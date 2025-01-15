@@ -1,4 +1,4 @@
-import { Shield, Award, Clock, Tool, Users, ThumbsUp } from "lucide-react";
+import { Shield, Award, Clock, Wrench, Users, ThumbsUp } from "lucide-react";
 
 const WhyChooseUs = () => {
   const reasons = [
@@ -18,7 +18,7 @@ const WhyChooseUs = () => {
       description: "We respect your time with prompt service and clear communication throughout your project."
     },
     {
-      icon: Tool,
+      icon: Wrench,
       title: "Expert Team",
       description: "Our skilled professionals have years of experience in all aspects of roofing."
     },
