@@ -51,7 +51,7 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-24">
+        <div className="flex justify-between h-32">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -63,7 +63,7 @@ const Navbar = () => {
                 whileTap={{ scale: 0.95 }}
                 src="/lovable-uploads/c14c4941-34e9-4747-840a-167e0fe92c76.png"
                 alt="A Roof Above Logo"
-                className="h-24 w-auto transition-transform duration-200"
+                className="h-32 w-auto transition-transform duration-200"
               />
             </Link>
           </motion.div>
