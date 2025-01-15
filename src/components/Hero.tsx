@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Phone, Mail } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -14,7 +15,7 @@ const Hero = () => {
             Professional roofing services for residential and commercial properties.
             Quality workmanship guaranteed.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button
               asChild
               size="lg"
@@ -30,6 +31,16 @@ const Hero = () => {
             >
               <Link to="/services">Our Services</Link>
             </Button>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-white">
+            <a href="tel:509-218-4343" className="flex items-center gap-2 hover:text-roofing-beige transition-colors">
+              <Phone className="h-5 w-5" />
+              <span className="text-lg">509-218-4343</span>
+            </a>
+            <a href="mailto:jc@aroofabove.com" className="flex items-center gap-2 hover:text-roofing-beige transition-colors">
+              <Mail className="h-5 w-5" />
+              <span className="text-lg">jc@aroofabove.com</span>
+            </a>
           </div>
         </div>
       </div>
