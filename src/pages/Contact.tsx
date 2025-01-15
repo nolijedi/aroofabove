@@ -42,14 +42,6 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen pt-24 pb-12">
-      <div 
-        className="fixed inset-0 -z-10"
-        style={{
-          background: "linear-gradient(to bottom right, rgba(34,31,38,0.95), rgba(249,115,22,0.8))",
-          backgroundBlendMode: "multiply"
-        }}
-      />
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -57,10 +49,10 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-roofing-orange to-orange-300">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-roofing-charcoal">
             Get in Touch
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-roofing-charcoal/90 max-w-2xl mx-auto">
             We're here to help with all your roofing needs. Contact us today for expert solutions and professional service.
           </p>
         </motion.div>
@@ -73,10 +65,10 @@ const Contact = () => {
         >
           <motion.div 
             variants={itemVariants}
-            className="space-y-8 bg-black/40 backdrop-blur-sm p-8 rounded-lg border border-white/10"
+            className="space-y-8 bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-roofing-orange/20"
           >
             <div>
-              <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
+              <h2 className="text-2xl font-bold text-roofing-charcoal mb-6">Contact Information</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {contactInfo.map((item, index) => (
                   <motion.div
@@ -87,13 +79,13 @@ const Contact = () => {
                     {item.href ? (
                       <a 
                         href={item.href}
-                        className="flex items-center gap-3 text-gray-300 hover:text-roofing-orange transition-colors p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-roofing-orange/50"
+                        className="flex items-center gap-3 text-roofing-charcoal hover:text-roofing-orange transition-colors p-4 rounded-lg bg-white/80 backdrop-blur-sm border border-roofing-orange/20 group-hover:border-roofing-orange"
                       >
                         <item.icon className="h-6 w-6 group-hover:text-roofing-orange transition-colors" />
                         <span>{item.text}</span>
                       </a>
                     ) : (
-                      <div className="flex items-center gap-3 text-gray-300 p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-roofing-orange/50">
+                      <div className="flex items-center gap-3 text-roofing-charcoal p-4 rounded-lg bg-white/80 backdrop-blur-sm border border-roofing-orange/20 group-hover:border-roofing-orange">
                         <item.icon className="h-6 w-6 group-hover:text-roofing-orange transition-colors" />
                         <span>{item.text}</span>
                       </div>
@@ -106,9 +98,9 @@ const Contact = () => {
 
           <motion.div 
             variants={itemVariants}
-            className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/10"
+            className="bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-roofing-orange/20"
           >
-            <h2 className="text-2xl font-bold text-white mb-6">Send Us a Message</h2>
+            <h2 className="text-2xl font-bold text-roofing-charcoal mb-6">Send Us a Message</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <motion.div
                 whileHover={{ scale: 1.02 }}
@@ -116,7 +108,7 @@ const Contact = () => {
               >
                 <Input 
                   placeholder="Your Name" 
-                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-roofing-orange/50" 
+                  className="bg-white border-roofing-orange/20 text-roofing-charcoal placeholder:text-roofing-charcoal/50 focus:border-roofing-orange" 
                 />
               </motion.div>
               
@@ -127,7 +119,7 @@ const Contact = () => {
                 <Input 
                   type="email" 
                   placeholder="Your Email" 
-                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-roofing-orange/50" 
+                  className="bg-white border-roofing-orange/20 text-roofing-charcoal placeholder:text-roofing-charcoal/50 focus:border-roofing-orange" 
                 />
               </motion.div>
               
@@ -138,7 +130,7 @@ const Contact = () => {
                 <Input 
                   type="tel" 
                   placeholder="Your Phone" 
-                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-roofing-orange/50" 
+                  className="bg-white border-roofing-orange/20 text-roofing-charcoal placeholder:text-roofing-charcoal/50 focus:border-roofing-orange" 
                 />
               </motion.div>
               
@@ -148,7 +140,7 @@ const Contact = () => {
               >
                 <Textarea 
                   placeholder="Your Message" 
-                  className="min-h-[150px] bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-roofing-orange/50" 
+                  className="min-h-[150px] bg-white border-roofing-orange/20 text-roofing-charcoal placeholder:text-roofing-charcoal/50 focus:border-roofing-orange" 
                 />
               </motion.div>
               

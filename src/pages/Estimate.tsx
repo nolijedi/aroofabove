@@ -32,23 +32,18 @@ const Estimate = () => {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-roofing-charcoal via-roofing-charcoal to-roofing-orange-dark">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,255,134,0.05),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(249,115,22,0.05),transparent_50%)]" />
-      </div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div className="min-h-screen pt-24 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-green-200 to-roofing-beige bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-roofing-charcoal">
             Get a Free Estimate
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-roofing-charcoal/90 max-w-2xl mx-auto">
             Fill out the form below to request a free estimate for your roofing project.
             We'll get back to you within 24 hours.
           </p>
@@ -58,7 +53,7 @@ const Estimate = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-2xl mx-auto bg-white/5 backdrop-blur-md p-8 rounded-lg border border-white/10 mb-12"
+          className="max-w-2xl mx-auto bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-roofing-orange/20 mb-12"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
             <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -148,16 +143,17 @@ const Estimate = () => {
                 className="min-h-[150px] bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-green-500/30 transition-colors"
               />
             </motion.div>
-
+            {/* Update all Input and select elements with these classes:
+               className="bg-white border-roofing-orange/20 text-roofing-charcoal placeholder:text-roofing-charcoal/50 focus:border-roofing-orange" */}
+            
             <motion.div 
               variants={itemVariants}
               whileHover={{ scale: 1.02 }}
               className="relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 via-orange-500/20 to-green-500/20 blur-xl" />
               <Button 
                 type="submit"
-                className="w-full bg-gradient-to-r from-roofing-orange via-green-500/80 to-orange-500 hover:from-roofing-orange-dark hover:via-green-600/80 hover:to-orange-600 text-white relative"
+                className="w-full bg-gradient-to-r from-roofing-orange to-orange-500 hover:from-roofing-orange-dark hover:to-orange-600 text-white relative"
               >
                 Request Estimate
               </Button>

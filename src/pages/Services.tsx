@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/carousel";
 import { Shield, Wrench, Clock, Award, Users, Zap } from "lucide-react";
 
-const Services = () => {
   const services = [
     {
       title: "Roof Installation",
@@ -76,6 +75,7 @@ const Services = () => {
     }
   ];
 
+const Services = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -98,7 +98,7 @@ const Services = () => {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12 bg-gradient-to-b from-gray-900 to-gray-800">
+    <div className="min-h-screen pt-24 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -106,10 +106,10 @@ const Services = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-roofing-orange to-orange-300">
+          <h1 className="text-5xl md:text-6xl font-bold text-roofing-charcoal mb-6">
             Our Roofing Services
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-roofing-charcoal/90 max-w-3xl mx-auto">
             Professional roofing solutions for every need
           </p>
         </motion.div>
@@ -125,16 +125,16 @@ const Services = () => {
               key={index}
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-8 transform transition-all duration-300 border border-white/10"
+              className="bg-white/90 backdrop-blur-sm rounded-xl p-8 transform transition-all duration-300 border border-roofing-orange/20 shadow-lg"
             >
               <div className="flex flex-col items-center text-center space-y-4">
                 <div className="p-4 bg-gradient-to-r from-roofing-orange to-orange-500 rounded-full text-white">
                   <service.icon className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-semibold text-white">
+                <h3 className="text-xl font-semibold text-roofing-charcoal">
                   {service.title}
                 </h3>
-                <p className="text-gray-300">
+                <p className="text-roofing-charcoal/80">
                   {service.description}
                 </p>
               </div>
@@ -146,9 +146,9 @@ const Services = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="mb-16 bg-black/40 backdrop-blur-sm p-8 rounded-lg"
+          className="mb-16 bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-lg"
         >
-          <h2 className="text-3xl font-bold text-white text-center mb-8">Our Recent Projects</h2>
+          <h2 className="text-3xl font-bold text-roofing-charcoal text-center mb-8">Our Recent Projects</h2>
           <Carousel className="w-full max-w-5xl mx-auto">
             <CarouselContent>
               {projectImages.map((image, index) => (
@@ -163,17 +163,17 @@ const Services = () => {
                         alt={image.title}
                         className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-300"
                       />
-                      <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm text-white p-4">
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-roofing-charcoal/90 to-transparent backdrop-blur-sm text-white p-4">
                         <h3 className="text-xl font-semibold">{image.title}</h3>
-                        <p className="text-sm text-gray-200">{image.description}</p>
+                        <p className="text-sm text-roofing-cream">{image.description}</p>
                       </div>
                     </div>
                   </motion.div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="text-white border-white hover:bg-white/20" />
-            <CarouselNext className="text-white border-white hover:bg-white/20" />
+            <CarouselPrevious className="text-roofing-charcoal border-roofing-orange hover:bg-roofing-orange/20" />
+            <CarouselNext className="text-roofing-charcoal border-roofing-orange hover:bg-roofing-orange/20" />
           </Carousel>
         </motion.div>
       </div>
