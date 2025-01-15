@@ -63,7 +63,7 @@ const Navbar = () => {
                 whileTap={{ scale: 0.95 }}
                 src="/lovable-uploads/c14c4941-34e9-4747-840a-167e0fe92c76.png"
                 alt="A Roof Above Logo"
-                className="h-16 w-auto transition-transform duration-200"
+                className="h-20 w-auto transition-transform duration-200"
               />
             </Link>
           </motion.div>
