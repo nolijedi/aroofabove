@@ -29,6 +29,7 @@ export default {
           "orange-dark": "#EA580C",
           charcoal: "#221F26",
           beige: "#FDE1D3",
+          cream: "#FEF7CD",
           "off-white": "#F8F8F8",
         },
         primary: {

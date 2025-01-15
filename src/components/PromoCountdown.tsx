@@ -75,7 +75,7 @@ const PromoCountdown = () => {
         >
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="relative p-6 rounded-lg shadow-2xl bg-gradient-to-br from-roofing-charcoal/80 via-roofing-charcoal/85 to-roofing-orange-dark/80 backdrop-blur-md border border-white/10 cursor-pointer"
+            className="relative p-6 rounded-lg shadow-2xl bg-gradient-to-br from-roofing-orange/80 to-roofing-cream/90 backdrop-blur-md border border-white/10 cursor-pointer"
             onClick={() => navigate('/estimate')}
           >
             <button
