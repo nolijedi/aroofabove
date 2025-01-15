@@ -5,6 +5,30 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Shield, Wrench, Clock } from "lucide-react";
 
 const Index = () => {
+  const features = [
+    {
+      icon: Shield,
+      title: "Quality Guaranteed",
+      description: "We stand behind our work with industry-leading warranties.",
+      expandedDescription: "Our comprehensive warranty coverage ensures your peace of mind. We use only premium materials and follow strict quality control processes to deliver roofing solutions that stand the test of time.",
+      image: "https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?auto=format&fit=crop&q=80&w=1920"
+    },
+    {
+      icon: Wrench,
+      title: "Expert Craftsmanship",
+      description: "Our skilled team brings years of experience to every project.",
+      expandedDescription: "Our team of certified professionals has decades of combined experience in residential and commercial roofing. We stay updated with the latest industry standards and techniques.",
+      image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=1920"
+    },
+    {
+      icon: Clock,
+      title: "Timely Service",
+      description: "We respect your time and complete projects on schedule.",
+      expandedDescription: "Our efficient project management ensures minimal disruption to your daily life. We provide detailed timelines and keep you informed throughout the entire process.",
+      image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&q=80&w=1920"
+    }
+  ];
+
   return (
     <main className="min-h-screen">
       <Hero />
@@ -27,37 +51,41 @@ const Index = () => {
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Shield,
-                title: "Quality Guaranteed",
-                description: "We stand behind our work with industry-leading warranties."
-              },
-              {
-                icon: Wrench,
-                title: "Expert Craftsmanship",
-                description: "Our skilled team brings years of experience to every project."
-              },
-              {
-                icon: Clock,
-                title: "Timely Service",
-                description: "We respect your time and complete projects on schedule."
-              }
-            ].map((feature, index) => (
+            {features.map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+                className="group h-[400px] perspective"
               >
-                <div className="flex flex-col items-center text-center space-y-4">
-                  <div className="p-3 bg-roofing-orange rounded-full text-white">
-                    <feature.icon className="w-6 h-6" />
+                <div className="relative h-full w-full transition-all duration-500 preserve-3d group-hover:[transform:rotateY(180deg)]">
+                  {/* Front of card */}
+                  <div className="absolute inset-0 bg-white p-6 rounded-xl shadow-lg hover:shadow-xl backface-hidden">
+                    <div className="flex flex-col items-center text-center space-y-4">
+                      <div className="p-3 bg-roofing-orange rounded-full text-white">
+                        <feature.icon className="w-6 h-6" />
+                      </div>
+                      <h3 className="text-xl font-semibold text-roofing-charcoal">{feature.title}</h3>
+                      <p className="text-gray-600">{feature.description}</p>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-roofing-charcoal">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
+
+                  {/* Back of card */}
+                  <div className="absolute inset-0 bg-white p-6 rounded-xl shadow-lg [transform:rotateY(180deg)] backface-hidden">
+                    <div className="h-full flex flex-col">
+                      <div className="relative h-48 mb-4 overflow-hidden rounded-lg">
+                        <img 
+                          src={feature.image} 
+                          alt={feature.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <h3 className="text-xl font-semibold text-roofing-charcoal mb-2">{feature.title}</h3>
+                      <p className="text-gray-600 flex-grow">{feature.expandedDescription}</p>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
