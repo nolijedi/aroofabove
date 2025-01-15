@@ -49,10 +49,10 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-roofing-charcoal">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-[#1a2b4b]">
             Get in Touch
           </h1>
-          <p className="text-xl text-roofing-charcoal/90 max-w-2xl mx-auto">
+          <p className="text-xl text-[#1a2b4b] max-w-2xl mx-auto">
             We're here to help with all your roofing needs. Contact us today for expert solutions and professional service.
           </p>
         </motion.div>

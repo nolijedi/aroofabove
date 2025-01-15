@@ -40,10 +40,10 @@ const Estimate = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-roofing-charcoal">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-[#1a2b4b]">
             Get a Free Estimate
           </h1>
-          <p className="text-xl text-roofing-charcoal/90 max-w-2xl mx-auto">
+          <p className="text-xl text-[#1a2b4b] max-w-2xl mx-auto">
             Fill out the form below to request a free estimate for your roofing project.
             We'll get back to you within 24 hours.
           </p>
@@ -143,8 +143,6 @@ const Estimate = () => {
                 className="min-h-[150px] bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-green-500/30 transition-colors"
               />
             </motion.div>
-            {/* Update all Input and select elements with these classes:
-               className="bg-white border-roofing-orange/20 text-roofing-charcoal placeholder:text-roofing-charcoal/50 focus:border-roofing-orange" */}
             
             <motion.div 
               variants={itemVariants}

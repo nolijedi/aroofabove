@@ -9,71 +9,71 @@ import {
 } from "@/components/ui/carousel";
 import { Shield, Wrench, Clock, Award, Users, Zap } from "lucide-react";
 
-  const services = [
-    {
-      title: "Roof Installation",
-      description: "Expert installation of various roofing types.",
-      icon: Wrench,
-    },
-    {
-      title: "Roof Repair",
-      description: "Quick and reliable roof repair services.",
-      icon: Shield,
-    },
-    {
-      title: "Maintenance",
-      description: "Regular maintenance to extend the life of your roof.",
-      icon: Clock,
-    },
-    {
-      title: "Consultation",
-      description: "Professional advice for your roofing needs.",
-      icon: Award,
-    },
-    {
-      title: "Emergency Services",
-      description: "24/7 emergency roofing services.",
-      icon: Users,
-    },
-    {
-      title: "Energy Solutions",
-      description: "Energy-efficient roofing options.",
-      icon: Zap,
-    },
-  ];
+const services = [
+  {
+    title: "Roof Installation",
+    description: "Expert installation of various roofing types.",
+    icon: Wrench,
+  },
+  {
+    title: "Roof Repair",
+    description: "Quick and reliable roof repair services.",
+    icon: Shield,
+  },
+  {
+    title: "Maintenance",
+    description: "Regular maintenance to extend the life of your roof.",
+    icon: Clock,
+  },
+  {
+    title: "Consultation",
+    description: "Professional advice for your roofing needs.",
+    icon: Award,
+  },
+  {
+    title: "Emergency Services",
+    description: "24/7 emergency roofing services.",
+    icon: Users,
+  },
+  {
+    title: "Energy Solutions",
+    description: "Energy-efficient roofing options.",
+    icon: Zap,
+  },
+];
 
-  const projectImages = [
-    {
-      url: "https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24",
-      title: "Modern Residential Roof Installation",
-      description: "Complete roof replacement with premium materials"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1600585154363-67eb9e2e2099",
-      title: "Solar Panel Roof Integration",
-      description: "Eco-friendly roofing solutions"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1605808978575-e73be210d160",
-      title: "Commercial Flat Roof Systems",
-      description: "Durable commercial roofing"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1591588582259-e675bd2e6088",
-      title: "Traditional Shingle Installation",
-      description: "Classic and reliable roofing"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1516156008625-3a9d6067fab5",
-      title: "Modern Architectural Roofing",
-      description: "Contemporary design solutions"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39",
-      title: "Slate Roof Craftsmanship",
-      description: "Premium slate roofing"
-    }
-  ];
+const projectImages = [
+  {
+    url: "https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24",
+    title: "Modern Residential Roof Installation",
+    description: "Complete roof replacement with premium materials"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1600585154363-67eb9e2e2099",
+    title: "Solar Panel Roof Integration",
+    description: "Eco-friendly roofing solutions"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1605808978575-e73be210d160",
+    title: "Commercial Flat Roof Systems",
+    description: "Durable commercial roofing"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1591588582259-e675bd2e6088",
+    title: "Traditional Shingle Installation",
+    description: "Classic and reliable roofing"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1516156008625-3a9d6067fab5",
+    title: "Modern Architectural Roofing",
+    description: "Contemporary design solutions"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39",
+    title: "Slate Roof Craftsmanship",
+    description: "Premium slate roofing"
+  }
+];
 
 const Services = () => {
   const containerVariants = {
@@ -106,10 +106,10 @@ const Services = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-roofing-charcoal mb-6">
+          <h1 className="text-5xl md:text-6xl font-bold text-[#1a2b4b] mb-6">
             Our Roofing Services
           </h1>
-          <p className="text-xl text-roofing-charcoal/90 max-w-3xl mx-auto">
+          <p className="text-xl text-[#1a2b4b] max-w-3xl mx-auto">
             Professional roofing solutions for every need
           </p>
         </motion.div>

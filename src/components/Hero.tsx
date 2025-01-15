@@ -8,7 +8,7 @@ const Hero = () => {
       {/* Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12">
         <div className="text-center space-y-8 animate-fade-in">
-          <h1 className="text-4xl md:text-6xl font-bold text-navy-900 mb-6 drop-shadow-lg">
+          <h1 className="text-4xl md:text-6xl font-bold text-[#1a2b4b] mb-6 drop-shadow-lg">
             Your Trusted Roofing Experts
           </h1>
           <p className="text-xl md:text-2xl text-[#1a2b4b] mb-8 max-w-2xl mx-auto font-medium">
