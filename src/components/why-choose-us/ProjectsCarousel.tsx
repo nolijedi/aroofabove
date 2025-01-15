@@ -20,7 +20,7 @@ export const ProjectsCarousel = ({ projects }: ProjectsCarouselProps) => (
     transition={{ delay: 0.4 }}
     className="mb-16"
   >
-    <h2 className="text-3xl font-bold text-white text-center mb-12">
+    <h2 className="text-3xl font-bold text-roofing-charcoal text-center mb-12">
       Our Recent Projects
     </h2>
     <Carousel
@@ -37,8 +37,8 @@ export const ProjectsCarousel = ({ projects }: ProjectsCarouselProps) => (
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="text-roofing-charcoal border-roofing-orange hover:bg-roofing-orange/20" />
+      <CarouselNext className="text-roofing-charcoal border-roofing-orange hover:bg-roofing-orange/20" />
     </Carousel>
   </motion.div>
 );
