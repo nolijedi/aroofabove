@@ -9,32 +9,32 @@ import { CallToAction } from "@/components/why-choose-us/CallToAction";
 const WhyChooseUs = () => {
   const reasons = [
     {
-      icon: Award,
+      Icon: Award,
       title: "Expert Craftsmanship",
       description: "Our team brings years of experience and expertise to every project."
     },
     {
-      icon: Users,
+      Icon: Users,
       title: "Customer-First Approach",
       description: "We prioritize your needs and ensure complete satisfaction."
     },
     {
-      icon: Clock,
+      Icon: Clock,
       title: "Timely Completion",
       description: "We respect your time and deliver projects on schedule."
     },
     {
-      icon: Shield,
+      Icon: Shield,
       title: "Quality Materials",
       description: "We use only premium materials for lasting results."
     },
     {
-      icon: ThumbsUp,
+      Icon: ThumbsUp,
       title: "Licensed & Insured",
       description: "Full compliance and protection for your peace of mind."
     },
     {
-      icon: Gem,
+      Icon: Gem,
       title: "Competitive Pricing",
       description: "Fair and transparent pricing for all our services."
     }

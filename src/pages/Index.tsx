@@ -1,8 +1,7 @@
-import Hero from "@/components/Hero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Shield, Tool, Clock } from "lucide-react";
+import { ArrowRight, Shield, Wrench, Clock } from "lucide-react";
 
 const Index = () => {
   return (
@@ -34,7 +33,7 @@ const Index = () => {
                 description: "We stand behind our work with industry-leading warranties."
               },
               {
-                icon: Tool,
+                icon: Wrench,
                 title: "Expert Craftsmanship",
                 description: "Our skilled team brings years of experience to every project."
               },
