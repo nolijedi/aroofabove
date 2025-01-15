@@ -82,11 +82,7 @@ const Navbar = () => {
               >
                 <Button
                   asChild
-                  className={`${
-                    scrolled 
-                      ? 'bg-roofing-beige text-roofing-charcoal hover:bg-roofing-orange hover:text-white' 
-                      : 'bg-white/20 text-roofing-cream hover:bg-white/30'
-                  } transition-all duration-300`}
+                  className="bg-roofing-orange text-white hover:bg-roofing-orange-dark transition-all duration-300"
                 >
                   <Link to={item.path}>
                     {item.label}
@@ -136,7 +132,7 @@ const Navbar = () => {
           >
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`${scrolled ? 'text-roofing-charcoal' : 'text-roofing-cream'} hover:text-roofing-orange transition-colors p-2 rounded-lg`}
+              className="text-roofing-charcoal hover:text-roofing-orange transition-colors p-2 rounded-lg"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
