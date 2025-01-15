@@ -98,24 +98,22 @@ const Services = () => {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12">
+    <div className="min-h-screen pt-24 pb-12 bg-gradient-to-b from-gray-900 to-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-roofing-orange to-orange-300">
             Our Roofing Services
           </h1>
-          <p className="text-xl text-gray-100 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Professional roofing solutions for every need
           </p>
         </motion.div>
 
-        {/* Services Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -127,16 +125,16 @@ const Services = () => {
               key={index}
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
-              className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 transform transition-all duration-300"
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-8 transform transition-all duration-300 border border-white/10"
             >
               <div className="flex flex-col items-center text-center space-y-4">
-                <div className="p-4 bg-roofing-orange rounded-full text-white">
-                  <service.icon className="w-6 h-6" />
+                <div className="p-4 bg-gradient-to-r from-roofing-orange to-orange-500 rounded-full text-white">
+                  <service.icon className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-semibold text-roofing-charcoal">
+                <h3 className="text-xl font-semibold text-white">
                   {service.title}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-300">
                   {service.description}
                 </p>
               </div>
@@ -144,7 +142,6 @@ const Services = () => {
           ))}
         </motion.div>
 
-        {/* Project Showcase */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
