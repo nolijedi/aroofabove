@@ -61,9 +61,9 @@ const Navbar = () => {
               <motion.img
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                src="/lovable-uploads/21ad76c3-8063-4f80-8f8c-f62f64b10dad.png"
+                src="/lovable-uploads/22f501b9-a09c-4fa6-9516-78339018748b.png"
                 alt="A Roof Above Logo"
-                className="h-12 w-auto transition-transform duration-200"
+                className="h-16 w-auto transition-transform duration-200"
               />
             </Link>
           </motion.div>
