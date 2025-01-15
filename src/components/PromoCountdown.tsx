@@ -10,6 +10,7 @@ const PromoCountdown = () => {
   const [timeLeft, setTimeLeft] = useState<number>(60 * 1000); // 60 seconds
   const [isVisible, setIsVisible] = useState(false);
   const [isClosed, setIsClosed] = useState(false);
+  const [isExitIntent, setIsExitIntent] = useState(false);
 
   useEffect(() => {
     // Reset isClosed state when route changes
@@ -23,7 +24,26 @@ const PromoCountdown = () => {
       console.log("Setting promo visible after 3 second delay");
     }, 3000);
 
-    // Start countdown from 60 seconds
+    // Handle exit intent
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0) {
+        setIsExitIntent(true);
+        console.log("Exit intent detected");
+      }
+    };
+
+    document.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      clearTimeout(showTimeout);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Only start countdown when visible
+    if (!isVisible) return;
+
     const startTime = Date.now();
     
     const updateTimer = () => {
@@ -44,9 +64,8 @@ const PromoCountdown = () => {
 
     return () => {
       clearInterval(interval);
-      clearTimeout(showTimeout);
     };
-  }, [location.pathname]); // Reset timer when route changes
+  }, [isVisible]); // Only reset timer when visibility changes
 
   if (isClosed || timeLeft === 0) return null;
 
@@ -81,13 +100,15 @@ const PromoCountdown = () => {
             </button>
             <div className="text-white space-y-3">
               <h3 className="text-xl font-bold bg-gradient-to-r from-green-300 to-green-100 bg-clip-text text-transparent">
-                Limited Time Offer!
+                {isExitIntent ? "🔥 Last Chance Deal!" : "Limited Time Offer!"}
               </h3>
               <p className="text-sm">
-                Get 15% off your roof estimate with code:
+                {isExitIntent 
+                  ? "Don't miss out on saving $8,000 on average!"
+                  : "Get 15% off your roof estimate with code:"}
               </p>
               <div className="bg-white/10 px-4 py-2 rounded font-mono text-green-300">
-                ROOF2024
+                {isExitIntent ? "LASTCHANCE" : "ROOF2024"}
               </div>
               <div className="text-sm mt-2">
                 Expires in:
