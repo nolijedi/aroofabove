@@ -72,11 +72,11 @@ const Index = () => {
             <Button
               asChild
               size="lg"
-              className="bg-roofing-orange text-white hover:bg-roofing-orange-dark shadow-lg hover:shadow-xl transition-all duration-300 group"
+              className="bg-roofing-orange text-white hover:bg-roofing-orange-dark shadow-lg hover:shadow-xl transition-all duration-300 group hover:scale-105"
             >
               <Link to="/services" className="flex items-center gap-2">
                 Explore Our Services
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform text-white" />
               </Link>
             </Button>
           </motion.div>
