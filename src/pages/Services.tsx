@@ -64,12 +64,12 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
-              className="perspective"
+              className="group perspective"
             >
-              <div className="relative w-full h-[400px] preserve-3d transition-transform duration-500 hover:rotate-y-180">
+              <div className="relative w-full h-[400px] preserve-3d transition-all duration-700 group-hover:rotate-y-180">
                 {/* Front of card */}
                 <div className="absolute w-full h-full backface-hidden">
-                  <div className="h-full bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow">
+                  <div className="h-full bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8">
                     <div className="flex flex-col h-full">
                       <div className="flex items-center gap-4 mb-6">
                         <div className="p-3 bg-roofing-orange rounded-full text-white">
