@@ -31,7 +31,13 @@ const Estimate = () => {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12 bg-gradient-to-b from-gray-900 to-gray-800">
+    <div className="min-h-screen pt-24 pb-12">
+      <div 
+        className="fixed inset-0 bg-gradient-to-br from-gray-900 via-roofing-charcoal to-green-900/30 -z-10"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(74,222,128,0.05),transparent_50%)]" />
+      </div>
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -39,7 +45,7 @@ const Estimate = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-roofing-orange to-orange-300">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-roofing-orange via-green-400/80 to-orange-300">
             Get a Free Estimate
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -52,54 +58,83 @@ const Estimate = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-2xl mx-auto bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/10 mb-12"
+          className="max-w-2xl mx-auto bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/10 mb-12 relative overflow-hidden"
         >
-          <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Success indicator overlay */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-green-500/5 via-transparent to-transparent pointer-events-none" />
+          
+          <form onSubmit={handleSubmit} className="space-y-6 relative">
             <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">First Name</label>
-                <Input placeholder="First Name" className="bg-white/5 border-white/10 text-white placeholder:text-gray-400" />
+                <Input 
+                  placeholder="First Name" 
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-green-500/30 transition-colors" 
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">Last Name</label>
-                <Input placeholder="Last Name" className="bg-white/5 border-white/10 text-white placeholder:text-gray-400" />
+                <Input 
+                  placeholder="Last Name" 
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-green-500/30 transition-colors" 
+                />
               </div>
             </motion.div>
 
             <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
-                <Input type="email" placeholder="Email" className="bg-white/5 border-white/10 text-white placeholder:text-gray-400" />
+                <Input 
+                  type="email" 
+                  placeholder="Email" 
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-green-500/30 transition-colors" 
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">Phone</label>
-                <Input type="tel" placeholder="Phone" className="bg-white/5 border-white/10 text-white placeholder:text-gray-400" />
+                <Input 
+                  type="tel" 
+                  placeholder="Phone" 
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-green-500/30 transition-colors" 
+                />
               </div>
             </motion.div>
 
             <motion.div variants={itemVariants}>
               <label className="block text-sm font-medium text-gray-300 mb-1">Address</label>
-              <Input placeholder="Street Address" className="bg-white/5 border-white/10 text-white placeholder:text-gray-400" />
+              <Input 
+                placeholder="Street Address" 
+                className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-green-500/30 transition-colors" 
+              />
             </motion.div>
 
             <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">City</label>
-                <Input placeholder="City" className="bg-white/5 border-white/10 text-white placeholder:text-gray-400" />
+                <Input 
+                  placeholder="City" 
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-green-500/30 transition-colors" 
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">State</label>
-                <Input placeholder="State" className="bg-white/5 border-white/10 text-white placeholder:text-gray-400" />
+                <Input 
+                  placeholder="State" 
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-green-500/30 transition-colors" 
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">ZIP</label>
-                <Input placeholder="ZIP Code" className="bg-white/5 border-white/10 text-white placeholder:text-gray-400" />
+                <Input 
+                  placeholder="ZIP Code" 
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-green-500/30 transition-colors" 
+                />
               </div>
             </motion.div>
 
             <motion.div variants={itemVariants}>
               <label className="block text-sm font-medium text-gray-300 mb-1">Project Type</label>
-              <select className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-white">
+              <select className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-white focus:border-green-500/30 transition-colors">
                 <option value="" className="bg-gray-900">Select Project Type</option>
                 <option value="repair" className="bg-gray-900">Roof Repair</option>
                 <option value="replacement" className="bg-gray-900">Roof Replacement</option>
@@ -113,17 +148,19 @@ const Estimate = () => {
               <label className="block text-sm font-medium text-gray-300 mb-1">Project Details</label>
               <Textarea 
                 placeholder="Please describe your roofing needs in detail"
-                className="min-h-[150px] bg-white/5 border-white/10 text-white placeholder:text-gray-400"
+                className="min-h-[150px] bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-green-500/30 transition-colors"
               />
             </motion.div>
 
             <motion.div 
               variants={itemVariants}
               whileHover={{ scale: 1.02 }}
+              className="relative"
             >
+              <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 via-orange-500/20 to-green-500/20 blur-xl" />
               <Button 
                 type="submit"
-                className="w-full bg-gradient-to-r from-roofing-orange to-orange-500 hover:from-roofing-orange-dark hover:to-orange-600 text-white"
+                className="w-full bg-gradient-to-r from-roofing-orange via-green-500/80 to-orange-500 hover:from-roofing-orange-dark hover:via-green-600/80 hover:to-orange-600 text-white relative"
               >
                 Request Estimate
               </Button>
