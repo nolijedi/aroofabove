@@ -32,21 +32,23 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             className="flex flex-col sm:flex-row gap-6 justify-center mb-12"
           >
-            <Button
-              asChild
-              size="lg"
-              className="bg-roofing-orange text-white hover:bg-roofing-orange-dark transform transition-all duration-300 shadow-lg hover:shadow-xl text-xl py-6 px-12 rounded-xl"
-            >
-              <Link to="/estimate">Get Free Estimate</Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="bg-transparent text-roofing-cream border-2 border-roofing-cream hover:bg-roofing-cream/10 transform transition-all duration-300 shadow-lg hover:shadow-xl text-xl py-6 px-12 rounded-xl"
-            >
-              <Link to="/services">Our Services</Link>
-            </Button>
+            <Link to="/estimate">
+              <Button
+                size="lg"
+                className="bg-roofing-orange text-white hover:bg-roofing-orange-dark transform transition-all duration-300 shadow-lg hover:shadow-xl text-xl py-6 px-12 rounded-xl"
+              >
+                Get Free Estimate
+              </Button>
+            </Link>
+            <Link to="/services">
+              <Button
+                size="lg"
+                variant="outline"
+                className="bg-transparent text-roofing-cream border-2 border-roofing-cream hover:bg-roofing-cream/10 transform transition-all duration-300 shadow-lg hover:shadow-xl text-xl py-6 px-12 rounded-xl"
+              >
+                Our Services
+              </Button>
+            </Link>
           </motion.div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
