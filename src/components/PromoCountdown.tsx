@@ -124,10 +124,9 @@ const PromoCountdown = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ 
-            opacity: 1, 
-            y: 0,
+            opacity: 1,
             x: position.x,
-            y: position.y,
+            y: position.y
           }}
           exit={{ opacity: 0, y: 20 }}
           className="fixed z-50"
