@@ -39,17 +39,22 @@ const projects = [
   {
     image: "https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24",
     title: "Residential Roofing",
-    description: "Quality roofing solutions for homes"
+    description: "Complete roof installations and repairs"
   },
   {
     image: "https://images.unsplash.com/photo-1600585154363-67eb9e2e2099",
     title: "Commercial Projects",
-    description: "Large-scale commercial roofing"
+    description: "Large-scale commercial solutions"
   },
   {
-    image: "https://images.unsplash.com/photo-1591088398332-8a7791972843",
+    image: "https://images.unsplash.com/photo-1605808978575-e73be210d160",
     title: "Roof Repairs",
     description: "Expert repair services"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1591588582259-e675bd2e6088",
+    title: "Emergency Services",
+    description: "24/7 emergency response"
   }
 ];
 
@@ -104,7 +109,8 @@ const WhyChooseUs = () => {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 transform hover:scale-105 transition-transform duration-300"
+              whileHover={{ scale: 1.05 }}
+              className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8"
             >
               <div className="flex flex-col items-center text-center space-y-4">
                 <div className="p-4 bg-roofing-orange rounded-full text-white">
@@ -131,10 +137,11 @@ const WhyChooseUs = () => {
           <h2 className="text-3xl font-bold text-white text-center mb-8">
             Our Recent Projects
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
               <motion.div
                 key={index}
+                variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
                 className="overflow-hidden rounded-xl shadow-lg"
               >
@@ -142,7 +149,7 @@ const WhyChooseUs = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transform hover:scale-105 transition-duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent">
                     <div className="absolute bottom-0 p-6">

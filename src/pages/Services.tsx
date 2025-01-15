@@ -1,5 +1,4 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   Carousel,
@@ -8,155 +7,178 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Shield, Home, Building2, Wrench, Clock, Phone } from "lucide-react";
+import { Shield, Wrench, Clock, Award, Users, Zap } from "lucide-react";
 
 const Services = () => {
   const services = [
     {
-      title: "Residential Roofing",
-      description: "Expert installation and repair of asphalt shingles, metal roofing, and tile roofs for homes.",
-      features: ["Asphalt Shingles", "Metal Roofing", "Tile Roofs", "Roof Repairs", "New Installations"],
-      icon: Home,
+      title: "Roof Installation",
+      description: "Expert installation of various roofing types.",
+      icon: Wrench,
     },
     {
-      title: "Commercial Roofing",
-      description: "Comprehensive commercial roofing solutions including TPO, EPDM, and metal systems.",
-      features: ["TPO Roofing", "EPDM Systems", "Metal Roofs", "Flat Roof Repair", "Preventive Maintenance"],
-      icon: Building2,
+      title: "Roof Repair",
+      description: "Quick and reliable roof repair services.",
+      icon: Shield,
+    },
+    {
+      title: "Maintenance",
+      description: "Regular maintenance to extend the life of your roof.",
+      icon: Clock,
+    },
+    {
+      title: "Consultation",
+      description: "Professional advice for your roofing needs.",
+      icon: Award,
     },
     {
       title: "Emergency Services",
-      description: "24/7 emergency roof repair services for storm damage, leaks, and urgent repairs.",
-      features: ["Storm Damage", "Leak Repair", "Emergency Tarping", "Insurance Claims", "Quick Response"],
-      icon: Phone,
+      description: "24/7 emergency roofing services.",
+      icon: Users,
     },
     {
-      title: "Maintenance & Inspection",
-      description: "Regular maintenance and detailed inspections to prevent costly repairs.",
-      features: ["Annual Inspections", "Gutter Cleaning", "Preventive Care", "Roof Certification", "Maintenance Plans"],
-      icon: Wrench,
-    }
+      title: "Energy Solutions",
+      description: "Energy-efficient roofing options.",
+      icon: Zap,
+    },
   ];
 
   const projectImages = [
     {
       url: "https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24",
-      title: "Modern Residential Roof Installation"
+      title: "Modern Residential Roof Installation",
+      description: "Complete roof replacement with premium materials"
     },
     {
       url: "https://images.unsplash.com/photo-1600585154363-67eb9e2e2099",
-      title: "Solar Panel Roof Integration"
+      title: "Solar Panel Roof Integration",
+      description: "Eco-friendly roofing solutions"
     },
     {
       url: "https://images.unsplash.com/photo-1605808978575-e73be210d160",
-      title: "Commercial Flat Roof Systems"
+      title: "Commercial Flat Roof Systems",
+      description: "Durable commercial roofing"
     },
     {
       url: "https://images.unsplash.com/photo-1591588582259-e675bd2e6088",
-      title: "Traditional Shingle Installation"
+      title: "Traditional Shingle Installation",
+      description: "Classic and reliable roofing"
     },
     {
       url: "https://images.unsplash.com/photo-1516156008625-3a9d6067fab5",
-      title: "Modern Architectural Roofing"
+      title: "Modern Architectural Roofing",
+      description: "Contemporary design solutions"
     },
     {
       url: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39",
-      title: "Slate Roof Craftsmanship"
+      title: "Slate Roof Craftsmanship",
+      description: "Premium slate roofing"
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <div className="pt-24 px-4 max-w-7xl mx-auto">
-      {/* Header Section */}
-      <div className="text-center mb-12 bg-black/40 backdrop-blur-sm p-8 rounded-lg">
-        <h1 className="text-4xl font-bold text-white mb-4">Professional Roofing Services</h1>
-        <p className="text-lg text-gray-100 max-w-2xl mx-auto">
-          We offer comprehensive roofing solutions for both residential and commercial properties.
-          Our expert team ensures quality workmanship and lasting results.
-        </p>
-      </div>
-
-      {/* Services Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-        {services.map((service, index) => {
-          const Icon = service.icon;
-          return (
-            <Card key={index} className="p-6 hover:shadow-lg transition-shadow bg-white/90 backdrop-blur-sm">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 bg-roofing-orange rounded-full">
-                  <Icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-roofing-charcoal">{service.title}</h3>
-              </div>
-              <p className="text-gray-600 mb-4">{service.description}</p>
-              <ul className="space-y-2 mb-6">
-                {service.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center text-gray-700">
-                    <span className="w-2 h-2 bg-roofing-orange rounded-full mr-2"></span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          );
-        })}
-      </div>
-
-      {/* Project Showcase */}
-      <div className="mb-16 bg-black/40 backdrop-blur-sm p-8 rounded-lg">
-        <h2 className="text-3xl font-bold text-white text-center mb-8">Our Recent Projects</h2>
-        <Carousel className="w-full max-w-5xl mx-auto">
-          <CarouselContent>
-            {projectImages.map((image, index) => (
-              <CarouselItem key={index}>
-                <div className="p-1">
-                  <div className="relative aspect-[16/9] overflow-hidden rounded-xl">
-                    <img
-                      src={image.url}
-                      alt={image.title}
-                      className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm text-white p-4">
-                      <h3 className="text-xl font-semibold">{image.title}</h3>
-                    </div>
-                  </div>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="text-white border-white hover:bg-white/20" />
-          <CarouselNext className="text-white border-white hover:bg-white/20" />
-        </Carousel>
-      </div>
-
-      {/* Why Choose Us Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-        <div className="bg-white/90 backdrop-blur-sm p-6 rounded-lg text-center">
-          <Shield className="w-12 h-12 text-roofing-orange mx-auto mb-4" />
-          <h3 className="text-xl font-bold mb-2">Quality Guaranteed</h3>
-          <p className="text-gray-600">We stand behind our work with industry-leading warranties</p>
-        </div>
-        <div className="bg-white/90 backdrop-blur-sm p-6 rounded-lg text-center">
-          <Clock className="w-12 h-12 text-roofing-orange mx-auto mb-4" />
-          <h3 className="text-xl font-bold mb-2">Timely Service</h3>
-          <p className="text-gray-600">We complete projects on schedule without compromising quality</p>
-        </div>
-        <div className="bg-white/90 backdrop-blur-sm p-6 rounded-lg text-center">
-          <Phone className="w-12 h-12 text-roofing-orange mx-auto mb-4" />
-          <h3 className="text-xl font-bold mb-2">24/7 Support</h3>
-          <p className="text-gray-600">Emergency service available around the clock</p>
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <div className="text-center pb-12">
-        <Button
-          asChild
-          size="lg"
-          className="bg-roofing-orange text-white hover:bg-roofing-orange-dark"
+    <div className="min-h-screen pt-24 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Hero Section */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <Link to="/estimate">Get Your Free Estimate Today</Link>
-        </Button>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Our Roofing Services
+          </h1>
+          <p className="text-xl text-gray-100 max-w-3xl mx-auto">
+            Professional roofing solutions for every need
+          </p>
+        </motion.div>
+
+        {/* Services Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+        >
+          {services.map((service, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 transform transition-all duration-300"
+            >
+              <div className="flex flex-col items-center text-center space-y-4">
+                <div className="p-4 bg-roofing-orange rounded-full text-white">
+                  <service.icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-semibold text-roofing-charcoal">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600">
+                  {service.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Project Showcase */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="mb-16 bg-black/40 backdrop-blur-sm p-8 rounded-lg"
+        >
+          <h2 className="text-3xl font-bold text-white text-center mb-8">Our Recent Projects</h2>
+          <Carousel className="w-full max-w-5xl mx-auto">
+            <CarouselContent>
+              {projectImages.map((image, index) => (
+                <CarouselItem key={index}>
+                  <motion.div 
+                    whileHover={{ scale: 1.02 }}
+                    className="p-1"
+                  >
+                    <div className="relative aspect-[16/9] overflow-hidden rounded-xl">
+                      <img
+                        src={image.url}
+                        alt={image.title}
+                        className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm text-white p-4">
+                        <h3 className="text-xl font-semibold">{image.title}</h3>
+                        <p className="text-sm text-gray-200">{image.description}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="text-white border-white hover:bg-white/20" />
+            <CarouselNext className="text-white border-white hover:bg-white/20" />
+          </Carousel>
+        </motion.div>
       </div>
     </div>
   );
