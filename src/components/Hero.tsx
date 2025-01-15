@@ -59,7 +59,7 @@ const Hero = () => {
                   damping: 20,
                   delay: 0.5 + delay
                 }}
-                className="p-4 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+                className="p-4 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group active:bg-roofing-orange/20"
               >
                 <Icon className="w-8 h-8 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
               </motion.a>
