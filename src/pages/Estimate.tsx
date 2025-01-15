@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { motion } from "framer-motion";
+import PromoCountdown from "@/components/PromoCountdown";
 
 const Estimate = () => {
   const handleSubmit = (e: React.FormEvent) => {
@@ -31,21 +32,20 @@ const Estimate = () => {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12">
-      <div 
-        className="fixed inset-0 bg-gradient-to-br from-gray-900 via-roofing-charcoal to-green-900/30 -z-10"
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(74,222,128,0.05),transparent_50%)]" />
+    <div className="min-h-screen pt-24 pb-12 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-roofing-charcoal via-roofing-charcoal to-roofing-orange-dark">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,255,134,0.05),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(249,115,22,0.05),transparent_50%)]" />
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-roofing-orange via-green-400/80 to-orange-300">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-green-200 to-roofing-beige bg-clip-text text-transparent">
             Get a Free Estimate
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -58,12 +58,9 @@ const Estimate = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-2xl mx-auto bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/10 mb-12 relative overflow-hidden"
+          className="max-w-2xl mx-auto bg-white/5 backdrop-blur-md p-8 rounded-lg border border-white/10 mb-12"
         >
-          {/* Success indicator overlay */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-green-500/5 via-transparent to-transparent pointer-events-none" />
-          
-          <form onSubmit={handleSubmit} className="space-y-6 relative">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">First Name</label>
@@ -168,6 +165,7 @@ const Estimate = () => {
           </form>
         </motion.div>
       </div>
+      <PromoCountdown />
     </div>
   );
 };
