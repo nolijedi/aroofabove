@@ -1,4 +1,6 @@
 import { Shield, Award, Clock, Wrench, Users, ThumbsUp } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const WhyChooseUs = () => {
