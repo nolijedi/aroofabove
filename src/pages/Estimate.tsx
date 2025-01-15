@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { motion } from "framer-motion";
-import { RoofIcon, PhoneCall, Mail, MapPin, Clock } from "lucide-react";
+import { Home, PhoneCall, Mail, MapPin, Clock } from "lucide-react";
 
 const Estimate = () => {
   const handleSubmit = (e: React.FormEvent) => {
@@ -41,7 +41,7 @@ const Estimate = () => {
           className="text-center mb-12"
         >
           <div className="flex justify-center mb-6">
-            <RoofIcon className="h-16 w-16 text-roofing-orange" />
+            <Home className="h-16 w-16 text-roofing-orange" />
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#1a2b4b] leading-tight">
             Get Your Free Roofing Estimate
