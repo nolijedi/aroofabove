@@ -56,18 +56,25 @@ const WhyChooseUs = () => {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12 bg-gradient-to-b from-roofing-off-white to-roofing-beige">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen pt-24 pb-12 bg-gradient-to-br from-roofing-charcoal via-gray-800 to-roofing-charcoal relative overflow-hidden">
+      {/* Subtle pattern overlay */}
+      <div 
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }}
+      />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Why Choose A Roof Above?
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             With years of experience and a commitment to excellence, we deliver superior roofing solutions tailored to your needs.
           </p>
         </motion.div>
@@ -82,16 +89,16 @@ const WhyChooseUs = () => {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition-transform duration-300"
+              className="bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-8 transform hover:scale-105 transition-transform duration-300 border border-white/10"
             >
               <div className="flex flex-col items-center text-center space-y-4">
                 <div className="p-4 bg-roofing-orange rounded-full text-white">
                   <reason.icon size={32} />
                 </div>
-                <h3 className="text-xl font-semibold text-roofing-charcoal">
+                <h3 className="text-xl font-semibold text-white">
                   {reason.title}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-300">
                   {reason.description}
                 </p>
               </div>
