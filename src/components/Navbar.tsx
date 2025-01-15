@@ -82,8 +82,8 @@ const Navbar = () => {
               >
                 <Link
                   to={item.path}
-                  className={`text-[#0A2472] font-medium relative before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-full before:h-0.5 before:bg-roofing-orange before:scale-x-0 before:origin-right before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left ${
-                    scrolled ? 'text-[#0A2472]' : 'text-[#0A2472]'
+                  className={`font-medium relative before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-full before:h-0.5 before:bg-roofing-orange before:scale-x-0 before:origin-right before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left ${
+                    scrolled ? 'text-roofing-charcoal' : 'text-roofing-cream'
                   }`}
                 >
                   {item.label}
@@ -132,7 +132,7 @@ const Navbar = () => {
           >
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`text-${scrolled ? 'roofing-charcoal' : 'white'} hover:text-roofing-orange transition-colors p-2 rounded-lg`}
+              className={`${scrolled ? 'text-roofing-charcoal' : 'text-roofing-cream'} hover:text-roofing-orange transition-colors p-2 rounded-lg`}
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -167,7 +167,7 @@ const Navbar = () => {
                 >
                   <Link
                     to={item.path}
-                    className="flex items-center gap-2 px-4 py-3 text-[#0A2472] hover:text-roofing-orange hover:bg-roofing-beige/50 rounded-lg transition-all duration-300"
+                    className="flex items-center gap-2 px-4 py-3 text-roofing-charcoal hover:text-roofing-orange hover:bg-roofing-beige/50 rounded-lg transition-all duration-300"
                     onClick={() => setIsOpen(false)}
                   >
                     {item.icon && <item.icon className="w-4 h-4" />}
