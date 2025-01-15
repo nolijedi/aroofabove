@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send, Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -19,6 +19,34 @@ const Contact = () => {
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Get in touch with our team for all your roofing needs.
           </p>
+          
+          {/* Social Media Icons */}
+          <div className="flex justify-center gap-6 mt-8">
+            {[
+              { Icon: Facebook, href: "https://facebook.com", label: "Facebook" },
+              { Icon: Instagram, href: "https://instagram.com", label: "Instagram" },
+              { Icon: Twitter, href: "https://twitter.com", label: "Twitter" },
+              { Icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+              { Icon: Youtube, href: "https://youtube.com", label: "YouTube" }
+            ].map(({ Icon, href, label }) => (
+              <motion.a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 bg-roofing-orange/10 rounded-full text-roofing-orange hover:bg-roofing-orange hover:text-white transition-colors duration-300"
+                whileHover={{ 
+                  scale: 1.2,
+                  rotate: 360,
+                  transition: { duration: 0.5 }
+                }}
+                whileTap={{ scale: 0.9 }}
+                aria-label={label}
+              >
+                <Icon className="w-6 h-6" />
+              </motion.a>
+            ))}
+          </div>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
