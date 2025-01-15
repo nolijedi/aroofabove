@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send, Building2, Home } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Contact = () => {
@@ -31,8 +31,25 @@ const Contact = () => {
     }
   };
 
+  const contactInfo = [
+    { icon: Phone, text: "509-218-4343", href: "tel:509-218-4343" },
+    { icon: Mail, text: "jc@aroofabove.com", href: "mailto:jc@aroofabove.com" },
+    { icon: MapPin, text: "Serving the Greater Spokane Area" },
+    { icon: Clock, text: "Available 24/7 for Emergency Services" },
+    { icon: Building2, text: "Commercial & Industrial Projects" },
+    { icon: Home, text: "Residential Roofing Experts" }
+  ];
+
   return (
-    <div className="min-h-screen pt-24 pb-12 bg-gradient-to-b from-gray-900 to-gray-800">
+    <div className="min-h-screen pt-24 pb-12">
+      <div 
+        className="fixed inset-0 -z-10"
+        style={{
+          background: "linear-gradient(to bottom right, rgba(34,31,38,0.95), rgba(249,115,22,0.8))",
+          backgroundBlendMode: "multiply"
+        }}
+      />
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -40,11 +57,11 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-roofing-orange to-orange-300">
-            Contact Us
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-roofing-orange to-orange-300">
+            Get in Touch
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Get in touch with us for all your roofing needs. We're here to help with expert solutions and professional service.
+            We're here to help with all your roofing needs. Contact us today for expert solutions and professional service.
           </p>
         </motion.div>
 
@@ -56,41 +73,33 @@ const Contact = () => {
         >
           <motion.div 
             variants={itemVariants}
-            className="space-y-8 bg-black/40 backdrop-blur-sm p-8 rounded-lg"
+            className="space-y-8 bg-black/40 backdrop-blur-sm p-8 rounded-lg border border-white/10"
           >
             <div>
-              <h2 className="text-2xl font-bold text-white mb-6">Get In Touch</h2>
-              <div className="space-y-6">
-                <motion.a 
-                  whileHover={{ scale: 1.05 }}
-                  href="tel:509-218-4343" 
-                  className="flex items-center gap-3 text-gray-300 hover:text-roofing-orange transition-colors"
-                >
-                  <Phone className="h-6 w-6" />
-                  <span>509-218-4343</span>
-                </motion.a>
-                <motion.a 
-                  whileHover={{ scale: 1.05 }}
-                  href="mailto:jc@aroofabove.com" 
-                  className="flex items-center gap-3 text-gray-300 hover:text-roofing-orange transition-colors"
-                >
-                  <Mail className="h-6 w-6" />
-                  <span>jc@aroofabove.com</span>
-                </motion.a>
-                <motion.div 
-                  whileHover={{ scale: 1.05 }}
-                  className="flex items-center gap-3 text-gray-300"
-                >
-                  <MapPin className="h-6 w-6" />
-                  <span>Serving the Greater Spokane Area</span>
-                </motion.div>
-                <motion.div 
-                  whileHover={{ scale: 1.05 }}
-                  className="flex items-center gap-3 text-gray-300"
-                >
-                  <Clock className="h-6 w-6" />
-                  <span>Available 24/7 for Emergency Services</span>
-                </motion.div>
+              <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {contactInfo.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    whileHover={{ scale: 1.05 }}
+                    className="group"
+                  >
+                    {item.href ? (
+                      <a 
+                        href={item.href}
+                        className="flex items-center gap-3 text-gray-300 hover:text-roofing-orange transition-colors p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-roofing-orange/50"
+                      >
+                        <item.icon className="h-6 w-6 group-hover:text-roofing-orange transition-colors" />
+                        <span>{item.text}</span>
+                      </a>
+                    ) : (
+                      <div className="flex items-center gap-3 text-gray-300 p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-roofing-orange/50">
+                        <item.icon className="h-6 w-6 group-hover:text-roofing-orange transition-colors" />
+                        <span>{item.text}</span>
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
               </div>
             </div>
           </motion.div>
@@ -101,27 +110,58 @@ const Contact = () => {
           >
             <h2 className="text-2xl font-bold text-white mb-6">Send Us a Message</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <Input placeholder="Your Name" className="bg-white/5 border-white/10 text-white placeholder:text-gray-400" />
-              </div>
-              <div>
-                <Input type="email" placeholder="Your Email" className="bg-white/5 border-white/10 text-white placeholder:text-gray-400" />
-              </div>
-              <div>
-                <Input type="tel" placeholder="Your Phone" className="bg-white/5 border-white/10 text-white placeholder:text-gray-400" />
-              </div>
-              <div>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="space-y-2"
+              >
+                <Input 
+                  placeholder="Your Name" 
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-roofing-orange/50" 
+                />
+              </motion.div>
+              
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="space-y-2"
+              >
+                <Input 
+                  type="email" 
+                  placeholder="Your Email" 
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-roofing-orange/50" 
+                />
+              </motion.div>
+              
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="space-y-2"
+              >
+                <Input 
+                  type="tel" 
+                  placeholder="Your Phone" 
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-roofing-orange/50" 
+                />
+              </motion.div>
+              
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="space-y-2"
+              >
                 <Textarea 
                   placeholder="Your Message" 
-                  className="min-h-[150px] bg-white/5 border-white/10 text-white placeholder:text-gray-400" 
+                  className="min-h-[150px] bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-roofing-orange/50" 
                 />
-              </div>
-              <motion.div whileHover={{ scale: 1.02 }}>
+              </motion.div>
+              
+              <motion.div 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-roofing-orange to-orange-500 hover:from-roofing-orange-dark hover:to-orange-600 text-white"
+                  className="w-full bg-gradient-to-r from-roofing-orange to-orange-500 hover:from-roofing-orange-dark hover:to-orange-600 text-white group"
                 >
-                  Send Message
+                  <span>Send Message</span>
+                  <Send className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </motion.div>
             </form>
