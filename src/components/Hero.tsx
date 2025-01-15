@@ -54,6 +54,14 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
             className="flex flex-col sm:flex-row items-center justify-center gap-6 text-roofing-beige font-medium"
           >
+            <Button
+              asChild
+              variant="ghost"
+              size="lg"
+              className="bg-transparent text-roofing-cream hover:bg-roofing-cream/10 hover:scale-105 transform transition-all duration-300"
+            >
+              <Link to="/estimate">Get Free Estimate</Link>
+            </Button>
             <a 
               href="tel:509-218-4343" 
               className="flex items-center gap-2 hover:text-roofing-cream transition-colors hover:scale-105 transform transition-all duration-300 group"
