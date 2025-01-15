@@ -82,10 +82,11 @@ const Navbar = () => {
               >
                 <Button
                   asChild
-                  variant="ghost"
                   className={`${
-                    scrolled ? 'text-roofing-charcoal hover:bg-roofing-orange/10' : 'text-roofing-cream hover:bg-white/10'
-                  } font-medium`}
+                    scrolled 
+                      ? 'bg-roofing-beige text-roofing-charcoal hover:bg-roofing-orange hover:text-white' 
+                      : 'bg-white/20 text-roofing-cream hover:bg-white/30'
+                  } transition-all duration-300`}
                 >
                   <Link to={item.path}>
                     {item.label}
