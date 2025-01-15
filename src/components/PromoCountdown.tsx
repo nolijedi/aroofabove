@@ -12,7 +12,7 @@ const PromoCountdown = () => {
       setFirstVisit(new Date().toISOString());
     }
 
-    const expiryTime = new Date(firstVisit).getTime() + (24 * 60 * 60 * 1000); // 24 hours
+    const expiryTime = new Date(firstVisit).getTime() + (60 * 1000); // 60 seconds
     const updateTimer = () => {
       const now = new Date().getTime();
       const distance = expiryTime - now;
@@ -33,7 +33,6 @@ const PromoCountdown = () => {
 
   if (isExpired) return null;
 
-  const hours = Math.floor(timeLeft / (1000 * 60 * 60));
   const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
@@ -61,7 +60,7 @@ const PromoCountdown = () => {
             Expires in:
           </div>
           <div className="font-mono text-lg text-green-300">
-            {`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`}
+            {`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`}
           </div>
         </div>
       </motion.div>
