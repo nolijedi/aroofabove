@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,9 @@ const PromoCountdown = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isClosed, setIsClosed] = useState(false);
   const [isExitIntent, setIsExitIntent] = useState(false);
+  const [position, setPosition] = useState({ x: 100, y: 100 });
+  const [velocity, setVelocity] = useState({ x: 2, y: 2 });
+  const frameRef = useRef<number>();
 
   useEffect(() => {
     // Reset isClosed state when route changes
@@ -39,6 +42,44 @@ const PromoCountdown = () => {
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
+
+  useEffect(() => {
+    // Animation loop for floating effect
+    const animate = () => {
+      setPosition(prevPos => {
+        const newPos = {
+          x: prevPos.x + velocity.x,
+          y: prevPos.y + velocity.y
+        };
+
+        // Check for collision with window boundaries
+        if (newPos.x <= 0 || newPos.x >= window.innerWidth - 300) {
+          setVelocity(prev => ({ ...prev, x: -prev.x }));
+        }
+        if (newPos.y <= 0 || newPos.y >= window.innerHeight - 400) {
+          setVelocity(prev => ({ ...prev, y: -prev.y }));
+        }
+
+        // Keep within bounds
+        return {
+          x: Math.max(0, Math.min(window.innerWidth - 300, newPos.x)),
+          y: Math.max(0, Math.min(window.innerHeight - 400, newPos.y))
+        };
+      });
+
+      frameRef.current = requestAnimationFrame(animate);
+    };
+
+    if (isVisible && !isClosed) {
+      frameRef.current = requestAnimationFrame(animate);
+    }
+
+    return () => {
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
+      }
+    };
+  }, [isVisible, isClosed, velocity]);
 
   useEffect(() => {
     // Only start countdown when visible
@@ -82,13 +123,21 @@ const PromoCountdown = () => {
       {isVisible && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={{ 
+            opacity: 1, 
+            y: 0,
+            x: position.x,
+            y: position.y,
+          }}
           exit={{ opacity: 0, y: 20 }}
-          className="fixed bottom-8 right-8 z-50"
+          className="fixed z-50"
+          style={{ 
+            pointerEvents: isClosed ? 'none' : 'auto',
+          }}
         >
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="relative p-6 rounded-lg shadow-2xl bg-gradient-to-br from-[#8B5CF6] to-[#D946EF] backdrop-blur-md border border-white/10 cursor-pointer"
+            className="relative p-6 rounded-lg shadow-2xl bg-gradient-to-br from-[#8B5CF6]/80 to-[#D946EF]/80 backdrop-blur-md border border-white/10 cursor-pointer"
             onClick={() => navigate('/estimate')}
           >
             <button
