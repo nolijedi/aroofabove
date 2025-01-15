@@ -5,16 +5,6 @@ import { Phone, Mail } from "lucide-react";
 const Hero = () => {
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* Dynamic Background */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24?q=80&w=2070')",
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-roofing-charcoal/80 to-roofing-orange-dark/60" />
-      </div>
-
       {/* Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12">
         <div className="text-center space-y-8 animate-fade-in">

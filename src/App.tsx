@@ -18,7 +18,17 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="min-h-screen bg-roofing-off-white">
+        <div className="min-h-screen relative">
+          {/* Background Image and Overlay */}
+          <div 
+            className="fixed inset-0 bg-cover bg-center bg-no-repeat -z-10"
+            style={{
+              backgroundImage: "url('https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24?q=80&w=2070')",
+            }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-roofing-charcoal/80 to-roofing-orange-dark/60" />
+          </div>
+          
           <Navbar />
           <Routes>
             <Route path="/" element={<Index />} />
