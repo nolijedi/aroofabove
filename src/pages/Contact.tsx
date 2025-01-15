@@ -21,7 +21,7 @@ const Contact = () => {
           </p>
           
           {/* Social Media Icons */}
-          <div className="flex justify-center gap-6 mt-8">
+          <div className="flex justify-center gap-8 mt-12">
             {[
               { Icon: Facebook, href: "https://facebook.com", label: "Facebook" },
               { Icon: Instagram, href: "https://instagram.com", label: "Instagram" },
@@ -34,7 +34,7 @@ const Contact = () => {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-roofing-orange/10 rounded-full text-roofing-orange hover:bg-roofing-orange hover:text-white transition-colors duration-300"
+                className="p-4 bg-roofing-orange/10 rounded-full text-roofing-orange hover:bg-roofing-orange hover:text-white transition-colors duration-300"
                 whileHover={{ 
                   scale: 1.2,
                   rotate: 360,
@@ -43,7 +43,7 @@ const Contact = () => {
                 whileTap={{ scale: 0.9 }}
                 aria-label={label}
               >
-                <Icon className="w-6 h-6" />
+                <Icon className="w-8 h-8" />
               </motion.a>
             ))}
           </div>
