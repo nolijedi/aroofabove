@@ -46,12 +46,15 @@ const Hero = () => {
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
                 transition={{
-                  duration: 0.3,
-                  delay: 0.5 + delay,
-                  ease: [0, 0.71, 0.2, 1.01]
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20,
+                  delay: 0.5 + delay
                 }}
-                className="bg-roofing-beige p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
+                className="p-4 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
                 <Icon className="w-8 h-8 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
               </motion.a>
