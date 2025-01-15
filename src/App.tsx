@@ -10,6 +10,7 @@ import WhyChooseUs from "./pages/WhyChooseUs";
 import Contact from "./pages/Contact";
 import Estimate from "./pages/Estimate";
 import PromoCountdown from "./components/PromoCountdown";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <div className="min-h-screen relative">
           {/* Background Image and Overlay */}
           <div 
