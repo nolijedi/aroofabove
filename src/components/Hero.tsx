@@ -8,10 +8,10 @@ const Hero = () => {
       {/* Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12">
         <div className="text-center space-y-8 animate-fade-in">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+          <h1 className="text-4xl md:text-6xl font-bold text-navy-900 mb-6 drop-shadow-lg">
             Your Trusted Roofing Experts
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-[#1a2b4b] mb-8 max-w-2xl mx-auto font-medium">
             Professional roofing services for residential and commercial properties.
             Quality workmanship guaranteed.
           </p>
@@ -19,7 +19,7 @@ const Hero = () => {
             <Button
               asChild
               size="lg"
-              className="bg-white text-roofing-charcoal hover:bg-roofing-beige hover:scale-105 transform transition-all duration-300"
+              className="bg-white text-[#1a2b4b] hover:bg-roofing-beige hover:scale-105 transform transition-all duration-300"
             >
               <Link to="/estimate">Get Free Estimate</Link>
             </Button>
@@ -27,12 +27,12 @@ const Hero = () => {
               asChild
               size="lg"
               variant="outline"
-              className="bg-transparent text-white border-white hover:bg-white/10 hover:scale-105 transform transition-all duration-300"
+              className="bg-transparent text-[#1a2b4b] border-[#1a2b4b] hover:bg-white/10 hover:scale-105 transform transition-all duration-300"
             >
               <Link to="/services">Our Services</Link>
             </Button>
           </div>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-white">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-[#1a2b4b] font-medium">
             <a 
               href="tel:509-218-4343" 
               className="flex items-center gap-2 hover:text-roofing-beige transition-colors hover:scale-105 transform transition-all duration-300"
