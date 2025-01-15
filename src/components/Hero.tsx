@@ -30,12 +30,12 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+            className="flex flex-col sm:flex-row gap-6 justify-center mb-12"
           >
             <Button
               asChild
               size="lg"
-              className="bg-roofing-orange text-white hover:bg-roofing-orange-dark hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="bg-roofing-orange text-white hover:bg-roofing-orange-dark transform transition-all duration-300 shadow-lg hover:shadow-xl text-xl py-6 px-12 rounded-xl"
             >
               <Link to="/estimate">Get Free Estimate</Link>
             </Button>
@@ -43,7 +43,7 @@ const Hero = () => {
               asChild
               size="lg"
               variant="outline"
-              className="bg-transparent text-roofing-cream border-roofing-cream hover:bg-roofing-cream/10 hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="bg-transparent text-roofing-cream border-2 border-roofing-cream hover:bg-roofing-cream/10 transform transition-all duration-300 shadow-lg hover:shadow-xl text-xl py-6 px-12 rounded-xl"
             >
               <Link to="/services">Our Services</Link>
             </Button>
@@ -54,14 +54,6 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
             className="flex flex-col sm:flex-row items-center justify-center gap-6 text-roofing-beige font-medium"
           >
-            <Button
-              asChild
-              variant="ghost"
-              size="lg"
-              className="bg-transparent text-roofing-cream hover:bg-roofing-cream/10 hover:scale-105 transform transition-all duration-300"
-            >
-              <Link to="/estimate">Get Free Estimate</Link>
-            </Button>
             <a 
               href="tel:509-218-4343" 
               className="flex items-center gap-2 hover:text-roofing-cream transition-colors hover:scale-105 transform transition-all duration-300 group"
