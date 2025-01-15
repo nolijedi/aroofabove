@@ -9,6 +9,7 @@ import Services from "./pages/Services";
 import WhyChooseUs from "./pages/WhyChooseUs";
 import Contact from "./pages/Contact";
 import Estimate from "./pages/Estimate";
+import PromoCountdown from "./components/PromoCountdown";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/estimate" element={<Estimate />} />
           </Routes>
+          <PromoCountdown />
         </div>
       </BrowserRouter>
     </TooltipProvider>
