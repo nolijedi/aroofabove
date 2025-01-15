@@ -85,7 +85,7 @@ const WhyChooseUs = () => {
             >
               <div className="flex flex-col items-center text-center space-y-4">
                 <div className="p-4 bg-roofing-orange rounded-full text-white">
-                  <reason.icon size={32} />
+                  <reason.icon />
                 </div>
                 <h3 className="text-xl font-semibold text-roofing-charcoal">
                   {reason.title}
