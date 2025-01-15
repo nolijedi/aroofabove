@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Award, Clock, Shield, Tool, Users, Zap } from "lucide-react";
+import { ArrowRight, Award, Clock, Shield, Wrench, Users, Zap } from "lucide-react";
 
 const reasons = [
   {
     title: "Expert Craftsmanship",
     description: "Our team of skilled professionals brings years of experience and dedication to every project.",
-    icon: Tool,
+    icon: Wrench,
   },
   {
     title: "Quality Materials",
