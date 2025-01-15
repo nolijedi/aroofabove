@@ -1,16 +1,17 @@
 import { Shield, Award, Clock, Wrench, Users, ThumbsUp } from "lucide-react";
+import { motion } from "framer-motion";
 
 const WhyChooseUs = () => {
   const reasons = [
     {
       icon: Shield,
-      title: "Licensed & Insured",
-      description: "Fully licensed and insured for your peace of mind. We meet all local and state requirements."
+      title: "Quality Guaranteed",
+      description: "We stand behind our work with industry-leading warranties and guarantees."
     },
     {
       icon: Award,
-      title: "Quality Workmanship",
-      description: "Premium materials and expert installation techniques ensure lasting results."
+      title: "Award-Winning Service",
+      description: "Recognized for excellence in roofing services and customer satisfaction."
     },
     {
       icon: Clock,
@@ -25,37 +26,91 @@ const WhyChooseUs = () => {
     {
       icon: Users,
       title: "Customer Focused",
-      description: "We prioritize customer satisfaction with transparent pricing and excellent service."
+      description: "Your satisfaction is our priority. We listen to your needs and deliver results."
     },
     {
       icon: ThumbsUp,
-      title: "Warranty Backed",
-      description: "Our work is backed by comprehensive warranties for your protection."
+      title: "Professional Standards",
+      description: "We maintain the highest standards of professionalism and craftsmanship."
     }
   ];
 
-  return (
-    <div className="pt-24 px-4 max-w-7xl mx-auto">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-roofing-charcoal mb-4">Why Choose Us</h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          With years of experience and a commitment to excellence, we're your trusted choice for all roofing needs.
-        </p>
-      </div>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-        {reasons.map((reason, index) => {
-          const IconComponent = reason.icon;
-          return (
-            <div key={index} className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <div className="flex items-center justify-center w-12 h-12 bg-roofing-beige rounded-full mb-4">
-                <IconComponent className="h-6 w-6 text-roofing-orange" />
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1
+    }
+  };
+
+  return (
+    <div className="min-h-screen pt-24 pb-12 bg-gradient-to-b from-roofing-off-white to-roofing-beige">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-6">
+            Why Choose A Roof Above?
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            With years of experience and a commitment to excellence, we deliver superior roofing solutions tailored to your needs.
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {reasons.map((reason, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition-transform duration-300"
+            >
+              <div className="flex flex-col items-center text-center space-y-4">
+                <div className="p-4 bg-roofing-orange rounded-full text-white">
+                  <reason.icon size={32} />
+                </div>
+                <h3 className="text-xl font-semibold text-roofing-charcoal">
+                  {reason.title}
+                </h3>
+                <p className="text-gray-600">
+                  {reason.description}
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-roofing-charcoal mb-2">{reason.title}</h3>
-              <p className="text-gray-600">{reason.description}</p>
-            </div>
-          );
-        })}
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="mt-16 text-center"
+        >
+          <Link
+            to="/contact"
+            className="inline-flex items-center px-8 py-3 bg-roofing-orange text-white rounded-full font-semibold hover:bg-roofing-orange-dark transition-colors duration-300"
+          >
+            Get Started Today
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Link>
+        </motion.div>
       </div>
     </div>
   );
