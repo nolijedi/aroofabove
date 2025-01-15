@@ -41,19 +41,27 @@ const Services = () => {
   const projectImages = [
     {
       url: "https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24",
-      title: "Modern Residential Roof"
+      title: "Modern Residential Roof Installation"
     },
     {
-      url: "https://images.unsplash.com/photo-1439337153520-7082a56a81f4",
-      title: "Commercial Glass Roof"
+      url: "https://images.unsplash.com/photo-1600585154363-67eb9e2e2099",
+      title: "Solar Panel Roof Integration"
     },
     {
-      url: "https://images.unsplash.com/photo-1497604401993-f2e922e5cb0a",
-      title: "Industrial Roofing"
+      url: "https://images.unsplash.com/photo-1605808978575-e73be210d160",
+      title: "Commercial Flat Roof Systems"
     },
     {
-      url: "https://images.unsplash.com/photo-1487958449943-2429e8be8625",
-      title: "Contemporary Design"
+      url: "https://images.unsplash.com/photo-1591588582259-e675bd2e6088",
+      title: "Traditional Shingle Installation"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1516156008625-3a9d6067fab5",
+      title: "Modern Architectural Roofing"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39",
+      title: "Slate Roof Craftsmanship"
     }
   ];
 
@@ -97,18 +105,18 @@ const Services = () => {
       {/* Project Showcase */}
       <div className="mb-16 bg-black/40 backdrop-blur-sm p-8 rounded-lg">
         <h2 className="text-3xl font-bold text-white text-center mb-8">Our Recent Projects</h2>
-        <Carousel className="w-full max-w-4xl mx-auto">
+        <Carousel className="w-full max-w-5xl mx-auto">
           <CarouselContent>
             {projectImages.map((image, index) => (
               <CarouselItem key={index}>
                 <div className="p-1">
-                  <div className="relative aspect-video overflow-hidden rounded-xl">
+                  <div className="relative aspect-[16/9] overflow-hidden rounded-xl">
                     <img
                       src={image.url}
                       alt={image.title}
-                      className="object-cover w-full h-full"
+                      className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-4">
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm text-white p-4">
                       <h3 className="text-xl font-semibold">{image.title}</h3>
                     </div>
                   </div>
@@ -116,8 +124,8 @@ const Services = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="text-white" />
-          <CarouselNext className="text-white" />
+          <CarouselPrevious className="text-white border-white hover:bg-white/20" />
+          <CarouselNext className="text-white border-white hover:bg-white/20" />
         </Carousel>
       </div>
 
