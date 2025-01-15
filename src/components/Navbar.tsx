@@ -69,7 +69,7 @@ const Navbar = () => {
           </motion.div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4">
             {[
               { path: "/services", label: "Services" },
               { path: "/why-choose-us", label: "Why Choose Us" },
@@ -80,14 +80,17 @@ const Navbar = () => {
                 whileHover="hover"
                 whileTap="tap"
               >
-                <Link
-                  to={item.path}
-                  className={`font-medium relative before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-full before:h-0.5 before:bg-roofing-orange before:scale-x-0 before:origin-right before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left ${
-                    scrolled ? 'text-roofing-charcoal' : 'text-roofing-cream'
-                  }`}
+                <Button
+                  asChild
+                  variant="ghost"
+                  className={`${
+                    scrolled ? 'text-roofing-charcoal hover:bg-roofing-orange/10' : 'text-roofing-cream hover:bg-white/10'
+                  } font-medium`}
                 >
-                  {item.label}
-                </Link>
+                  <Link to={item.path}>
+                    {item.label}
+                  </Link>
+                </Button>
               </motion.div>
             ))}
             <motion.div 
