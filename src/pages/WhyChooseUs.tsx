@@ -1,80 +1,72 @@
-import { Shield, Award, Clock, Wrench, Users, ThumbsUp } from "lucide-react";
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+
+const reasons = [
+  {
+    title: "Expert Craftsmanship",
+    description: "Our team of skilled professionals brings years of experience and dedication to every project.",
+    icon: () => (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Quality Materials",
+    description: "We use only the highest quality roofing materials to ensure durability and longevity.",
+    icon: () => (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+      </svg>
+    ),
+  },
+  {
+    title: "Customer Satisfaction",
+    description: "Your satisfaction is our priority. We work closely with you throughout the entire process.",
+    icon: () => (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+      </svg>
+    ),
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
 
 const WhyChooseUs = () => {
-  const reasons = [
-    {
-      icon: Shield,
-      title: "Quality Guaranteed",
-      description: "We stand behind our work with industry-leading warranties and guarantees."
-    },
-    {
-      icon: Award,
-      title: "Award-Winning Service",
-      description: "Recognized for excellence in roofing services and customer satisfaction."
-    },
-    {
-      icon: Clock,
-      title: "Timely Service",
-      description: "We respect your time with prompt service and clear communication throughout your project."
-    },
-    {
-      icon: Wrench,
-      title: "Expert Team",
-      description: "Our skilled professionals have years of experience in all aspects of roofing."
-    },
-    {
-      icon: Users,
-      title: "Customer Focused",
-      description: "Your satisfaction is our priority. We listen to your needs and deliver results."
-    },
-    {
-      icon: ThumbsUp,
-      title: "Professional Standards",
-      description: "We maintain the highest standards of professionalism and craftsmanship."
-    }
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1
-    }
-  };
-
   return (
-    <div className="min-h-screen pt-24 pb-12 bg-gradient-to-br from-roofing-charcoal via-gray-800 to-roofing-charcoal relative overflow-hidden">
-      {/* Subtle pattern overlay */}
-      <div 
-        className="absolute inset-0 opacity-5"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}
-      />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="min-h-screen pt-24 pb-12 bg-gradient-to-b from-roofing-off-white to-roofing-beige">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-6">
             Why Choose A Roof Above?
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             With years of experience and a commitment to excellence, we deliver superior roofing solutions tailored to your needs.
           </p>
         </motion.div>
@@ -89,16 +81,16 @@ const WhyChooseUs = () => {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-8 transform hover:scale-105 transition-transform duration-300 border border-white/10"
+              className="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition-transform duration-300"
             >
               <div className="flex flex-col items-center text-center space-y-4">
                 <div className="p-4 bg-roofing-orange rounded-full text-white">
                   <reason.icon size={32} />
                 </div>
-                <h3 className="text-xl font-semibold text-white">
+                <h3 className="text-xl font-semibold text-roofing-charcoal">
                   {reason.title}
                 </h3>
-                <p className="text-gray-300">
+                <p className="text-gray-600">
                   {reason.description}
                 </p>
               </div>
@@ -109,15 +101,15 @@ const WhyChooseUs = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="mt-16 text-center"
+          transition={{ delay: 0.8, duration: 0.6 }}
+          className="text-center mt-16"
         >
           <Link
             to="/contact"
-            className="inline-flex items-center px-8 py-3 bg-roofing-orange text-white rounded-full font-semibold hover:bg-roofing-orange-dark transition-colors duration-300"
+            className="inline-flex items-center space-x-2 text-roofing-orange hover:text-roofing-orange-dark transition-colors"
           >
-            Get Started Today
-            <ArrowRight className="ml-2 h-5 w-5" />
+            <span>Get Started Today</span>
+            <ArrowRight className="w-5 h-5" />
           </Link>
         </motion.div>
       </div>
