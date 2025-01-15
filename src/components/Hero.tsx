@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Phone, Mail } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
