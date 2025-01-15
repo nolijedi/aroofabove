@@ -1,166 +1,160 @@
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Clock, Send, Building2, Home } from "lucide-react";
-import { motion } from "framer-motion";
+import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
 
 const Contact = () => {
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Form submission logic would go here
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
-
-  const contactInfo = [
-    { icon: Phone, text: "509-218-4343", href: "tel:509-218-4343" },
-    { icon: Mail, text: "jc@aroofabove.com", href: "mailto:jc@aroofabove.com" },
-    { icon: MapPin, text: "Serving the Greater Spokane Area" },
-    { icon: Clock, text: "Available 24/7 for Emergency Services" },
-    { icon: Building2, text: "Commercial & Industrial Projects" },
-    { icon: Home, text: "Residential Roofing Experts" }
-  ];
-
   return (
-    <div className="min-h-screen pt-24 pb-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen pt-32 pb-20 px-4">
+      <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-[#1a2b4b]">
-            Get in Touch
+          <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-6">
+            Contact Us
           </h1>
-          <p className="text-xl text-[#1a2b4b] max-w-2xl mx-auto">
-            We're here to help with all your roofing needs. Contact us today for expert solutions and professional service.
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Get in touch with our team for all your roofing needs.
           </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12"
-        >
-          <motion.div 
-            variants={itemVariants}
-            className="space-y-8 bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-roofing-orange/20"
+        <div className="grid lg:grid-cols-2 gap-12">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="space-y-8"
           >
-            <div>
-              <h2 className="text-2xl font-bold text-roofing-charcoal mb-6">Contact Information</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {contactInfo.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    whileHover={{ scale: 1.05 }}
-                    className="group"
-                  >
-                    {item.href ? (
-                      <a 
-                        href={item.href}
-                        className="flex items-center gap-3 text-roofing-charcoal hover:text-roofing-orange transition-colors p-4 rounded-lg bg-white/80 backdrop-blur-sm border border-roofing-orange/20 group-hover:border-roofing-orange"
-                      >
-                        <item.icon className="h-6 w-6 group-hover:text-roofing-orange transition-colors" />
-                        <span>{item.text}</span>
-                      </a>
-                    ) : (
-                      <div className="flex items-center gap-3 text-roofing-charcoal p-4 rounded-lg bg-white/80 backdrop-blur-sm border border-roofing-orange/20 group-hover:border-roofing-orange">
-                        <item.icon className="h-6 w-6 group-hover:text-roofing-orange transition-colors" />
-                        <span>{item.text}</span>
-                      </div>
-                    )}
-                  </motion.div>
+            <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8">
+              <h2 className="text-2xl font-bold text-roofing-charcoal mb-6">
+                Contact Information
+              </h2>
+              <div className="space-y-6">
+                {[
+                  {
+                    icon: Phone,
+                    title: "Phone",
+                    content: "509-218-4343",
+                    link: "tel:509-218-4343"
+                  },
+                  {
+                    icon: Mail,
+                    title: "Email",
+                    content: "jc@aroofabove.com",
+                    link: "mailto:jc@aroofabove.com"
+                  },
+                  {
+                    icon: MapPin,
+                    title: "Address",
+                    content: "Spokane, WA"
+                  },
+                  {
+                    icon: Clock,
+                    title: "Business Hours",
+                    content: "Mon-Fri: 8:00 AM - 6:00 PM"
+                  }
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <div className="p-2 bg-roofing-orange/10 rounded-lg">
+                      <item.icon className="w-5 h-5 text-roofing-orange" />
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-roofing-charcoal">
+                        {item.title}
+                      </h3>
+                      {item.link ? (
+                        <a
+                          href={item.link}
+                          className="text-gray-600 hover:text-roofing-orange transition-colors"
+                        >
+                          {item.content}
+                        </a>
+                      ) : (
+                        <p className="text-gray-600">{item.content}</p>
+                      )}
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
           </motion.div>
 
-          <motion.div 
-            variants={itemVariants}
-            className="bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-roofing-orange/20"
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 }}
+            className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8"
           >
-            <h2 className="text-2xl font-bold text-roofing-charcoal mb-6">Send Us a Message</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="space-y-2"
-              >
-                <Input 
-                  placeholder="Your Name" 
-                  className="bg-white border-roofing-orange/20 text-roofing-charcoal placeholder:text-roofing-charcoal/50 focus:border-roofing-orange" 
+            <h2 className="text-2xl font-bold text-roofing-charcoal mb-6">
+              Send Us a Message
+            </h2>
+            <form className="space-y-6">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">
+                    First Name
+                  </label>
+                  <Input
+                    type="text"
+                    placeholder="John"
+                    className="w-full"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">
+                    Last Name
+                  </label>
+                  <Input
+                    type="text"
+                    placeholder="Doe"
+                    className="w-full"
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Email
+                </label>
+                <Input
+                  type="email"
+                  placeholder="john@example.com"
+                  className="w-full"
                 />
-              </motion.div>
-              
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="space-y-2"
-              >
-                <Input 
-                  type="email" 
-                  placeholder="Your Email" 
-                  className="bg-white border-roofing-orange/20 text-roofing-charcoal placeholder:text-roofing-charcoal/50 focus:border-roofing-orange" 
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Phone
+                </label>
+                <Input
+                  type="tel"
+                  placeholder="(555) 123-4567"
+                  className="w-full"
                 />
-              </motion.div>
-              
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="space-y-2"
-              >
-                <Input 
-                  type="tel" 
-                  placeholder="Your Phone" 
-                  className="bg-white border-roofing-orange/20 text-roofing-charcoal placeholder:text-roofing-charcoal/50 focus:border-roofing-orange" 
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Message
+                </label>
+                <Textarea
+                  placeholder="How can we help you?"
+                  className="w-full min-h-[120px]"
                 />
-              </motion.div>
-              
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="space-y-2"
+              </div>
+              <Button
+                type="submit"
+                className="w-full bg-roofing-orange text-white hover:bg-roofing-orange-dark group"
               >
-                <Textarea 
-                  placeholder="Your Message" 
-                  className="min-h-[150px] bg-white border-roofing-orange/20 text-roofing-charcoal placeholder:text-roofing-charcoal/50 focus:border-roofing-orange" 
-                />
-              </motion.div>
-              
-              <motion.div 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button 
-                  type="submit" 
-                  className="w-full bg-gradient-to-r from-roofing-orange to-orange-500 hover:from-roofing-orange-dark hover:to-orange-600 text-white group"
-                >
-                  <span>Send Message</span>
-                  <Send className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </motion.div>
+                Send Message
+                <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
             </form>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
-    </div>
+    </main>
   );
 };
 

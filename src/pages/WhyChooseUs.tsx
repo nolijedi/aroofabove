@@ -1,122 +1,124 @@
 import { motion } from "framer-motion";
-import { Award, Clock, Shield, Wrench, Users, Zap } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { ArrowRight, Award, Users, Clock, Shield, ThumbsUp, Gem } from "lucide-react";
 import { ReasonCard } from "@/components/why-choose-us/ReasonCard";
 import { ProjectsCarousel } from "@/components/why-choose-us/ProjectsCarousel";
 import { CallToAction } from "@/components/why-choose-us/CallToAction";
 
-const reasons = [
-  {
-    title: "Expert Craftsmanship",
-    description: "Our team of skilled professionals brings years of experience and dedication to every project.",
-    icon: Wrench,
-  },
-  {
-    title: "Quality Materials",
-    description: "We use only the highest quality roofing materials to ensure durability and longevity.",
-    icon: Shield,
-  },
-  {
-    title: "Customer Satisfaction",
-    description: "Your satisfaction is our priority. We work closely with you throughout the entire process.",
-    icon: Users,
-  },
-  {
-    title: "Fast Turnaround",
-    description: "We complete projects efficiently without compromising on quality.",
-    icon: Clock,
-  },
-  {
-    title: "Licensed & Insured",
-    description: "Full peace of mind with our comprehensive insurance coverage and proper licensing.",
-    icon: Award,
-  },
-  {
-    title: "Energy Efficient",
-    description: "We specialize in energy-efficient roofing solutions that save you money.",
-    icon: Zap,
-  },
-];
-
-const projects = [
-  {
-    image: "https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24",
-    title: "Modern Residential Roofing",
-    description: "Complete roof installations"
-  },
-  {
-    image: "https://images.unsplash.com/photo-1600585154363-67eb9e2e2099",
-    title: "Luxury Home Roofing",
-    description: "Premium materials and design"
-  },
-  {
-    image: "https://images.unsplash.com/photo-1605808978575-e73be210d160",
-    title: "Traditional Home Roofing",
-    description: "Classic style and durability"
-  },
-  {
-    image: "https://images.unsplash.com/photo-1591588582259-e675bd2e6088",
-    title: "Emergency Repairs",
-    description: "24/7 emergency response"
-  },
-  {
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f",
-    title: "Sustainable Roofing",
-    description: "Eco-friendly solutions"
-  },
-  {
-    image: "https://images.unsplash.com/photo-1516156008625-3a9d6067fab5",
-    title: "Custom Design",
-    description: "Tailored to your style"
-  }
-];
-
 const WhyChooseUs = () => {
+  const reasons = [
+    {
+      icon: Award,
+      title: "Expert Craftsmanship",
+      description: "Our team brings years of experience and expertise to every project."
+    },
+    {
+      icon: Users,
+      title: "Customer-First Approach",
+      description: "We prioritize your needs and ensure complete satisfaction."
+    },
+    {
+      icon: Clock,
+      title: "Timely Completion",
+      description: "We respect your time and deliver projects on schedule."
+    },
+    {
+      icon: Shield,
+      title: "Quality Materials",
+      description: "We use only premium materials for lasting results."
+    },
+    {
+      icon: ThumbsUp,
+      title: "Licensed & Insured",
+      description: "Full compliance and protection for your peace of mind."
+    },
+    {
+      icon: Gem,
+      title: "Competitive Pricing",
+      description: "Fair and transparent pricing for all our services."
+    }
+  ];
+
+  const projects = [
+    {
+      image: "https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24",
+      title: "Residential Roof Replacement",
+      description: "Complete roof replacement with 30-year warranty shingles."
+    },
+    {
+      image: "https://images.unsplash.com/photo-1600585154363-67eb9e2e2099",
+      title: "Commercial Flat Roof",
+      description: "Installation of TPO roofing system for local business."
+    },
+    {
+      image: "https://images.unsplash.com/photo-1605808357954-53ae0fe87d16",
+      title: "Emergency Repair",
+      description: "Quick response and repair after storm damage."
+    }
+  ];
+
   return (
-    <div className="min-h-screen pt-24 pb-12 bg-gradient-to-b from-roofing-cream via-white to-roofing-beige">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen pt-32 pb-20 px-4">
+      <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-roofing-orange to-roofing-orange-dark bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-6">
             Why Choose A Roof Above?
           </h1>
-          <p className="text-xl text-roofing-charcoal max-w-3xl mx-auto">
-            With years of experience and a commitment to excellence, we deliver superior roofing solutions tailored to your needs.
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Experience the difference of working with a trusted roofing partner.
           </p>
         </motion.div>
 
-        <motion.div
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.2,
-              },
-            },
-          }}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
-        >
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {reasons.map((reason, index) => (
-            <ReasonCard
+            <motion.div
               key={index}
-              title={reason.title}
-              description={reason.description}
-              Icon={reason.icon}
-            />
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <ReasonCard {...reason} />
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
 
         <ProjectsCarousel projects={projects} />
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-16"
+        >
+          <div className="text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-roofing-charcoal mb-6">
+              Our Commitment to Excellence
+            </h2>
+            <p className="text-gray-600 mb-8">
+              With over 20 years of experience in the roofing industry, we've built our reputation on quality workmanship, exceptional customer service, and attention to detail. Our team of certified professionals is dedicated to providing you with the best roofing solutions tailored to your needs.
+            </p>
+            <Button
+              asChild
+              size="lg"
+              className="bg-roofing-orange text-white hover:bg-roofing-orange-dark group"
+            >
+              <Link to="/estimate">
+                Get Your Free Estimate
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+          </div>
+        </motion.div>
+
         <CallToAction />
       </div>
-    </div>
+    </main>
   );
 };
 
