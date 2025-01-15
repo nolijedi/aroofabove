@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Home, Building2, Wrench, PaintBucket } from "lucide-react";
+import PromoCountdown from "@/components/PromoCountdown";
 
 const Services = () => {
   return (
@@ -112,6 +113,7 @@ const Services = () => {
           </Button>
         </motion.div>
       </div>
+      <PromoCountdown />
     </main>
   );
 };
