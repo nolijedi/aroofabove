@@ -82,7 +82,7 @@ const Navbar = () => {
               >
                 <Button
                   asChild
-                  className="bg-roofing-orange text-white hover:bg-roofing-orange-dark transition-all duration-300"
+                  className="bg-roofing-orange text-white hover:bg-roofing-orange-dark transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   <Link to={item.path}>
                     {item.label}
