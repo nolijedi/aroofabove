@@ -28,7 +28,8 @@ const Services = () => {
               title: "Residential Roofing",
               description: "Expert installation and repair services for homes of all sizes.",
               features: ["Shingle Installation", "Leak Repair", "Maintenance", "Emergency Services"],
-              fact: "Did you know? The average residential roof has over 10,000 individual shingles!"
+              fact: "Did you know? The average residential roof has over 10,000 individual shingles!",
+              image: "/lovable-uploads/1ed3c427-6ca8-454e-adf5-d25edcf467a5.png"
             },
             {
               icon: Building2,
@@ -88,6 +89,15 @@ const Services = () => {
                 <div className="absolute w-full h-full backface-hidden [transform:rotateY(180deg)] bg-gradient-to-br from-roofing-orange/90 to-roofing-orange-dark/90 backdrop-blur-sm rounded-xl shadow-lg p-8">
                   <div className="flex flex-col h-full text-white">
                     <h3 className="text-2xl font-semibold mb-6">{service.title}</h3>
+                    {service.image && (
+                      <div className="mb-4 rounded-lg overflow-hidden">
+                        <img 
+                          src={service.image} 
+                          alt={service.title}
+                          className="w-full h-48 object-cover"
+                        />
+                      </div>
+                    )}
                     <p className="text-lg mb-8">{service.fact}</p>
                     <div className="mt-auto">
                       <Button
