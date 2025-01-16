@@ -54,7 +54,7 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
-              className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow"
+              className="group bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow"
             >
               <div className="flex flex-col h-full">
                 <div className="flex items-center gap-4 mb-6">
@@ -72,7 +72,7 @@ const Services = () => {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-auto">
+                <div className="mt-auto opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
                   <Button
                     asChild
                     variant="outline"
