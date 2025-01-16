@@ -11,7 +11,7 @@ const Index = () => {
       title: "Quality Guaranteed",
       description: "We stand behind our work with industry-leading warranties.",
       expandedDescription: "Our comprehensive warranty coverage ensures your peace of mind. We use only premium materials and follow strict quality control processes to deliver roofing solutions that stand the test of time.",
-      image: "https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&q=80&w=1920"
+      image: "/lovable-uploads/10a995fa-6759-4932-b918-b83c2dd741d7.png"
     },
     {
       icon: Wrench,
