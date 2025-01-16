@@ -14,7 +14,7 @@ const EnhancedHero = () => {
   return (
     <div className="relative">
       <Hero />
-      <div className="absolute top-1/2 right-8 flex flex-col gap-4">
+      <div className="absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center gap-8">
         {socialLinks.map(({ Icon, href, label, delay }, index) => (
           <motion.a
             key={index}
@@ -22,8 +22,8 @@ const EnhancedHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={label}
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
             whileHover={{ 
               scale: 1.2,
               rotate: 360,
@@ -34,11 +34,11 @@ const EnhancedHero = () => {
               type: "spring",
               stiffness: 300,
               damping: 20,
-              delay: delay
+              delay: 0.5 + delay
             }}
-            className="p-3 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+            className="p-4 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group active:bg-roofing-orange/20"
           >
-            <Icon className="w-6 h-6 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
+            <Icon className="w-8 h-8 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
           </motion.a>
         ))}
       </div>
