@@ -44,7 +44,8 @@ const Services = () => {
               title: "Roof Repair",
               description: "Quick and reliable repair services to protect your property.",
               features: ["Storm Damage", "Leak Detection", "Gutter Repair", "Ventilation Fix"],
-              fact: "Interesting fact: Most roof leaks are found around chimneys and vents, not in the open areas!"
+              fact: "Interesting fact: Most roof leaks are found around chimneys and vents, not in the open areas!",
+              image: "/lovable-uploads/16c50230-228c-4910-af52-24b168e003c9.png"
             },
             {
               icon: PaintBucket,
