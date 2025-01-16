@@ -46,8 +46,8 @@ const Navbar = () => {
       variants={navVariants}
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? "bg-white/95 backdrop-blur-sm shadow-lg" 
-          : "bg-transparent"
+          ? "bg-roofing-charcoal/95 backdrop-blur-sm shadow-lg" 
+          : "bg-roofing-charcoal/80"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

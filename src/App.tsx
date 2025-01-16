@@ -30,11 +30,11 @@ const App = () => (
               backgroundImage: "url('https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24?q=80&w=2070')",
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-roofing-charcoal/90 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-roofing-charcoal/95 to-transparent" />
           </div>
           
           <Navbar />
-          <div className="pt-32"> {/* Increased padding to accommodate the lowered logo */}
+          <div className="pt-24"> {/* Reduced padding to bring content up */}
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/services" element={<Services />} />
