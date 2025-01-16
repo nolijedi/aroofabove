@@ -36,7 +36,8 @@ const Services = () => {
               title: "Commercial Roofing",
               description: "Professional solutions for businesses and commercial properties.",
               features: ["Flat Roofing", "TPO/EPDM Systems", "Preventive Maintenance", "24/7 Support"],
-              fact: "Fun fact: Commercial roofs can last up to 50 years with proper maintenance!"
+              fact: "Fun fact: Commercial roofs can last up to 50 years with proper maintenance!",
+              image: "/lovable-uploads/daa7e114-eb17-4afb-945c-aae7a9cb7139.png"
             },
             {
               icon: Wrench,
