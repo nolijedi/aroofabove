@@ -14,33 +14,42 @@ const EnhancedHero = () => {
   return (
     <div className="relative">
       <Hero />
-      <div className="absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center gap-8">
-        {socialLinks.map(({ Icon, href, label, delay }, index) => (
-          <motion.a
-            key={index}
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={label}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            whileHover={{ 
-              scale: 1.2,
-              rotate: 360,
-              transition: { duration: 0.5 }
-            }}
-            whileTap={{ scale: 0.9 }}
-            transition={{
-              type: "spring",
-              stiffness: 300,
-              damping: 20,
-              delay: 0.5 + delay
-            }}
-            className="p-4 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group active:bg-roofing-orange/20"
-          >
-            <Icon className="w-8 h-8 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
-          </motion.a>
-        ))}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-48 pb-12">
+          <div className="text-center space-y-8">
+            {/* Match exact spacing from Hero component */}
+            <div className="mb-6" /> {/* h1 space */}
+            <div className="mb-8" /> {/* p space */}
+            <div className="flex justify-center gap-8 mb-12 pointer-events-auto">
+              {socialLinks.map(({ Icon, href, label, delay }, index) => (
+                <motion.a
+                  key={index}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  whileHover={{ 
+                    scale: 1.2,
+                    rotate: 360,
+                    transition: { duration: 0.5 }
+                  }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20,
+                    delay: 0.5 + delay
+                  }}
+                  className="p-4 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group active:bg-roofing-orange/20"
+                >
+                  <Icon className="w-8 h-8 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
