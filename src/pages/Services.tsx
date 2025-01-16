@@ -37,7 +37,7 @@ const Services = () => {
               description: "Professional solutions for businesses and commercial properties.",
               features: ["Flat Roofing", "TPO/EPDM Systems", "Preventive Maintenance", "24/7 Support"],
               fact: "Fun fact: Commercial roofs can last up to 50 years with proper maintenance!",
-              image: "/lovable-uploads/daa7e114-eb17-4afb-945c-aae7a9cb7139.png"
+              image: "/lovable-uploads/f1a0c45a-862b-4b13-adf5-442bf18e0a3f.png"
             },
             {
               icon: Wrench,
