@@ -1,11 +1,45 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowRight, Home, Calculator } from "lucide-react";
+import { useEffect } from "react";
 
 const Estimate = () => {
+  // Add reduced motion hook for accessibility
+  const shouldReduceMotion = useReducedMotion();
+
+  // Add resize observer controller
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      // Batch DOM reads and writes
+      window.requestAnimationFrame(() => {
+        for (const entry of entries) {
+          if (entry.target) {
+            // Handle resize if needed
+          }
+        }
+      });
+    });
+
+    // Get all animated elements
+    const animatedElements = document.querySelectorAll('.animate-resize');
+    animatedElements.forEach(element => resizeObserver.observe(element));
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
+
+  // Animation variants with reduced motion support
+  const hoverAnimation = shouldReduceMotion
+    ? {}
+    : {
+        scale: 1.02,
+        transition: { type: "spring", stiffness: 300 }
+      };
+
   return (
     <main className="min-h-screen pt-32 pb-20 px-4 bg-gradient-to-br from-roofing-cream to-roofing-beige">
       <div className="max-w-7xl mx-auto">
@@ -35,14 +69,13 @@ const Estimate = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="lg:col-span-2 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300"
+            className="lg:col-span-2 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300 animate-resize"
           >
             <form className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-4">
                 <motion.div 
-                  className="space-y-2"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  className="space-y-2 animate-resize"
+                  whileHover={hoverAnimation}
                 >
                   <label className="text-sm font-medium text-gray-700">
                     First Name
@@ -54,9 +87,8 @@ const Estimate = () => {
                   />
                 </motion.div>
                 <motion.div 
-                  className="space-y-2"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  className="space-y-2 animate-resize"
+                  whileHover={hoverAnimation}
                 >
                   <label className="text-sm font-medium text-gray-700">
                     Last Name
@@ -70,9 +102,8 @@ const Estimate = () => {
               </div>
 
               <motion.div 
-                className="space-y-2"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                className="space-y-2 animate-resize"
+                whileHover={hoverAnimation}
               >
                 <label className="text-sm font-medium text-gray-700">
                   Email
@@ -85,9 +116,8 @@ const Estimate = () => {
               </motion.div>
 
               <motion.div 
-                className="space-y-2"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                className="space-y-2 animate-resize"
+                whileHover={hoverAnimation}
               >
                 <label className="text-sm font-medium text-gray-700">
                   Phone
@@ -100,9 +130,8 @@ const Estimate = () => {
               </motion.div>
 
               <motion.div 
-                className="space-y-2"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                className="space-y-2 animate-resize"
+                whileHover={hoverAnimation}
               >
                 <label className="text-sm font-medium text-gray-700">
                   Address
@@ -116,9 +145,8 @@ const Estimate = () => {
 
               <div className="grid sm:grid-cols-2 gap-4">
                 <motion.div 
-                  className="space-y-2"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  className="space-y-2 animate-resize"
+                  whileHover={hoverAnimation}
                 >
                   <label className="text-sm font-medium text-gray-700">
                     City
@@ -130,9 +158,8 @@ const Estimate = () => {
                   />
                 </motion.div>
                 <motion.div 
-                  className="space-y-2"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  className="space-y-2 animate-resize"
+                  whileHover={hoverAnimation}
                 >
                   <label className="text-sm font-medium text-gray-700">
                     ZIP Code
@@ -146,9 +173,8 @@ const Estimate = () => {
               </div>
 
               <motion.div 
-                className="space-y-2"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                className="space-y-2 animate-resize"
+                whileHover={hoverAnimation}
               >
                 <label className="text-sm font-medium text-gray-700">
                   Service Type
@@ -167,9 +193,8 @@ const Estimate = () => {
               </motion.div>
 
               <motion.div 
-                className="space-y-2"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                className="space-y-2 animate-resize"
+                whileHover={hoverAnimation}
               >
                 <label className="text-sm font-medium text-gray-700">
                   Project Details
@@ -200,7 +225,7 @@ const Estimate = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
-            className="space-y-6"
+            className="space-y-6 animate-resize"
           >
             <motion.div 
               className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300"
