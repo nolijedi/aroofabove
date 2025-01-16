@@ -18,7 +18,7 @@ const Index = () => {
       title: "Expert Craftsmanship",
       description: "Our skilled team brings years of experience to every project.",
       expandedDescription: "Our team of certified professionals has decades of combined experience in residential and commercial roofing. We stay updated with the latest industry standards and techniques.",
-      image: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80&w=1920"
+      image: "/lovable-uploads/6e209d79-c584-48f2-9696-9aacf51e851d.png"
     },
     {
       icon: Clock,
