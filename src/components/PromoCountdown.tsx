@@ -7,7 +7,7 @@ import { X } from "lucide-react";
 const PromoCountdown = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [timeLeft, setTimeLeft] = useState<number>(60 * 1000); // 60 seconds
+  const [timeLeft, setTimeLeft] = useState<number>(60); // Changed to store seconds instead of milliseconds
   const [isVisible, setIsVisible] = useState(false);
   const [isClosed, setIsClosed] = useState(false);
   const [isExitIntent, setIsExitIntent] = useState(false);
@@ -24,6 +24,7 @@ const PromoCountdown = () => {
     // Add initial delay of 3 seconds before showing
     const showTimeout = setTimeout(() => {
       setIsVisible(true);
+      setTimeLeft(60); // Reset timer when showing
       console.log("Setting promo visible after 3 second delay");
     }, 3000);
 
@@ -85,33 +86,23 @@ const PromoCountdown = () => {
     // Only start countdown when visible
     if (!isVisible) return;
 
-    const startTime = Date.now();
-    
-    const updateTimer = () => {
-      const now = Date.now();
-      const elapsed = now - startTime;
-      const remaining = 60 * 1000 - elapsed; // 60 seconds in milliseconds
-      
-      if (remaining <= 0) {
-        setTimeLeft(0);
-        console.log("Promo expired");
-      } else {
-        setTimeLeft(remaining);
-      }
-    };
+    const timer = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime <= 1) {
+          clearInterval(timer);
+          return 0;
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
 
-    updateTimer();
-    const interval = setInterval(updateTimer, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [isVisible]); // Only reset timer when visibility changes
+    return () => clearInterval(timer);
+  }, [isVisible]);
 
   if (isClosed || timeLeft === 0) return null;
 
-  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
 
   const handleClose = (e: React.MouseEvent) => {
     e.stopPropagation();
