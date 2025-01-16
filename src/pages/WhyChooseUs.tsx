@@ -55,6 +55,11 @@ const WhyChooseUs = () => {
       image: "https://images.unsplash.com/photo-1605808357954-53ae0fe87d16",
       title: "Emergency Repair",
       description: "Quick response and repair after storm damage."
+    },
+    {
+      image: "https://images.unsplash.com/photo-1635424710928-0544e8512eae",
+      title: "Solar Roof Installation",
+      description: "Modern solar panel integration with existing roofing."
     }
   ];
 
