@@ -85,7 +85,7 @@ const Services = () => {
                 </div>
 
                 {/* Back of card */}
-                <div className="absolute w-full h-full backface-hidden [transform:rotateY(180deg)] bg-roofing-orange/95 backdrop-blur-sm rounded-xl shadow-lg p-8">
+                <div className="absolute w-full h-full backface-hidden [transform:rotateY(180deg)] bg-gradient-to-br from-roofing-orange/90 to-roofing-orange-dark/90 backdrop-blur-sm rounded-xl shadow-lg p-8">
                   <div className="flex flex-col h-full text-white">
                     <h3 className="text-2xl font-semibold mb-6">{service.title}</h3>
                     <p className="text-lg mb-8">{service.fact}</p>
@@ -93,7 +93,7 @@ const Services = () => {
                       <Button
                         asChild
                         variant="outline"
-                        className="w-full border-white text-white hover:bg-white hover:text-roofing-orange group"
+                        className="w-full border-2 border-white bg-white/10 text-white hover:bg-white hover:text-roofing-orange transition-all duration-300 group"
                       >
                         <Link to="/estimate">
                           Get Estimate
