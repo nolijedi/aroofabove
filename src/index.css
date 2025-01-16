@@ -100,6 +100,18 @@
   }
 }
 
+@keyframes phone-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(0.6);
+  }
+}
+
 @layer utilities {
   .perspective {
     perspective: 1000px;
@@ -111,5 +123,9 @@
   
   .backface-hidden {
     backface-visibility: hidden;
+  }
+
+  .animate-phone-pulse {
+    animation: phone-pulse 2s infinite;
   }
 }
