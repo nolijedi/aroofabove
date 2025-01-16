@@ -33,16 +33,16 @@ const App = () => (
             <div className="absolute inset-0 bg-gradient-to-b from-roofing-charcoal/90 to-transparent" />
           </div>
           
-          <div className="pt-8">
-            <Navbar />
+          <Navbar />
+          <div className="pt-32"> {/* Increased padding to accommodate the lowered logo */}
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/why-choose-us" element={<WhyChooseUs />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/estimate" element={<Estimate />} />
+            </Routes>
           </div>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/why-choose-us" element={<WhyChooseUs />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/estimate" element={<Estimate />} />
-          </Routes>
           <PromoCountdown />
           <StickyPhone />
         </div>
