@@ -52,7 +52,8 @@ const Services = () => {
               title: "Roof Maintenance",
               description: "Regular maintenance to extend the life of your roof.",
               features: ["Inspections", "Cleaning", "Coating", "Preventive Care"],
-              fact: "Pro tip: Regular maintenance can double the lifespan of your roof!"
+              fact: "Pro tip: Regular maintenance can double the lifespan of your roof!",
+              image: "/lovable-uploads/0731486e-2755-4069-b85d-d32667dca65c.png"
             }
           ].map((service, index) => (
             <motion.div
