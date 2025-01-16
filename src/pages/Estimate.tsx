@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowRight, Home, Calculator } from "lucide-react";
+import { Home, Calculator } from "lucide-react";
 import { useEffect } from "react";
 
 const Estimate = () => {
@@ -255,7 +255,7 @@ const Estimate = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.6 + index * 0.1 }}
                   >
-                    <ArrowRight className="w-4 h-4 text-roofing-orange flex-shrink-0" />
+                    <Home className="w-4 h-4 text-roofing-orange flex-shrink-0" />
                     {item}
                   </motion.li>
                 ))}
