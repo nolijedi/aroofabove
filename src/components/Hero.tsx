@@ -76,11 +76,11 @@ const Hero = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-6 text-roofing-beige font-medium"
           >
             <a 
-              href="tel:509-218-4343" 
+              href="tel:509-400-5911" 
               className="flex items-center gap-2 hover:text-roofing-cream transition-colors hover:scale-105 transform transition-all duration-300 group"
             >
               <Phone className="h-5 w-5 group-hover:animate-bounce" />
-              <span className="text-lg drop-shadow-[0_2px_2px_rgba(0,0,0,0.3)]">509-218-4343</span>
+              <span className="text-lg drop-shadow-[0_2px_2px_rgba(0,0,0,0.3)]">509-400-5911</span>
             </a>
             <a 
               href="mailto:jc@aroofabove.com" 

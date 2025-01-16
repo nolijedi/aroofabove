@@ -11,6 +11,7 @@ import Contact from "./pages/Contact";
 import Estimate from "./pages/Estimate";
 import PromoCountdown from "./components/PromoCountdown";
 import ScrollToTop from "./components/ScrollToTop";
+import StickyPhone from "./components/StickyPhone";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
             <Route path="/estimate" element={<Estimate />} />
           </Routes>
           <PromoCountdown />
+          <StickyPhone />
         </div>
       </BrowserRouter>
     </TooltipProvider>
