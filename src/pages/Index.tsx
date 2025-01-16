@@ -1,4 +1,4 @@
-import Hero from "@/components/Hero";
+import EnhancedHero from "@/components/EnhancedHero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -31,7 +31,7 @@ const Index = () => {
 
   return (
     <main className="min-h-screen">
-      <Hero />
+      <EnhancedHero />
       
       {/* Features Section */}
       <section className="py-20 px-4 bg-white/80">
