@@ -8,9 +8,9 @@ const StickyPhone = () => {
 
   return (
     <motion.div
-      initial={{ x: 100 }}
+      initial={{ x: -100 }}
       animate={{ x: 0 }}
-      className="fixed bottom-24 right-4 z-50"
+      className="fixed bottom-24 left-4 z-50"
     >
       <button
         onClick={handlePhoneClick}

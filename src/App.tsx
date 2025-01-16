@@ -33,7 +33,9 @@ const App = () => (
             <div className="absolute inset-0 bg-gradient-to-r from-roofing-orange/60 to-roofing-cream/40" />
           </div>
           
-          <Navbar />
+          <div className="pt-8">
+            <Navbar />
+          </div>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/services" element={<Services />} />
