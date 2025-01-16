@@ -7,7 +7,7 @@ import { X } from "lucide-react";
 const PromoCountdown = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [timeLeft, setTimeLeft] = useState<number>(60); // Changed to store seconds instead of milliseconds
+  const [timeLeft, setTimeLeft] = useState<number>(60);
   const [isVisible, setIsVisible] = useState(false);
   const [isClosed, setIsClosed] = useState(false);
   const [isExitIntent, setIsExitIntent] = useState(false);
@@ -15,28 +15,32 @@ const PromoCountdown = () => {
   const [velocity, setVelocity] = useState({ x: 2, y: 2 });
   const frameRef = useRef<number>();
 
+  // Reset isClosed state when route changes
   useEffect(() => {
-    // Reset isClosed state when route changes
     setIsClosed(false);
+    setIsVisible(true); // Always show on route change
+    setTimeLeft(60); // Reset timer
   }, [location.pathname]);
 
+  // Handle exit intent
   useEffect(() => {
-    // Add initial delay of 3 seconds before showing
-    const showTimeout = setTimeout(() => {
-      setIsVisible(true);
-      setTimeLeft(60); // Reset timer when showing
-      console.log("Setting promo visible after 3 second delay");
-    }, 3000);
-
-    // Handle exit intent
     const handleMouseLeave = (e: MouseEvent) => {
       if (e.clientY <= 0) {
         setIsExitIntent(true);
-        console.log("Exit intent detected");
+        setIsVisible(true); // Show when exit intent detected
+        setTimeLeft(60); // Reset timer
+        console.log("Exit intent detected, showing promo");
       }
     };
 
     document.addEventListener("mouseleave", handleMouseLeave);
+
+    // Initial show after 3 seconds
+    const showTimeout = setTimeout(() => {
+      setIsVisible(true);
+      setTimeLeft(60);
+      console.log("Initial promo display after 3 seconds");
+    }, 3000);
 
     return () => {
       clearTimeout(showTimeout);
@@ -44,8 +48,8 @@ const PromoCountdown = () => {
     };
   }, []);
 
+  // Animation loop for floating effect
   useEffect(() => {
-    // Animation loop for floating effect
     const animate = () => {
       setPosition(prevPos => {
         const newPos = {
@@ -82,22 +86,26 @@ const PromoCountdown = () => {
     };
   }, [isVisible, isClosed, velocity]);
 
+  // Countdown timer
   useEffect(() => {
-    // Only start countdown when visible
-    if (!isVisible) return;
+    if (!isVisible || isClosed) return;
 
+    console.log("Starting countdown from", timeLeft, "seconds");
+    
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
-        if (prevTime <= 1) {
+        const newTime = prevTime - 1;
+        if (newTime <= 0) {
           clearInterval(timer);
+          console.log("Timer reached zero");
           return 0;
         }
-        return prevTime - 1;
+        return newTime;
       });
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [isVisible]);
+  }, [isVisible, isClosed]);
 
   if (isClosed || timeLeft === 0) return null;
 
@@ -107,6 +115,7 @@ const PromoCountdown = () => {
   const handleClose = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsClosed(true);
+    console.log("Promo closed by user");
   };
 
   return (
