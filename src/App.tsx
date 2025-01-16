@@ -30,7 +30,7 @@ const App = () => (
               backgroundImage: "url('https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24?q=80&w=2070')",
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-roofing-charcoal/90 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-roofing-cream/40 to-roofing-cream/40" />
           </div>
           
           <div className="pt-8">
