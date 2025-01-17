@@ -36,7 +36,7 @@ const features = [
     title: "Complete Documentation",
     description: "We handle all paperwork and provide comprehensive documentation.",
     expandedDescription: "Our thorough documentation process includes detailed photos, measurements, and damage assessments that insurance companies can't deny.",
-    image: "/lovable-uploads/0731486e-2755-4069-b85d-d32667dca65c.png"
+    image: "/lovable-uploads/a069e4f1-5af7-4ebd-bcc0-36435570855d.png"
   }
 ];
 
