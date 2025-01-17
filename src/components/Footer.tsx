@@ -21,11 +21,11 @@ const Footer = () => {
               <img
                 src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png"
                 alt="A Roof Above Logo"
-                className="h-16 w-auto brightness-200" // Increased from h-8 to h-16 (2x bigger)
+                className="h-16 w-auto brightness-200"
               />
             </Link>
             
-            <div className="flex flex-col items-start text-xs space-y-1 ml-auto mr-8"> {/* Added mr-8 for more right spacing */}
+            <div className="flex flex-col items-center text-xs space-y-1 mx-auto"> {/* Changed to items-center and mx-auto */}
               <a
                 href="tel:509-400-5911"
                 className="flex items-center space-x-2 text-gray-300 hover:text-roofing-orange transition-colors group"
