@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Facebook, Instagram, Twitter, Linkedin, Youtube, Phone, Mail } from "lucide-react";
-import Hero from "./Hero";
 
 const socialLinks = [
   { Icon: Facebook, href: "https://facebook.com/aroofabove", label: "Facebook", delay: 0 },
@@ -12,10 +11,9 @@ const socialLinks = [
 
 const EnhancedHero = () => {
   return (
-    <div className="relative">
-      <Hero />
-      <div className="absolute inset-0 bg-roofing-charcoal/80">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center min-h-screen">
+    <div className="relative min-h-screen pt-32">
+      <div className="absolute inset-0 bg-roofing-charcoal/90">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center min-h-[calc(100vh-128px)]">
           <div className="text-center space-y-8">
             <motion.h1 
               initial={{ opacity: 0, y: -20 }}
