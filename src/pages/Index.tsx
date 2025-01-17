@@ -30,37 +30,6 @@ const Index = () => {
     }
   ];
 
-  const [flippedCards, setFlippedCards] = useState<{ [key: number]: boolean }>({});
-  const [shouldStayFlipped, setShouldStayFlipped] = useState<{ [key: number]: boolean }>({});
-
-  useEffect(() => {
-    const timeouts: { [key: number]: NodeJS.Timeout } = {};
-    
-    Object.entries(flippedCards).forEach(([index, isFlipped]) => {
-      if (!isFlipped && shouldStayFlipped[Number(index)]) {
-        timeouts[Number(index)] = setTimeout(() => {
-          setShouldStayFlipped(prev => ({
-            ...prev,
-            [Number(index)]: false
-          }));
-        }, 1000);
-      }
-    });
-
-    return () => {
-      Object.values(timeouts).forEach(timeout => clearTimeout(timeout));
-    };
-  }, [flippedCards, shouldStayFlipped]);
-
-  const handleMouseEnter = (index: number) => {
-    setFlippedCards(prev => ({ ...prev, [index]: true }));
-    setShouldStayFlipped(prev => ({ ...prev, [index]: true }));
-  };
-
-  const handleMouseLeave = (index: number) => {
-    setFlippedCards(prev => ({ ...prev, [index]: false }));
-  };
-
   return (
     <main className="min-h-screen">
       <EnhancedHero />
@@ -68,28 +37,6 @@ const Index = () => {
       {/* Features Section */}
       <section className="py-20 px-4 bg-white/80">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-6 relative">
-              <span className="relative inline-block pb-4">
-                Why Choose A Roof Above?
-                <motion.div
-                  className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-l from-roofing-orange via-roofing-orange-dark to-roofing-cream"
-                  initial={{ width: 0 }}
-                  animate={{ width: "100%" }}
-                  transition={{ delay: 0.5, duration: 0.8 }}
-                />
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              We deliver excellence in every project with our experienced team and premium materials.
-            </p>
-          </motion.div>
-
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
@@ -98,42 +45,30 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="group h-[400px] perspective"
+                className="h-[400px] perspective"
               >
-                <div 
-                  className="relative h-full w-full transition-all duration-500 preserve-3d"
-                  style={{
-                    transform: `rotateY(${(flippedCards[index] || shouldStayFlipped[index]) ? '180deg' : '0deg'})`
-                  }}
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={() => handleMouseLeave(index)}
-                >
-                  {/* Front of card */}
-                  <div className="absolute inset-0 bg-white p-6 rounded-xl shadow-lg hover:shadow-xl backface-hidden">
-                    <div className="flex flex-col items-center text-center space-y-4">
-                      <div className="p-3 bg-roofing-orange rounded-full text-white">
-                        <feature.icon className="w-6 h-6" />
+                <div className="relative w-full h-full preserve-3d cursor-pointer transition-transform duration-300">
+                  <div className="absolute w-full h-full backface-hidden">
+                    <div className="bg-gradient-to-br from-white via-roofing-cream to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 h-full flex flex-col justify-between border border-roofing-orange/20">
+                      <div className="flex flex-col items-center text-center space-y-6">
+                        <motion.div 
+                          className="p-4 bg-gradient-to-r from-roofing-orange to-roofing-orange-dark rounded-full text-white shadow-lg"
+                          whileHover={{ scale: 1.1, rotate: 360 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          <feature.icon className="w-8 h-8" />
+                        </motion.div>
+                        
+                        <h3 className="text-2xl font-bold bg-gradient-to-r from-roofing-charcoal to-roofing-orange-dark bg-clip-text text-transparent">
+                          {feature.title}
+                        </h3>
+                        
+                        <p className="text-gray-600 italic text-lg leading-relaxed relative">
+                          <span className="text-4xl text-roofing-orange/20 absolute -top-4 -left-2">"</span>
+                          {feature.description}
+                          <span className="text-4xl text-roofing-orange/20 absolute -bottom-4 -right-2">"</span>
+                        </p>
                       </div>
-                      <h3 className="text-xl font-semibold text-roofing-charcoal">{feature.title}</h3>
-                      <p className="text-gray-600">{feature.description}</p>
-                    </div>
-                  </div>
-
-                  {/* Back of card */}
-                  <div 
-                    className="absolute inset-0 bg-white p-6 rounded-xl shadow-lg backface-hidden"
-                    style={{ transform: 'rotateY(180deg)' }}
-                  >
-                    <div className="h-full flex flex-col">
-                      <div className="relative h-48 mb-4 overflow-hidden rounded-lg">
-                        <img 
-                          src={feature.image} 
-                          alt={feature.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <h3 className="text-xl font-semibold text-roofing-charcoal mb-2">{feature.title}</h3>
-                      <p className="text-gray-600 flex-grow">{feature.expandedDescription}</p>
                     </div>
                   </div>
                 </div>
