@@ -10,7 +10,7 @@ const Contact = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
           <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-6 relative">
             <span className="relative inline-block">
@@ -23,34 +23,12 @@ const Contact = () => {
               />
             </span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
             Get in touch with our expert team today.
           </p>
-        </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold mb-4">Get a Free Estimate</h2>
-            <p className="text-gray-600 mb-4">
-              Fill out the form below to receive a free estimate for your roofing project.
-            </p>
-            <Button asChild>
-              <Link to="/estimate" className="text-white bg-roofing-orange hover:bg-roofing-orange-dark rounded-md px-4 py-2">
-                Get Estimate
-              </Link>
-            </Button>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold mb-4">Contact Information</h2>
-            <p className="text-gray-600 mb-2">Phone: (123) 456-7890</p>
-            <p className="text-gray-600 mb-2">Email: info@roofabove.com</p>
-            <p className="text-gray-600">Address: 123 Roofing St, Dallas, TX</p>
-          </div>
-        </div>
-
-        <div className="bg-white p-8 rounded-lg shadow-md">
-          <h2 className="text-2xl font-semibold mb-6 text-center">Connect With Us</h2>
-          <div className="flex justify-center gap-6">
+          {/* Social Icons moved here */}
+          <div className="flex justify-center gap-6 mb-12">
             {[
               { Icon: Facebook, href: "https://facebook.com", label: "Facebook", delay: 0 },
               { Icon: Twitter, href: "https://twitter.com", label: "Twitter", delay: 0.1 },
@@ -82,6 +60,26 @@ const Contact = () => {
                 <Icon className="w-8 h-8 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
               </motion.a>
             ))}
+          </div>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-8 mb-12">
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-2xl font-semibold mb-4">Get a Free Estimate</h2>
+            <p className="text-gray-600 mb-4">
+              Fill out the form below to receive a free estimate for your roofing project.
+            </p>
+            <Button asChild>
+              <Link to="/estimate" className="text-white bg-roofing-orange hover:bg-roofing-orange-dark rounded-md px-4 py-2">
+                Get Estimate
+              </Link>
+            </Button>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-2xl font-semibold mb-4">Contact Information</h2>
+            <p className="text-gray-600 mb-2">Phone: (123) 456-7890</p>
+            <p className="text-gray-600 mb-2">Email: info@roofabove.com</p>
+            <p className="text-gray-600">Address: 123 Roofing St, Dallas, TX</p>
           </div>
         </div>
       </div>
