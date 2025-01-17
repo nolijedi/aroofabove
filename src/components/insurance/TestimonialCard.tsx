@@ -25,17 +25,18 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
       viewport={{ once: true }}
       transition={{ delay: index * 0.2 }}
       className="h-[450px] perspective"
+      onMouseEnter={() => setIsFlipped(true)}
+      onMouseLeave={() => setIsFlipped(false)}
     >
       <motion.div
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ 
           duration: 0.6,
-          type: "tween",
-          ease: "easeInOut"
+          type: "spring",
+          stiffness: 100,
+          damping: 20
         }}
         className="relative w-full h-full preserve-3d cursor-pointer"
-        onHoverStart={() => setIsFlipped(true)}
-        onHoverEnd={() => setIsFlipped(false)}
       >
         {/* Front of card */}
         <div className="absolute w-full h-full backface-hidden">
