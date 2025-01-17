@@ -13,6 +13,18 @@ import PromoCountdown from "./components/PromoCountdown";
 import ScrollToTop from "./components/ScrollToTop";
 import StickyPhone from "./components/StickyPhone";
 
+// Add styles to hide Lovable widget
+const styles = document.createElement('style');
+styles.innerHTML = `
+  #lovable-widget {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+`;
+document.head.appendChild(styles);
+
 const queryClient = new QueryClient();
 
 const App = () => (
