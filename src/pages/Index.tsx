@@ -66,30 +66,28 @@ const Index = () => {
       <EnhancedHero />
       
       {/* Features Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-white/80">
         <div className="max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="tile-graphics mb-16"
+            className="text-center mb-16"
           >
-            <div className="tile-graphics-content p-8">
-              <h2 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-6 relative text-center">
-                <span className="relative inline-block pb-4">
-                  Why Choose A Roof Above?
-                  <motion.div
-                    className="absolute -bottom-1 left-0 w-full h-1 bg-roofing-orange"
-                    initial={{ width: 0 }}
-                    animate={{ width: "100%" }}
-                    transition={{ delay: 0.5, duration: 0.8 }}
-                  />
-                </span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto text-center">
-                We deliver excellence in every project with our experienced team and premium materials.
-              </p>
-            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-6 relative">
+              <span className="relative inline-block pb-4">
+                Why Choose A Roof Above?
+                <motion.div
+                  className="absolute -bottom-1 left-0 w-full h-1 bg-roofing-orange"
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                />
+              </span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              We deliver excellence in every project with our experienced team and premium materials.
+            </p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -111,8 +109,8 @@ const Index = () => {
                   onMouseLeave={() => handleMouseLeave(index)}
                 >
                   {/* Front of card */}
-                  <div className="absolute inset-0 tile-graphics">
-                    <div className="tile-graphics-content p-6 flex flex-col items-center text-center space-y-4">
+                  <div className="absolute inset-0 bg-white p-6 rounded-xl shadow-lg hover:shadow-xl backface-hidden">
+                    <div className="flex flex-col items-center text-center space-y-4">
                       <div className="p-3 bg-roofing-orange rounded-full text-white">
                         <feature.icon className="w-6 h-6" />
                       </div>
@@ -123,10 +121,10 @@ const Index = () => {
 
                   {/* Back of card */}
                   <div 
-                    className="absolute inset-0 tile-graphics"
+                    className="absolute inset-0 bg-white p-6 rounded-xl shadow-lg backface-hidden"
                     style={{ transform: 'rotateY(180deg)' }}
                   >
-                    <div className="tile-graphics-content p-6 h-full flex flex-col">
+                    <div className="h-full flex flex-col">
                       <div className="relative h-48 mb-4 overflow-hidden rounded-lg">
                         <img 
                           src={feature.image} 
