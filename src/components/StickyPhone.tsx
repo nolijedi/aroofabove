@@ -12,23 +12,25 @@ const StickyPhone = () => {
       animate={{ 
         x: 0,
         y: [-5, 5, -5],
-        scale: [1, 1.1, 0.6],
       }}
       transition={{
         y: {
           duration: 4,
           repeat: Infinity,
           ease: "easeInOut"
-        },
-        scale: {
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut"
         }
       }}
       className="fixed bottom-4 left-4 z-50"
     >
-      <button
+      <motion.button
+        initial={{ scale: 0.6 }}
+        animate={{ scale: 1 }}
+        transition={{
+          scale: {
+            duration: 1.5,
+            ease: "easeOut"
+          }
+        }}
         onClick={handlePhoneClick}
         className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
         aria-label="Call us"
@@ -47,7 +49,7 @@ const StickyPhone = () => {
             </textPath>
           </text>
         </svg>
-      </button>
+      </motion.button>
     </motion.div>
   );
 };
