@@ -112,7 +112,7 @@ const InsuranceClaims = () => {
   };
 
   return (
-    <main className="min-h-screen pt-32 pb-16 px-4 bg-gradient-to-br from-roofing-cream via-white to-roofing-beige">
+    <main className="min-h-screen pt-32 pb-16 px-4 bg-background">
       <div className="max-w-7xl mx-auto space-y-12">
         <div className="section-gradient-separator transform hover:scale-105 transition-all duration-500">
           <InsuranceHeader />
