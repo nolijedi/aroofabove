@@ -10,6 +10,7 @@ interface TestimonialCardProps {
     image: string;
     saved: string;
     description?: string;
+    damageImage: string;
   };
   index: number;
 }
@@ -71,7 +72,7 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
           <div className="text-center">
             <h3 className="text-xl font-bold text-white mb-4">Damage Details</h3>
             <img 
-              src="/lovable-uploads/5f0ba17d-ca48-4772-a374-1352c4e1d7dc.png"
+              src={testimonial.damageImage}
               alt="Roof damage"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />

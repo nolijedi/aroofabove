@@ -43,7 +43,8 @@ const testimonials = [
     quote: "A Roof Above helped me get $15,000 more on my claim than the insurance company initially offered. Their expertise in dealing with adjusters was invaluable!",
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070",
     saved: "$15,000",
-    description: "Extensive storm damage left the roof severely compromised. Our team documented all damage points and successfully negotiated with the insurance company for full coverage."
+    description: "Extensive storm damage left the roof severely compromised. Our team documented all damage points and successfully negotiated with the insurance company for full coverage.",
+    damageImage: "/lovable-uploads/5f0ba17d-ca48-4772-a374-1352c4e1d7dc.png"
   },
   {
     name: "Michael Rodriguez",
@@ -51,7 +52,8 @@ const testimonials = [
     quote: "When my insurance company denied my claim, A Roof Above stepped in and got it approved within a week. Their knowledge of the claims process is unmatched.",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=2070",
     saved: "$22,500",
-    description: "Initial claim denial was overturned after our thorough documentation and professional assessment revealed significant hidden structural damage."
+    description: "Initial claim denial was overturned after our thorough documentation and professional assessment revealed significant hidden structural damage.",
+    damageImage: "/lovable-uploads/1a9829f9-6d94-4c1f-a6d0-01060b690c88.png"
   },
   {
     name: "Emily Chen",
@@ -59,7 +61,8 @@ const testimonials = [
     quote: "The team at A Roof Above handled everything with my insurance company. They documented all the damage professionally and got me full replacement coverage!",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2070",
     saved: "$18,750",
-    description: "Multiple leaks and water damage required comprehensive roof replacement. Our team's detailed documentation ensured full coverage approval."
+    description: "Multiple leaks and water damage required comprehensive roof replacement. Our team's detailed documentation ensured full coverage approval.",
+    damageImage: "/lovable-uploads/af60ca2a-df55-411d-a43a-1513bf62deb9.png"
   },
   {
     name: "David Thompson",
@@ -67,7 +70,8 @@ const testimonials = [
     quote: "I was amazed at how smooth the insurance claim process was with A Roof Above. They knew exactly what documentation was needed and handled everything.",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070",
     saved: "$20,000",
-    description: "Hail damage compromised roof integrity extensively. Our comprehensive claim documentation resulted in complete roof replacement approval."
+    description: "Hail damage compromised roof integrity extensively. Our comprehensive claim documentation resulted in complete roof replacement approval.",
+    damageImage: "/lovable-uploads/c14c4941-34e9-4747-840a-167e0fe92c76.png"
   }
 ];
 
