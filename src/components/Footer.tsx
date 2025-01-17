@@ -23,8 +23,8 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row md:justify-between items-center">
           {/* Logo and Social Section */}
-          <div className="flex items-center w-full md:w-auto relative min-h-[80px] justify-center md:justify-end">
-            <div className="absolute left-1/2 -translate-x-1/2 md:static md:left-auto md:transform-none">
+          <div className="flex flex-col md:flex-row items-center w-full md:w-auto relative min-h-[80px] justify-center md:justify-end">
+            <div className="mb-4 md:mb-0 md:mr-4 order-2 md:order-1">
               <div className="flex space-x-4 md:space-x-2">
                 {[
                   { Icon: Facebook, href: "https://facebook.com/aroofabove", label: "Facebook" },
@@ -44,11 +44,11 @@ const Footer = () => {
                 ))}
               </div>
             </div>
-            <Link to="/" className="block mt-4 md:mt-0">
+            <Link to="/" className="order-1 md:order-2">
               <img
                 src="/lovable-uploads/2d080e69-c586-4861-8316-7ec496261217.png"
                 alt="A Roof Above Logo"
-                className="h-16 w-auto brightness-100"
+                className="h-12 md:h-16 w-auto brightness-100"
               />
             </Link>
           </div>
