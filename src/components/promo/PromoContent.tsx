@@ -23,10 +23,10 @@ export const PromoContent = ({ isExitIntent, timeLeft, onClose, onClick }: Promo
     >
       <button
         onClick={onClose}
-        className="absolute top-2 right-2 p-1.5 rounded-full hover:bg-roofing-beige/80 transition-colors duration-300"
+        className="absolute -top-3 -right-3 p-2 rounded-full bg-white shadow-lg hover:bg-roofing-beige/80 transition-all duration-300 border-2 border-roofing-orange/30 group"
         aria-label="Close promotion"
       >
-        <X className="w-4 h-4 text-roofing-orange" />
+        <X className="w-6 h-6 text-roofing-orange group-hover:scale-110 transition-transform duration-300" />
       </button>
       
       <div className="space-y-4">
