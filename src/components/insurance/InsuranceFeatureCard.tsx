@@ -44,7 +44,7 @@ const InsuranceFeatureCard = ({
       >
         {/* Front of card */}
         <div className="absolute inset-0 [backface-visibility:hidden]">
-          <div className="h-full bg-gradient-to-br from-roofing-cream via-white to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 border border-roofing-orange/20">
+          <div className="h-full bg-gradient-to-br from-white via-roofing-cream to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 border border-roofing-orange/20">
             <div className="flex flex-col items-center text-center space-y-4">
               <motion.div 
                 whileHover={{ scale: 1.1, rotate: 360 }}
@@ -69,21 +69,23 @@ const InsuranceFeatureCard = ({
 
         {/* Back of card */}
         <div 
-          className="absolute inset-0 [backface-visibility:hidden] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-8 [transform:rotateY(180deg)]"
+          className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)]"
         >
-          <div className="flex flex-col h-full text-white [transform:rotateY(180deg)]">
-            <h3 className="text-2xl font-semibold mb-6 text-roofing-cream">{feature.title}</h3>
-            {feature.image && (
-              <div className="relative mb-6 group/image">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-300" />
-                <img 
-                  src={feature.image} 
-                  alt={feature.title}
-                  className="w-full h-48 object-cover rounded-lg shadow-lg transform transition-transform duration-300 group-hover/image:scale-105"
-                />
-              </div>
-            )}
-            <p className="text-lg mb-8 text-roofing-cream/90 leading-relaxed">{feature.expandedDescription}</p>
+          <div className="h-full bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8">
+            <div className="flex flex-col h-full text-white [transform:rotateY(180deg)]">
+              <h3 className="text-2xl font-semibold mb-6 text-roofing-cream">{feature.title}</h3>
+              {feature.image && (
+                <div className="relative mb-6 group/image">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-300" />
+                  <img 
+                    src={feature.image} 
+                    alt={feature.title}
+                    className="w-full h-48 object-cover rounded-lg shadow-lg transform transition-transform duration-300 group-hover/image:scale-105"
+                  />
+                </div>
+              )}
+              <p className="text-lg mb-8 text-roofing-cream/90 leading-relaxed">{feature.expandedDescription}</p>
+            </div>
           </div>
         </div>
       </div>

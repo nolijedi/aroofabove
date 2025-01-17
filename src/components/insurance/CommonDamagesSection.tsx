@@ -105,13 +105,15 @@ const CommonDamagesSection = () => {
 
                 {/* Back of card */}
                 <div 
-                  className="absolute w-full h-full [backface-visibility:hidden] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-6 flex items-center justify-center [transform:rotateY(180deg)]"
+                  className="absolute w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)]"
                 >
-                  <div className="text-center [transform:rotateY(180deg)]">
-                    <h3 className="text-xl font-bold text-white mb-4">{damage.title}</h3>
-                    <p className="text-roofing-cream text-sm leading-relaxed">
-                      {damage.expandedDescription}
-                    </p>
+                  <div className="h-full bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-6">
+                    <div className="flex flex-col h-full text-white [transform:rotateY(180deg)]">
+                      <h3 className="text-xl font-bold text-white mb-4">{damage.title}</h3>
+                      <p className="text-roofing-cream text-sm leading-relaxed">
+                        {damage.expandedDescription}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
