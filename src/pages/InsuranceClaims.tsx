@@ -95,15 +95,15 @@ const InsuranceClaims = () => {
   return (
     <main className="min-h-screen pt-40 pb-20 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="section-gradient-separator mb-24">
+        <div className="section-gradient-separator mb-16">
           <InsuranceHeader />
         </div>
         
-        <div className="section-gradient-separator mb-24">
+        <div className="section-gradient-separator mb-16">
           <WhyChooseUsSection />
         </div>
         
-        <div className="section-gradient-separator mb-24">
+        <div className="section-gradient-separator mb-16">
           <div className="grid md:grid-cols-2 gap-8">
             {features.map((feature, index) => (
               <InsuranceFeatureCard
@@ -119,19 +119,19 @@ const InsuranceClaims = () => {
           </div>
         </div>
 
-        <div className="section-gradient-separator mb-24">
+        <div className="section-gradient-separator mb-16">
           <ProcessSection />
         </div>
 
-        <div className="section-gradient-separator mb-24">
+        <div className="section-gradient-separator mb-16">
           <CommonDamagesSection />
         </div>
 
-        <div className="section-gradient-separator mb-24">
+        <div className="section-gradient-separator mb-16">
           <WhyActNowSection />
         </div>
 
-        <div className="section-gradient-separator mb-24">
+        <div className="section-gradient-separator mb-16">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {testimonials.map((testimonial, index) => (
               <TestimonialCard
