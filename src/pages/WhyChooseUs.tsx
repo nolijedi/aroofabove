@@ -7,25 +7,25 @@ import { projects } from "@/data/projects";
 
 const WhyChooseUs = () => {
   return (
-    <main className="min-h-screen pt-40 pb-20 px-4 bg-gradient-to-br from-[#F1F0FB] via-white to-[#F1F0FB]">
+    <main className="min-h-screen pt-40 pb-20 px-4">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-[#1A1F2C] mb-2 relative">
+          <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-2 relative">
             <span className="relative inline-block pb-2">
               Why Home Owners Choose Us
               <motion.div
-                className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-[#9b87f5] to-[#7E69AB]"
+                className="absolute -bottom-2 left-0 w-full h-1 bg-roofing-orange"
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
                 transition={{ delay: 0.5, duration: 0.8 }}
               />
             </span>
           </h1>
-          <p className="text-sm text-[#8E9196] max-w-2xl mx-auto">
+          <p className="text-sm text-gray-500 max-w-2xl mx-auto">
             Experience the difference with our expert roofing services.
           </p>
         </motion.div>

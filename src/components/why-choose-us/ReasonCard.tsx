@@ -20,14 +20,14 @@ export const ReasonCard = ({ title, description, Icon }: ReasonCardProps) => (
       },
     }}
     whileHover={{ scale: 1.05 }}
-    className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-2xl border border-[#9b87f5]/20 group"
+    className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-2xl border border-roofing-orange/20"
   >
     <div className="flex flex-col items-center text-center space-y-4">
-      <div className="p-4 bg-gradient-to-br from-[#9b87f5] to-[#7E69AB] rounded-full text-white shadow-lg transform transition-all duration-300 group-hover:scale-110">
+      <div className="p-4 bg-gradient-to-r from-roofing-orange to-roofing-orange-dark rounded-full text-white">
         <Icon className="w-8 h-8" />
       </div>
-      <h3 className="text-xl font-bold text-[#1A1F2C]">{title}</h3>
-      <p className="text-[#8E9196] leading-relaxed">{description}</p>
+      <h3 className="text-xl font-bold text-roofing-charcoal">{title}</h3>
+      <p className="text-roofing-charcoal/80 leading-relaxed">{description}</p>
     </div>
   </motion.div>
 );
