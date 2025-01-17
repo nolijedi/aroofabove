@@ -7,8 +7,8 @@ export const usePromoVisibility = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isClosed, setIsClosed] = useState(false);
   const [isExitIntent, setIsExitIntent] = useState(false);
-  const [storedTimeLeft, setStoredTimeLeft] = useLocalStorage('promoTimeLeft', '120'); // Set to 2 minutes (120 seconds)
-  const [timeLeft, setTimeLeft] = useState(parseInt(storedTimeLeft));
+  const [storedTimeLeft, setStoredTimeLeft] = useLocalStorage('promoTimeLeft', '120');
+  const [timeLeft, setTimeLeft] = useState(120); // Initialize directly to 120 seconds
 
   // Initialize visibility on mount - show immediately
   useEffect(() => {
