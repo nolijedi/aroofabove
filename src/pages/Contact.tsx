@@ -82,7 +82,7 @@ const Contact = () => {
             transition={{ delay: 0.3 }}
             className="rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-500"
           >
-            <div className="bg-gradient-to-br from-white via-roofing-cream to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 transform transition-all duration-300 hover:shadow-2xl">
+            <div className="bg-gradient-to-br from-white via-roofing-cream to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 transform transition-all duration-300 hover:shadow-2xl h-full">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-gradient-to-r from-roofing-orange to-roofing-orange-dark rounded-full flex items-center justify-center">
                   <span className="text-2xl text-white">📋</span>
@@ -114,7 +114,7 @@ const Contact = () => {
             transition={{ delay: 0.4 }}
             className="rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-500"
           >
-            <div className="bg-gradient-to-br from-white via-roofing-cream to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 transform transition-all duration-300 hover:shadow-2xl">
+            <div className="bg-gradient-to-br from-white via-roofing-cream to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 transform transition-all duration-300 hover:shadow-2xl h-full">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-gradient-to-r from-roofing-orange to-roofing-orange-dark rounded-full flex items-center justify-center">
                   <span className="text-2xl text-white">📱</span>
