@@ -18,7 +18,7 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
         <Button
           key={item.path}
           variant={currentPath === item.path ? "default" : "ghost"}
-          className={`w-full mt-2 justify-start ${
+          className={`w-full mt-2 justify-start text-lg ${
             currentPath === item.path
               ? "bg-roofing-orange hover:bg-roofing-orange-dark text-white"
               : "text-gray-600 hover:text-roofing-orange hover:bg-transparent"
@@ -32,7 +32,7 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
       ))}
       <Button
         asChild
-        className="w-full mt-4 bg-roofing-beige hover:bg-roofing-beige/90 text-roofing-charcoal hover:text-roofing-charcoal/90 animate-bounce-pause shadow-lg hover:shadow-xl transition-all duration-300"
+        className="w-full mt-4 bg-roofing-beige hover:bg-roofing-beige/90 text-roofing-charcoal hover:text-roofing-charcoal/90 animate-bounce-pause shadow-lg hover:shadow-xl transition-all duration-300 text-lg"
       >
         <Link to="/estimate" onClick={onClose}>
           Get Estimate
