@@ -36,7 +36,7 @@ export const ProjectCard = ({ image, title, description, fact }: ProjectCardProp
       <motion.div
         animate={{ rotateY: isFlipped || shouldStayFlipped ? 180 : 0 }}
         transition={{ duration: 0.6 }}
-        className="relative w-full h-full preserve-3d"
+        className="relative w-full h-full preserve-3d cursor-pointer"
         onHoverStart={handleMouseEnter}
         onHoverEnd={handleMouseLeave}
       >
