@@ -30,14 +30,16 @@ const PromoCountdown = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ 
             opacity: 1,
+            x: position.x,
+            y: position.y,
             transition: {
-              type: "spring",
-              stiffness: 50,
-              damping: 20
+              opacity: { duration: 0.3 },
+              x: { type: "spring", stiffness: 100, damping: 20 },
+              y: { type: "spring", stiffness: 100, damping: 20 }
             }
           }}
           exit={{ opacity: 0, y: 20 }}
-          className="fixed z-[9999] bottom-5 right-5"
+          className="fixed z-[9999]"
           style={{ 
             pointerEvents: isClosed ? 'none' : 'auto',
           }}
