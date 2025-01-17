@@ -7,7 +7,7 @@ const InsuranceHeader = () => {
       animate={{ opacity: 1, y: 0 }}
       className="text-center mb-16"
     >
-      <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-4 relative">
+      <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-2 relative">
         <span className="relative inline-block pb-2">
           Insurance Claims Made Easy
           <motion.div
@@ -18,7 +18,7 @@ const InsuranceHeader = () => {
           />
         </span>
       </h1>
-      <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+      <p className="text-sm text-gray-500 max-w-2xl mx-auto">
         Let us guide you through the insurance claims process with ease and expertise.
       </p>
     </motion.div>
