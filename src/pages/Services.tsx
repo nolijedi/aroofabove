@@ -37,7 +37,7 @@ const Services = () => {
 
   return (
     <main className="min-h-screen pt-32 pb-20 px-4">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-5xl mx-auto"> {/* Changed from max-w-7xl to max-w-5xl */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -193,10 +193,9 @@ const Services = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center rounded-xl overflow-hidden relative"
+          className="text-center rounded-xl overflow-hidden relative bg-white/80 backdrop-blur-sm shadow-lg"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-roofing-orange/20 to-roofing-cream/20 backdrop-blur-sm" />
-          <div className="relative p-12">
+          <div className="p-12">
             <h2 className="text-3xl font-bold text-roofing-charcoal mb-4">
               Ready to Start Your Project?
             </h2>
@@ -222,4 +221,3 @@ const Services = () => {
 };
 
 export default Services;
-
