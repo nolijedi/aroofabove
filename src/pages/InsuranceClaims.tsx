@@ -133,18 +133,35 @@ const InsuranceClaims = () => {
         </div>
         
         <div className="section-gradient-separator">
-          <div className="grid md:grid-cols-2 gap-8">
-            {features.map((feature, index) => (
-              <InsuranceFeatureCard
-                key={index}
-                feature={feature}
-                index={index}
-                flippedCards={flippedCards}
-                shouldStayFlipped={shouldStayFlipped}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              />
-            ))}
+          <div className="relative w-full max-w-5xl mx-auto">
+            {/* Roof of the house */}
+            <div className="grid grid-cols-2 gap-8 transform -skew-x-12">
+              {features.slice(0, 2).map((feature, index) => (
+                <InsuranceFeatureCard
+                  key={index}
+                  feature={feature}
+                  index={index}
+                  flippedCards={flippedCards}
+                  shouldStayFlipped={shouldStayFlipped}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                />
+              ))}
+            </div>
+            {/* Body of the house */}
+            <div className="grid grid-cols-2 gap-8 mt-4">
+              {features.slice(2).map((feature, index) => (
+                <InsuranceFeatureCard
+                  key={index + 2}
+                  feature={feature}
+                  index={index + 2}
+                  flippedCards={flippedCards}
+                  shouldStayFlipped={shouldStayFlipped}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
