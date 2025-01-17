@@ -10,6 +10,7 @@ export const ProjectFields = () => {
 
   return (
     <div className="space-y-4">
+      <h3 className="text-lg font-semibold text-roofing-charcoal mb-4">Project Details</h3>
       <motion.div 
         className="space-y-2 animate-resize"
         whileHover={hoverAnimation}
@@ -18,7 +19,7 @@ export const ProjectFields = () => {
           Service Type
         </label>
         <Select>
-          <SelectTrigger className="w-full border-roofing-orange/20 focus:border-roofing-orange">
+          <SelectTrigger className="w-full bg-white/70 border-roofing-orange/20 focus:border-roofing-orange">
             <SelectValue placeholder="Select service type" />
           </SelectTrigger>
           <SelectContent>
@@ -39,7 +40,7 @@ export const ProjectFields = () => {
         </label>
         <Textarea
           placeholder="Please describe your roofing needs..."
-          className="w-full min-h-[120px] border-roofing-orange/20 focus:border-roofing-orange"
+          className="w-full min-h-[120px] bg-white/70 border-roofing-orange/20 focus:border-roofing-orange"
         />
       </motion.div>
     </div>

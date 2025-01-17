@@ -9,6 +9,7 @@ export const AddressFields = () => {
 
   return (
     <div className="space-y-4">
+      <h3 className="text-lg font-semibold text-roofing-charcoal mb-4">Address Details</h3>
       <motion.div 
         className="space-y-2 animate-resize"
         whileHover={hoverAnimation}
@@ -19,7 +20,7 @@ export const AddressFields = () => {
         <Input
           type="text"
           placeholder="123 Main St"
-          className="w-full border-roofing-orange/20 focus:border-roofing-orange"
+          className="w-full bg-white/70 border-roofing-orange/20 focus:border-roofing-orange"
         />
       </motion.div>
 
@@ -34,7 +35,7 @@ export const AddressFields = () => {
           <Input
             type="text"
             placeholder="Spokane"
-            className="w-full border-roofing-orange/20 focus:border-roofing-orange"
+            className="w-full bg-white/70 border-roofing-orange/20 focus:border-roofing-orange"
           />
         </motion.div>
         <motion.div 
@@ -47,7 +48,7 @@ export const AddressFields = () => {
           <Input
             type="text"
             placeholder="99201"
-            className="w-full border-roofing-orange/20 focus:border-roofing-orange"
+            className="w-full bg-white/70 border-roofing-orange/20 focus:border-roofing-orange"
           />
         </motion.div>
       </div>
