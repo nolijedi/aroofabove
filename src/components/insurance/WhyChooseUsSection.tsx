@@ -32,9 +32,9 @@ const WhyChooseUsSection = () => {
             </div>
           </div>
           {/* House body */}
-          <div className="bg-white p-8 rounded-xl shadow-lg mt-8 relative overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <div className="bg-white p-8 rounded-xl shadow-lg mt-8 relative overflow-hidden hover:shadow-xl transition-shadow duration-300 min-h-[200px] flex flex-col justify-between">
             <h3 className="text-2xl font-semibold mb-4 text-roofing-orange">Experienced Team</h3>
-            <p className="text-gray-600 leading-relaxed">Our team has years of experience navigating insurance claims, ensuring nothing gets overlooked.</p>
+            <p className="text-roofing-charcoal/80 leading-relaxed font-medium max-w-xs">Our team has years of experience navigating insurance claims, ensuring nothing gets overlooked.</p>
           </div>
         </div>
 
@@ -58,9 +58,9 @@ const WhyChooseUsSection = () => {
             </div>
           </div>
           {/* House body */}
-          <div className="bg-white p-8 rounded-xl shadow-lg mt-8 relative overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <div className="bg-white p-8 rounded-xl shadow-lg mt-8 relative overflow-hidden hover:shadow-xl transition-shadow duration-300 min-h-[200px] flex flex-col justify-between">
             <h3 className="text-2xl font-semibold mb-4 text-roofing-orange">Advocacy for You</h3>
-            <p className="text-gray-600 leading-relaxed">We work on your behalf to maximize your claim and ensure all covered damages are accounted for.</p>
+            <p className="text-roofing-charcoal/80 leading-relaxed font-medium max-w-xs">We work on your behalf to maximize your claim and ensure all covered damages are accounted for.</p>
           </div>
         </div>
 
@@ -84,9 +84,9 @@ const WhyChooseUsSection = () => {
             </div>
           </div>
           {/* House body */}
-          <div className="bg-white p-8 rounded-xl shadow-lg mt-8 relative overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <div className="bg-white p-8 rounded-xl shadow-lg mt-8 relative overflow-hidden hover:shadow-xl transition-shadow duration-300 min-h-[200px] flex flex-col justify-between">
             <h3 className="text-2xl font-semibold mb-4 text-roofing-orange">Stress-Free Process</h3>
-            <p className="text-gray-600 leading-relaxed">From inspections to paperwork, we'll handle the heavy lifting while keeping you informed.</p>
+            <p className="text-roofing-charcoal/80 leading-relaxed font-medium max-w-xs">From inspections to paperwork, we'll handle the heavy lifting while keeping you informed.</p>
           </div>
         </div>
       </div>
