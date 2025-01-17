@@ -43,7 +43,7 @@ const Index = () => {
             ...prev,
             [Number(index)]: false
           }));
-        }, 1000); // Changed from 5000 to 1000 milliseconds
+        }, 1000);
       }
     });
 
@@ -74,10 +74,18 @@ const Index = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-roofing-charcoal mb-4">
-              Why Choose A Roof Above?
+            <h2 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-6 relative">
+              <span className="relative inline-block pb-4">
+                Why Choose A Roof Above?
+                <motion.div
+                  className="absolute -bottom-1 left-0 w-full h-1 bg-roofing-orange"
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                />
+              </span>
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               We deliver excellence in every project with our experienced team and premium materials.
             </p>
           </motion.div>
