@@ -51,7 +51,7 @@ const testimonials = [
     quote: "When my insurance company denied my claim, A Roof Above stepped in and got it approved within a week. Their knowledge of the claims process is unmatched.",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=2070",
     saved: "$22,500",
-    description: "A fallen tree caused severe structural damage to the roof, requiring immediate professional intervention. Our comprehensive documentation helped secure full insurance coverage."
+    description: "Initial claim denial was overturned after our thorough documentation and professional assessment revealed significant hidden structural damage."
   },
   {
     name: "Emily Chen",
@@ -67,7 +67,7 @@ const testimonials = [
     quote: "I was amazed at how smooth the insurance claim process was with A Roof Above. They knew exactly what documentation was needed and handled everything.",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070",
     saved: "$20,000",
-    description: "A large tree fell during a storm causing extensive damage to the roof structure. Our team's swift response and thorough documentation resulted in a successful claim."
+    description: "Hail damage compromised roof integrity extensively. Our comprehensive claim documentation resulted in complete roof replacement approval."
   }
 ];
 

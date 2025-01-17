@@ -71,7 +71,7 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
           <div className="text-center">
             <h3 className="text-xl font-bold text-white mb-4">Damage Details</h3>
             <img 
-              src="/lovable-uploads/19c5de79-cf25-4190-9c17-133374fe66bd.png"
+              src="/lovable-uploads/5f0ba17d-ca48-4772-a374-1352c4e1d7dc.png"
               alt="Roof damage"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
