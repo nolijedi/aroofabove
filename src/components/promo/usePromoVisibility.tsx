@@ -7,22 +7,23 @@ export const usePromoVisibility = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isClosed, setIsClosed] = useState(false);
   const [isExitIntent, setIsExitIntent] = useState(false);
-  const [storedTimeLeft, setStoredTimeLeft] = useLocalStorage('promoTimeLeft', '60');
+  const [storedTimeLeft, setStoredTimeLeft] = useLocalStorage('promoTimeLeft', '300'); // Set to 5 minutes
   const [timeLeft, setTimeLeft] = useState(parseInt(storedTimeLeft));
 
-  // Check if promo should be permanently closed
+  // Initialize visibility on mount
   useEffect(() => {
     const isPermanentlyClosed = localStorage.getItem('promoClosedPermanently') === 'true';
+    console.log("Checking promo state - permanentlyClosed:", isPermanentlyClosed, "timeLeft:", timeLeft);
+    
     if (isPermanentlyClosed || timeLeft <= 0) {
       setIsClosed(true);
       return;
     }
 
-    // Always show promo if not closed
     setIsClosed(false);
     setIsVisible(true);
-    console.log("Promo visibility set to true, time left:", timeLeft);
-  }, [timeLeft]);
+    console.log("Promo visibility initialized - visible:", true);
+  }, []);
 
   // Handle exit intent
   useEffect(() => {
@@ -40,7 +41,10 @@ export const usePromoVisibility = () => {
 
   // Handle countdown timer
   useEffect(() => {
-    if (isClosed) return;
+    if (isClosed) {
+      console.log("Timer stopped - promo is closed");
+      return;
+    }
 
     console.log("Starting countdown from", timeLeft, "seconds");
     

@@ -9,6 +9,8 @@ const PromoCountdown = () => {
   const { isVisible, isClosed, isExitIntent, timeLeft, setIsClosed } = usePromoVisibility();
   const { position, setIsHovered } = usePromoAnimation(isVisible, isClosed);
 
+  console.log("PromoCountdown render - isVisible:", isVisible, "isClosed:", isClosed, "timeLeft:", timeLeft);
+
   if (isClosed || timeLeft === 0) {
     console.log("Promo is closed or timer reached zero");
     return null;
@@ -37,7 +39,7 @@ const PromoCountdown = () => {
             }
           }}
           exit={{ opacity: 0, y: 20 }}
-          className="fixed z-50"
+          className="fixed z-[9999]"
           style={{ 
             pointerEvents: isClosed ? 'none' : 'auto',
             right: '20px',
