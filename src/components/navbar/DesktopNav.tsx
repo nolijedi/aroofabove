@@ -28,7 +28,7 @@ const DesktopNav = ({ navItems, currentPath }: DesktopNavProps) => {
       </div>
       <Button
         asChild
-        className="bg-roofing-beige hover:bg-roofing-beige/90 text-roofing-charcoal hover:text-roofing-charcoal/90 animate-bounce-pause shadow-lg hover:shadow-xl transition-all duration-300 text-sm [text-shadow:_0_1px_1px_rgb(255_255_255_/_40%)] px-2 py-1"
+        className="bg-roofing-beige hover:bg-roofing-beige/90 text-roofing-charcoal hover:text-roofing-charcoal/90 animate-bounce-pause shadow-lg hover:shadow-xl transition-all duration-300 text-sm [text-shadow:_0_1px_1px_rgb(255_255_255_/_40%)] px-2 py-1 border-2 border-black"
       >
         <Link to="/estimate">Get Estimate Now</Link>
       </Button>
