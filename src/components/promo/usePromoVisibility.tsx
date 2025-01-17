@@ -7,22 +7,21 @@ export const usePromoVisibility = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isClosed, setIsClosed] = useState(false);
   const [isExitIntent, setIsExitIntent] = useState(false);
-  const [storedTimeLeft, setStoredTimeLeft] = useLocalStorage('promoTimeLeft', '300'); // Set to 5 minutes
+  const [storedTimeLeft, setStoredTimeLeft] = useLocalStorage('promoTimeLeft', '120'); // Set to 2 minutes (120 seconds)
   const [timeLeft, setTimeLeft] = useState(parseInt(storedTimeLeft));
 
-  // Initialize visibility on mount
+  // Initialize visibility on mount - show immediately
   useEffect(() => {
     const isPermanentlyClosed = localStorage.getItem('promoClosedPermanently') === 'true';
-    console.log("Checking promo state - permanentlyClosed:", isPermanentlyClosed, "timeLeft:", timeLeft);
+    console.log("Initializing promo visibility - permanentlyClosed:", isPermanentlyClosed);
     
-    if (isPermanentlyClosed || timeLeft <= 0) {
-      setIsClosed(true);
-      return;
+    // Reset localStorage on each visit to ensure the promo shows
+    if (!isPermanentlyClosed) {
+      localStorage.removeItem('promoTimeLeft');
+      setTimeLeft(120); // Reset to 2 minutes
+      setIsClosed(false);
+      setIsVisible(true);
     }
-
-    setIsClosed(false);
-    setIsVisible(true);
-    console.log("Promo visibility initialized - visible:", true);
   }, []);
 
   // Handle exit intent
@@ -65,6 +64,14 @@ export const usePromoVisibility = () => {
 
     return () => clearInterval(timer);
   }, [isClosed, setStoredTimeLeft]);
+
+  // Force visibility on route changes
+  useEffect(() => {
+    if (!isClosed && timeLeft > 0) {
+      setIsVisible(true);
+      console.log("Showing promo on route change");
+    }
+  }, [location.pathname]);
 
   return {
     isVisible,

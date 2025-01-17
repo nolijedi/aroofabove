@@ -11,8 +11,9 @@ const PromoCountdown = () => {
 
   console.log("PromoCountdown render - isVisible:", isVisible, "isClosed:", isClosed, "timeLeft:", timeLeft);
 
-  if (isClosed || timeLeft === 0) {
-    console.log("Promo is closed or timer reached zero");
+  // Only hide if explicitly closed by user
+  if (isClosed) {
+    console.log("Promo is closed by user");
     return null;
   }
 
