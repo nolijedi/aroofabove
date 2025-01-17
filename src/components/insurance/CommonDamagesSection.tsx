@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CloudHail, Wind, Trash2, TreePine, CloudRain } from "lucide-react";
+import { CloudHail, Wind, Trash2, TreePine, CloudRain, Eye } from "lucide-react";
 
 const CommonDamagesSection = () => {
   const damages = [
@@ -54,7 +54,7 @@ const CommonDamagesSection = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`bg-gradient-to-br ${damage.gradient} p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 group`}
+              className={`bg-gradient-to-br ${damage.gradient} p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 group relative`}
             >
               <div className="relative overflow-hidden h-full">
                 {/* Background pattern */}
@@ -80,6 +80,16 @@ const CommonDamagesSection = () => {
                       {damage.description}
                     </p>
                   </div>
+
+                  {/* Hover indicator */}
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="absolute bottom-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <Eye className="w-5 h-5 text-roofing-orange animate-pulse" />
+                    <span className="text-xs text-roofing-orange/80 block mt-1">View details</span>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
