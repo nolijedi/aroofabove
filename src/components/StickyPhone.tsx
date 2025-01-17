@@ -23,7 +23,7 @@ const StickyPhone = () => {
         onClick={handlePhoneClick}
         className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group pointer-events-auto"
         animate={{
-          scale: [0.1, 1, 0.1],
+          scale: [0.1, 1.5, 0.1],
         }}
         transition={{
           duration: 3,
