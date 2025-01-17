@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,6 +35,11 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
+            <img 
+              src="/lovable-uploads/f1a0c45a-862b-4b13-adf5-442bf18e0a3f.png" 
+              alt="A Roof Above Logo" 
+              className="h-12 w-auto"
+            />
             <span className="text-2xl font-bold text-roofing-orange">
               A Roof Above
             </span>
@@ -60,6 +65,16 @@ const Navbar = () => {
               className="bg-roofing-orange hover:bg-roofing-orange-dark text-white"
             >
               <Link to="/estimate">Get Estimate</Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="border-roofing-orange text-roofing-orange hover:bg-roofing-orange hover:text-white"
+            >
+              <a href="tel:509-400-5911" className="flex items-center gap-2">
+                <Phone className="h-4 w-4" />
+                Call Now
+              </a>
             </Button>
           </div>
 
@@ -96,6 +111,16 @@ const Navbar = () => {
               <Link to="/estimate" onClick={() => setIsOpen(false)}>
                 Get Estimate
               </Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="w-full mt-2 border-roofing-orange text-roofing-orange hover:bg-roofing-orange hover:text-white"
+            >
+              <a href="tel:509-400-5911" className="flex items-center justify-center gap-2">
+                <Phone className="h-4 w-4" />
+                Call Now
+              </a>
             </Button>
           </div>
         )}
