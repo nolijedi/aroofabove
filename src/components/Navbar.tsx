@@ -36,29 +36,27 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <img 
-              src="/lovable-uploads/f1a0c45a-862b-4b13-adf5-442bf18e0a3f.png" 
+              src="/lovable-uploads/af60ca2a-df55-411d-a43a-1513bf62deb9.png" 
               alt="A Roof Above Logo" 
               className="h-12 w-auto"
             />
-            <span className="text-2xl font-bold text-roofing-orange">
-              A Roof Above
-            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4">
             {navItems.map((item) => (
-              <Link
+              <Button
                 key={item.path}
-                to={item.path}
-                className={`text-lg transition-colors duration-300 ${
+                variant={location.pathname === item.path ? "default" : "ghost"}
+                className={`${
                   location.pathname === item.path
-                    ? "text-roofing-orange font-semibold"
-                    : "text-gray-600 hover:text-roofing-orange"
+                    ? "bg-roofing-orange hover:bg-roofing-orange-dark text-white"
+                    : "text-gray-600 hover:text-roofing-orange hover:bg-transparent"
                 }`}
+                asChild
               >
-                {item.label}
-              </Link>
+                <Link to={item.path}>{item.label}</Link>
+              </Button>
             ))}
             <Button
               asChild
@@ -91,18 +89,20 @@ const Navbar = () => {
         {isOpen && (
           <div className="md:hidden pb-6">
             {navItems.map((item) => (
-              <Link
+              <Button
                 key={item.path}
-                to={item.path}
-                className={`block py-2 text-lg ${
+                variant={location.pathname === item.path ? "default" : "ghost"}
+                className={`w-full mt-2 justify-start ${
                   location.pathname === item.path
-                    ? "text-roofing-orange font-semibold"
-                    : "text-gray-600"
+                    ? "bg-roofing-orange hover:bg-roofing-orange-dark text-white"
+                    : "text-gray-600 hover:text-roofing-orange hover:bg-transparent"
                 }`}
-                onClick={() => setIsOpen(false)}
+                asChild
               >
-                {item.label}
-              </Link>
+                <Link to={item.path} onClick={() => setIsOpen(false)}>
+                  {item.label}
+                </Link>
+              </Button>
             ))}
             <Button
               asChild
