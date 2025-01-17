@@ -17,24 +17,21 @@ const StickyPhone = () => {
       }}
       className="fixed bottom-4 left-4 z-50 ml-4 mb-4 pointer-events-none"
     >
-      <motion.button
+      <motion.div
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={handlePhoneClick}
         className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group pointer-events-auto"
-        aria-label="Call us"
+        animate={{
+          scale: [0.1, 1, 0.1],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
       >
-        <motion.div
-          className="absolute inset-0 w-full h-full"
-          animate={{
-            scale: [0.1, 1, 0.1],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
+        <div className="absolute inset-0 w-full h-full">
           <div className="flex items-center justify-center w-full h-full">
             <Phone className="w-12 h-12 text-white relative z-10" />
           </div>
@@ -51,8 +48,8 @@ const StickyPhone = () => {
               </textPath>
             </text>
           </svg>
-        </motion.div>
-      </motion.button>
+        </div>
+      </motion.div>
     </motion.div>
   );
 };
