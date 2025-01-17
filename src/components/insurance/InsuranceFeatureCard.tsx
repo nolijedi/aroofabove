@@ -25,12 +25,6 @@ const InsuranceFeatureCard = ({
   onMouseLeave,
 }: InsuranceFeatureCardProps) => {
   const Icon = feature.icon;
-  const gradients = [
-    "from-[#F97316] to-[#EA580C]",
-    "from-[#8B5CF6] to-[#6D28D9]",
-    "from-[#0EA5E9] to-[#0369A1]",
-    "from-[#D946EF] to-[#A21CAF]"
-  ];
   
   return (
     <motion.div
@@ -41,7 +35,7 @@ const InsuranceFeatureCard = ({
       className="group h-[400px] perspective"
     >
       <div 
-        className="relative h-full w-full transition-all duration-500 preserve-3d shadow-xl hover:shadow-2xl"
+        className="relative h-full w-full transition-all duration-500 preserve-3d"
         style={{
           transform: `rotateY(${(flippedCards[index] || shouldStayFlipped[index]) ? '180deg' : '0deg'})`
         }}
@@ -49,62 +43,33 @@ const InsuranceFeatureCard = ({
         onMouseLeave={() => onMouseLeave(index)}
       >
         {/* Front of card */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50 rounded-xl p-8 backface-hidden border border-gray-100">
-          <div className="flex flex-col items-center text-center space-y-6">
-            <motion.div 
-              className={`p-4 bg-gradient-to-r ${gradients[index % gradients.length]} rounded-2xl text-white shadow-lg`}
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Icon className="w-8 h-8" />
-            </motion.div>
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-roofing-orange to-roofing-orange-dark bg-clip-text text-transparent">
-              {feature.title}
-            </h3>
-            <p className="text-gray-600 text-lg">{feature.description}</p>
-            <motion.div
-              className="absolute bottom-4 left-1/2 -translate-x-1/2"
-              animate={{ y: [0, 5, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <p className="text-sm text-roofing-orange font-medium">Hover to learn more</p>
-            </motion.div>
+        <div className="absolute inset-0 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 backface-hidden">
+          <div className="flex flex-col items-center text-center space-y-4">
+            <div className="p-3 bg-roofing-orange rounded-full text-white">
+              <Icon className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-semibold text-roofing-charcoal">{feature.title}</h3>
+            <p className="text-gray-600">{feature.description}</p>
           </div>
         </div>
 
         {/* Back of card */}
         <div 
-          className="absolute inset-0 rounded-xl shadow-lg backface-hidden overflow-hidden"
+          className="absolute inset-0 bg-gradient-to-br from-roofing-orange/90 to-roofing-orange-dark/90 backdrop-blur-sm rounded-xl shadow-lg p-8 backface-hidden"
           style={{ transform: 'rotateY(180deg)' }}
         >
-          <div className="relative h-full">
-            {/* Background image with overlay */}
-            <div className="absolute inset-0">
-              <img 
-                src={feature.image} 
-                alt={feature.title}
-                className="w-full h-full object-cover"
-              />
-              <div className={`absolute inset-0 bg-gradient-to-br ${gradients[index % gradients.length]} opacity-90`} />
-            </div>
-            
-            {/* Content */}
-            <div className="relative h-full p-8 flex flex-col justify-between z-10">
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-6">{feature.title}</h3>
-                <p className="text-white/90 text-lg leading-relaxed">
-                  {feature.expandedDescription}
-                </p>
+          <div className="flex flex-col h-full text-white">
+            <h3 className="text-2xl font-semibold mb-6">{feature.title}</h3>
+            {feature.image && (
+              <div className="mb-4 rounded-lg overflow-hidden">
+                <img 
+                  src={feature.image} 
+                  alt={feature.title}
+                  className="w-full h-48 object-cover"
+                />
               </div>
-              <motion.div
-                className="mt-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-              >
-                <Icon className="w-8 h-8 text-white/80" />
-              </motion.div>
-            </div>
+            )}
+            <p className="text-lg mb-8">{feature.expandedDescription}</p>
           </div>
         </div>
       </div>
