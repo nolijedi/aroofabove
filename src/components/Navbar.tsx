@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import DesktopNav from "./navbar/DesktopNav";
+import MobileNav from "./navbar/MobileNav";
+import { NavItem } from "./navbar/types";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +19,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { path: "/", label: "Home" },
     { path: "/services", label: "Services" },
     { path: "/why-choose-us", label: "Why Choose Us" },
@@ -33,7 +35,6 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center min-h-[180px]">
-          {/* Logo */}
           <Link to="/" className="flex items-center justify-center flex-1">
             <img 
               src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png" 
@@ -42,41 +43,8 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
-            {navItems.map((item) => (
-              <Button
-                key={item.path}
-                variant={location.pathname === item.path ? "default" : "ghost"}
-                className={`${
-                  location.pathname === item.path
-                    ? "bg-roofing-orange hover:bg-roofing-orange-dark text-white"
-                    : "text-gray-600 hover:text-roofing-orange hover:bg-transparent"
-                }`}
-                asChild
-              >
-                <Link to={item.path}>{item.label}</Link>
-              </Button>
-            ))}
-            <Button
-              asChild
-              className="bg-roofing-beige hover:bg-roofing-beige/90 text-roofing-charcoal hover:text-roofing-charcoal/90 animate-bounce-pause shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              <Link to="/estimate">Get Estimate</Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="border-roofing-orange text-roofing-orange hover:bg-roofing-orange hover:text-white"
-            >
-              <a href="tel:509-400-5911" className="flex items-center gap-2">
-                <Phone className="h-4 w-4" />
-                Call Now
-              </a>
-            </Button>
-          </div>
+          <DesktopNav navItems={navItems} currentPath={location.pathname} />
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden text-gray-600"
             onClick={() => setIsOpen(!isOpen)}
@@ -85,45 +53,12 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden pb-6">
-            {navItems.map((item) => (
-              <Button
-                key={item.path}
-                variant={location.pathname === item.path ? "default" : "ghost"}
-                className={`w-full mt-2 justify-start ${
-                  location.pathname === item.path
-                    ? "bg-roofing-orange hover:bg-roofing-orange-dark text-white"
-                    : "text-gray-600 hover:text-roofing-orange hover:bg-transparent"
-                }`}
-                asChild
-              >
-                <Link to={item.path} onClick={() => setIsOpen(false)}>
-                  {item.label}
-                </Link>
-              </Button>
-            ))}
-            <Button
-              asChild
-              className="w-full mt-4 bg-roofing-beige hover:bg-roofing-beige/90 text-roofing-charcoal hover:text-roofing-charcoal/90 animate-bounce-pause shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              <Link to="/estimate" onClick={() => setIsOpen(false)}>
-                Get Estimate
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="w-full mt-2 border-roofing-orange text-roofing-orange hover:bg-roofing-orange hover:text-white"
-            >
-              <a href="tel:509-400-5911" className="flex items-center justify-center gap-2">
-                <Phone className="h-4 w-4" />
-                Call Now
-              </a>
-            </Button>
-          </div>
-        )}
+        <MobileNav 
+          isOpen={isOpen}
+          navItems={navItems}
+          currentPath={location.pathname}
+          onClose={() => setIsOpen(false)}
+        />
       </div>
     </nav>
   );
