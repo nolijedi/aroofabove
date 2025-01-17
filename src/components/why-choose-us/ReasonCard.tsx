@@ -33,7 +33,7 @@ export const ReasonCard = ({ title, description, Icon }: ReasonCardProps) => (
       <h3 className="text-xl font-bold bg-gradient-to-r from-roofing-charcoal to-roofing-orange-dark bg-clip-text text-transparent">{title}</h3>
       <p className="text-roofing-charcoal/80 leading-relaxed">{description}</p>
       <motion.div
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-roofing-orange"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-roofing-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         animate={{ y: [0, 5, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
