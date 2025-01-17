@@ -25,16 +25,19 @@ const StickyPhone = () => {
         aria-label="Call us"
       >
         <motion.div
+          className="flex items-center justify-center w-full h-full"
           animate={{
-            scale: [1, 1.2, 1],
+            scale: [0.1, 1, 0.1],
           }}
           transition={{
-            duration: 2,
+            duration: 3,
             repeat: Infinity,
             ease: "easeInOut"
           }}
         >
-          <Phone className="w-12 h-12 group-hover:scale-110 transition-transform text-white relative z-10" />
+          <div className="flex items-center justify-center w-full h-full">
+            <Phone className="w-12 h-12 text-white relative z-10" />
+          </div>
         </motion.div>
         <svg className="absolute inset-0 w-full h-full animate-spin-slow" viewBox="0 0 100 100">
           <defs>
