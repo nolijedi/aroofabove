@@ -32,13 +32,13 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center min-h-[100px]">
+        <div className="flex justify-between items-center min-h-[140px]">
           {/* Logo */}
-          <Link to="/" className="flex items-center justify-center">
+          <Link to="/" className="flex items-center justify-center flex-1">
             <img 
               src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png" 
               alt="A Roof Above Logo" 
-              className="h-20 md:h-24 w-auto my-2"
+              className="h-28 md:h-32 w-auto my-4"
             />
           </Link>
 
