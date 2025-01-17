@@ -8,7 +8,7 @@ interface Position {
 export const usePromoAnimation = (isVisible: boolean, isClosed: boolean) => {
   const [isHovered, setIsHovered] = useState(false);
   const [position, setPosition] = useState<Position>({ x: 20, y: 20 });
-  const [velocity, setVelocity] = useState<Position>({ x: 0.5, y: 0.3 }); // Slower initial velocity
+  const [velocity, setVelocity] = useState<Position>({ x: 0.2, y: 0.15 }); // Much slower initial velocity
 
   useEffect(() => {
     if (!isVisible || isClosed || isHovered) return;
@@ -18,14 +18,14 @@ export const usePromoAnimation = (isVisible: boolean, isClosed: boolean) => {
         const newX = prevPos.x + velocity.x;
         const newY = prevPos.y + velocity.y;
         
-        // Get viewport dimensions, subtracting space for the promo
+        // Get viewport dimensions, accounting for promo size
         const maxX = window.innerWidth - 340;
         const maxY = window.innerHeight - 340;
         
         let newVelocityX = velocity.x;
         let newVelocityY = velocity.y;
 
-        // Gentle bounce off walls
+        // Very gentle bounce off walls
         if (newX > maxX || newX < 20) {
           newVelocityX = -velocity.x;
         }
@@ -34,10 +34,10 @@ export const usePromoAnimation = (isVisible: boolean, isClosed: boolean) => {
           newVelocityY = -velocity.y;
         }
 
-        // Very subtle random movement
+        // Extremely subtle random movement
         setVelocity({
-          x: newVelocityX * 0.9999 + (Math.random() - 0.5) * 0.01,
-          y: newVelocityY * 0.9999 + (Math.random() - 0.5) * 0.01
+          x: newVelocityX * 0.999 + (Math.random() - 0.5) * 0.001,
+          y: newVelocityY * 0.999 + (Math.random() - 0.5) * 0.001
         });
 
         return {

@@ -21,12 +21,13 @@ export const PromoContent = ({ isExitIntent, timeLeft, onClose, onClick }: Promo
         boxShadow: '0 4px 32px rgba(249, 115, 22, 0.15)',
       }}
     >
+      {/* Larger, more prominent close button */}
       <button
         onClick={onClose}
-        className="absolute -top-3 -right-3 p-2 rounded-full bg-white shadow-lg hover:bg-roofing-beige/80 transition-all duration-300 border-2 border-roofing-orange/30 group"
+        className="absolute -top-4 -right-4 p-3 rounded-full bg-white shadow-lg hover:bg-roofing-beige/80 transition-all duration-300 border-2 border-roofing-orange/30 group"
         aria-label="Close promotion"
       >
-        <X className="w-6 h-6 text-roofing-orange group-hover:scale-110 transition-transform duration-300" />
+        <X className="w-8 h-8 text-roofing-orange group-hover:scale-110 transition-transform duration-300" />
       </button>
       
       <div className="space-y-4">

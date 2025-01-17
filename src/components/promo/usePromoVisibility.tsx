@@ -3,30 +3,30 @@ import { useLocation } from "react-router-dom";
 
 export const usePromoVisibility = () => {
   const location = useLocation();
-  const [isVisible, setIsVisible] = useState(false); // Start as hidden
+  const [isVisible, setIsVisible] = useState(false);
   const [isClosed, setIsClosed] = useState(false);
   const [isExitIntent, setIsExitIntent] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(120); // Start at 120 seconds
+  const [timeLeft, setTimeLeft] = useState(120);
 
-  // Initialize visibility with delay on mount and route changes
+  // Initialize visibility and start countdown on mount and route changes
   useEffect(() => {
     const isPermanentlyClosed = localStorage.getItem('promoClosedPermanently') === 'true';
     console.log("Initializing promo visibility - permanentlyClosed:", isPermanentlyClosed);
     
     if (!isPermanentlyClosed) {
-      // Set a 1-second delay before showing the promo
-      const timer = setTimeout(() => {
+      // Reset timer and show after 1 second delay
+      const showTimer = setTimeout(() => {
         setTimeLeft(120);
         setIsClosed(false);
         setIsVisible(true);
         console.log("Showing promo after 1-second delay");
       }, 1000);
 
-      return () => clearTimeout(timer);
+      return () => clearTimeout(showTimer);
     } else {
       setIsClosed(true);
     }
-  }, [location.pathname]); // Re-run on route changes
+  }, [location.pathname]);
 
   // Handle exit intent
   useEffect(() => {
@@ -42,10 +42,10 @@ export const usePromoVisibility = () => {
     return () => document.removeEventListener("mouseleave", handleMouseLeave);
   }, [isClosed, timeLeft]);
 
-  // Handle countdown timer
+  // Handle countdown timer - starts immediately when visible
   useEffect(() => {
-    if (isClosed) {
-      console.log("Timer stopped - promo is closed");
+    if (isClosed || !isVisible) {
+      console.log("Timer stopped - promo is closed or not visible");
       return;
     }
 
@@ -65,7 +65,7 @@ export const usePromoVisibility = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [isClosed]);
+  }, [isClosed, isVisible]);
 
   return {
     isVisible,
