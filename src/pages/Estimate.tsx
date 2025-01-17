@@ -42,17 +42,19 @@ const Estimate = () => {
           className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-8 mx-4"
         >
           <div className="container mx-auto px-4 text-center">
+
             <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-2 relative">
               <span className="relative inline-block pb-2">
                 Get Your Free Estimate
                 <motion.div
-                  className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-roofing-orange via-roofing-orange-dark to-roofing-orange"
+                  className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-l from-roofing-orange via-roofing-orange-dark to-roofing-cream"
                   initial={{ width: 0 }}
                   animate={{ width: "100%" }}
                   transition={{ delay: 0.5, duration: 0.8 }}
                 />
               </span>
             </h1>
+
             <p className="text-sm text-gray-600 max-w-2xl mx-auto mb-8">
               Fill out the form below and we'll provide you with a detailed estimate for your roofing project.
             </p>

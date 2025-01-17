@@ -18,7 +18,7 @@ const WhyChooseUs = () => {
             <span className="relative inline-block pb-2">
               Why Home Owners Choose Us
               <motion.div
-                className="absolute -bottom-2 left-0 w-full h-1 bg-roofing-orange"
+                className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-l from-roofing-orange via-roofing-orange-dark to-roofing-cream"
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
                 transition={{ delay: 0.5, duration: 0.8 }}
