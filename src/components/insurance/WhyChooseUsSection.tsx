@@ -12,17 +12,43 @@ const WhyChooseUsSection = () => {
         Why Choose Us for Insurance Claims Assistance?
       </h2>
       <div className="grid md:grid-cols-3 gap-8">
-        <div className="bg-white p-6 rounded-xl shadow-lg">
-          <h3 className="text-xl font-semibold mb-4 text-roofing-orange">Experienced Team</h3>
-          <p className="text-gray-600">Our team has years of experience navigating insurance claims, ensuring nothing gets overlooked.</p>
+        {/* House 1 */}
+        <div className="relative">
+          {/* Roof */}
+          <div className="absolute w-[120%] h-20 bg-roofing-orange -top-8 left-1/2 -translate-x-1/2 -z-10"
+               style={{ clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }}>
+          </div>
+          {/* House body */}
+          <div className="bg-white p-6 rounded-xl shadow-lg mt-8">
+            <h3 className="text-xl font-semibold mb-4 text-roofing-orange">Experienced Team</h3>
+            <p className="text-gray-600">Our team has years of experience navigating insurance claims, ensuring nothing gets overlooked.</p>
+          </div>
         </div>
-        <div className="bg-white p-6 rounded-xl shadow-lg">
-          <h3 className="text-xl font-semibold mb-4 text-roofing-orange">Advocacy for You</h3>
-          <p className="text-gray-600">We work on your behalf to maximize your claim and ensure all covered damages are accounted for.</p>
+
+        {/* House 2 */}
+        <div className="relative">
+          {/* Roof */}
+          <div className="absolute w-[120%] h-20 bg-roofing-orange -top-8 left-1/2 -translate-x-1/2 -z-10"
+               style={{ clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }}>
+          </div>
+          {/* House body */}
+          <div className="bg-white p-6 rounded-xl shadow-lg mt-8">
+            <h3 className="text-xl font-semibold mb-4 text-roofing-orange">Advocacy for You</h3>
+            <p className="text-gray-600">We work on your behalf to maximize your claim and ensure all covered damages are accounted for.</p>
+          </div>
         </div>
-        <div className="bg-white p-6 rounded-xl shadow-lg">
-          <h3 className="text-xl font-semibold mb-4 text-roofing-orange">Stress-Free Process</h3>
-          <p className="text-gray-600">From inspections to paperwork, we'll handle the heavy lifting while keeping you informed.</p>
+
+        {/* House 3 */}
+        <div className="relative">
+          {/* Roof */}
+          <div className="absolute w-[120%] h-20 bg-roofing-orange -top-8 left-1/2 -translate-x-1/2 -z-10"
+               style={{ clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }}>
+          </div>
+          {/* House body */}
+          <div className="bg-white p-6 rounded-xl shadow-lg mt-8">
+            <h3 className="text-xl font-semibold mb-4 text-roofing-orange">Stress-Free Process</h3>
+            <p className="text-gray-600">From inspections to paperwork, we'll handle the heavy lifting while keeping you informed.</p>
+          </div>
         </div>
       </div>
     </motion.div>
