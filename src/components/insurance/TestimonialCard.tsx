@@ -30,12 +30,17 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
     >
       <motion.div
         animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6, type: "spring", stiffness: 100, damping: 20 }}
+        transition={{ 
+          duration: 0.6,
+          type: "spring",
+          stiffness: 100,
+          damping: 20
+        }}
         className="relative w-full h-full preserve-3d cursor-pointer"
       >
         {/* Front of card */}
         <div className="absolute w-full h-full backface-hidden">
-          <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 h-full flex flex-col justify-between">
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 h-full flex flex-col justify-between">
             <div className="flex flex-col items-center text-center space-y-3">
               <div className="w-16 h-16 rounded-full overflow-hidden">
                 <img 
@@ -44,24 +49,22 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-lg font-semibold text-roofing-charcoal">
-                {testimonial.name}
-              </h3>
+              <h3 className="text-lg font-semibold text-roofing-charcoal">{testimonial.name}</h3>
               <p className="text-sm text-gray-500">{testimonial.location}</p>
               <div className="flex space-x-1">
                 {[...Array(5)].map((_, i) => (
-                  <Star 
+                  <motion.div
                     key={i}
-                    className="w-4 h-4 fill-roofing-orange text-roofing-orange" 
-                  />
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: i * 0.1 }}
+                  >
+                    <Star className="w-4 h-4 fill-roofing-orange text-roofing-orange" />
+                  </motion.div>
                 ))}
               </div>
-              <p className="text-roofing-orange font-bold text-lg">
-                {testimonial.saved}
-              </p>
-              <p className="text-gray-600 italic text-sm leading-tight">
-                "{testimonial.quote}"
-              </p>
+              <p className="text-roofing-orange font-bold text-lg">{testimonial.saved}</p>
+              <p className="text-gray-600 italic text-sm leading-tight">&ldquo;{testimonial.quote}&rdquo;</p>
             </div>
           </div>
         </div>
