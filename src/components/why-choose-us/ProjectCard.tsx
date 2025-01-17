@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { Info, ArrowRight } from "lucide-react";
 
 interface ProjectCardProps {
   image: string;
@@ -65,6 +66,14 @@ export const ProjectCard = ({ image, title, description, fact }: ProjectCardProp
           <div className="text-center">
             <h3 className="text-xl font-bold text-white mb-4">Did You Know?</h3>
             <p className="text-roofing-cream text-lg leading-relaxed">{fact}</p>
+            <motion.div
+              className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-white"
+              animate={{ y: [0, 5, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <Info className="w-5 h-5 animate-pulse" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </motion.div>
           </div>
         </div>
       </motion.div>

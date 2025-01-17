@@ -122,6 +122,7 @@ const Services = () => {
                           {service.title}
                         </h3>
                       </div>
+
                       <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
                       <ul className="space-y-4 mb-8">
                         {service.features.map((feature, idx) => (
@@ -138,12 +139,14 @@ const Services = () => {
                         ))}
                       </ul>
                       <motion.div
-                        className="mt-auto text-sm text-roofing-orange text-center"
+                        className="mt-auto flex items-center justify-center gap-2 text-roofing-orange"
                         animate={{ y: [0, 5, 0] }}
                         transition={{ duration: 2, repeat: Infinity }}
                       >
-                        Hover to learn more
+                        <Info className="w-5 h-5 animate-pulse" />
+                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </motion.div>
+
                     </div>
                   </div>
                 </div>
@@ -219,3 +222,4 @@ const Services = () => {
 };
 
 export default Services;
+
