@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Home, Building2, Wrench, PaintBucket } from "lucide-react";
+import { ArrowRight, Home, Building2, Wrench, PaintBucket, Info } from "lucide-react";
 import PromoCountdown from "@/components/PromoCountdown";
 import { useState, useEffect } from "react";
 

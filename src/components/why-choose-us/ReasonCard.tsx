@@ -1,6 +1,12 @@
 import { motion } from "framer-motion";
 import { LucideIcon, Info, ArrowRight } from "lucide-react";
 
+interface ReasonCardProps {
+  title: string;
+  description: string;
+  Icon: LucideIcon;
+}
+
 export const ReasonCard = ({ title, description, Icon }: ReasonCardProps) => (
   <motion.div
     variants={{
