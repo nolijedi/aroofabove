@@ -1,0 +1,47 @@
+.tile-graphics {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.tile-graphics::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  backdrop-filter: blur(4px);
+}
+
+.tile-graphics::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8rem;
+  height: 8rem;
+  background: rgba(243, 146, 55, 0.1);
+  border-bottom-left-radius: 100%;
+}
+
+.tile-graphics-content {
+  position: relative;
+  z-index: 1;
+}
+
+.tile-graphics-decoration::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 8rem;
+  height: 8rem;
+  background: rgba(243, 146, 55, 0.1);
+  border-top-right-radius: 100%;
+  transform: translate(-32%, 32%);
+  filter: blur(2rem);
+}
+
+.section-gradient-separator.tile-graphics::before {
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+}
