@@ -6,48 +6,87 @@ const WhyChooseUsSection = () => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="mb-16"
+      className="mb-16 pt-12"
     >
-      <h2 className="text-3xl font-bold text-roofing-charcoal mb-8 text-center">
+      <h2 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-16 text-center max-w-4xl mx-auto leading-tight">
         Why Choose Us for Insurance Claims Assistance?
       </h2>
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-3 gap-12 px-4">
         {/* House 1 */}
         <div className="relative group">
           {/* Roof */}
-          <div className="absolute w-[120%] h-20 bg-roofing-orange -top-8 left-1/2 -translate-x-1/2 -z-10"
-               style={{ clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }}>
+          <div className="absolute w-[140%] h-24 -top-12 left-1/2 -translate-x-1/2 -z-10 overflow-hidden">
+            <div 
+              className="w-full h-full bg-gradient-to-b from-roofing-orange-dark to-roofing-orange"
+              style={{ 
+                clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)',
+                boxShadow: 'inset 0 -4px 6px rgba(0,0,0,0.1)'
+              }}
+            >
+              {/* Roof texture */}
+              <div className="absolute inset-0 opacity-20"
+                   style={{
+                     backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.1) 10px, rgba(0,0,0,0.1) 20px)'
+                   }}
+              />
+            </div>
           </div>
           {/* House body */}
-          <div className="bg-white p-6 rounded-xl shadow-lg mt-8 relative overflow-hidden">
-            <h3 className="text-xl font-semibold mb-4 text-roofing-orange">Experienced Team</h3>
-            <p className="text-gray-600">Our team has years of experience navigating insurance claims, ensuring nothing gets overlooked.</p>
+          <div className="bg-white p-8 rounded-xl shadow-lg mt-8 relative overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <h3 className="text-2xl font-semibold mb-4 text-roofing-orange">Experienced Team</h3>
+            <p className="text-gray-600 leading-relaxed">Our team has years of experience navigating insurance claims, ensuring nothing gets overlooked.</p>
           </div>
         </div>
 
         {/* House 2 */}
         <div className="relative group">
           {/* Roof */}
-          <div className="absolute w-[120%] h-20 bg-roofing-orange -top-8 left-1/2 -translate-x-1/2 -z-10"
-               style={{ clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }}>
+          <div className="absolute w-[140%] h-24 -top-12 left-1/2 -translate-x-1/2 -z-10 overflow-hidden">
+            <div 
+              className="w-full h-full bg-gradient-to-b from-roofing-orange-dark to-roofing-orange"
+              style={{ 
+                clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)',
+                boxShadow: 'inset 0 -4px 6px rgba(0,0,0,0.1)'
+              }}
+            >
+              {/* Roof texture */}
+              <div className="absolute inset-0 opacity-20"
+                   style={{
+                     backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.1) 10px, rgba(0,0,0,0.1) 20px)'
+                   }}
+              />
+            </div>
           </div>
           {/* House body */}
-          <div className="bg-white p-6 rounded-xl shadow-lg mt-8 relative overflow-hidden">
-            <h3 className="text-xl font-semibold mb-4 text-roofing-orange">Advocacy for You</h3>
-            <p className="text-gray-600">We work on your behalf to maximize your claim and ensure all covered damages are accounted for.</p>
+          <div className="bg-white p-8 rounded-xl shadow-lg mt-8 relative overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <h3 className="text-2xl font-semibold mb-4 text-roofing-orange">Advocacy for You</h3>
+            <p className="text-gray-600 leading-relaxed">We work on your behalf to maximize your claim and ensure all covered damages are accounted for.</p>
           </div>
         </div>
 
         {/* House 3 */}
         <div className="relative group">
           {/* Roof */}
-          <div className="absolute w-[120%] h-20 bg-roofing-orange -top-8 left-1/2 -translate-x-1/2 -z-10"
-               style={{ clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }}>
+          <div className="absolute w-[140%] h-24 -top-12 left-1/2 -translate-x-1/2 -z-10 overflow-hidden">
+            <div 
+              className="w-full h-full bg-gradient-to-b from-roofing-orange-dark to-roofing-orange"
+              style={{ 
+                clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)',
+                boxShadow: 'inset 0 -4px 6px rgba(0,0,0,0.1)'
+              }}
+            >
+              {/* Roof texture */}
+              <div className="absolute inset-0 opacity-20"
+                   style={{
+                     backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.1) 10px, rgba(0,0,0,0.1) 20px)'
+                   }}
+              />
+            </div>
           </div>
           {/* House body */}
-          <div className="bg-white p-6 rounded-xl shadow-lg mt-8 relative overflow-hidden">
-            <h3 className="text-xl font-semibold mb-4 text-roofing-orange">Stress-Free Process</h3>
-            <p className="text-gray-600">From inspections to paperwork, we'll handle the heavy lifting while keeping you informed.</p>
+          <div className="bg-white p-8 rounded-xl shadow-lg mt-8 relative overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <h3 className="text-2xl font-semibold mb-4 text-roofing-orange">Stress-Free Process</h3>
+            <p className="text-gray-600 leading-relaxed">From inspections to paperwork, we'll handle the heavy lifting while keeping you informed.</p>
           </div>
         </div>
       </div>
