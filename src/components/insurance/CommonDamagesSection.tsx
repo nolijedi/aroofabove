@@ -10,35 +10,35 @@ const CommonDamagesSection = () => {
       title: "Hail damage",
       icon: CloudHail,
       description: "Impact damage from hailstones",
-      gradient: "from-orange-100 via-orange-200 to-orange-100",
+      gradient: "from-white via-roofing-cream to-roofing-beige",
       expandedDescription: "Hailstorms can create dents, cracks, and weaknesses in your roof's surface, leading to potential leaks and structural issues if left unaddressed."
     },
     {
       title: "Wind damage",
       icon: Wind,
       description: "Lifted or missing shingles",
-      gradient: "from-roofing-cream via-roofing-beige to-roofing-cream",
+      gradient: "from-white via-roofing-cream to-roofing-beige",
       expandedDescription: "Strong winds can lift, tear, or completely remove shingles, exposing your roof's underlayment and creating vulnerable areas for water infiltration."
     },
     {
       title: "Storm-related debris",
       icon: Trash2,
       description: "Damage from flying debris",
-      gradient: "from-roofing-beige via-orange-200 to-roofing-beige",
+      gradient: "from-white via-roofing-cream to-roofing-beige",
       expandedDescription: "During storms, flying debris can cause punctures, scratches, and other forms of impact damage that compromise your roof's protective layer."
     },
     {
       title: "Fallen tree limbs",
       icon: TreePine,
       description: "Impact from fallen branches",
-      gradient: "from-orange-100 via-roofing-cream to-orange-100",
+      gradient: "from-white via-roofing-cream to-roofing-beige",
       expandedDescription: "Heavy branches and fallen trees can cause severe structural damage to your roof, requiring immediate professional attention to prevent further issues."
     },
     {
       title: "Leaks due to severe weather",
       icon: CloudRain,
       description: "Water infiltration issues",
-      gradient: "from-roofing-cream via-orange-100 to-roofing-cream",
+      gradient: "from-white via-roofing-cream to-roofing-beige",
       expandedDescription: "Severe weather can expose vulnerabilities in your roof, leading to water infiltration that can damage your home's interior and compromise structural integrity."
     }
   ];
@@ -67,28 +67,30 @@ const CommonDamagesSection = () => {
               onMouseLeave={() => setFlippedCard(null)}
             >
               <div 
-                className="relative w-full h-full transition-all duration-500 preserve-3d"
+                className="relative w-full h-full transition-all duration-500 preserve-3d cursor-pointer hover:scale-105"
                 style={{
                   transform: `rotateY(${flippedCard === index ? '180deg' : '0deg'})`
                 }}
               >
                 {/* Front of card */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${damage.gradient} p-6 rounded-xl shadow-md backface-hidden border border-roofing-orange/20`}>
-                  <div className="flex flex-col items-center text-center space-y-4">
-                    <motion.div 
-                      className="p-4 bg-white/80 rounded-full shadow-inner group-hover:scale-110 transition-transform duration-300"
-                      whileHover={{ scale: 1.1, rotate: 360 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <damage.icon className="w-8 h-8 text-roofing-orange" />
-                    </motion.div>
-                    
-                    <h3 className="text-lg font-semibold text-roofing-charcoal group-hover:text-roofing-orange transition-colors duration-300">
-                      {damage.title}
-                    </h3>
-                    <p className="text-sm text-roofing-charcoal/70">
-                      {damage.description}
-                    </p>
+                <div className={`absolute w-full h-full backface-hidden`}>
+                  <div className="bg-gradient-to-br from-white via-roofing-cream to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-6 h-full flex flex-col justify-between border border-roofing-orange/20">
+                    <div className="flex flex-col items-center text-center space-y-4">
+                      <motion.div 
+                        className="p-4 bg-white/80 rounded-full shadow-inner group-hover:scale-110 transition-transform duration-300"
+                        whileHover={{ scale: 1.1, rotate: 360 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <damage.icon className="w-8 h-8 text-roofing-orange" />
+                      </motion.div>
+                      
+                      <h3 className="text-lg font-semibold text-roofing-charcoal">
+                        {damage.title}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {damage.description}
+                      </p>
+                    </div>
                     
                     <motion.div
                       className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-roofing-orange"
@@ -103,12 +105,12 @@ const CommonDamagesSection = () => {
 
                 {/* Back of card */}
                 <div 
-                  className="absolute inset-0 bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-6 rounded-xl shadow-md backface-hidden"
+                  className="absolute w-full h-full backface-hidden rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-6 flex items-center justify-center"
                   style={{ transform: 'rotateY(180deg)' }}
                 >
-                  <div className="flex flex-col h-full justify-center text-center">
-                    <h3 className="text-xl font-semibold text-roofing-cream mb-4">{damage.title}</h3>
-                    <p className="text-roofing-cream/90 text-sm leading-relaxed">
+                  <div className="text-center">
+                    <h3 className="text-xl font-bold text-white mb-4">{damage.title}</h3>
+                    <p className="text-roofing-cream text-sm leading-relaxed">
                       {damage.expandedDescription}
                     </p>
                   </div>
