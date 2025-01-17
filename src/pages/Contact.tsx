@@ -51,38 +51,37 @@ const Contact = () => {
         <div className="bg-white p-8 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-6 text-center">Connect With Us</h2>
           <div className="flex justify-center gap-6">
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transform transition-transform hover:scale-110"
-            >
-              <Facebook className="w-8 h-8 text-roofing-orange hover:text-roofing-orange-dark" />
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transform transition-transform hover:scale-110"
-            >
-              <Twitter className="w-8 h-8 text-roofing-orange hover:text-roofing-orange-dark" />
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transform transition-transform hover:scale-110"
-            >
-              <Instagram className="w-8 h-8 text-roofing-orange hover:text-roofing-orange-dark" />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transform transition-transform hover:scale-110"
-            >
-              <Linkedin className="w-8 h-8 text-roofing-orange hover:text-roofing-orange-dark" />
-            </a>
+            {[
+              { Icon: Facebook, href: "https://facebook.com", label: "Facebook", delay: 0 },
+              { Icon: Twitter, href: "https://twitter.com", label: "Twitter", delay: 0.1 },
+              { Icon: Instagram, href: "https://instagram.com", label: "Instagram", delay: 0.2 },
+              { Icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn", delay: 0.3 }
+            ].map(({ Icon, href, label, delay }, index) => (
+              <motion.a
+                key={index}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                whileHover={{ 
+                  scale: 1.2,
+                  rotate: 360,
+                  transition: { duration: 0.5 }
+                }}
+                whileTap={{ scale: 0.9 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20,
+                  delay: 0.5 + delay
+                }}
+                className="p-4 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group active:bg-roofing-orange/20"
+              >
+                <Icon className="w-8 h-8 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
+              </motion.a>
+            ))}
           </div>
         </div>
       </div>
