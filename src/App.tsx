@@ -48,7 +48,7 @@ const App = () => (
           </div>
           
           <Navbar />
-          <main className="flex-grow px-4 md:px-0">
+          <main className="flex-grow">
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/services" element={<Services />} />

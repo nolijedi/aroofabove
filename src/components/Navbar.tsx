@@ -4,13 +4,11 @@ import { Menu, X } from "lucide-react";
 import DesktopNav from "./navbar/DesktopNav";
 import MobileNav from "./navbar/MobileNav";
 import { NavItem } from "./navbar/types";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,18 +41,17 @@ const Navbar = () => {
             <img 
               src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png" 
               alt="A Roof Above Logo" 
-              className={`${isMobile ? 'h-12' : 'h-16'} w-auto`}
+              className="h-16 w-auto"
             />
           </Link>
 
           <DesktopNav navItems={navItems} currentPath={location.pathname} />
 
           <button
-            className="md:hidden absolute right-4 p-2 text-gray-600 hover:text-roofing-orange transition-colors"
+            className="md:hidden absolute right-0 text-gray-600"
             onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={16} /> : <Menu size={16} />}
           </button>
         </div>
 

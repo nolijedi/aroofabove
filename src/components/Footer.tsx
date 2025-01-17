@@ -21,11 +21,11 @@ const Footer = () => {
   return (
     <footer className="bg-roofing-charcoal py-3">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row md:justify-between items-center">
+        <div className="flex flex-wrap justify-between items-center gap-4">
           {/* Logo and Social Section */}
-          <div className="flex items-center w-full md:w-auto relative min-h-[80px] justify-center md:justify-end">
-            <div className="absolute left-1/2 -translate-x-1/2 md:static md:left-auto md:transform-none">
-              <div className="flex space-x-4 md:space-x-2">
+          <div className="flex items-center w-full h-full relative min-h-[80px] justify-end">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+              <div className="flex space-x-2">
                 {[
                   { Icon: Facebook, href: "https://facebook.com/aroofabove", label: "Facebook" },
                   { Icon: Instagram, href: "https://instagram.com/aroofabove", label: "Instagram" },
@@ -37,14 +37,14 @@ const Footer = () => {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 md:p-1 bg-white/5 rounded-full hover:bg-white/10 transition-colors group"
+                    className="p-1 bg-white/5 rounded-full hover:bg-white/10 transition-colors group"
                   >
-                    <Icon className="w-6 h-6 md:w-4 md:h-4 text-gray-300 group-hover:text-roofing-orange transition-colors" />
+                    <Icon className="w-4 h-4 text-gray-300 group-hover:text-roofing-orange transition-colors" />
                   </a>
                 ))}
               </div>
             </div>
-            <Link to="/" className="block mt-4 md:mt-0">
+            <Link to="/" className="block">
               <img
                 src="/lovable-uploads/2d080e69-c586-4861-8316-7ec496261217.png"
                 alt="A Roof Above Logo"
@@ -54,7 +54,7 @@ const Footer = () => {
           </div>
 
           {/* Sitemap Links */}
-          <div className="flex flex-wrap justify-center gap-4 text-sm md:text-xs">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs">
             {siteMapLinks.map((link) => (
               <Link
                 key={link.to}
@@ -67,7 +67,7 @@ const Footer = () => {
           </div>
 
           {/* Legal Links */}
-          <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 text-sm md:text-xs">
+          <div className="flex items-center space-x-4 text-xs">
             <Dialog open={isPrivacyOpen} onOpenChange={setIsPrivacyOpen}>
               <DialogTrigger asChild>
                 <button className="text-gray-300 hover:text-roofing-orange transition-colors">
@@ -76,7 +76,7 @@ const Footer = () => {
               </DialogTrigger>
               <PrivacyPolicyContent />
             </Dialog>
-            <span className="text-gray-500 hidden md:inline">|</span>
+            <span className="text-gray-500">|</span>
             <Dialog open={isTermsOpen} onOpenChange={setIsTermsOpen}>
               <DialogTrigger asChild>
                 <button className="text-gray-300 hover:text-roofing-orange transition-colors">
@@ -85,7 +85,7 @@ const Footer = () => {
               </DialogTrigger>
               <TermsContent />
             </Dialog>
-            <span className="text-gray-500 hidden md:inline">|</span>
+            <span className="text-gray-500">|</span>
             <span className="text-gray-400">
               © {new Date().getFullYear()} A Roof Above
             </span>
