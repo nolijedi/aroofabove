@@ -42,7 +42,7 @@ const TestimonialsSection = () => {
       <h2 className="text-3xl font-bold text-roofing-charcoal text-center mb-12">
         Success Stories
       </h2>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
         {testimonials.map((testimonial, index) => (
           <TestimonialCard
             key={index}
