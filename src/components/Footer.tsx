@@ -16,7 +16,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-wrap justify-between items-center gap-4">
           {/* Logo and Contact Section */}
-          <div className="flex items-center w-full relative">
+          <div className="flex items-center w-full h-full relative min-h-[64px]">
             <Link to="/" className="block">
               <img
                 src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png"
@@ -25,7 +25,7 @@ const Footer = () => {
               />
             </Link>
             
-            <div className="flex flex-col items-center text-base space-y-1.5 absolute left-1/2 transform -translate-x-1/2">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center space-y-1.5">
               <a
                 href="tel:509-400-5911"
                 className="flex items-center space-x-2 text-gray-300 hover:text-roofing-orange transition-colors group"
