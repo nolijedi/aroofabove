@@ -18,6 +18,12 @@ export const usePromoAnimation = (isVisible: boolean, isClosed: boolean) => {
   const promoWidth = 320; // Width of the promo component
   const promoHeight = 400; // Approximate height of the promo component
 
+  // Define the boundaries as percentage of viewport
+  const maxRightBoundary = 0.7; // 70% of viewport width
+  const maxBottomBoundary = 0.7; // 70% of viewport height
+  const minLeftBoundary = 0.1; // 10% of viewport width
+  const minTopBoundary = 0.1; // 10% of viewport height
+
   useEffect(() => {
     const animate = () => {
       if (isHovered) {
@@ -34,21 +40,27 @@ export const usePromoAnimation = (isVisible: boolean, isClosed: boolean) => {
         let newVelocityX = velocity.x;
         let newVelocityY = velocity.y;
 
+        // Calculate boundaries based on viewport percentages
+        const rightBoundary = window.innerWidth * maxRightBoundary - promoWidth;
+        const bottomBoundary = window.innerHeight * maxBottomBoundary - promoHeight;
+        const leftBoundary = window.innerWidth * minLeftBoundary;
+        const topBoundary = window.innerHeight * minTopBoundary;
+
         // Check horizontal boundaries
-        if (newPos.x <= 0) {
-          newPos.x = 0;
+        if (newPos.x <= leftBoundary) {
+          newPos.x = leftBoundary;
           newVelocityX = Math.abs(velocity.x);
-        } else if (newPos.x >= window.innerWidth - promoWidth) {
-          newPos.x = window.innerWidth - promoWidth;
+        } else if (newPos.x >= rightBoundary) {
+          newPos.x = rightBoundary;
           newVelocityX = -Math.abs(velocity.x);
         }
 
         // Check vertical boundaries
-        if (newPos.y <= 0) {
-          newPos.y = 0;
+        if (newPos.y <= topBoundary) {
+          newPos.y = topBoundary;
           newVelocityY = Math.abs(velocity.y);
-        } else if (newPos.y >= window.innerHeight - promoHeight) {
-          newPos.y = window.innerHeight - promoHeight;
+        } else if (newPos.y >= bottomBoundary) {
+          newPos.y = bottomBoundary;
           newVelocityY = -Math.abs(velocity.y);
         }
 
@@ -77,9 +89,14 @@ export const usePromoAnimation = (isVisible: boolean, isClosed: boolean) => {
   // Add window resize handler
   useEffect(() => {
     const handleResize = () => {
+      const rightBoundary = window.innerWidth * maxRightBoundary - promoWidth;
+      const bottomBoundary = window.innerHeight * maxBottomBoundary - promoHeight;
+      const leftBoundary = window.innerWidth * minLeftBoundary;
+      const topBoundary = window.innerHeight * minTopBoundary;
+
       setPosition(prevPos => ({
-        x: Math.min(prevPos.x, window.innerWidth - promoWidth),
-        y: Math.min(prevPos.y, window.innerHeight - promoHeight)
+        x: Math.max(leftBoundary, Math.min(prevPos.x, rightBoundary)),
+        y: Math.max(topBoundary, Math.min(prevPos.y, bottomBoundary))
       }));
     };
 
