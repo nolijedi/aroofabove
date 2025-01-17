@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, Info, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
 interface TestimonialCardProps {
@@ -74,11 +74,12 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
               </p>
             </div>
             <motion.div
-              className="absolute bottom-4 left-1/2 -translate-x-1/2"
+              className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-roofing-orange"
               animate={{ y: [0, 5, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <p className="text-sm text-roofing-orange">Hover to see damage details</p>
+              <Info className="w-5 h-5" />
+              <ArrowRight className="w-5 h-5" />
             </motion.div>
           </div>
         </div>
