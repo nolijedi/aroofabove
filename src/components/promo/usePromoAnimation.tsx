@@ -12,7 +12,7 @@ interface Velocity {
 
 export const usePromoAnimation = (isVisible: boolean, isClosed: boolean) => {
   const [position, setPosition] = useState<Position>({ x: 100, y: 100 });
-  const [velocity, setVelocity] = useState<Velocity>({ x: 1, y: 1 });
+  const [velocity, setVelocity] = useState<Velocity>({ x: 0.5, y: 0.5 }); // Reduced velocity
   const [isHovered, setIsHovered] = useState(false);
   const frameRef = useRef<number>();
 
@@ -32,11 +32,12 @@ export const usePromoAnimation = (isVisible: boolean, isClosed: boolean) => {
         let newVelocityX = velocity.x;
         let newVelocityY = velocity.y;
 
+        // Smooth bounce effect with gradual velocity changes
         if (newPos.x <= 0 || newPos.x >= window.innerWidth - 300) {
-          newVelocityX = -velocity.x;
+          newVelocityX = -velocity.x * 0.95; // Slightly reduce velocity on bounce
         }
         if (newPos.y <= 0 || newPos.y >= window.innerHeight - 400) {
-          newVelocityY = -velocity.y;
+          newVelocityY = -velocity.y * 0.95; // Slightly reduce velocity on bounce
         }
 
         if (newVelocityX !== velocity.x || newVelocityY !== velocity.y) {
