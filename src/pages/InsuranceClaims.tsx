@@ -71,7 +71,7 @@ const testimonials = [
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070",
     saved: "$20,000",
     description: "Hail damage compromised roof integrity extensively. Our comprehensive claim documentation resulted in complete roof replacement approval.",
-    damageImage: "/lovable-uploads/c14c4941-34e9-4747-840a-167e0fe92c76.png"
+    damageImage: "/lovable-uploads/f16aa9d7-ecba-42b3-937b-e83c914719c8.png"
   }
 ];
 
