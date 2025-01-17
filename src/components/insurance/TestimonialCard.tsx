@@ -36,20 +36,23 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
           stiffness: 100,
           damping: 20
         }}
-        className="relative w-full h-full preserve-3d cursor-pointer"
+        className="relative w-full h-full preserve-3d cursor-pointer hover:scale-105 transition-transform duration-300"
       >
         {/* Front of card */}
         <div className="absolute w-full h-full backface-hidden">
-          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 h-full flex flex-col justify-between">
+          <div className="bg-gradient-to-br from-white via-roofing-cream to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-6 h-full flex flex-col justify-between border border-roofing-orange/20">
             <div className="flex flex-col items-center text-center space-y-3">
-              <div className="w-16 h-16 rounded-full overflow-hidden">
+              <motion.div 
+                className="w-16 h-16 rounded-full overflow-hidden ring-4 ring-roofing-orange ring-offset-2"
+                whileHover={{ scale: 1.1 }}
+              >
                 <img 
                   src={testimonial.image} 
                   alt={testimonial.name}
                   className="w-full h-full object-cover"
                 />
-              </div>
-              <h3 className="text-lg font-semibold text-roofing-charcoal">{testimonial.name}</h3>
+              </motion.div>
+              <h3 className="text-lg font-semibold bg-gradient-to-r from-roofing-charcoal to-roofing-orange-dark bg-clip-text text-transparent">{testimonial.name}</h3>
               <p className="text-sm text-gray-500">{testimonial.location}</p>
               <div className="flex space-x-1">
                 {[...Array(5)].map((_, i) => (
@@ -63,24 +66,41 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
                   </motion.div>
                 ))}
               </div>
-              <p className="text-roofing-orange font-bold text-lg">{testimonial.saved}</p>
-              <p className="text-gray-600 italic text-sm leading-tight">&ldquo;{testimonial.quote}&rdquo;</p>
+              <p className="text-roofing-orange font-bold text-2xl bg-gradient-to-r from-roofing-orange to-roofing-orange-dark bg-clip-text text-transparent">{testimonial.saved}</p>
+              <p className="text-gray-600 italic text-sm leading-tight relative">
+                <span className="text-4xl text-roofing-orange/20 absolute -top-4 -left-2">"</span>
+                {testimonial.quote}
+                <span className="text-4xl text-roofing-orange/20 absolute -bottom-4 -right-2">"</span>
+              </p>
             </div>
+            <motion.div
+              className="absolute bottom-4 left-1/2 -translate-x-1/2"
+              animate={{ y: [0, 5, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <p className="text-sm text-roofing-orange">Hover to see damage details</p>
+            </motion.div>
           </div>
         </div>
 
         {/* Back of card */}
         <div 
-          className="absolute w-full h-full backface-hidden rounded-xl shadow-lg bg-roofing-orange p-6 flex items-center justify-center"
+          className="absolute w-full h-full backface-hidden rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-6 flex items-center justify-center"
           style={{ transform: 'rotateY(180deg)' }}
         >
           <div className="text-center">
             <h3 className="text-xl font-bold text-white mb-4">Damage Details</h3>
-            <img 
-              src={testimonial.damageImage}
-              alt="Roof damage"
-              className="w-full h-40 object-cover rounded-lg mb-4"
-            />
+            <motion.div 
+              className="relative group"
+              whileHover={{ scale: 1.05 }}
+            >
+              <img 
+                src={testimonial.damageImage}
+                alt="Roof damage"
+                className="w-full h-40 object-cover rounded-lg mb-4 shadow-xl transform transition-all duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </motion.div>
             <p className="text-roofing-cream text-sm leading-relaxed">
               {testimonial.description || "Severe roof damage caused by recent storms required immediate professional attention. Our team successfully restored the roof to pristine condition."}
             </p>
