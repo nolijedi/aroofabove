@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Shield, Clock, DollarSign, FileCheck } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import InsuranceFeatureCard from "@/components/insurance/InsuranceFeatureCard";
 import TestimonialCard from "@/components/insurance/TestimonialCard";
 import CallToActionSection from "@/components/insurance/CallToActionSection";
@@ -79,25 +79,6 @@ const InsuranceClaims = () => {
   const [flippedCards, setFlippedCards] = useState<{ [key: number]: boolean }>({});
   const [shouldStayFlipped, setShouldStayFlipped] = useState<{ [key: number]: boolean }>({});
 
-  useEffect(() => {
-    const timeouts: { [key: number]: NodeJS.Timeout } = {};
-    
-    Object.entries(flippedCards).forEach(([index, isFlipped]) => {
-      if (!isFlipped && shouldStayFlipped[Number(index)]) {
-        timeouts[Number(index)] = setTimeout(() => {
-          setShouldStayFlipped(prev => ({
-            ...prev,
-            [Number(index)]: false
-          }));
-        }, 1000);
-      }
-    });
-
-    return () => {
-      Object.values(timeouts).forEach(timeout => clearTimeout(timeout));
-    };
-  }, [flippedCards, shouldStayFlipped]);
-
   const handleMouseEnter = (index: number) => {
     setFlippedCards(prev => ({ ...prev, [index]: true }));
     setShouldStayFlipped(prev => ({ ...prev, [index]: true }));
@@ -117,7 +98,7 @@ const InsuranceClaims = () => {
         >
           <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-6 relative">
             <span className="relative inline-block">
-              Insurance Claims Made Easy
+              Insurance Claims Assistance | A Roof Above
               <motion.div
                 className="absolute -bottom-2 left-0 w-full h-1 bg-roofing-orange"
                 initial={{ width: 0 }}
@@ -126,12 +107,38 @@ const InsuranceClaims = () => {
               />
             </span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Let us handle your insurance claim process from start to finish.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            At <span className="font-semibold">A Roof Above</span>, we understand that dealing with roof damage is stressful enough—handling insurance claims shouldn't add to that burden. That's why we're here to help you every step of the way, ensuring you get the compensation you deserve and your roof back in top shape quickly.
           </p>
         </motion.div>
 
-        {/* Features Section */}
+        {/* Why Choose Us Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <h2 className="text-3xl font-bold text-roofing-charcoal mb-8 text-center">
+            Why Choose Us for Insurance Claims Assistance?
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <h3 className="text-xl font-semibold mb-4 text-roofing-orange">Experienced Team</h3>
+              <p className="text-gray-600">Our team has years of experience navigating insurance claims, ensuring nothing gets overlooked.</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <h3 className="text-xl font-semibold mb-4 text-roofing-orange">Advocacy for You</h3>
+              <p className="text-gray-600">We work on your behalf to maximize your claim and ensure all covered damages are accounted for.</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <h3 className="text-xl font-semibold mb-4 text-roofing-orange">Stress-Free Process</h3>
+              <p className="text-gray-600">From inspections to paperwork, we'll handle the heavy lifting while keeping you informed.</p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Features Grid Section */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           {features.map((feature, index) => (
             <InsuranceFeatureCard
@@ -145,6 +152,105 @@ const InsuranceClaims = () => {
             />
           ))}
         </div>
+
+        {/* Process Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <h2 className="text-3xl font-bold text-roofing-charcoal mb-8 text-center">
+            Our Step-by-Step Process
+          </h2>
+          <div className="space-y-6">
+            {[
+              {
+                title: "Free Roof Inspection",
+                description: "Our certified roofing experts will conduct a thorough inspection to assess the damage. We'll document everything with photos and a detailed report—essential tools for your insurance claim."
+              },
+              {
+                title: "Damage Documentation",
+                description: "We provide professional documentation of all damages, including descriptions and visual evidence, to support your insurance claim."
+              },
+              {
+                title: "Insurance Claim Filing",
+                description: "Need help with filing? No problem. Our team will guide you through the paperwork and ensure all necessary details are included for a smooth process."
+              },
+              {
+                title: "Adjuster Coordination",
+                description: "When the insurance adjuster visits, we'll be there to represent your best interests and ensure they don't miss a thing."
+              },
+              {
+                title: "Expert Repairs or Replacement",
+                description: "Once your claim is approved, our skilled team gets to work restoring your roof. We use only high-quality materials to ensure long-lasting results."
+              }
+            ].map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                className="bg-white p-6 rounded-xl shadow-lg"
+              >
+                <h3 className="text-xl font-semibold mb-2 text-roofing-orange">
+                  {index + 1}. {step.title}
+                </h3>
+                <p className="text-gray-600">{step.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Common Damages Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <h2 className="text-3xl font-bold text-roofing-charcoal mb-8 text-center">
+            Common Roof Damages Covered by Insurance
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {[
+              "Hail damage",
+              "Wind damage",
+              "Storm-related debris",
+              "Fallen tree limbs",
+              "Leaks due to severe weather"
+            ].map((damage, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-roofing-orange/10 p-4 rounded-lg text-center"
+              >
+                <p className="text-roofing-charcoal font-medium">{damage}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Why Act Now Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16 bg-roofing-beige p-8 rounded-xl"
+        >
+          <h2 className="text-3xl font-bold text-roofing-charcoal mb-6 text-center">
+            Why Act Now?
+          </h2>
+          <p className="text-gray-700 text-center max-w-3xl mx-auto">
+            Insurance policies often have strict deadlines for filing claims after damage occurs. 
+            Delaying could mean missing out on the compensation you're entitled to. Plus, untreated 
+            damage can lead to more costly repairs down the road. Don't wait—let us help you today!
+          </p>
+        </motion.div>
 
         {/* Testimonials Section */}
         <motion.div
