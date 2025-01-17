@@ -11,6 +11,10 @@ const socialLinks = [
 ];
 
 const EnhancedHero = () => {
+  const handleSocialClick = (href: string) => {
+    window.open(href, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="relative">
       <Hero />
@@ -21,11 +25,9 @@ const EnhancedHero = () => {
             <div className="mb-8" />
             <div className="flex justify-center gap-8 mb-12 pointer-events-auto">
               {socialLinks.map(({ Icon, href, label, delay }, index) => (
-                <motion.a
+                <motion.button
                   key={index}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  onClick={() => handleSocialClick(href)}
                   aria-label={label}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -44,7 +46,7 @@ const EnhancedHero = () => {
                   className="p-4 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group active:bg-roofing-orange/20"
                 >
                   <Icon className="w-8 h-8 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
-                </motion.a>
+                </motion.button>
               ))}
             </div>
           </div>
