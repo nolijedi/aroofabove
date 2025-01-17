@@ -6,17 +6,19 @@ export const usePromoVisibility = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isClosed, setIsClosed] = useState(false);
   const [isExitIntent, setIsExitIntent] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(120);
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const savedTime = localStorage.getItem('promoTimeLeft');
+    return savedTime ? parseInt(savedTime, 10) : 120;
+  });
 
-  // Initialize visibility and start countdown on mount and route changes
+  // Initialize visibility on mount and route changes
   useEffect(() => {
     const isPermanentlyClosed = localStorage.getItem('promoClosedPermanently') === 'true';
     console.log("Initializing promo visibility - permanentlyClosed:", isPermanentlyClosed);
     
     if (!isPermanentlyClosed) {
-      // Reset timer and show after 1 second delay
+      // Show after 1 second delay, but don't reset timer
       const showTimer = setTimeout(() => {
-        setTimeLeft(120);
         setIsClosed(false);
         setIsVisible(true);
         console.log("Showing promo after 1-second delay");
@@ -53,14 +55,16 @@ export const usePromoVisibility = () => {
     
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
-        if (prevTime <= 0) {
+        const newTime = prevTime <= 0 ? 0 : prevTime - 1;
+        localStorage.setItem('promoTimeLeft', newTime.toString());
+        
+        if (newTime <= 0) {
           clearInterval(timer);
           setIsClosed(true);
           localStorage.setItem('promoClosedPermanently', 'true');
           console.log("Timer reached zero, closing permanently");
-          return 0;
         }
-        return prevTime - 1;
+        return newTime;
       });
     }, 1000);
 
