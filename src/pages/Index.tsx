@@ -56,12 +56,12 @@ const Index = () => {
                     rotateY: isFlipped[index] ? 180 : 0,
                   }}
                   transition={{ 
-                    duration: 0.6,
+                    duration: 0.8,
                     type: "spring",
-                    stiffness: 100,
-                    damping: 20
+                    stiffness: 60,
+                    damping: 15
                   }}
-                  className="relative w-full h-full preserve-3d cursor-pointer hover:scale-105 transition-transform duration-300"
+                  className="relative w-full h-full preserve-3d cursor-pointer hover:scale-105 transition-transform duration-500"
                 >
                   {/* Front of card */}
                   <div className="absolute inset-0 bg-gradient-to-br from-roofing-cream via-white to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 backface-hidden border border-roofing-orange/20">
