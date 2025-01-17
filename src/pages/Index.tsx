@@ -43,7 +43,7 @@ const Index = () => {
             ...prev,
             [Number(index)]: false
           }));
-        }, 5000);
+        }, 1000); // Changed from 5000 to 1000 milliseconds
       }
     });
 
