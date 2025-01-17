@@ -19,11 +19,9 @@ const EnhancedHero = () => {
     <div className="relative">
       <Hero />
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[22rem] pb-12">
-          <div className="text-center space-y-8">
-            <div className="mb-6" />
-            <div className="mb-8" />
-            <div className="flex justify-center gap-4 md:gap-8 mb-12 pointer-events-auto">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[16rem] sm:pt-[18rem] md:pt-[20rem] lg:pt-[22rem] pb-8 md:pb-12">
+          <div className="text-center">
+            <div className="flex justify-center gap-3 md:gap-6 pointer-events-auto">
               {socialLinks.map(({ Icon, href, label, delay }, index) => (
                 <motion.button
                   key={index}
@@ -43,9 +41,9 @@ const EnhancedHero = () => {
                     damping: 20,
                     delay: 0.5 + delay
                   }}
-                  className="p-2 md:p-3 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group active:bg-roofing-orange/20"
+                  className="p-2 md:p-3 bg-roofing-beige/90 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group active:bg-roofing-orange/20"
                 >
-                  <Icon className="w-5 h-5 md:w-6 md:h-6 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
                 </motion.button>
               ))}
             </div>
