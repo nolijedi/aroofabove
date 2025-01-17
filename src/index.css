@@ -142,20 +142,48 @@
 
   .section-gradient-separator {
     position: relative;
+    padding: 2rem 0;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 255, 255, 0.05) 15%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.05) 85%,
+      transparent
+    );
   }
 
   .section-gradient-separator::after {
     content: '';
     position: absolute;
-    bottom: -0.5rem;
+    bottom: 0;
     left: 0;
     width: 100%;
-    height: 1px;
+    height: 2px;
     background: linear-gradient(90deg, 
       rgba(255, 255, 255, 0) 0%,
       theme('colors.roofing-orange') 50%,
       rgba(255, 255, 255, 0) 100%
     );
     opacity: 0.3;
+  }
+
+  .section-gradient-separator:nth-child(even) {
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(theme('colors.roofing-cream'), 0.05) 15%,
+      rgba(theme('colors.roofing-cream'), 0.1) 50%,
+      rgba(theme('colors.roofing-cream'), 0.05) 85%,
+      transparent
+    );
+  }
+
+  .section-gradient-separator:nth-child(even)::after {
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0) 0%,
+      theme('colors.roofing-cream') 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
   }
 }

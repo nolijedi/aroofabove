@@ -24,32 +24,38 @@ const Estimate = () => {
   }, []);
 
   return (
-    <main className="min-h-screen pt-32 pb-20 px-4 bg-gradient-to-br from-roofing-cream to-roofing-beige">
+    <main className="min-h-screen pt-32 pb-20">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="section-gradient-separator"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-2 relative">
-            <span className="relative inline-block pb-2">
-              Get Your Free Estimate
-              <motion.div
-                className="absolute -bottom-2 left-0 w-full h-1 bg-roofing-orange"
-                initial={{ width: 0 }}
-                animate={{ width: "100%" }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-              />
-            </span>
-          </h1>
-          <p className="text-sm text-gray-500 max-w-2xl mx-auto">
-            Fill out the form below and we'll provide you with a detailed estimate for your roofing project.
-          </p>
+          <div className="px-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-2 relative">
+              <span className="relative inline-block pb-2">
+                Get Your Free Estimate
+                <motion.div
+                  className="absolute -bottom-2 left-0 w-full h-1 bg-roofing-orange"
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                />
+              </span>
+            </h1>
+            <p className="text-sm text-gray-500 max-w-2xl mx-auto">
+              Fill out the form below and we'll provide you with a detailed estimate for your roofing project.
+            </p>
+          </div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-12">
-          <EstimateForm />
-          <EstimateSidebar />
+        <div className="section-gradient-separator">
+          <div className="px-4">
+            <div className="grid lg:grid-cols-3 gap-12">
+              <EstimateForm />
+              <EstimateSidebar />
+            </div>
+          </div>
         </div>
       </div>
     </main>
