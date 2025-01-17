@@ -1,12 +1,33 @@
 import { motion } from "framer-motion";
+import { Cloud, Wind, Trash2, TreePine, CloudRain } from "lucide-react";
 
 const CommonDamagesSection = () => {
   const damages = [
-    "Hail damage",
-    "Wind damage",
-    "Storm-related debris",
-    "Fallen tree limbs",
-    "Leaks due to severe weather"
+    {
+      title: "Hail damage",
+      icon: Cloud,
+      description: "Impact damage from hailstones"
+    },
+    {
+      title: "Wind damage",
+      icon: Wind,
+      description: "Lifted or missing shingles"
+    },
+    {
+      title: "Storm-related debris",
+      icon: Trash2,
+      description: "Damage from flying debris"
+    },
+    {
+      title: "Fallen tree limbs",
+      icon: TreePine,
+      description: "Impact from fallen branches"
+    },
+    {
+      title: "Leaks due to severe weather",
+      icon: CloudRain,
+      description: "Water infiltration issues"
+    }
   ];
 
   return (
@@ -27,9 +48,13 @@ const CommonDamagesSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className="bg-roofing-orange/10 p-4 rounded-lg text-center"
+            className="bg-roofing-orange/10 p-6 rounded-lg text-center flex flex-col items-center gap-3 hover:bg-roofing-orange/20 transition-colors duration-300"
           >
-            <p className="text-roofing-charcoal font-medium">{damage}</p>
+            <div className="p-3 bg-roofing-orange/20 rounded-full">
+              {<damage.icon className="w-6 h-6 text-roofing-orange" />}
+            </div>
+            <h3 className="text-roofing-charcoal font-semibold">{damage.title}</h3>
+            <p className="text-sm text-roofing-charcoal/70">{damage.description}</p>
           </motion.div>
         ))}
       </div>
