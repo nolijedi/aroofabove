@@ -16,7 +16,7 @@ const WhyChooseUs = () => {
         >
           <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-6 relative">
             <span className="relative inline-block">
-              Why Choose Us?
+              Why Home Owners Choose Us
               <motion.div
                 className="absolute -bottom-2 left-0 w-full h-1 bg-roofing-orange"
                 initial={{ width: 0 }}
