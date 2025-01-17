@@ -20,7 +20,6 @@ const Navbar = () => {
   }, []);
 
   const navItems: NavItem[] = [
-    { path: "/", label: "Home" },
     { path: "/services", label: "Services" },
     { path: "/why-choose-us", label: "Why Choose Us" },
     { path: "/insurance-claims", label: "Insurance Claims" },
