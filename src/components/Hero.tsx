@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Phone, Mail, Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Hero = () => {
