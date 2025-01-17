@@ -12,7 +12,7 @@ const StickyPhone = () => {
       animate={{ 
         x: 0,
         y: [-5, 5, -5],
-        scale: [1, 1.1, 1],
+        scale: [1, 1.1, 0.9],
       }}
       transition={{
         y: {
