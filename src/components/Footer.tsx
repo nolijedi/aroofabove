@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import PrivacyPolicyContent from "./legal/PrivacyPolicyContent";
+import TermsContent from "./legal/TermsContent";
+import { useState } from "react";
 
 const Footer = () => {
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [isTermsOpen, setIsTermsOpen] = useState(false);
+
   const siteMapLinks = [
     { to: "/", label: "Home" },
     { to: "/services", label: "Services" },
@@ -61,13 +68,23 @@ const Footer = () => {
 
           {/* Legal Links */}
           <div className="flex items-center space-x-4 text-xs">
-            <Link to="/privacy-policy" className="text-gray-300 hover:text-roofing-orange transition-colors">
-              Privacy Policy
-            </Link>
+            <Dialog open={isPrivacyOpen} onOpenChange={setIsPrivacyOpen}>
+              <DialogTrigger asChild>
+                <button className="text-gray-300 hover:text-roofing-orange transition-colors">
+                  Privacy Policy
+                </button>
+              </DialogTrigger>
+              <PrivacyPolicyContent />
+            </Dialog>
             <span className="text-gray-500">|</span>
-            <Link to="/terms" className="text-gray-300 hover:text-roofing-orange transition-colors">
-              Terms of Service
-            </Link>
+            <Dialog open={isTermsOpen} onOpenChange={setIsTermsOpen}>
+              <DialogTrigger asChild>
+                <button className="text-gray-300 hover:text-roofing-orange transition-colors">
+                  Terms of Service
+                </button>
+              </DialogTrigger>
+              <TermsContent />
+            </Dialog>
             <span className="text-gray-500">|</span>
             <span className="text-gray-400">
               © {new Date().getFullYear()} A Roof Above
