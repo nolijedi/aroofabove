@@ -23,13 +23,13 @@ const StickyPhone = () => {
       className="fixed bottom-4 left-4 z-50"
     >
       <motion.button
-        initial={{ scale: 0.6 }}
-        animate={{ scale: [0, 0.6, 1, 0.8, 1] }}
+        initial={{ scale: 0 }}
+        animate={{ scale: [0, 1, 0] }}
         whileHover={{ scale: 2 }}
         transition={{
           scale: {
             duration: 4,
-            times: [0, 0.2, 0.4, 0.7, 1],
+            times: [0, 0.5, 1],
             ease: "easeInOut",
             repeat: Infinity,
           },
