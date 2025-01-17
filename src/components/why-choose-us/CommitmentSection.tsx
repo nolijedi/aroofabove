@@ -23,7 +23,7 @@ export const CommitmentSection = () => (
         className="bg-roofing-orange text-white hover:bg-roofing-orange-dark group"
       >
         <Link to="/estimate">
-          Get Your Free Estimate
+          Get Estimate Now
           <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </Link>
       </Button>

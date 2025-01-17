@@ -20,7 +20,7 @@ export const CallToAction = () => (
       to="/contact"
       className="inline-flex items-center space-x-2 bg-white text-roofing-charcoal px-8 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-roofing-cream group"
     >
-      <span>Get Started Today</span>
+      <span>Get Estimate Now</span>
       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
     </Link>
   </motion.div>
