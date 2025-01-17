@@ -3,19 +3,10 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Shield, Wrench, Clock, Info } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const Index = () => {
-  const [flippedCards, setFlippedCards] = useState<{ [key: number]: boolean }>({});
-  const [shouldStayFlipped, setShouldStayFlipped] = useState<{ [key: number]: boolean }>({});
-
-  useEffect(() => {
-    const timeouts: { [key: number]: NodeJS.Timeout } = {};
-    
-    return () => {
-      Object.values(timeouts).forEach(timeout => clearTimeout(timeout));
-    };
-  }, []);
+  const [isFlipped, setIsFlipped] = useState<{ [key: number]: boolean }>({});
 
   const features = [
     {
@@ -41,20 +32,6 @@ const Index = () => {
     }
   ];
 
-  const handleMouseEnter = (index: number) => {
-    setFlippedCards(prev => ({ ...prev, [index]: true }));
-    setShouldStayFlipped(prev => ({ ...prev, [index]: true }));
-  };
-
-  const handleMouseLeave = (index: number) => {
-    // Add a longer delay before unflipping to make it smoother
-    setTimeout(() => {
-      if (!shouldStayFlipped[index]) return;
-      setFlippedCards(prev => ({ ...prev, [index]: false }));
-      setShouldStayFlipped(prev => ({ ...prev, [index]: false }));
-    }, 300); // Increased delay for smoother transition
-  };
-
   return (
     <main className="min-h-screen">
       <EnhancedHero />
@@ -70,24 +47,21 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="h-[400px] perspective group"
+                className="h-[400px] perspective"
+                onMouseEnter={() => setIsFlipped(prev => ({ ...prev, [index]: true }))}
+                onMouseLeave={() => setIsFlipped(prev => ({ ...prev, [index]: false }))}
               >
                 <motion.div 
-                  className="relative h-full w-full preserve-3d cursor-pointer transition-all duration-500"
                   animate={{ 
-                    rotateY: (flippedCards[index] || shouldStayFlipped[index]) ? 180 : 0,
-                    scale: 1.02 // Slight scale up by default
+                    rotateY: isFlipped[index] ? 180 : 0,
                   }}
-                  whileHover={{ scale: 1.05 }} // Additional scale on hover
                   transition={{ 
                     duration: 0.6,
                     type: "spring",
-                    stiffness: 70, // Reduced stiffness for smoother animation
-                    damping: 25, // Increased damping for more stability
-                    scale: { duration: 0.3 } // Separate transition for scale
+                    stiffness: 100,
+                    damping: 20
                   }}
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={() => handleMouseLeave(index)}
+                  className="relative w-full h-full preserve-3d cursor-pointer hover:scale-105 transition-transform duration-300"
                 >
                   {/* Front of card */}
                   <div className="absolute inset-0 bg-gradient-to-br from-roofing-cream via-white to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 backface-hidden border border-roofing-orange/20">
