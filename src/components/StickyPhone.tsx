@@ -27,7 +27,7 @@ const StickyPhone = () => {
           </defs>
           <text className="text-xs fill-white">
             <textPath href="#circle" startOffset="0%">
-              CALL US NOW • CLICK HERE • CALL US NOW • CLICK HERE •
+              call us now click here circling around the inside edge of the orange circle
             </textPath>
           </text>
         </svg>
