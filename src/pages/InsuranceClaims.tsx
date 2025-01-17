@@ -53,7 +53,7 @@ const testimonials = [
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=2070",
     saved: "$22,500",
     description: "Initial claim denial was overturned after our thorough documentation and professional assessment revealed significant hidden structural damage.",
-    damageImage: "/lovable-uploads/6c125ef0-61d1-44fe-bf06-589a6cbe53de.png"
+    damageImage: "/lovable-uploads/e1bf4d7c-f4d0-4f90-92d9-901827a3ffb8.png"
   },
   {
     name: "Emily Chen",
