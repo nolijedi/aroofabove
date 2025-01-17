@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
+import { Facebook, Instagram, Twitter, Linkedin, Youtube, Phone, Mail } from "lucide-react";
 import Hero from "./Hero";
 
 const socialLinks = [
@@ -14,18 +14,28 @@ const EnhancedHero = () => {
   return (
     <div className="relative">
       <Hero />
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+      <div className="absolute inset-0 bg-roofing-charcoal/80">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center min-h-screen">
-          <div className="text-center space-y-12">
+          <div className="text-center space-y-8">
             <motion.h1 
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-5xl md:text-7xl font-bold tracking-tight text-white pointer-events-none drop-shadow-lg z-20 relative"
+              className="text-5xl md:text-7xl font-bold tracking-tight text-roofing-cream mb-12"
             >
               Your Trusted Roofing Experts
             </motion.h1>
-            <div className="flex justify-center gap-6 pointer-events-auto z-10 relative">
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8"
+            >
+              Professional roofing services for residential and commercial properties. Quality workmanship guaranteed.
+            </motion.p>
+
+            <div className="flex justify-center gap-6">
               {socialLinks.map(({ Icon, href, label, delay }, index) => (
                 <motion.a
                   key={index}
@@ -35,24 +45,36 @@ const EnhancedHero = () => {
                   aria-label={label}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  whileHover={{ 
-                    scale: 1.2,
-                    rotate: 360,
-                    transition: { duration: 0.5 }
-                  }}
+                  whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   transition={{
                     type: "spring",
                     stiffness: 300,
                     damping: 20,
-                    delay: 0.5 + delay
+                    delay: delay
                   }}
-                  className="p-3 bg-roofing-beige/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+                  className="p-4 bg-roofing-beige rounded-full shadow-lg hover:bg-roofing-cream transition-all duration-300"
                 >
-                  <Icon className="w-6 h-6 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
+                  <Icon className="w-6 h-6 text-roofing-charcoal" />
                 </motion.a>
               ))}
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="flex flex-col md:flex-row items-center justify-center gap-8 mt-12 text-white text-xl"
+            >
+              <a href="tel:509-400-5911" className="flex items-center gap-2 hover:text-roofing-cream transition-colors">
+                <Phone className="w-6 h-6" />
+                509-400-5911
+              </a>
+              <a href="mailto:jc@aroofabove.com" className="flex items-center gap-2 hover:text-roofing-cream transition-colors">
+                <Mail className="w-6 h-6" />
+                jc@aroofabove.com
+              </a>
+            </motion.div>
           </div>
         </div>
       </div>
