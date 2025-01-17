@@ -1,27 +1,32 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useLocalStorage } from "@/hooks/use-local-storage";
 
 export const usePromoVisibility = () => {
   const location = useLocation();
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false); // Start as hidden
   const [isClosed, setIsClosed] = useState(false);
   const [isExitIntent, setIsExitIntent] = useState(false);
   const [timeLeft, setTimeLeft] = useState(120); // Start at 120 seconds
 
-  // Initialize visibility on mount
+  // Initialize visibility with delay on mount and route changes
   useEffect(() => {
     const isPermanentlyClosed = localStorage.getItem('promoClosedPermanently') === 'true';
     console.log("Initializing promo visibility - permanentlyClosed:", isPermanentlyClosed);
     
     if (!isPermanentlyClosed) {
-      setTimeLeft(120);
-      setIsClosed(false);
-      setIsVisible(true);
+      // Set a 1-second delay before showing the promo
+      const timer = setTimeout(() => {
+        setTimeLeft(120);
+        setIsClosed(false);
+        setIsVisible(true);
+        console.log("Showing promo after 1-second delay");
+      }, 1000);
+
+      return () => clearTimeout(timer);
     } else {
       setIsClosed(true);
     }
-  }, []);
+  }, [location.pathname]); // Re-run on route changes
 
   // Handle exit intent
   useEffect(() => {
@@ -61,14 +66,6 @@ export const usePromoVisibility = () => {
 
     return () => clearInterval(timer);
   }, [isClosed]);
-
-  // Force visibility on route changes
-  useEffect(() => {
-    if (!isClosed && timeLeft > 0) {
-      setIsVisible(true);
-      console.log("Showing promo on route change");
-    }
-  }, [location.pathname]);
 
   return {
     isVisible,
