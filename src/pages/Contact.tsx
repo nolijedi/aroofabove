@@ -27,7 +27,7 @@ const Contact = () => {
             Get in touch with our expert team today.
           </p>
 
-          {/* Social Icons moved here */}
+          {/* Social Icons */}
           <div className="flex justify-center gap-6 mb-12">
             {[
               { Icon: Facebook, href: "https://facebook.com", label: "Facebook", delay: 0 },
@@ -64,23 +64,69 @@ const Contact = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold mb-4">Get a Free Estimate</h2>
-            <p className="text-gray-600 mb-4">
-              Fill out the form below to receive a free estimate for your roofing project.
-            </p>
-            <Button asChild>
-              <Link to="/estimate" className="text-white bg-roofing-orange hover:bg-roofing-orange-dark rounded-md px-4 py-2">
-                Get Estimate
-              </Link>
-            </Button>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold mb-4">Contact Information</h2>
-            <p className="text-gray-600 mb-2">Phone: (123) 456-7890</p>
-            <p className="text-gray-600 mb-2">Email: info@roofabove.com</p>
-            <p className="text-gray-600">Address: 123 Roofing St, Dallas, TX</p>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+            className="rounded-lg shadow-lg overflow-hidden"
+          >
+            <div className="bg-gradient-to-br from-roofing-orange to-roofing-beige p-1">
+              <div className="bg-white p-8 rounded-lg h-full transform transition-transform hover:scale-[0.99] duration-300">
+                <h2 className="text-2xl font-bold mb-4 text-roofing-charcoal">
+                  Get a Free Estimate
+                </h2>
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  Fill out the form below to receive a free estimate for your roofing project.
+                </p>
+                <Button asChild className="w-full bg-roofing-orange hover:bg-roofing-orange-dark transition-colors duration-300">
+                  <Link to="/estimate" className="inline-flex items-center justify-center gap-2">
+                    Get Estimate
+                    <motion.span
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ repeat: Infinity, duration: 1.5 }}
+                    >
+                      →
+                    </motion.span>
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 }}
+            className="rounded-lg shadow-lg overflow-hidden"
+          >
+            <div className="bg-gradient-to-br from-roofing-cream to-roofing-beige p-1">
+              <div className="bg-white p-8 rounded-lg h-full transform transition-transform hover:scale-[0.99] duration-300">
+                <h2 className="text-2xl font-bold mb-6 text-roofing-charcoal">
+                  Contact Information
+                </h2>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3 text-gray-600 hover:text-roofing-orange transition-colors">
+                    <div className="w-10 h-10 bg-roofing-beige rounded-full flex items-center justify-center">
+                      <span className="text-xl">📞</span>
+                    </div>
+                    <p>(123) 456-7890</p>
+                  </div>
+                  <div className="flex items-center gap-3 text-gray-600 hover:text-roofing-orange transition-colors">
+                    <div className="w-10 h-10 bg-roofing-beige rounded-full flex items-center justify-center">
+                      <span className="text-xl">✉️</span>
+                    </div>
+                    <p>info@roofabove.com</p>
+                  </div>
+                  <div className="flex items-center gap-3 text-gray-600 hover:text-roofing-orange transition-colors">
+                    <div className="w-10 h-10 bg-roofing-beige rounded-full flex items-center justify-center">
+                      <span className="text-xl">📍</span>
+                    </div>
+                    <p>123 Roofing St, Dallas, TX</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </main>
