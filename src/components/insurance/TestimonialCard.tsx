@@ -28,7 +28,11 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
     >
       <motion.div
         animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6, delay: isFlipped ? 0 : 0.2 }}
+        transition={{ 
+          duration: 0.6,
+          type: "tween",
+          ease: "easeInOut"
+        }}
         className="relative w-full h-full preserve-3d cursor-pointer"
         onHoverStart={() => setIsFlipped(true)}
         onHoverEnd={() => setIsFlipped(false)}
