@@ -1,22 +1,22 @@
 import { motion } from "framer-motion";
-import { Award, Users, Clock, Shield, ThumbsUp, Gem } from "lucide-react";
+import { Shield, Wrench, Clock } from "lucide-react";
 import { ReasonCard } from "./ReasonCard";
 
 const reasons = [
   {
     Icon: Shield,
     title: "Quality Guaranteed",
-    description: "Our comprehensive warranty coverage ensures your peace of mind. We use only premium materials and follow strict quality control processes."
+    description: "We stand behind our work with industry-leading warranties."
   },
   {
-    Icon: Users,
+    Icon: Wrench,
     title: "Expert Craftsmanship",
-    description: "Our skilled team brings years of experience and expertise to every project, ensuring the highest quality workmanship."
+    description: "Our skilled team brings years of experience to every project."
   },
   {
     Icon: Clock,
     title: "Timely Service",
-    description: "We respect your time and complete projects on schedule, minimizing disruption to your daily life."
+    description: "We respect your time and complete projects on schedule."
   }
 ];
 

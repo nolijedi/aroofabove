@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { LucideIcon, Info, ArrowRight } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 interface ReasonCardProps {
   title: string;
@@ -22,7 +22,7 @@ export const ReasonCard = ({ title, description, Icon }: ReasonCardProps) => (
     whileHover={{ scale: 1.05 }}
     className="h-[400px] perspective"
   >
-    <div className="relative w-full h-full preserve-3d cursor-pointer hover:scale-105 transition-transform duration-300">
+    <div className="relative w-full h-full preserve-3d cursor-pointer transition-transform duration-300">
       <div className="absolute w-full h-full backface-hidden">
         <div className="bg-gradient-to-br from-white via-roofing-cream to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 h-full flex flex-col justify-between border border-roofing-orange/20">
           <div className="flex flex-col items-center text-center space-y-6">
@@ -42,15 +42,6 @@ export const ReasonCard = ({ title, description, Icon }: ReasonCardProps) => (
               <span className="text-4xl text-roofing-orange/20 absolute -bottom-4 -right-2">"</span>
             </p>
           </div>
-
-          <motion.div
-            className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-roofing-orange"
-            animate={{ y: [0, 5, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <Info className="w-5 h-5" />
-            <ArrowRight className="w-5 h-5" />
-          </motion.div>
         </div>
       </div>
     </div>
