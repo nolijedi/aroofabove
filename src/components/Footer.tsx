@@ -3,41 +3,40 @@ import { Mail, Phone, Facebook, Instagram, Twitter, Youtube } from "lucide-react
 
 const Footer = () => {
   return (
-    <footer className="bg-roofing-charcoal py-8">
+    <footer className="bg-roofing-charcoal py-4">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-          {/* Logo */}
-          <div className="flex flex-col items-center md:items-start">
-            <Link to="/" className="block mb-4">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          {/* Logo and Contact Section */}
+          <div className="flex items-center gap-8">
+            <Link to="/" className="block">
               <img
                 src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png"
                 alt="A Roof Above Logo"
-                className="h-12 w-auto brightness-200"
+                className="h-8 w-auto brightness-200"
               />
             </Link>
-          </div>
-
-          {/* Contact Information with Social Links */}
-          <div className="flex flex-col items-center md:items-start space-y-4">
-            <h3 className="text-lg font-semibold text-white mb-2">Contact Us</h3>
-            <div className="space-y-3">
+            
+            <div className="flex flex-col items-start space-y-1">
               <a
                 href="tel:509-400-5911"
-                className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors group"
+                className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors group text-sm"
               >
-                <Phone className="w-5 h-5 group-hover:text-roofing-orange transition-colors" />
+                <Phone className="w-4 h-4 group-hover:text-roofing-orange transition-colors" />
                 <span>(509) 400-5911</span>
               </a>
               <a
                 href="mailto:jc@aroofabove.com"
-                className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors group"
+                className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors group text-sm"
               >
-                <Mail className="w-5 h-5 group-hover:text-roofing-orange transition-colors" />
+                <Mail className="w-4 h-4 group-hover:text-roofing-orange transition-colors" />
                 <span>jc@aroofabove.com</span>
               </a>
             </div>
-            {/* Social Links */}
-            <div className="flex space-x-4 mt-4">
+          </div>
+
+          {/* Quick Links */}
+          <div className="flex items-center gap-6">
+            <div className="flex space-x-4">
               {[
                 { Icon: Facebook, href: "https://facebook.com/aroofabove", label: "Facebook" },
                 { Icon: Instagram, href: "https://instagram.com/aroofabove", label: "Instagram" },
@@ -49,7 +48,7 @@ const Footer = () => {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 bg-white/5 rounded-full hover:bg-white/10 transition-colors group"
+                  className="p-1.5 bg-white/5 rounded-full hover:bg-white/10 transition-colors group"
                 >
                   <Icon className="w-4 h-4 text-gray-300 group-hover:text-roofing-orange transition-colors" />
                 </a>
@@ -57,36 +56,20 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="flex flex-col items-center md:items-start">
-            <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
-            <div className="grid grid-cols-2 gap-3">
-              <Link to="/" className="text-gray-300 hover:text-white transition-colors">
-                Home
-              </Link>
-              <Link to="/services" className="text-gray-300 hover:text-white transition-colors">
-                Services
-              </Link>
-              <Link to="/why-choose-us" className="text-gray-300 hover:text-white transition-colors">
-                Why Choose Us
-              </Link>
-              <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">
-                Contact
-              </Link>
-              <Link to="/estimate" className="text-gray-300 hover:text-white transition-colors">
-                Get Estimate
-              </Link>
-              <Link to="/insurance-claims" className="text-gray-300 hover:text-white transition-colors">
-                Insurance Claims
-              </Link>
-            </div>
+          {/* Legal Links */}
+          <div className="flex items-center space-x-4 text-sm">
+            <Link to="/privacy-policy" className="text-gray-300 hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            <span className="text-gray-500">|</span>
+            <Link to="/terms" className="text-gray-300 hover:text-white transition-colors">
+              Terms of Service
+            </Link>
+            <span className="text-gray-500">|</span>
+            <span className="text-gray-400">
+              © {new Date().getFullYear()} A Roof Above
+            </span>
           </div>
-        </div>
-
-        <div className="mt-8 pt-4 border-t border-white/10">
-          <p className="text-center text-gray-400 text-sm">
-            © {new Date().getFullYear()} A Roof Above. All rights reserved.
-          </p>
         </div>
       </div>
     </footer>
