@@ -12,16 +12,16 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-roofing-orange to-roofing-cream/60 py-8">
+    <footer className="bg-roofing-charcoal py-12">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Social Links */}
-          <div className="space-y-4">
+          <div className="space-y-6">
             <Link to="/" className="block">
               <img
                 src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png"
                 alt="A Roof Above Logo"
-                className="h-16 w-auto"
+                className="h-16 w-auto brightness-200"
               />
             </Link>
             <div className="flex space-x-4">
@@ -36,9 +36,9 @@ const Footer = () => {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 bg-roofing-beige rounded-full hover:bg-white transition-colors"
+                  className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors"
                 >
-                  <Icon className="w-5 h-5 text-roofing-charcoal" />
+                  <Icon className="w-5 h-5 text-white" />
                 </a>
               ))}
             </div>
@@ -46,20 +46,20 @@ const Footer = () => {
 
           {/* Contact Information */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-roofing-charcoal">Contact Us</h3>
-            <div className="space-y-2">
+            <h3 className="text-lg font-semibold text-white">Contact Us</h3>
+            <div className="space-y-3">
               <a
                 href="tel:509-400-5911"
-                className="flex items-center space-x-2 text-roofing-charcoal hover:text-white transition-colors"
+                className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors group"
               >
-                <Phone className="w-5 h-5" />
+                <Phone className="w-5 h-5 group-hover:text-roofing-orange transition-colors" />
                 <span>(509) 400-5911</span>
               </a>
               <a
                 href="mailto:jc@aroofabove.com"
-                className="flex items-center space-x-2 text-roofing-charcoal hover:text-white transition-colors"
+                className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors group"
               >
-                <Mail className="w-5 h-5" />
+                <Mail className="w-5 h-5 group-hover:text-roofing-orange transition-colors" />
                 <span>jc@aroofabove.com</span>
               </a>
             </div>
@@ -67,24 +67,24 @@ const Footer = () => {
 
           {/* Site Map */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-roofing-charcoal">Site Map</h3>
-            <div className="grid grid-cols-2 gap-2">
-              <Link to="/" className="text-roofing-charcoal hover:text-white transition-colors">
+            <h3 className="text-lg font-semibold text-white">Site Map</h3>
+            <div className="grid grid-cols-2 gap-3">
+              <Link to="/" className="text-gray-300 hover:text-white transition-colors">
                 Home
               </Link>
-              <Link to="/services" className="text-roofing-charcoal hover:text-white transition-colors">
+              <Link to="/services" className="text-gray-300 hover:text-white transition-colors">
                 Services
               </Link>
-              <Link to="/why-choose-us" className="text-roofing-charcoal hover:text-white transition-colors">
+              <Link to="/why-choose-us" className="text-gray-300 hover:text-white transition-colors">
                 Why Choose Us
               </Link>
-              <Link to="/contact" className="text-roofing-charcoal hover:text-white transition-colors">
+              <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">
                 Contact
               </Link>
-              <Link to="/estimate" className="text-roofing-charcoal hover:text-white transition-colors">
+              <Link to="/estimate" className="text-gray-300 hover:text-white transition-colors">
                 Get Estimate
               </Link>
-              <Link to="/insurance-claims" className="text-roofing-charcoal hover:text-white transition-colors">
+              <Link to="/insurance-claims" className="text-gray-300 hover:text-white transition-colors">
                 Insurance Claims
               </Link>
             </div>
@@ -92,11 +92,11 @@ const Footer = () => {
 
           {/* Legal */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-roofing-charcoal">Legal</h3>
-            <div className="space-y-2">
+            <h3 className="text-lg font-semibold text-white">Legal</h3>
+            <div className="space-y-3">
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button variant="link" className="text-roofing-charcoal hover:text-white transition-colors p-0">
+                  <Button variant="link" className="text-gray-300 hover:text-white transition-colors p-0">
                     Privacy Policy
                   </Button>
                 </DialogTrigger>
@@ -128,7 +128,7 @@ const Footer = () => {
 
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button variant="link" className="text-roofing-charcoal hover:text-white transition-colors p-0">
+                  <Button variant="link" className="text-gray-300 hover:text-white transition-colors p-0">
                     Terms of Service
                   </Button>
                 </DialogTrigger>
@@ -161,8 +161,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-4 border-t border-roofing-charcoal/20">
-          <p className="text-center text-roofing-charcoal">
+        <div className="mt-12 pt-6 border-t border-white/10">
+          <p className="text-center text-gray-400">
             © {new Date().getFullYear()} A Roof Above. All rights reserved.
           </p>
         </div>
