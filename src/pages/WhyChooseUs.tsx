@@ -25,7 +25,7 @@ const WhyChooseUs = () => {
               />
             </span>
           </h1>
-          <p className="text-sm text-gray-500 max-w-2xl mx-auto">
+          <p className="text-sm text-roofing-charcoal/80 max-w-2xl mx-auto font-medium">
             Experience the difference with our expert roofing services.
           </p>
         </motion.div>

@@ -54,7 +54,7 @@ const Estimate = () => {
               </span>
             </h1>
 
-            <p className="text-sm text-gray-600 max-w-2xl mx-auto mb-8">
+            <p className="text-sm text-roofing-charcoal/80 max-w-2xl mx-auto mb-8 font-medium">
               Fill out the form below and we'll provide you with a detailed estimate for your roofing project.
             </p>
           </div>

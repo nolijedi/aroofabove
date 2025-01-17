@@ -18,7 +18,7 @@ const InsuranceHeader = () => {
           />
         </span>
       </h1>
-      <p className="text-sm text-gray-500 max-w-xl mx-auto"> {/* Reduced max-width from 2xl to xl */}
+      <p className="text-sm text-roofing-charcoal/80 max-w-xl mx-auto font-medium"> {/* Reduced max-width from 2xl to xl */}
         Let us guide you through the insurance claims process with ease and expertise.
       </p>
     </motion.div>

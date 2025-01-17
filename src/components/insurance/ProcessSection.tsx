@@ -83,7 +83,7 @@ const ProcessSection = () => {
                       {step.title}
                     </h3>
                   </div>
-                  <p className="text-gray-600 ml-11">{step.description}</p>
+                  <p className="text-roofing-charcoal/80 ml-11 font-medium">{step.description}</p>
                 </div>
               </div>
 

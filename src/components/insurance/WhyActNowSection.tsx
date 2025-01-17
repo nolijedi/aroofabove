@@ -60,7 +60,7 @@ const WhyActNowSection = () => {
         </div>
 
         <div className="text-center space-y-4">
-          <p className="text-gray-700 max-w-3xl mx-auto mb-6">
+          <p className="text-roofing-charcoal/80 max-w-3xl mx-auto mb-6 font-medium">
             Insurance policies often have strict deadlines for filing claims after damage occurs. 
             Delaying could mean missing out on the compensation you're entitled to. Plus, untreated 
             damage can lead to more costly repairs down the road. Don't wait—let us help you today!
