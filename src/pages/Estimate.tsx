@@ -24,10 +24,14 @@ const Estimate = () => {
   }, []);
 
   return (
-    <main className="min-h-screen pt-24 pb-20">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="section-gradient-separator">
-          <div className="px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen pt-32 pb-20">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="section-gradient-separator"
+        >
+          <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-2 relative">
               <span className="relative inline-block pb-2">
                 Get Your Free Estimate
@@ -39,14 +43,14 @@ const Estimate = () => {
                 />
               </span>
             </h1>
-            <p className="text-sm text-gray-500 max-w-2xl mx-auto">
+            <p className="text-sm text-gray-500 max-w-2xl mx-auto mb-8">
               Fill out the form below and we'll provide you with a detailed estimate for your roofing project.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         <div className="section-gradient-separator">
-          <div className="px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-3 gap-12">
               <EstimateForm />
               <EstimateSidebar />

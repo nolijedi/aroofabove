@@ -12,7 +12,7 @@ const Contact = () => {
           animate={{ opacity: 1, y: 0 }}
           className="section-gradient-separator"
         >
-          <div className="px-4">
+          <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-2 relative">
               <span className="relative inline-block pb-2">
                 Contact Us
