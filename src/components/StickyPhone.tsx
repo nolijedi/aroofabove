@@ -34,15 +34,15 @@ const StickyPhone = () => {
             repeat: Infinity,
           },
           whileHover: {
-            duration: 0.3,
+            duration: 0.15,  // Faster hover animation
             ease: "easeOut"
           }
         }}
         onClick={handlePhoneClick}
-        className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+        className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
         aria-label="Call us"
       >
-        <Phone className="w-6 h-6 group-hover:scale-110 transition-transform text-white relative z-10" />
+        <Phone className="w-8 h-8 group-hover:scale-110 transition-transform text-white relative z-10" />
         <svg className="absolute inset-0 w-full h-full animate-spin-slow" viewBox="0 0 100 100">
           <defs>
             <path
