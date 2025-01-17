@@ -62,7 +62,7 @@ const testimonials = [
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2070",
     saved: "$18,750",
     description: "Multiple leaks and water damage required comprehensive roof replacement. Our team's detailed documentation ensured full coverage approval.",
-    damageImage: "/lovable-uploads/af60ca2a-df55-411d-a43a-1513bf62deb9.png"
+    damageImage: "/lovable-uploads/653be579-2668-497f-b444-2d4e07ef359f.png"
   },
   {
     name: "David Thompson",
