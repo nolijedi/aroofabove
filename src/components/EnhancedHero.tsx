@@ -15,12 +15,12 @@ const EnhancedHero = () => {
     <div className="relative">
       <Hero />
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-48 pb-12">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12">
           <div className="text-center space-y-8">
-            {/* Match exact spacing from Hero component */}
-            <div className="mb-6" /> {/* h1 space */}
-            <div className="mb-8" /> {/* p space */}
-            <div className="flex justify-center gap-8 mb-12 pointer-events-auto">
+            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl pointer-events-none">
+              Your Trusted Roofing Experts
+            </h1>
+            <div className="flex justify-center gap-8 pointer-events-auto">
               {socialLinks.map(({ Icon, href, label, delay }, index) => (
                 <motion.a
                   key={index}
