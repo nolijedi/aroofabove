@@ -20,7 +20,7 @@ const StickyPhone = () => {
           ease: "easeInOut"
         }
       }}
-      className="fixed bottom-4 left-4 z-50"
+      className="fixed bottom-4 left-4 z-50 ml-4 mb-4 pointer-events-none"
     >
       <motion.button
         initial={{ scale: 0 }}
@@ -41,7 +41,7 @@ const StickyPhone = () => {
           }
         }}
         onClick={handlePhoneClick}
-        className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+        className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group pointer-events-auto"
         aria-label="Call us"
       >
         <Phone className="w-12 h-12 group-hover:scale-110 transition-transform text-white relative z-10" />
