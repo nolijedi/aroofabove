@@ -21,11 +21,11 @@ const EnhancedHero = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-5xl md:text-7xl font-bold tracking-tight text-white pointer-events-none drop-shadow-lg"
+              className="text-5xl md:text-7xl font-bold tracking-tight text-white pointer-events-none drop-shadow-lg z-20 relative"
             >
               Your Trusted Roofing Experts
             </motion.h1>
-            <div className="flex justify-center gap-6 pointer-events-auto">
+            <div className="flex justify-center gap-6 pointer-events-auto z-10 relative">
               {socialLinks.map(({ Icon, href, label, delay }, index) => (
                 <motion.a
                   key={index}
