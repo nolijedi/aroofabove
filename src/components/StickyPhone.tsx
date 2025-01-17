@@ -15,7 +15,7 @@ const StickyPhone = () => {
         stiffness: 100,
         damping: 20
       }}
-      className="fixed bottom-24 left-4 z-40 ml-4 mb-4 pointer-events-none"
+      className="fixed bottom-40 left-4 z-40 ml-4 mb-4 pointer-events-none" // Changed from bottom-24 to bottom-40
     >
       <motion.div
         whileHover={{ scale: 1.2 }}
