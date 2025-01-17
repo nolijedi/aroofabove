@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, Info, ArrowRight } from "lucide-react";
 
 interface InsuranceFeatureCardProps {
   feature: {
@@ -55,11 +55,12 @@ const InsuranceFeatureCard = ({
             <h3 className="text-xl font-semibold bg-gradient-to-r from-roofing-charcoal to-roofing-orange-dark bg-clip-text text-transparent">{feature.title}</h3>
             <p className="text-gray-600 leading-relaxed">{feature.description}</p>
             <motion.div
-              className="absolute bottom-4 left-1/2 -translate-x-1/2"
+              className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2"
               animate={{ y: [0, 5, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <p className="text-sm text-roofing-orange">Hover to learn more</p>
+              <Info className="w-5 h-5 text-roofing-orange animate-pulse" />
+              <ArrowRight className="w-5 h-5 text-roofing-orange group-hover:translate-x-1 transition-transform" />
             </motion.div>
           </div>
         </div>
