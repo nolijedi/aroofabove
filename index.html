@@ -13,5 +13,17 @@
     <div id="root"></div>
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      const tileCards = document.querySelectorAll('.tile-card');
+
+      tileCards.forEach(card => {
+        card.addEventListener('mouseleave', () => {
+          card.classList.add('hovered');
+          setTimeout(() => {
+            card.classList.remove('hovered');
+          }, 5000); // 5 seconds delay
+        });
+      });
+    </script>
   </body>
 </html>
