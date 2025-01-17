@@ -18,15 +18,15 @@ const StickyPhone = () => {
       className="fixed bottom-4 left-4 z-50 ml-4 mb-4 pointer-events-none"
     >
       <motion.div
-        whileHover={{ scale: 1.1 }}
+        whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.95 }}
         onClick={handlePhoneClick}
         className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group pointer-events-auto"
         animate={{
-          scale: [0.1, 1.5, 0.1],
+          scale: [1, 0.1, 1],
         }}
         transition={{
-          duration: 3,
+          duration: 2,
           repeat: Infinity,
           ease: "easeInOut"
         }}
