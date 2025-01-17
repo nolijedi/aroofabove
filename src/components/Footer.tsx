@@ -11,15 +11,41 @@ const Footer = () => {
     { Icon: Youtube, href: "https://youtube.com", label: "YouTube", delay: 0.4 }
   ];
 
+  const siteMap = [
+    {
+      title: "Main Pages",
+      links: [
+        { to: "/", label: "Home" },
+        { to: "/services", label: "Services" },
+        { to: "/why-choose-us", label: "Why Choose Us" },
+        { to: "/contact", label: "Contact" },
+      ]
+    },
+    {
+      title: "Services",
+      links: [
+        { to: "/estimate", label: "Get Estimate" },
+        { to: "/insurance-claims", label: "Insurance Claims" },
+      ]
+    },
+    {
+      title: "Legal",
+      links: [
+        { to: "/privacy", label: "Privacy Policy" },
+        { to: "/terms", label: "Terms of Service" },
+      ]
+    }
+  ];
+
   return (
     <footer className="bg-gradient-to-r from-roofing-orange/90 to-roofing-cream/90 backdrop-blur-sm mt-20">
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-4 gap-8">
           {/* Logo and Company Info */}
           <div className="space-y-4">
             <Link to="/" className="inline-block">
               <img 
-                src="/lovable-uploads/f1a0c45a-862b-4b13-adf5-442bf18e0a3f.png" 
+                src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png" 
                 alt="RoofVision Logo" 
                 className="h-16 w-auto"
               />
@@ -29,20 +55,34 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Contact Information */}
+          {/* Site Map */}
+          {siteMap.map((section, index) => (
+            <div key={index} className="space-y-4">
+              <h3 className="text-xl font-semibold text-roofing-charcoal">{section.title}</h3>
+              <ul className="space-y-2">
+                {section.links.map((link, linkIndex) => (
+                  <li key={linkIndex}>
+                    <Link 
+                      to={link.to}
+                      className="text-roofing-charcoal/80 hover:text-roofing-orange transition-colors duration-300"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          {/* Contact and Social */}
           <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-roofing-charcoal">Contact Us</h3>
+            <h3 className="text-xl font-semibold text-roofing-charcoal">Connect With Us</h3>
             <div className="space-y-2 text-roofing-charcoal/80">
               <p>📞 (123) 456-7890</p>
               <p>✉️ info@roofabove.com</p>
               <p>📍 123 Roofing St, Dallas, TX</p>
             </div>
-          </div>
-
-          {/* Social Links */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-roofing-charcoal">Connect With Us</h3>
-            <div className="flex gap-4">
+            <div className="flex gap-4 pt-4">
               {socialLinks.map(({ Icon, href, label, delay }, index) => (
                 <motion.a
                   key={index}
