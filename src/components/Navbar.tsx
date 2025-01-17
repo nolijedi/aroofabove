@@ -33,7 +33,7 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center min-h-[80px]">
+        <div className="flex justify-between items-center min-h-[60px]">
           <Link 
             to="/" 
             className="flex items-center justify-center flex-1 transition-transform duration-300 hover:scale-105 hover:rotate-2"
@@ -41,7 +41,7 @@ const Navbar = () => {
             <img 
               src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png" 
               alt="A Roof Above Logo" 
-              className="h-24 md:h-28 w-auto"
+              className="h-16 md:h-20 w-auto"
             />
           </Link>
 
@@ -51,7 +51,7 @@ const Navbar = () => {
             className="md:hidden text-gray-600"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
+            {isOpen ? <X size={16} /> : <Menu size={16} />}
           </button>
         </div>
 
