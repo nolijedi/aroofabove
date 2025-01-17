@@ -11,22 +11,22 @@ const StickyPhone = () => {
 
   return (
     <motion.div
-      initial={{ x: -100 }}
+      initial={{ x: isMobile ? 100 : -100 }}
       animate={{ x: 0 }}
       transition={{
         type: "spring",
         stiffness: 100,
         damping: 20
       }}
-      className={`fixed ${isMobile ? 'bottom-24 right-4' : 'bottom-64 left-4'} z-40 pointer-events-none`}
+      className={`fixed ${isMobile ? 'bottom-20 right-4' : 'bottom-64 left-4'} z-40 pointer-events-none`}
     >
       <motion.div
-        whileHover={{ scale: 1.2 }}
+        whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={handlePhoneClick}
-        className={`relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white ${isMobile ? 'p-8' : 'p-16'} rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group pointer-events-auto`}
+        className={`relative bg-roofing-orange/90 hover:bg-roofing-orange-dark text-white ${isMobile ? 'p-6' : 'p-16'} rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group pointer-events-auto`}
         animate={{
-          scale: [1, 0, 1],
+          scale: [1, 0.95, 1],
         }}
         transition={{
           duration: 2,
@@ -36,7 +36,7 @@ const StickyPhone = () => {
       >
         <div className="absolute inset-0 w-full h-full">
           <div className="flex items-center justify-center w-full h-full">
-            <Phone className={`${isMobile ? 'w-8 h-8' : 'w-12 h-12'} text-white relative z-10`} />
+            <Phone className={`${isMobile ? 'w-6 h-6' : 'w-12 h-12'} text-white relative z-10`} />
           </div>
           {!isMobile && (
             <svg className="absolute inset-0 w-full h-full animate-spin-slow" viewBox="0 0 100 100">
