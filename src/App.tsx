@@ -9,6 +9,7 @@ import Services from "./pages/Services";
 import WhyChooseUs from "./pages/WhyChooseUs";
 import Contact from "./pages/Contact";
 import Estimate from "./pages/Estimate";
+import InsuranceClaims from "./pages/InsuranceClaims";
 import PromoCountdown from "./components/PromoCountdown";
 import ScrollToTop from "./components/ScrollToTop";
 import StickyPhone from "./components/StickyPhone";
@@ -52,6 +53,7 @@ const App = () => (
             <Route path="/why-choose-us" element={<WhyChooseUs />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/estimate" element={<Estimate />} />
+            <Route path="/insurance-claims" element={<InsuranceClaims />} />
           </Routes>
           <PromoCountdown />
           <StickyPhone />
