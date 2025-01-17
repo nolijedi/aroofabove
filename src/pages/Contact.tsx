@@ -5,19 +5,19 @@ import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 
 const Contact = () => {
   return (
-    <main className="min-h-screen pt-32 pb-16">
+    <main className="min-h-screen pt-32 pb-16 bg-gradient-to-br from-roofing-cream via-white to-roofing-beige">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="section-gradient-separator"
+          className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-8"
         >
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-2 relative">
               <span className="relative inline-block pb-2">
                 Contact Us
                 <motion.div
-                  className="absolute -bottom-2 left-0 w-full h-1 bg-roofing-orange"
+                  className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-roofing-orange via-roofing-orange-dark to-roofing-orange"
                   initial={{ width: 0 }}
                   animate={{ width: "100%" }}
                   transition={{ delay: 0.5, duration: 0.8 }}
@@ -56,9 +56,9 @@ const Contact = () => {
                     damping: 20,
                     delay: 0.5 + delay
                   }}
-                  className="p-4 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group active:bg-roofing-orange/20"
+                  className="p-4 bg-gradient-to-br from-roofing-beige to-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
                 >
-                  <Icon className="w-8 h-8 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
+                  <Icon className="w-8 h-8 text-roofing-orange group-hover:text-roofing-orange-dark transition-colors" />
                 </motion.a>
               ))}
             </div>
@@ -72,10 +72,10 @@ const Contact = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
-                className="rounded-lg shadow-lg overflow-hidden"
+                className="rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-500"
               >
-                <div className="bg-gradient-to-br from-roofing-orange to-roofing-beige p-1">
-                  <div className="bg-white p-8 rounded-lg h-full transform transition-transform hover:scale-[0.99] duration-300">
+                <div className="bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-beige p-1">
+                  <div className="bg-white/95 backdrop-blur-sm p-8 rounded-2xl h-full transform transition-transform hover:scale-[0.99] duration-300">
                     <div className="flex items-center gap-3 mb-6">
                       <div className="w-12 h-12 bg-roofing-beige rounded-full flex items-center justify-center">
                         <span className="text-2xl">📋</span>
@@ -106,10 +106,10 @@ const Contact = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.4 }}
-                className="rounded-lg shadow-lg overflow-hidden"
+                className="rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-500"
               >
-                <div className="bg-gradient-to-br from-roofing-orange to-roofing-beige p-1">
-                  <div className="bg-white p-8 rounded-lg h-full transform transition-transform hover:scale-[0.99] duration-300">
+                <div className="bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-beige p-1">
+                  <div className="bg-white/95 backdrop-blur-sm p-8 rounded-2xl h-full transform transition-transform hover:scale-[0.99] duration-300">
                     <div className="flex items-center gap-3 mb-6">
                       <div className="w-12 h-12 bg-roofing-beige rounded-full flex items-center justify-center">
                         <span className="text-2xl">📱</span>

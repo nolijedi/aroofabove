@@ -24,19 +24,19 @@ const Estimate = () => {
   }, []);
 
   return (
-    <main className="min-h-screen pt-32 pb-20">
+    <main className="min-h-screen pt-32 pb-20 bg-gradient-to-br from-roofing-cream via-white to-roofing-beige">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="section-gradient-separator"
+          className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-8"
         >
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-2 relative">
               <span className="relative inline-block pb-2">
                 Get Your Free Estimate
                 <motion.div
-                  className="absolute -bottom-2 left-0 w-full h-1 bg-roofing-orange"
+                  className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-roofing-orange via-roofing-orange-dark to-roofing-orange"
                   initial={{ width: 0 }}
                   animate={{ width: "100%" }}
                   transition={{ delay: 0.5, duration: 0.8 }}

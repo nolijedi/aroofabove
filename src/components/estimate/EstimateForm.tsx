@@ -11,16 +11,16 @@ export const EstimateForm = () => {
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 1 }}
-      className="lg:col-span-2 relative overflow-hidden rounded-xl shadow-2xl"
+      className="lg:col-span-2 relative overflow-hidden rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-500"
     >
       {/* Decorative background elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-roofing-cream via-roofing-beige to-roofing-orange/20 opacity-90" />
-      <div className="absolute top-0 right-0 w-64 h-64 bg-roofing-orange/10 rounded-full -translate-y-32 translate-x-32 blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-roofing-orange/10 rounded-full translate-y-32 -translate-x-32 blur-3xl" />
+      <div className="absolute top-0 right-0 w-64 h-64 bg-roofing-orange/10 rounded-full -translate-y-32 translate-x-32 blur-3xl animate-spin-slow" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-roofing-orange/10 rounded-full translate-y-32 -translate-x-32 blur-3xl animate-spin-slow" />
       
       {/* Content */}
       <div className="relative p-8 backdrop-blur-sm">
-        <div className="absolute top-0 right-0 w-32 h-32 bg-roofing-orange/5 rounded-bl-full" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-roofing-orange/20 to-roofing-orange-dark/20 rounded-bl-full" />
         
         <form className="space-y-6">
           <div className="space-y-2 mb-8">
@@ -33,17 +33,26 @@ export const EstimateForm = () => {
           </div>
 
           <div className="space-y-8">
-            <div className="bg-white/50 backdrop-blur-sm p-6 rounded-lg shadow-sm">
+            <motion.div 
+              whileHover={{ scale: 1.02 }}
+              className="bg-white/50 backdrop-blur-sm p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+            >
               <PersonalInfoFields />
-            </div>
+            </motion.div>
 
-            <div className="bg-white/50 backdrop-blur-sm p-6 rounded-lg shadow-sm">
+            <motion.div 
+              whileHover={{ scale: 1.02 }}
+              className="bg-white/50 backdrop-blur-sm p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+            >
               <AddressFields />
-            </div>
+            </motion.div>
 
-            <div className="bg-white/50 backdrop-blur-sm p-6 rounded-lg shadow-sm">
+            <motion.div 
+              whileHover={{ scale: 1.02 }}
+              className="bg-white/50 backdrop-blur-sm p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+            >
               <ProjectFields />
-            </div>
+            </motion.div>
           </div>
           
           <motion.div
@@ -54,7 +63,7 @@ export const EstimateForm = () => {
             <Button
               type="submit"
               size="lg"
-              className="w-full bg-gradient-to-r from-roofing-orange to-roofing-orange-dark text-white hover:opacity-90 group h-14 text-lg"
+              className="w-full bg-gradient-to-r from-roofing-orange to-roofing-orange-dark text-white hover:opacity-90 group h-14 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
             >
               Get Estimate Now
               <Calculator className="ml-2 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
