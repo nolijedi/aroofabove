@@ -3,11 +3,19 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Shield, Wrench, Clock, Info } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Index = () => {
   const [flippedCards, setFlippedCards] = useState<{ [key: number]: boolean }>({});
   const [shouldStayFlipped, setShouldStayFlipped] = useState<{ [key: number]: boolean }>({});
+
+  useEffect(() => {
+    let timeouts: { [key: number]: NodeJS.Timeout } = {};
+    
+    return () => {
+      Object.values(timeouts).forEach(timeout => clearTimeout(timeout));
+    };
+  }, []);
 
   const features = [
     {
@@ -35,12 +43,15 @@ const Index = () => {
 
   const handleMouseEnter = (index: number) => {
     setFlippedCards(prev => ({ ...prev, [index]: true }));
+    setShouldStayFlipped(prev => ({ ...prev, [index]: true }));
   };
 
   const handleMouseLeave = (index: number) => {
-    if (!shouldStayFlipped[index]) {
+    // Add a slight delay before unflipping
+    setTimeout(() => {
       setFlippedCards(prev => ({ ...prev, [index]: false }));
-    }
+      setShouldStayFlipped(prev => ({ ...prev, [index]: false }));
+    }, 100);
   };
 
   return (
@@ -58,10 +69,10 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="h-[400px] perspective"
+                className="h-[400px] perspective group"
               >
                 <motion.div 
-                  className="relative h-full w-full preserve-3d cursor-pointer hover:scale-105 transition-all duration-300"
+                  className="relative h-full w-full preserve-3d cursor-pointer transition-all duration-300 group-hover:scale-105"
                   animate={{ rotateY: (flippedCards[index] || shouldStayFlipped[index]) ? 180 : 0 }}
                   transition={{ 
                     duration: 0.6,
@@ -69,8 +80,8 @@ const Index = () => {
                     stiffness: 100,
                     damping: 20
                   }}
-                  onHoverStart={() => handleMouseEnter(index)}
-                  onHoverEnd={() => handleMouseLeave(index)}
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={() => handleMouseLeave(index)}
                 >
                   {/* Front of card */}
                   <div className="absolute inset-0 bg-gradient-to-br from-roofing-cream via-white to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 backface-hidden border border-roofing-orange/20">
