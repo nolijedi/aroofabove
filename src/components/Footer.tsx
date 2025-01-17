@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 
 const Footer = () => {
   const siteMapLinks = [
@@ -15,7 +15,7 @@ const Footer = () => {
     <footer className="bg-roofing-charcoal py-3">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-wrap justify-between items-center gap-4">
-          {/* Logo and Contact Section */}
+          {/* Logo and Social Section */}
           <div className="flex items-center w-full h-full relative min-h-[80px]">
             <Link to="/" className="block">
               <img
@@ -25,22 +25,8 @@ const Footer = () => {
               />
             </Link>
             
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center space-y-1.5">
-              <a
-                href="tel:509-400-5911"
-                className="flex items-center space-x-2 text-gray-300 hover:text-roofing-orange transition-colors group"
-              >
-                <Phone className="w-4 h-4 group-hover:text-roofing-orange transition-colors" />
-                <span>(509) 400-5911</span>
-              </a>
-              <a
-                href="mailto:jc@aroofabove.com"
-                className="flex items-center space-x-2 text-gray-300 hover:text-roofing-orange transition-colors group"
-              >
-                <Mail className="w-4 h-4 group-hover:text-roofing-orange transition-colors" />
-                <span>jc@aroofabove.com</span>
-              </a>
-              <div className="flex space-x-2 pt-1">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+              <div className="flex space-x-2">
                 {[
                   { Icon: Facebook, href: "https://facebook.com/aroofabove", label: "Facebook" },
                   { Icon: Instagram, href: "https://instagram.com/aroofabove", label: "Instagram" },
