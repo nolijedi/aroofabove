@@ -15,7 +15,7 @@ const EnhancedHero = () => {
     <div className="relative">
       <Hero />
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[32rem] pb-12">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[22rem] pb-12">
           <div className="text-center space-y-8">
             <div className="mb-6" />
             <div className="mb-8" />
