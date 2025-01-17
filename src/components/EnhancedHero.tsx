@@ -23,7 +23,7 @@ const EnhancedHero = () => {
           <div className="text-center space-y-8">
             <div className="mb-6" />
             <div className="mb-8" />
-            <div className="flex justify-center gap-8 mb-12 pointer-events-auto">
+            <div className="flex justify-center gap-4 md:gap-8 mb-12 pointer-events-auto">
               {socialLinks.map(({ Icon, href, label, delay }, index) => (
                 <motion.button
                   key={index}
@@ -43,9 +43,9 @@ const EnhancedHero = () => {
                     damping: 20,
                     delay: 0.5 + delay
                   }}
-                  className="p-4 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group active:bg-roofing-orange/20"
+                  className="p-2 md:p-3 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group active:bg-roofing-orange/20"
                 >
-                  <Icon className="w-8 h-8 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
+                  <Icon className="w-5 h-5 md:w-6 md:h-6 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
                 </motion.button>
               ))}
             </div>
