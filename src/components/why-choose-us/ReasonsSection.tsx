@@ -4,39 +4,24 @@ import { ReasonCard } from "./ReasonCard";
 
 const reasons = [
   {
-    Icon: Award,
-    title: "Expert Craftsmanship",
-    description: "Our team brings years of experience and expertise to every project."
+    Icon: Shield,
+    title: "Quality Guaranteed",
+    description: "Our comprehensive warranty coverage ensures your peace of mind. We use only premium materials and follow strict quality control processes."
   },
   {
     Icon: Users,
-    title: "Customer-First Approach",
-    description: "We prioritize your needs and ensure complete satisfaction."
+    title: "Expert Craftsmanship",
+    description: "Our skilled team brings years of experience and expertise to every project, ensuring the highest quality workmanship."
   },
   {
     Icon: Clock,
-    title: "Timely Completion",
-    description: "We respect your time and deliver projects on schedule."
-  },
-  {
-    Icon: Shield,
-    title: "Quality Materials",
-    description: "We use only premium materials for lasting results."
-  },
-  {
-    Icon: ThumbsUp,
-    title: "Licensed & Insured",
-    description: "Full compliance and protection for your peace of mind."
-  },
-  {
-    Icon: Gem,
-    title: "Competitive Pricing",
-    description: "Fair and transparent pricing for all our services."
+    title: "Timely Service",
+    description: "We respect your time and complete projects on schedule, minimizing disruption to your daily life."
   }
 ];
 
 export const ReasonsSection = () => (
-  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 px-4">
     {reasons.map((reason, index) => (
       <motion.div
         key={index}
