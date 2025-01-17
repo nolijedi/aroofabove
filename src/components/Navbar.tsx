@@ -39,7 +39,7 @@ const Navbar = () => {
             <img 
               src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png" 
               alt="A Roof Above Logo" 
-              className="h-36 md:h-40 w-auto -mb-8"
+              className="h-36 md:h-40 w-auto"
             />
           </Link>
 
