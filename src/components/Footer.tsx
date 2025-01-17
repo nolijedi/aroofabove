@@ -16,16 +16,16 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-wrap justify-between items-center gap-4">
           {/* Logo and Contact Section */}
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-8 w-full">
             <Link to="/" className="block">
               <img
                 src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png"
                 alt="A Roof Above Logo"
-                className="h-8 w-auto brightness-200" // Increased from h-6 to h-8
+                className="h-16 w-auto brightness-200" // Increased from h-8 to h-16 (2x bigger)
               />
             </Link>
             
-            <div className="flex flex-col items-start text-xs space-y-1 ml-auto"> {/* Added ml-auto */}
+            <div className="flex flex-col items-start text-xs space-y-1 ml-auto mr-8"> {/* Added mr-8 for more right spacing */}
               <a
                 href="tel:509-400-5911"
                 className="flex items-center space-x-2 text-gray-300 hover:text-roofing-orange transition-colors group"
