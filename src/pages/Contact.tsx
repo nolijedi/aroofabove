@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -27,7 +28,7 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 mb-12">
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-semibold mb-4">Get a Free Estimate</h2>
             <p className="text-gray-600 mb-4">
@@ -44,6 +45,44 @@ const Contact = () => {
             <p className="text-gray-600 mb-2">Phone: (123) 456-7890</p>
             <p className="text-gray-600 mb-2">Email: info@roofabove.com</p>
             <p className="text-gray-600">Address: 123 Roofing St, Dallas, TX</p>
+          </div>
+        </div>
+
+        <div className="bg-white p-8 rounded-lg shadow-md">
+          <h2 className="text-2xl font-semibold mb-6 text-center">Connect With Us</h2>
+          <div className="flex justify-center gap-6">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transform transition-transform hover:scale-110"
+            >
+              <Facebook className="w-8 h-8 text-roofing-orange hover:text-roofing-orange-dark" />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transform transition-transform hover:scale-110"
+            >
+              <Twitter className="w-8 h-8 text-roofing-orange hover:text-roofing-orange-dark" />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transform transition-transform hover:scale-110"
+            >
+              <Instagram className="w-8 h-8 text-roofing-orange hover:text-roofing-orange-dark" />
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transform transition-transform hover:scale-110"
+            >
+              <Linkedin className="w-8 h-8 text-roofing-orange hover:text-roofing-orange-dark" />
+            </a>
           </div>
         </div>
       </div>
