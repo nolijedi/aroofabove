@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ClipboardCheck, Camera, FileText, Users, Tools } from "lucide-react";
+import { ClipboardCheck, Camera, FileText, Users, Wrench } from "lucide-react";
 
 const ProcessSection = () => {
   const steps = [
@@ -30,7 +30,7 @@ const ProcessSection = () => {
     {
       title: "Expert Repairs or Replacement",
       description: "Once your claim is approved, our skilled team gets to work restoring your roof. We use only high-quality materials to ensure long-lasting results.",
-      icon: Tools,
+      icon: Wrench,
       gradient: "from-roofing-beige via-orange-100 to-roofing-cream"
     }
   ];
