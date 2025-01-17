@@ -9,7 +9,17 @@ const StickyPhone = () => {
   return (
     <motion.div
       initial={{ x: -100 }}
-      animate={{ x: 0 }}
+      animate={{ 
+        x: 0,
+        y: [-5, 5, -5],
+      }}
+      transition={{
+        y: {
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }
+      }}
       className="fixed bottom-4 left-4 z-50"
     >
       <button
