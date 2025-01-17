@@ -213,13 +213,29 @@ const InsuranceClaims = () => {
           <h2 className="text-3xl font-bold text-roofing-charcoal mb-8 text-center">
             Common Roof Damages Covered by Insurance
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          
+          <div className="mb-8">
+            <img 
+              src="/lovable-uploads/b40a570b-31d3-482a-bbb0-9198d1a952fe.png" 
+              alt="Common roof damage types" 
+              className="w-full max-w-3xl mx-auto rounded-lg shadow-lg"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
+              "Streaking stains",
+              "Buckled shingles",
+              "Missing granules",
+              "Rusted flashing",
+              "Water stains",
+              "Moss or mold growth",
               "Hail damage",
               "Wind damage",
-              "Storm-related debris",
+              "Storm debris",
               "Fallen tree limbs",
-              "Leaks due to severe weather"
+              "Weather-related leaks",
+              "Curling shingles"
             ].map((damage, index) => (
               <motion.div
                 key={index}
@@ -227,7 +243,7 @@ const InsuranceClaims = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-roofing-orange/10 p-4 rounded-lg text-center"
+                className="bg-roofing-orange/10 p-4 rounded-lg text-center hover:bg-roofing-orange/20 transition-colors"
               >
                 <p className="text-roofing-charcoal font-medium">{damage}</p>
               </motion.div>
