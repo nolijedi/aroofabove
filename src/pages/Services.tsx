@@ -19,7 +19,7 @@ const Services = () => {
             ...prev,
             [Number(index)]: false
           }));
-        }, 3000);
+        }, 1000); // Changed from 3000 to 1000 milliseconds
       }
     });
 
