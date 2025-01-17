@@ -24,17 +24,17 @@ const StickyPhone = () => {
     >
       <motion.button
         initial={{ scale: 0.6 }}
-        animate={{ scale: [0.6, 1, 0.8, 1] }}
+        animate={{ scale: [0, 0.6, 1, 0.8, 1] }}
         whileHover={{ scale: 2 }}
         transition={{
           scale: {
             duration: 4,
-            times: [0, 0.4, 0.7, 1],
+            times: [0, 0.2, 0.4, 0.7, 1],
             ease: "easeInOut",
             repeat: Infinity,
           },
           whileHover: {
-            duration: 0.15,  // Faster hover animation
+            duration: 0.15,
             ease: "easeOut"
           }
         }}
