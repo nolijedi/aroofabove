@@ -1,5 +1,5 @@
 import { Shield, Clock, DollarSign, FileCheck } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InsuranceFeatureCard from "@/components/insurance/InsuranceFeatureCard";
 import TestimonialCard from "@/components/insurance/TestimonialCard";
 import CallToActionSection from "@/components/insurance/CallToActionSection";
@@ -82,6 +82,25 @@ const testimonials = [
 const InsuranceClaims = () => {
   const [flippedCards, setFlippedCards] = useState<{ [key: number]: boolean }>({});
   const [shouldStayFlipped, setShouldStayFlipped] = useState<{ [key: number]: boolean }>({});
+
+  useEffect(() => {
+    const timeouts: { [key: number]: NodeJS.Timeout } = {};
+    
+    Object.entries(flippedCards).forEach(([index, isFlipped]) => {
+      if (!isFlipped && shouldStayFlipped[Number(index)]) {
+        timeouts[Number(index)] = setTimeout(() => {
+          setShouldStayFlipped(prev => ({
+            ...prev,
+            [Number(index)]: false
+          }));
+        }, 1000);
+      }
+    });
+
+    return () => {
+      Object.values(timeouts).forEach(timeout => clearTimeout(timeout));
+    };
+  }, [flippedCards, shouldStayFlipped]);
 
   const handleMouseEnter = (index: number) => {
     setFlippedCards(prev => ({ ...prev, [index]: true }));
