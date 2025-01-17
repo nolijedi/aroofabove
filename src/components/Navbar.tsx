@@ -60,7 +60,7 @@ const Navbar = () => {
             ))}
             <Button
               asChild
-              className="bg-roofing-orange hover:bg-roofing-orange-dark text-white"
+              className="bg-roofing-beige hover:bg-roofing-beige/90 text-roofing-charcoal hover:text-roofing-charcoal/90 animate-bounce shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <Link to="/estimate">Get Estimate</Link>
             </Button>
@@ -106,7 +106,7 @@ const Navbar = () => {
             ))}
             <Button
               asChild
-              className="w-full mt-4 bg-roofing-orange hover:bg-roofing-orange-dark text-white"
+              className="w-full mt-4 bg-roofing-beige hover:bg-roofing-beige/90 text-roofing-charcoal hover:text-roofing-charcoal/90 animate-bounce shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <Link to="/estimate" onClick={() => setIsOpen(false)}>
                 Get Estimate
