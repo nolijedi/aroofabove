@@ -35,7 +35,10 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center min-h-[120px]">
-          <Link to="/" className="flex items-center justify-center flex-1">
+          <Link 
+            to="/" 
+            className="flex items-center justify-center flex-1 transition-transform duration-300 hover:scale-105 hover:rotate-2"
+          >
             <img 
               src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png" 
               alt="A Roof Above Logo" 
