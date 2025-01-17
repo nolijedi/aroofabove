@@ -62,18 +62,18 @@ const CommonDamagesSection = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="h-[250px] [perspective:1000px]"
+              className="h-[250px] perspective"
               onMouseEnter={() => setFlippedCard(index)}
               onMouseLeave={() => setFlippedCard(null)}
             >
               <div 
-                className="relative w-full h-full transition-all duration-500 [transform-style:preserve-3d] cursor-pointer hover:scale-105"
+                className="relative w-full h-full transition-all duration-500 preserve-3d cursor-pointer hover:scale-105"
                 style={{
                   transform: `rotateY(${flippedCard === index ? '180deg' : '0deg'})`
                 }}
               >
                 {/* Front of card */}
-                <div className="absolute w-full h-full [backface-visibility:hidden]">
+                <div className={`absolute w-full h-full backface-hidden`}>
                   <div className="bg-gradient-to-br from-white via-roofing-cream to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-6 h-full flex flex-col justify-between border border-roofing-orange/20">
                     <div className="flex flex-col items-center text-center space-y-4">
                       <motion.div 
@@ -105,15 +105,14 @@ const CommonDamagesSection = () => {
 
                 {/* Back of card */}
                 <div 
-                  className="absolute w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)]"
+                  className="absolute w-full h-full backface-hidden rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-6 flex items-center justify-center"
+                  style={{ transform: 'rotateY(180deg)' }}
                 >
-                  <div className="h-full bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-6">
-                    <div className="flex flex-col h-full text-white [transform:rotateY(180deg)]">
-                      <h3 className="text-xl font-bold text-white mb-4">{damage.title}</h3>
-                      <p className="text-roofing-cream text-sm leading-relaxed">
-                        {damage.expandedDescription}
-                      </p>
-                    </div>
+                  <div className="text-center">
+                    <h3 className="text-xl font-bold text-white mb-4">{damage.title}</h3>
+                    <p className="text-roofing-cream text-sm leading-relaxed">
+                      {damage.expandedDescription}
+                    </p>
                   </div>
                 </div>
               </div>

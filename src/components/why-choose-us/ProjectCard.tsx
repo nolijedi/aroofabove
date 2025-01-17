@@ -18,7 +18,7 @@ export const ProjectCard = ({ image, title, description, fact }: ProjectCardProp
     if (!isFlipped && shouldStayFlipped) {
       timeout = setTimeout(() => {
         setShouldStayFlipped(false);
-      }, 1000);
+      }, 1000); // Changed from 5000 to 1000 milliseconds
     }
     return () => clearTimeout(timeout);
   }, [isFlipped, shouldStayFlipped]);
@@ -33,16 +33,16 @@ export const ProjectCard = ({ image, title, description, fact }: ProjectCardProp
   };
 
   return (
-    <div className="[perspective:1000px] h-full">
+    <div className="perspective h-full">
       <motion.div
         animate={{ rotateY: isFlipped || shouldStayFlipped ? 180 : 0 }}
         transition={{ duration: 0.6 }}
-        className="relative w-full h-full [transform-style:preserve-3d] cursor-pointer"
+        className="relative w-full h-full preserve-3d cursor-pointer"
         onHoverStart={handleMouseEnter}
         onHoverEnd={handleMouseLeave}
       >
         {/* Front of card */}
-        <div className="absolute w-full h-full [backface-visibility:hidden]">
+        <div className="absolute w-full h-full backface-hidden">
           <div className="relative overflow-hidden rounded-xl shadow-lg aspect-video group h-full">
             <img
               src={image}
@@ -60,9 +60,10 @@ export const ProjectCard = ({ image, title, description, fact }: ProjectCardProp
 
         {/* Back of card */}
         <div 
-          className="absolute w-full h-full [backface-visibility:hidden] rounded-xl shadow-lg bg-roofing-orange p-6 flex items-center justify-center [transform:rotateY(180deg)]"
+          className="absolute w-full h-full backface-hidden rounded-xl shadow-lg bg-roofing-orange p-6 flex items-center justify-center"
+          style={{ transform: 'rotateY(180deg)' }}
         >
-          <div className="text-center [transform:rotateY(180deg)]">
+          <div className="text-center">
             <h3 className="text-xl font-bold text-white mb-4">Did You Know?</h3>
             <p className="text-roofing-cream text-lg leading-relaxed">{fact}</p>
             <motion.div

@@ -20,7 +20,7 @@
   height: 2px;
   background: linear-gradient(90deg, 
     rgba(255, 255, 255, 0) 0%,
-    #F97316 50%,
+    theme('colors.roofing-orange') 50%,
     rgba(255, 255, 255, 0) 100%
   );
   opacity: 0.3;
@@ -30,9 +30,9 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(253, 225, 211, 0.05) 15%,
-    rgba(253, 225, 211, 0.1) 50%,
-    rgba(253, 225, 211, 0.05) 85%,
+    rgba(theme('colors.roofing-cream'), 0.05) 15%,
+    rgba(theme('colors.roofing-cream'), 0.1) 50%,
+    rgba(theme('colors.roofing-cream'), 0.05) 85%,
     transparent
   );
 }
@@ -41,9 +41,9 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(253, 225, 211, 0.05) 15%,
-    rgba(253, 225, 211, 0.1) 50%,
-    rgba(253, 225, 211, 0.05) 85%,
+    rgba(theme('colors.roofing-beige'), 0.05) 15%,
+    rgba(theme('colors.roofing-beige'), 0.1) 50%,
+    rgba(theme('colors.roofing-beige'), 0.05) 85%,
     transparent
   );
 }
@@ -52,9 +52,9 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(249, 115, 22, 0.03) 15%,
-    rgba(249, 115, 22, 0.06) 50%,
-    rgba(249, 115, 22, 0.03) 85%,
+    rgba(theme('colors.roofing-orange'), 0.03) 15%,
+    rgba(theme('colors.roofing-orange'), 0.06) 50%,
+    rgba(theme('colors.roofing-orange'), 0.03) 85%,
     transparent
   );
 }
@@ -62,7 +62,7 @@
 .section-gradient-separator:nth-child(even)::after {
   background: linear-gradient(90deg, 
     rgba(255, 255, 255, 0) 0%,
-    #FDE1D3 50%,
+    theme('colors.roofing-cream') 50%,
     rgba(255, 255, 255, 0) 100%
   );
 }
@@ -70,7 +70,7 @@
 .section-gradient-separator:nth-child(3n)::after {
   background: linear-gradient(90deg, 
     rgba(255, 255, 255, 0) 0%,
-    #FDE1D3 50%,
+    theme('colors.roofing-beige') 50%,
     rgba(255, 255, 255, 0) 100%
   );
 }
@@ -78,7 +78,7 @@
 .section-gradient-separator:nth-child(4n)::after {
   background: linear-gradient(90deg, 
     rgba(255, 255, 255, 0) 0%,
-    #EA580C 50%,
+    theme('colors.roofing-orange-dark') 50%,
     rgba(255, 255, 255, 0) 100%
   );
 }
