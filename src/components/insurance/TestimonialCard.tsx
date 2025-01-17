@@ -24,20 +24,20 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.2 }}
-      className="h-[400px] perspective"
+      className="h-[450px] perspective"
     >
       <motion.div
         animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.6, delay: isFlipped ? 0 : 0.2 }}
         className="relative w-full h-full preserve-3d cursor-pointer"
         onHoverStart={() => setIsFlipped(true)}
         onHoverEnd={() => setIsFlipped(false)}
       >
         {/* Front of card */}
         <div className="absolute w-full h-full backface-hidden">
-          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 h-full">
-            <div className="flex flex-col items-center text-center space-y-4">
-              <div className="w-20 h-20 rounded-full overflow-hidden mb-4">
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 h-full flex flex-col justify-between">
+            <div className="flex flex-col items-center text-center space-y-3">
+              <div className="w-16 h-16 rounded-full overflow-hidden">
                 <img 
                   src={testimonial.image} 
                   alt={testimonial.name}
@@ -54,12 +54,12 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: i * 0.1 }}
                   >
-                    <Star className="w-5 h-5 fill-roofing-orange text-roofing-orange" />
+                    <Star className="w-4 h-4 fill-roofing-orange text-roofing-orange" />
                   </motion.div>
                 ))}
               </div>
-              <p className="text-roofing-orange font-bold text-xl">Saved {testimonial.saved}</p>
-              <p className="text-gray-600 italic">&ldquo;{testimonial.quote}&rdquo;</p>
+              <p className="text-roofing-orange font-bold text-lg">{testimonial.saved}</p>
+              <p className="text-gray-600 italic text-sm leading-tight">&ldquo;{testimonial.quote}&rdquo;</p>
             </div>
           </div>
         </div>
@@ -74,9 +74,9 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
             <img 
               src={testimonial.damageImage}
               alt="Roof damage"
-              className="w-full h-48 object-cover rounded-lg mb-4"
+              className="w-full h-40 object-cover rounded-lg mb-4"
             />
-            <p className="text-roofing-cream text-lg leading-relaxed">
+            <p className="text-roofing-cream text-sm leading-relaxed">
               {testimonial.description || "Severe roof damage caused by recent storms required immediate professional attention. Our team successfully restored the roof to pristine condition."}
             </p>
           </div>

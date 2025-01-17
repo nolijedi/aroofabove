@@ -44,7 +44,7 @@ const testimonials = [
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070",
     saved: "$15,000",
     description: "Extensive storm damage left the roof severely compromised. Our team documented all damage points and successfully negotiated with the insurance company for full coverage.",
-    damageImage: "/lovable-uploads/5f0ba17d-ca48-4772-a374-1352c4e1d7dc.png"
+    damageImage: "/lovable-uploads/44396b47-f9e4-4da7-92f2-8401f6a62f24.png"
   },
   {
     name: "Michael Rodriguez",
