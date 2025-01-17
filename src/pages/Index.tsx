@@ -10,7 +10,7 @@ const Index = () => {
   const [shouldStayFlipped, setShouldStayFlipped] = useState<{ [key: number]: boolean }>({});
 
   useEffect(() => {
-    let timeouts: { [key: number]: NodeJS.Timeout } = {};
+    const timeouts: { [key: number]: NodeJS.Timeout } = {};
     
     return () => {
       Object.values(timeouts).forEach(timeout => clearTimeout(timeout));
@@ -47,11 +47,12 @@ const Index = () => {
   };
 
   const handleMouseLeave = (index: number) => {
-    // Add a slight delay before unflipping
+    // Add a longer delay before unflipping to make it smoother
     setTimeout(() => {
+      if (!shouldStayFlipped[index]) return;
       setFlippedCards(prev => ({ ...prev, [index]: false }));
       setShouldStayFlipped(prev => ({ ...prev, [index]: false }));
-    }, 100);
+    }, 300); // Increased delay for smoother transition
   };
 
   return (
@@ -72,13 +73,18 @@ const Index = () => {
                 className="h-[400px] perspective group"
               >
                 <motion.div 
-                  className="relative h-full w-full preserve-3d cursor-pointer transition-all duration-300 group-hover:scale-105"
-                  animate={{ rotateY: (flippedCards[index] || shouldStayFlipped[index]) ? 180 : 0 }}
+                  className="relative h-full w-full preserve-3d cursor-pointer transition-all duration-500"
+                  animate={{ 
+                    rotateY: (flippedCards[index] || shouldStayFlipped[index]) ? 180 : 0,
+                    scale: 1.02 // Slight scale up by default
+                  }}
+                  whileHover={{ scale: 1.05 }} // Additional scale on hover
                   transition={{ 
                     duration: 0.6,
                     type: "spring",
-                    stiffness: 100,
-                    damping: 20
+                    stiffness: 70, // Reduced stiffness for smoother animation
+                    damping: 25, // Increased damping for more stability
+                    scale: { duration: 0.3 } // Separate transition for scale
                   }}
                   onMouseEnter={() => handleMouseEnter(index)}
                   onMouseLeave={() => handleMouseLeave(index)}
