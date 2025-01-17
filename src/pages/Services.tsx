@@ -3,8 +3,40 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Home, Building2, Wrench, PaintBucket } from "lucide-react";
 import PromoCountdown from "@/components/PromoCountdown";
+import { useState, useEffect } from "react";
 
 const Services = () => {
+  const [flippedCards, setFlippedCards] = useState<{ [key: number]: boolean }>({});
+  const [shouldStayFlipped, setShouldStayFlipped] = useState<{ [key: number]: boolean }>({});
+
+  useEffect(() => {
+    const timeouts: { [key: number]: NodeJS.Timeout } = {};
+    
+    Object.entries(flippedCards).forEach(([index, isFlipped]) => {
+      if (!isFlipped && shouldStayFlipped[Number(index)]) {
+        timeouts[Number(index)] = setTimeout(() => {
+          setShouldStayFlipped(prev => ({
+            ...prev,
+            [Number(index)]: false
+          }));
+        }, 5000);
+      }
+    });
+
+    return () => {
+      Object.values(timeouts).forEach(timeout => clearTimeout(timeout));
+    };
+  }, [flippedCards, shouldStayFlipped]);
+
+  const handleMouseEnter = (index: number) => {
+    setFlippedCards(prev => ({ ...prev, [index]: true }));
+    setShouldStayFlipped(prev => ({ ...prev, [index]: true }));
+  };
+
+  const handleMouseLeave = (index: number) => {
+    setFlippedCards(prev => ({ ...prev, [index]: false }));
+  };
+
   return (
     <main className="min-h-screen pt-32 pb-20 px-4">
       <div className="max-w-7xl mx-auto">
@@ -64,7 +96,14 @@ const Services = () => {
               transition={{ delay: index * 0.2 }}
               className="group perspective h-[400px]"
             >
-              <div className="relative w-full h-full preserve-3d transition-all duration-500 group-hover:[transform:rotateY(180deg)]">
+              <div 
+                className="relative w-full h-full preserve-3d transition-all duration-500"
+                style={{
+                  transform: `rotateY(${(flippedCards[index] || shouldStayFlipped[index]) ? '180deg' : '0deg'})`
+                }}
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={() => handleMouseLeave(index)}
+              >
                 {/* Front of card */}
                 <div className="absolute w-full h-full backface-hidden bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8">
                   <div className="flex flex-col h-full">
@@ -89,7 +128,9 @@ const Services = () => {
                 </div>
 
                 {/* Back of card */}
-                <div className="absolute w-full h-full backface-hidden [transform:rotateY(180deg)] bg-gradient-to-br from-roofing-orange/90 to-roofing-orange-dark/90 backdrop-blur-sm rounded-xl shadow-lg p-8">
+                <div 
+                  className="absolute w-full h-full backface-hidden [transform:rotateY(180deg)] bg-gradient-to-br from-roofing-orange/90 to-roofing-orange-dark/90 backdrop-blur-sm rounded-xl shadow-lg p-8"
+                >
                   <div className="flex flex-col h-full text-white">
                     <h3 className="text-2xl font-semibold mb-6">{service.title}</h3>
                     {service.image && (
