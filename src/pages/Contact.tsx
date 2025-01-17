@@ -5,7 +5,17 @@ import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 
 const Contact = () => {
   return (
-    <main className="min-h-screen pt-32 pb-16 bg-gradient-to-br from-roofing-cream via-white to-roofing-beige">
+    <main className="min-h-screen pt-32 pb-16 relative">
+      {/* Background Image and Overlay */}
+      <div 
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat -z-10"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24?q=80&w=2070')",
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-roofing-orange/60 to-roofing-cream/40" />
+      </div>
+
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
