@@ -39,9 +39,9 @@ const Footer = () => {
             </div>
             <Link to="/" className="block">
               <img
-                src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png"
+                src="/lovable-uploads/2d080e69-c586-4861-8316-7ec496261217.png"
                 alt="A Roof Above Logo"
-                className="h-16 w-auto brightness-200"
+                className="h-16 w-auto brightness-100"
               />
             </Link>
           </div>
