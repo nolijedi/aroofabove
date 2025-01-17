@@ -9,7 +9,10 @@ const PromoCountdown = () => {
   const { isVisible, isClosed, isExitIntent, timeLeft, setIsClosed } = usePromoVisibility();
   const { position, setIsHovered } = usePromoAnimation(isVisible, isClosed);
 
-  if (isClosed || timeLeft === 0) return null;
+  if (isClosed || timeLeft === 0) {
+    console.log("Promo is closed or timer reached zero");
+    return null;
+  }
 
   const handleClose = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -37,6 +40,8 @@ const PromoCountdown = () => {
           className="fixed z-50"
           style={{ 
             pointerEvents: isClosed ? 'none' : 'auto',
+            right: '20px',
+            bottom: '20px'
           }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
