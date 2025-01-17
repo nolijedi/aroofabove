@@ -15,15 +15,15 @@ const StickyPhone = () => {
         stiffness: 100,
         damping: 20
       }}
-      className="fixed bottom-64 left-4 z-40 ml-4 mb-4 pointer-events-none" // Changed from bottom-40 to bottom-64 (16rem)
+      className="fixed bottom-24 md:bottom-64 left-2 md:left-4 z-40 pointer-events-none"
     >
       <motion.div
-        whileHover={{ scale: 1.2 }}
+        whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={handlePhoneClick}
-        className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group pointer-events-auto"
+        className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-12 md:p-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group pointer-events-auto touch-manipulation"
         animate={{
-          scale: [1, 0, 1],
+          scale: [1, 0.95, 1],
         }}
         transition={{
           duration: 2,
@@ -33,7 +33,7 @@ const StickyPhone = () => {
       >
         <div className="absolute inset-0 w-full h-full">
           <div className="flex items-center justify-center w-full h-full">
-            <Phone className="w-12 h-12 text-white relative z-10" />
+            <Phone className="w-8 md:w-12 h-8 md:h-12 text-white relative z-10" />
           </div>
           <svg className="absolute inset-0 w-full h-full animate-spin-slow" viewBox="0 0 100 100">
             <defs>
@@ -42,7 +42,7 @@ const StickyPhone = () => {
                 d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
               />
             </defs>
-            <text className="text-xs fill-white">
+            <text className="text-[8px] md:text-xs fill-white">
               <textPath href="#circle" startOffset="0%">
                 CLICK HERE • CALL US NOW • CLICK HERE • CALL US NOW •
               </textPath>
