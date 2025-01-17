@@ -33,15 +33,15 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center min-h-[60px] relative">
+        <div className="flex items-center h-16 relative">
           <Link 
             to="/" 
-            className="absolute left-0 transition-transform duration-300 hover:scale-105 hover:rotate-2"
+            className="absolute left-4 top-1/2 -translate-y-1/2 transition-transform duration-300 hover:scale-105 hover:rotate-2"
           >
             <img 
               src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png" 
               alt="A Roof Above Logo" 
-              className="h-16 md:h-20 w-auto"
+              className="h-14 w-auto"
             />
           </Link>
 
