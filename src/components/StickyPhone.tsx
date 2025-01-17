@@ -9,42 +9,33 @@ const StickyPhone = () => {
   return (
     <motion.div
       initial={{ x: -100 }}
-      animate={{ 
-        x: 0,
-        y: [-5, 5, -5],
-      }}
+      animate={{ x: 0 }}
       transition={{
-        y: {
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }
+        type: "spring",
+        stiffness: 100,
+        damping: 20
       }}
       className="fixed bottom-4 left-4 z-50 ml-4 mb-4 pointer-events-none"
     >
       <motion.button
-        initial={{ scale: 0 }}
-        animate={{ scale: [0, 1.2, 1, 0] }}
-        transition={{
-          scale: {
-            duration: 3,
-            times: [0, 0.4, 0.6, 1],
-            ease: "easeInOut",
-            repeat: Infinity,
-          }
-        }}
-        whileHover={{ 
-          scale: 2,
-          transition: {
-            duration: 0.3,
-            ease: "easeOut"
-          }
-        }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
         onClick={handlePhoneClick}
         className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group pointer-events-auto"
         aria-label="Call us"
       >
-        <Phone className="w-12 h-12 group-hover:scale-110 transition-transform text-white relative z-10" />
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <Phone className="w-12 h-12 group-hover:scale-110 transition-transform text-white relative z-10" />
+        </motion.div>
         <svg className="absolute inset-0 w-full h-full animate-spin-slow" viewBox="0 0 100 100">
           <defs>
             <path
