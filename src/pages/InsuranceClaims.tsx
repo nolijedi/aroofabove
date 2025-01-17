@@ -11,7 +11,7 @@ const features = [
     title: "Expert Claims Advocacy",
     description: "Our team of insurance specialists works directly with your insurance company to maximize your claim.",
     expandedDescription: "We have years of experience dealing with insurance companies and know exactly what documentation they need to approve your claim quickly.",
-    image: "/lovable-uploads/10a995fa-6759-4932-b918-b83c2dd741d7.png"
+    image: "/lovable-uploads/4bce1ec0-41ca-4e43-ae3b-8d433eb8d962.png"
   },
   {
     icon: Clock,
