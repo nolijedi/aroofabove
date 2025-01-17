@@ -60,13 +60,17 @@ const Index = () => {
                 transition={{ delay: index * 0.2 }}
                 className="h-[400px] perspective"
               >
-                <div 
-                  className="relative h-full w-full transition-all duration-500 preserve-3d hover:scale-105"
-                  style={{
-                    transform: `rotateY(${(flippedCards[index] || shouldStayFlipped[index]) ? '180deg' : '0deg'})`
+                <motion.div 
+                  className="relative h-full w-full preserve-3d cursor-pointer hover:scale-105 transition-all duration-300"
+                  animate={{ rotateY: (flippedCards[index] || shouldStayFlipped[index]) ? 180 : 0 }}
+                  transition={{ 
+                    duration: 0.6,
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 20
                   }}
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={() => handleMouseLeave(index)}
+                  onHoverStart={() => handleMouseEnter(index)}
+                  onHoverEnd={() => handleMouseLeave(index)}
                 >
                   {/* Front of card */}
                   <div className="absolute inset-0 bg-gradient-to-br from-roofing-cream via-white to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 backface-hidden border border-roofing-orange/20">
@@ -117,7 +121,7 @@ const Index = () => {
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>
