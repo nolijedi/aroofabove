@@ -112,6 +112,21 @@
   }
 }
 
+@keyframes bounce-pause {
+  0%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+  60%, 80% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+}
+
 @layer utilities {
   .perspective {
     perspective: 1000px;
@@ -127,5 +142,9 @@
 
   .animate-phone-pulse {
     animation: phone-pulse 2s infinite;
+  }
+
+  .animate-bounce-pause {
+    animation: bounce-pause 2s infinite;
   }
 }
