@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -33,7 +33,8 @@ const Contact = () => {
               { Icon: Facebook, href: "https://facebook.com", label: "Facebook", delay: 0 },
               { Icon: Twitter, href: "https://twitter.com", label: "Twitter", delay: 0.1 },
               { Icon: Instagram, href: "https://instagram.com", label: "Instagram", delay: 0.2 },
-              { Icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn", delay: 0.3 }
+              { Icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn", delay: 0.3 },
+              { Icon: Youtube, href: "https://youtube.com", label: "YouTube", delay: 0.4 }
             ].map(({ Icon, href, label, delay }, index) => (
               <motion.a
                 key={index}
@@ -72,10 +73,15 @@ const Contact = () => {
           >
             <div className="bg-gradient-to-br from-roofing-orange to-roofing-beige p-1">
               <div className="bg-white p-8 rounded-lg h-full transform transition-transform hover:scale-[0.99] duration-300">
-                <h2 className="text-2xl font-bold mb-4 text-roofing-charcoal">
-                  Get a Free Estimate
-                </h2>
-                <p className="text-gray-600 mb-6 leading-relaxed">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-roofing-beige rounded-full flex items-center justify-center">
+                    <span className="text-2xl">📋</span>
+                  </div>
+                  <h2 className="text-2xl font-bold text-roofing-charcoal">
+                    Get a Free Estimate
+                  </h2>
+                </div>
+                <p className="text-gray-600 mb-8 leading-relaxed">
                   Fill out the form below to receive a free estimate for your roofing project.
                 </p>
                 <Button asChild className="w-full bg-roofing-orange hover:bg-roofing-orange-dark transition-colors duration-300">
@@ -99,12 +105,17 @@ const Contact = () => {
             transition={{ delay: 0.4 }}
             className="rounded-lg shadow-lg overflow-hidden"
           >
-            <div className="bg-gradient-to-br from-roofing-cream to-roofing-beige p-1">
+            <div className="bg-gradient-to-br from-roofing-orange to-roofing-beige p-1">
               <div className="bg-white p-8 rounded-lg h-full transform transition-transform hover:scale-[0.99] duration-300">
-                <h2 className="text-2xl font-bold mb-6 text-roofing-charcoal">
-                  Contact Information
-                </h2>
-                <div className="space-y-4">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-roofing-beige rounded-full flex items-center justify-center">
+                    <span className="text-2xl">📱</span>
+                  </div>
+                  <h2 className="text-2xl font-bold text-roofing-charcoal">
+                    Contact Information
+                  </h2>
+                </div>
+                <div className="space-y-6">
                   <div className="flex items-center gap-3 text-gray-600 hover:text-roofing-orange transition-colors">
                     <div className="w-10 h-10 bg-roofing-beige rounded-full flex items-center justify-center">
                       <span className="text-xl">📞</span>
