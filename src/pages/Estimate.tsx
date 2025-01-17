@@ -24,12 +24,22 @@ const Estimate = () => {
   }, []);
 
   return (
-    <main className="min-h-screen pt-32 pb-20 bg-gradient-to-br from-roofing-cream via-white to-roofing-beige">
+    <main className="min-h-screen pt-32 pb-20">
+      {/* Background Image and Overlay - matching Services page */}
+      <div 
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat -z-10"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24?q=80&w=2070')",
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-roofing-orange/60 to-roofing-cream/40" />
+      </div>
+
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-8"
+          className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-8 mx-4"
         >
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-2 relative">
@@ -43,14 +53,14 @@ const Estimate = () => {
                 />
               </span>
             </h1>
-            <p className="text-sm text-gray-500 max-w-2xl mx-auto mb-8">
+            <p className="text-sm text-gray-600 max-w-2xl mx-auto mb-8">
               Fill out the form below and we'll provide you with a detailed estimate for your roofing project.
             </p>
           </div>
         </motion.div>
 
-        <div className="section-gradient-separator">
-          <div className="container mx-auto px-4">
+        <div className="section-gradient-separator mx-4">
+          <div className="container mx-auto">
             <div className="grid lg:grid-cols-3 gap-12">
               <EstimateForm />
               <EstimateSidebar />
