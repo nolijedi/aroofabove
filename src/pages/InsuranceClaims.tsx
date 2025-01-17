@@ -112,7 +112,17 @@ const InsuranceClaims = () => {
   };
 
   return (
-    <main className="min-h-screen pt-32 pb-16 px-4 bg-background">
+    <main className="min-h-screen pt-32 pb-16 px-4 relative">
+      {/* Background gradient overlay */}
+      <div 
+        className="fixed inset-0 bg-gradient-to-r from-roofing-orange/60 to-roofing-cream/40 -z-10"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24?q=80&w=2070')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+      
       <div className="max-w-7xl mx-auto space-y-12">
         <div className="section-gradient-separator transform hover:scale-105 transition-all duration-500">
           <InsuranceHeader />
