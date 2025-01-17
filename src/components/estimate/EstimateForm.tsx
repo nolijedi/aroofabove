@@ -10,7 +10,7 @@ export const EstimateForm = () => {
     <motion.div
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.2, duration: 1 }} // Updated to 1 second
+      transition={{ duration: 1 }} // Explicitly set to 1 second
       className="lg:col-span-2 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300 animate-resize"
     >
       <form className="space-y-6">
