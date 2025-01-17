@@ -21,7 +21,7 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
           className={`w-full mt-2 justify-start text-lg ${
             currentPath === item.path
               ? "bg-roofing-orange hover:bg-roofing-orange-dark text-white"
-              : "text-gray-600 hover:text-roofing-orange hover:bg-transparent"
+              : "bg-roofing-cream/80 text-roofing-charcoal hover:bg-roofing-cream hover:text-roofing-orange"
           } [text-shadow:_0_1px_1px_rgb(0_0_0_/_40%)]`}
           asChild
         >
