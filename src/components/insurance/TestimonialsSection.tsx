@@ -33,25 +33,27 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      className="mb-20"
-    >
-      <h2 className="text-3xl font-bold text-roofing-charcoal text-center mb-12">
-        Success Stories
-      </h2>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
-        {testimonials.map((testimonial, index) => (
-          <TestimonialCard
-            key={index}
-            testimonial={testimonial}
-            index={index}
-          />
-        ))}
-      </div>
-    </motion.div>
+    <section className="py-20">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="mb-20"
+      >
+        <h2 className="text-3xl font-bold text-roofing-charcoal text-center mb-12">
+          Success Stories
+        </h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {testimonials.map((testimonial, index) => (
+            <TestimonialCard
+              key={index}
+              testimonial={testimonial}
+              index={index}
+            />
+          ))}
+        </div>
+      </motion.div>
+    </section>
   );
 };
 
