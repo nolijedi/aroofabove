@@ -22,7 +22,7 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
             currentPath === item.path
               ? "bg-roofing-orange hover:bg-roofing-orange-dark text-white"
               : "text-gray-600 hover:text-roofing-orange hover:bg-transparent"
-          } [text-shadow:_0_1px_1px_rgb(0_0_0_/_40%)] [-webkit-text-stroke:_0.5px_#F97316]`}
+          } [text-shadow:_0_1px_1px_rgb(0_0_0_/_40%)]`}
           asChild
         >
           <Link to={item.path} onClick={onClose}>
@@ -32,7 +32,7 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
       ))}
       <Button
         asChild
-        className="w-full mt-4 bg-roofing-beige hover:bg-roofing-beige/90 text-roofing-charcoal hover:text-roofing-charcoal/90 animate-bounce-pause shadow-lg hover:shadow-xl transition-all duration-300 text-lg [text-shadow:_0_1px_1px_rgb(255_255_255_/_40%)] [-webkit-text-stroke:_0.5px_#F97316]"
+        className="w-full mt-4 bg-roofing-beige hover:bg-roofing-beige/90 text-roofing-charcoal hover:text-roofing-charcoal/90 animate-bounce-pause shadow-lg hover:shadow-xl transition-all duration-300 text-lg [text-shadow:_0_1px_1px_rgb(255_255_255_/_40%)]"
       >
         <Link to="/estimate" onClick={onClose}>
           Get Estimate
