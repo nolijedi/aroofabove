@@ -18,11 +18,11 @@ export const usePromoAnimation = (isVisible: boolean, isClosed: boolean) => {
   const promoWidth = 320; // Width of the promo component
   const promoHeight = 400; // Approximate height of the promo component
 
-  // Define the boundaries as percentage of viewport
-  const maxRightBoundary = 0.7; // 70% of viewport width
-  const maxBottomBoundary = 0.7; // 70% of viewport height
-  const minLeftBoundary = 0.1; // 10% of viewport width
-  const minTopBoundary = 0.1; // 10% of viewport height
+  // Define the boundaries as percentage of viewport with tighter constraints
+  const maxRightBoundary = 0.6; // 60% of viewport width
+  const maxBottomBoundary = 0.6; // 60% of viewport height
+  const minLeftBoundary = 0.2; // 20% of viewport width
+  const minTopBoundary = 0.2; // 20% of viewport height
 
   useEffect(() => {
     const animate = () => {
@@ -40,28 +40,37 @@ export const usePromoAnimation = (isVisible: boolean, isClosed: boolean) => {
         let newVelocityX = velocity.x;
         let newVelocityY = velocity.y;
 
-        // Calculate boundaries based on viewport percentages
-        const rightBoundary = window.innerWidth * maxRightBoundary - promoWidth;
-        const bottomBoundary = window.innerHeight * maxBottomBoundary - promoHeight;
+        // Calculate boundaries based on viewport percentages with padding
+        const rightBoundary = (window.innerWidth * maxRightBoundary) - promoWidth;
+        const bottomBoundary = (window.innerHeight * maxBottomBoundary) - promoHeight;
         const leftBoundary = window.innerWidth * minLeftBoundary;
         const topBoundary = window.innerHeight * minTopBoundary;
 
-        // Check horizontal boundaries
+        // Check and handle horizontal boundaries with dampening
         if (newPos.x <= leftBoundary) {
           newPos.x = leftBoundary;
-          newVelocityX = Math.abs(velocity.x);
+          newVelocityX = Math.abs(velocity.x) * 0.8; // Reduce velocity on bounce
         } else if (newPos.x >= rightBoundary) {
           newPos.x = rightBoundary;
-          newVelocityX = -Math.abs(velocity.x);
+          newVelocityX = -Math.abs(velocity.x) * 0.8;
         }
 
-        // Check vertical boundaries
+        // Check and handle vertical boundaries with dampening
         if (newPos.y <= topBoundary) {
           newPos.y = topBoundary;
-          newVelocityY = Math.abs(velocity.y);
+          newVelocityY = Math.abs(velocity.y) * 0.8;
         } else if (newPos.y >= bottomBoundary) {
           newPos.y = bottomBoundary;
-          newVelocityY = -Math.abs(velocity.y);
+          newVelocityY = -Math.abs(velocity.y) * 0.8;
+        }
+
+        // Ensure minimum velocity
+        const minVelocity = 1;
+        if (Math.abs(newVelocityX) < minVelocity) {
+          newVelocityX = newVelocityX > 0 ? minVelocity : -minVelocity;
+        }
+        if (Math.abs(newVelocityY) < minVelocity) {
+          newVelocityY = newVelocityY > 0 ? minVelocity : -minVelocity;
         }
 
         // Update velocity if it changed
@@ -89,8 +98,8 @@ export const usePromoAnimation = (isVisible: boolean, isClosed: boolean) => {
   // Add window resize handler
   useEffect(() => {
     const handleResize = () => {
-      const rightBoundary = window.innerWidth * maxRightBoundary - promoWidth;
-      const bottomBoundary = window.innerHeight * maxBottomBoundary - promoHeight;
+      const rightBoundary = (window.innerWidth * maxRightBoundary) - promoWidth;
+      const bottomBoundary = (window.innerHeight * maxBottomBoundary) - promoHeight;
       const leftBoundary = window.innerWidth * minLeftBoundary;
       const topBoundary = window.innerHeight * minTopBoundary;
 
