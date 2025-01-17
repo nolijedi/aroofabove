@@ -91,12 +91,12 @@ const CommonDamagesSection = () => {
                     </p>
                     
                     <motion.div
-                      className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2"
+                      className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-roofing-orange"
                       animate={{ y: [0, 5, 0] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
-                      <Info className="w-5 h-5 text-roofing-orange animate-pulse" />
-                      <ArrowRight className="w-5 h-5 text-roofing-orange group-hover:translate-x-1 transition-transform" />
+                      <Info className="w-5 h-5" />
+                      <ArrowRight className="w-5 h-5" />
                     </motion.div>
                   </div>
                 </div>
