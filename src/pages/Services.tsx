@@ -19,7 +19,7 @@ const Services = () => {
             ...prev,
             [Number(index)]: false
           }));
-        }, 5000);
+        }, 3000);
       }
     });
 
