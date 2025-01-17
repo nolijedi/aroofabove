@@ -25,7 +25,7 @@ const StickyPhone = () => {
         aria-label="Call us"
       >
         <motion.div
-          className="flex items-center justify-center w-full h-full"
+          className="absolute inset-0 w-full h-full"
           animate={{
             scale: [0.1, 1, 0.1],
           }}
@@ -38,20 +38,20 @@ const StickyPhone = () => {
           <div className="flex items-center justify-center w-full h-full">
             <Phone className="w-12 h-12 text-white relative z-10" />
           </div>
+          <svg className="absolute inset-0 w-full h-full animate-spin-slow" viewBox="0 0 100 100">
+            <defs>
+              <path
+                id="circle"
+                d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+              />
+            </defs>
+            <text className="text-xs fill-white">
+              <textPath href="#circle" startOffset="0%">
+                CLICK HERE • CALL US NOW • CLICK HERE • CALL US NOW •
+              </textPath>
+            </text>
+          </svg>
         </motion.div>
-        <svg className="absolute inset-0 w-full h-full animate-spin-slow" viewBox="0 0 100 100">
-          <defs>
-            <path
-              id="circle"
-              d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
-            />
-          </defs>
-          <text className="text-xs fill-white">
-            <textPath href="#circle" startOffset="0%">
-              CLICK HERE • CALL US NOW • CLICK HERE • CALL US NOW •
-            </textPath>
-          </text>
-        </svg>
       </motion.button>
     </motion.div>
   );
