@@ -5,7 +5,7 @@ import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 
 const Contact = () => {
   return (
-    <main className="min-h-screen pt-32 pb-16 relative">
+    <main className="min-h-screen pt-24 sm:pt-28 md:pt-32 pb-12 md:pb-16 relative">
       {/* Background Image and Overlay */}
       <div 
         className="fixed inset-0 bg-cover bg-center bg-no-repeat -z-10"
@@ -16,14 +16,14 @@ const Contact = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-roofing-orange/60 to-roofing-cream/40" />
       </div>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-8 mb-12"
+          className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-6 sm:p-8 mb-8 sm:mb-12"
         >
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-2 relative">
+          <div className="container mx-auto text-center">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-roofing-charcoal mb-2 relative">
               <span className="relative inline-block pb-2">
                 Contact Us
                 <motion.div
@@ -34,11 +34,11 @@ const Contact = () => {
                 />
               </span>
             </h1>
-            <p className="text-sm text-gray-500 max-w-2xl mx-auto mb-8">
+            <p className="text-sm text-gray-500 max-w-2xl mx-auto mb-6 sm:mb-8">
               Get in touch with our expert team today.
             </p>
 
-            <div className="flex justify-center gap-6 mb-8">
+            <div className="flex justify-center gap-4 sm:gap-6 mb-6 sm:mb-8">
               {[
                 { Icon: Facebook, href: "https://facebook.com", label: "Facebook", delay: 0 },
                 { Icon: Twitter, href: "https://twitter.com", label: "Twitter", delay: 0.1 },
@@ -66,9 +66,9 @@ const Contact = () => {
                     damping: 20,
                     delay: 0.5 + delay
                   }}
-                  className="p-4 bg-gradient-to-br from-roofing-beige to-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+                  className="p-2 sm:p-3 bg-gradient-to-br from-roofing-beige to-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
                 >
-                  <Icon className="w-8 h-8 text-roofing-orange group-hover:text-roofing-orange-dark transition-colors" />
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-roofing-orange group-hover:text-roofing-orange-dark transition-colors" />
                 </motion.a>
               ))}
             </div>
