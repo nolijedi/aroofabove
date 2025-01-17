@@ -11,7 +11,6 @@ const PromoCountdown = () => {
 
   console.log("PromoCountdown render - isVisible:", isVisible, "isClosed:", isClosed, "timeLeft:", timeLeft);
 
-  // Only hide if explicitly closed by user
   if (isClosed) {
     console.log("Promo is closed by user");
     return null;
@@ -31,8 +30,6 @@ const PromoCountdown = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ 
             opacity: 1,
-            x: position.x,
-            y: position.y,
             transition: {
               type: "spring",
               stiffness: 50,
@@ -40,11 +37,9 @@ const PromoCountdown = () => {
             }
           }}
           exit={{ opacity: 0, y: 20 }}
-          className="fixed z-[9999]"
+          className="fixed z-[9999] bottom-5 right-5"
           style={{ 
             pointerEvents: isClosed ? 'none' : 'auto',
-            right: '20px',
-            bottom: '20px'
           }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
