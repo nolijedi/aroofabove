@@ -18,7 +18,7 @@ const features = [
     title: "Fast Claim Processing",
     description: "We expedite your claim process with thorough documentation and prompt responses.",
     expandedDescription: "Our streamlined process ensures your claim is processed as quickly as possible, often reducing wait times by weeks.",
-    image: "/lovable-uploads/6e209d79-c584-48f2-9696-9aacf51e851d.png"
+    image: "/lovable-uploads/6078425e-d51c-41d8-8d89-3d5b72f34172.png"
   },
   {
     icon: DollarSign,
