@@ -9,7 +9,7 @@ interface DesktopNavProps {
 
 const DesktopNav = ({ navItems, currentPath }: DesktopNavProps) => {
   return (
-    <div className="hidden md:flex items-center space-x-2">
+    <div className="hidden md:flex items-center justify-center space-x-2 flex-1">
       {navItems.map((item) => (
         <Button
           key={item.path}

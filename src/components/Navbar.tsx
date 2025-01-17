@@ -33,10 +33,10 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center min-h-[60px]">
+        <div className="flex items-center min-h-[60px] relative">
           <Link 
             to="/" 
-            className="flex items-center justify-center flex-1 transition-transform duration-300 hover:scale-105 hover:rotate-2"
+            className="absolute left-0 transition-transform duration-300 hover:scale-105 hover:rotate-2"
           >
             <img 
               src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png" 
@@ -48,7 +48,7 @@ const Navbar = () => {
           <DesktopNav navItems={navItems} currentPath={location.pathname} />
 
           <button
-            className="md:hidden text-gray-600"
+            className="md:hidden absolute right-0 text-gray-600"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X size={16} /> : <Menu size={16} />}
