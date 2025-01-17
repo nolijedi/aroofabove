@@ -1,31 +1,31 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useLocalStorage } from "@/hooks/use-local-storage";
 
 export const usePromoVisibility = () => {
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(false);
   const [isClosed, setIsClosed] = useState(false);
   const [isExitIntent, setIsExitIntent] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [storedTimeLeft, setStoredTimeLeft] = useLocalStorage('promoTimeLeft', '60');
+  const [timeLeft, setTimeLeft] = useState(parseInt(storedTimeLeft));
 
   useEffect(() => {
     const isPermanentlyClosed = localStorage.getItem('promoClosedPermanently') === 'true';
-    if (isPermanentlyClosed) {
+    if (isPermanentlyClosed || timeLeft <= 0) {
       setIsClosed(true);
       return;
     }
 
     setIsClosed(false);
     setIsVisible(true);
-    setTimeLeft(60);
-  }, [location.pathname]);
+  }, [location.pathname, timeLeft]);
 
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0 && !isClosed) {
+      if (e.clientY <= 0 && !isClosed && timeLeft > 0) {
         setIsExitIntent(true);
         setIsVisible(true);
-        setTimeLeft(60);
         console.log("Exit intent detected, showing promo");
       }
     };
@@ -33,9 +33,8 @@ export const usePromoVisibility = () => {
     document.addEventListener("mouseleave", handleMouseLeave);
 
     const showTimeout = setTimeout(() => {
-      if (!isClosed) {
+      if (!isClosed && timeLeft > 0) {
         setIsVisible(true);
-        setTimeLeft(60);
         console.log("Initial promo display after 3 seconds");
       }
     }, 3000);
@@ -44,27 +43,29 @@ export const usePromoVisibility = () => {
       clearTimeout(showTimeout);
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [isClosed]);
+  }, [isClosed, timeLeft]);
 
   useEffect(() => {
     if (!isVisible || isClosed) return;
 
-    console.log("Starting countdown from", timeLeft, "seconds");
+    console.log("Countdown continuing from", timeLeft, "seconds");
     
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
         const newTime = prevTime - 1;
         if (newTime <= 0) {
           clearInterval(timer);
-          console.log("Timer reached zero");
+          localStorage.setItem('promoClosedPermanently', 'true');
+          console.log("Timer reached zero, closing permanently");
           return 0;
         }
+        setStoredTimeLeft(newTime.toString());
         return newTime;
       });
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [isVisible, isClosed]);
+  }, [isVisible, isClosed, setStoredTimeLeft]);
 
   return {
     isVisible,
