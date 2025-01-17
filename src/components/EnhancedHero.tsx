@@ -15,12 +15,17 @@ const EnhancedHero = () => {
     <div className="relative">
       <Hero />
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12">
-          <div className="text-center space-y-8">
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl pointer-events-none">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center min-h-screen">
+          <div className="text-center space-y-12">
+            <motion.h1 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-5xl md:text-7xl font-bold tracking-tight text-white pointer-events-none drop-shadow-lg"
+            >
               Your Trusted Roofing Experts
-            </h1>
-            <div className="flex justify-center gap-8 pointer-events-auto">
+            </motion.h1>
+            <div className="flex justify-center gap-6 pointer-events-auto">
               {socialLinks.map(({ Icon, href, label, delay }, index) => (
                 <motion.a
                   key={index}
@@ -42,9 +47,9 @@ const EnhancedHero = () => {
                     damping: 20,
                     delay: 0.5 + delay
                   }}
-                  className="p-4 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group active:bg-roofing-orange/20"
+                  className="p-3 bg-roofing-beige/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
                 >
-                  <Icon className="w-8 h-8 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
+                  <Icon className="w-6 h-6 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
                 </motion.a>
               ))}
             </div>
