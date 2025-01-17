@@ -12,22 +12,35 @@ interface Velocity {
 
 export const usePromoAnimation = (isVisible: boolean, isClosed: boolean) => {
   const [position, setPosition] = useState<Position>({ x: 100, y: 100 });
-  const [velocity, setVelocity] = useState<Velocity>({ x: 2, y: 2 });
+  const [velocity, setVelocity] = useState<Velocity>({ x: 1, y: 1 });
+  const [isHovered, setIsHovered] = useState(false);
   const frameRef = useRef<number>();
 
   useEffect(() => {
     const animate = () => {
+      if (isHovered) {
+        frameRef.current = requestAnimationFrame(animate);
+        return;
+      }
+
       setPosition(prevPos => {
         const newPos = {
           x: prevPos.x + velocity.x,
           y: prevPos.y + velocity.y
         };
 
+        let newVelocityX = velocity.x;
+        let newVelocityY = velocity.y;
+
         if (newPos.x <= 0 || newPos.x >= window.innerWidth - 300) {
-          setVelocity(prev => ({ ...prev, x: -prev.x }));
+          newVelocityX = -velocity.x;
         }
         if (newPos.y <= 0 || newPos.y >= window.innerHeight - 400) {
-          setVelocity(prev => ({ ...prev, y: -prev.y }));
+          newVelocityY = -velocity.y;
+        }
+
+        if (newVelocityX !== velocity.x || newVelocityY !== velocity.y) {
+          setVelocity({ x: newVelocityX, y: newVelocityY });
         }
 
         return {
@@ -48,7 +61,10 @@ export const usePromoAnimation = (isVisible: boolean, isClosed: boolean) => {
         cancelAnimationFrame(frameRef.current);
       }
     };
-  }, [isVisible, isClosed, velocity]);
+  }, [isVisible, isClosed, velocity, isHovered]);
 
-  return { position };
+  return { 
+    position,
+    setIsHovered
+  };
 };

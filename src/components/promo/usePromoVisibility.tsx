@@ -9,6 +9,12 @@ export const usePromoVisibility = () => {
   const [timeLeft, setTimeLeft] = useState(60);
 
   useEffect(() => {
+    const isPermanentlyClosed = localStorage.getItem('promoClosedPermanently') === 'true';
+    if (isPermanentlyClosed) {
+      setIsClosed(true);
+      return;
+    }
+
     setIsClosed(false);
     setIsVisible(true);
     setTimeLeft(60);
@@ -16,7 +22,7 @@ export const usePromoVisibility = () => {
 
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0) {
+      if (e.clientY <= 0 && !isClosed) {
         setIsExitIntent(true);
         setIsVisible(true);
         setTimeLeft(60);
@@ -27,16 +33,18 @@ export const usePromoVisibility = () => {
     document.addEventListener("mouseleave", handleMouseLeave);
 
     const showTimeout = setTimeout(() => {
-      setIsVisible(true);
-      setTimeLeft(60);
-      console.log("Initial promo display after 3 seconds");
+      if (!isClosed) {
+        setIsVisible(true);
+        setTimeLeft(60);
+        console.log("Initial promo display after 3 seconds");
+      }
     }, 3000);
 
     return () => {
       clearTimeout(showTimeout);
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, []);
+  }, [isClosed]);
 
   useEffect(() => {
     if (!isVisible || isClosed) return;

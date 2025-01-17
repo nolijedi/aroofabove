@@ -7,14 +7,15 @@ import { PromoContent } from "./promo/PromoContent";
 const PromoCountdown = () => {
   const navigate = useNavigate();
   const { isVisible, isClosed, isExitIntent, timeLeft, setIsClosed } = usePromoVisibility();
-  const { position } = usePromoAnimation(isVisible, isClosed);
+  const { position, setIsHovered } = usePromoAnimation(isVisible, isClosed);
 
   if (isClosed || timeLeft === 0) return null;
 
   const handleClose = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsClosed(true);
-    console.log("Promo closed by user");
+    localStorage.setItem('promoClosedPermanently', 'true');
+    console.log("Promo closed permanently by user");
   };
 
   return (
@@ -25,13 +26,20 @@ const PromoCountdown = () => {
           animate={{ 
             opacity: 1,
             x: position.x,
-            y: position.y
+            y: position.y,
+            transition: {
+              type: "spring",
+              stiffness: 50,
+              damping: 20
+            }
           }}
           exit={{ opacity: 0, y: 20 }}
           className="fixed z-50"
           style={{ 
             pointerEvents: isClosed ? 'none' : 'auto',
           }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
           <PromoContent
             isExitIntent={isExitIntent}
