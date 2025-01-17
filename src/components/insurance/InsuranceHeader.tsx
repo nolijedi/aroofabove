@@ -8,7 +8,7 @@ const InsuranceHeader = () => {
       className="text-center mb-16"
     >
       <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-4 relative">
-        <span className="relative inline-block">
+        <span className="relative inline-block pb-2">
           Insurance Claims Made Easy
           <motion.div
             className="absolute -bottom-2 left-0 w-full h-1 bg-roofing-orange"
