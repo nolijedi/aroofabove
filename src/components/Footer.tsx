@@ -16,26 +16,26 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-wrap justify-between items-center gap-4">
           {/* Logo and Contact Section */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-8">
             <Link to="/" className="block">
               <img
                 src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png"
                 alt="A Roof Above Logo"
-                className="h-6 w-auto brightness-200"
+                className="h-8 w-auto brightness-200" // Increased from h-6 to h-8
               />
             </Link>
             
-            <div className="flex flex-col items-start text-xs space-y-1">
+            <div className="flex flex-col items-start text-xs space-y-1 ml-auto"> {/* Added ml-auto */}
               <a
                 href="tel:509-400-5911"
-                className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors group"
+                className="flex items-center space-x-2 text-gray-300 hover:text-roofing-orange transition-colors group"
               >
                 <Phone className="w-3 h-3 group-hover:text-roofing-orange transition-colors" />
                 <span>(509) 400-5911</span>
               </a>
               <a
                 href="mailto:jc@aroofabove.com"
-                className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors group"
+                className="flex items-center space-x-2 text-gray-300 hover:text-roofing-orange transition-colors group"
               >
                 <Mail className="w-3 h-3 group-hover:text-roofing-orange transition-colors" />
                 <span>jc@aroofabove.com</span>
@@ -67,7 +67,7 @@ const Footer = () => {
               <Link
                 key={link.to}
                 to={link.to}
-                className="text-gray-300 hover:text-white transition-colors"
+                className="text-gray-300 hover:text-roofing-orange transition-colors"
               >
                 {link.label}
               </Link>
@@ -76,11 +76,11 @@ const Footer = () => {
 
           {/* Legal Links */}
           <div className="flex items-center space-x-4 text-xs">
-            <Link to="/privacy-policy" className="text-gray-300 hover:text-white transition-colors">
+            <Link to="/privacy-policy" className="text-gray-300 hover:text-roofing-orange transition-colors">
               Privacy Policy
             </Link>
             <span className="text-gray-500">|</span>
-            <Link to="/terms" className="text-gray-300 hover:text-white transition-colors">
+            <Link to="/terms" className="text-gray-300 hover:text-roofing-orange transition-colors">
               Terms of Service
             </Link>
             <span className="text-gray-500">|</span>
