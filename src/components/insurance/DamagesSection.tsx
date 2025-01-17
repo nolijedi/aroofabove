@@ -9,7 +9,7 @@ const DamagesSection = () => {
       className="mb-16"
     >
       <h2 className="text-3xl font-bold text-roofing-charcoal mb-8 text-center">
-        Common Roof Damages Covered by Insurance
+        Common Roof Problems
       </h2>
       
       <div className="mb-8">
