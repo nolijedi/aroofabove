@@ -24,11 +24,11 @@ const StickyPhone = () => {
     >
       <motion.button
         initial={{ scale: 0 }}
-        animate={{ scale: [0, 1.8, 1.2, 0] }}
+        animate={{ scale: [0, 1.2, 1, 0] }}
         transition={{
           scale: {
             duration: 3,
-            times: [0, 0.3, 0.7, 1],
+            times: [0, 0.4, 0.6, 1],
             ease: "easeInOut",
             repeat: Infinity,
           }
