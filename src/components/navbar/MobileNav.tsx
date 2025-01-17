@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Phone } from "lucide-react";
 import { NavItem } from "./types";
 
 interface MobileNavProps {
@@ -38,16 +37,6 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
         <Link to="/estimate" onClick={onClose}>
           Get Estimate
         </Link>
-      </Button>
-      <Button
-        asChild
-        variant="outline"
-        className="w-full mt-2 border-roofing-orange text-roofing-orange hover:bg-roofing-orange hover:text-white"
-      >
-        <a href="tel:509-400-5911" className="flex items-center justify-center gap-2">
-          <Phone className="h-4 w-4" />
-          Call Now
-        </a>
       </Button>
     </div>
   );

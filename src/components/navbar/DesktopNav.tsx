@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Phone } from "lucide-react";
 import { NavItem } from "./types";
 
 interface DesktopNavProps {
@@ -30,16 +29,6 @@ const DesktopNav = ({ navItems, currentPath }: DesktopNavProps) => {
         className="bg-roofing-beige hover:bg-roofing-beige/90 text-roofing-charcoal hover:text-roofing-charcoal/90 animate-bounce-pause shadow-lg hover:shadow-xl transition-all duration-300"
       >
         <Link to="/estimate">Get Estimate</Link>
-      </Button>
-      <Button
-        asChild
-        variant="outline"
-        className="border-roofing-orange text-roofing-orange hover:bg-roofing-orange hover:text-white"
-      >
-        <a href="tel:509-400-5911" className="flex items-center gap-2">
-          <Phone className="h-4 w-4" />
-          Call Now
-        </a>
       </Button>
     </div>
   );
