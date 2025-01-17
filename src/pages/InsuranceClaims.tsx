@@ -29,7 +29,7 @@ const features = [
     title: "Maximum Coverage",
     description: "We ensure you get every dollar you deserve from your insurance claim.",
     expandedDescription: "Our detailed damage assessments and documentation help secure the maximum coverage available under your policy.",
-    image: "/lovable-uploads/16c50230-228c-4910-af52-24b168e003c9.png"
+    image: "/lovable-uploads/a380c8bc-eea5-477d-8fbe-67c4422d0e71.png"
   },
   {
     icon: FileCheck,
