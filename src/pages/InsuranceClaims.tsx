@@ -14,8 +14,8 @@ const InsuranceClaims = () => {
           <InsuranceHeader />
         </div>
         
-        <div className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-8 hover:shadow-2xl transition-all duration-500 rotate-180">
-          <div className="rotate-180">
+        <div className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-8 hover:shadow-2xl transition-all duration-500 scale-y-[-1]">
+          <div className="scale-y-[-1]">
             <WhyChooseUsSection />
           </div>
         </div>
