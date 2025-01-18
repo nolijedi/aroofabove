@@ -18,24 +18,24 @@ export const CalculatorSection = ({ showCalculator }: CalculatorSectionProps) =>
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="w-full flex flex-col items-center justify-center relative px-4 sm:px-6"
+      className="w-full flex flex-col items-center justify-center relative px-0 sm:px-4"
     >
-      <div className="w-full max-w-[400px] mx-auto relative">
+      <div className="w-full flex justify-center relative">
         {/* Decorative elements */}
         <div className="absolute -top-8 -left-8 w-32 h-32 bg-roofing-orange/10 rounded-full blur-2xl animate-pulse" />
         <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-roofing-cream/20 rounded-full blur-2xl animate-pulse" />
         
         {/* Main content wrapper */}
         <motion.div
-          className="relative bg-white/90 backdrop-blur-sm p-4 sm:p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500"
+          className="relative bg-white/90 backdrop-blur-sm p-2 sm:p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 w-[344px] mx-auto"
           whileHover={{ scale: 1.02 }}
         >
           {/* Header */}
-          <div className="mb-6 text-center">
-            <h3 className="text-2xl font-bold text-roofing-charcoal">
+          <div className="mb-4 sm:mb-6 text-center">
+            <h3 className="text-xl sm:text-2xl font-bold text-roofing-charcoal">
               Instant Estimate Calculator
             </h3>
-            <p className="text-sm text-roofing-charcoal/70">
+            <p className="text-xs sm:text-sm text-roofing-charcoal/70">
               Get an instant estimate for your roofing project
             </p>
           </div>
@@ -43,7 +43,7 @@ export const CalculatorSection = ({ showCalculator }: CalculatorSectionProps) =>
           {/* Calculator iframe with enhanced styling */}
           <div className="relative flex justify-center">
             <div className="absolute inset-0 bg-gradient-to-br from-roofing-cream via-roofing-beige to-roofing-orange/20 opacity-30 rounded-lg" />
-            <div className="w-full max-w-[344px] overflow-hidden">
+            <div className="w-[344px] overflow-hidden">
               <iframe
                 src={urlWithParams}
                 className="w-full h-[650px] border-none rounded-lg shadow-lg relative z-10"
