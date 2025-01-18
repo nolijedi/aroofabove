@@ -43,7 +43,7 @@ const Estimate = () => {
   }, [handleResize]);
 
   return (
-    <main className="min-h-screen pt-32 pb-20" ref={pageRef}>
+    <main className="min-h-screen pt-32 pb-20 overflow-x-hidden" ref={pageRef}>
       {/* Background Image and Overlay - matching Services page */}
       <div 
         className="fixed inset-0 bg-cover bg-center bg-no-repeat -z-10"
