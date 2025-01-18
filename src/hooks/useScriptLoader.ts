@@ -6,22 +6,24 @@ export const useScriptLoader = () => {
   const SCRIPT_ID = 'instant-roofer-script';
 
   useEffect(() => {
+    // Check if script is already loaded
+    if (document.getElementById(SCRIPT_ID)) {
+      return; // Script already exists, don't load it again
+    }
+
     let timeoutId: number;
+    let scriptElement: HTMLScriptElement | null = null;
 
     const loadScript = () => {
-      // Check if script already exists
-      if (document.getElementById(SCRIPT_ID)) {
-        return; // Script already loaded
-      }
-
-      const script = document.createElement('script');
-      script.id = SCRIPT_ID;
-      script.type = 'text/javascript';
-      script.async = true;
-      script.crossOrigin = "anonymous";
-      script.src = "https://book.instantroofer.com/js/instant-roofer-google-ads-integration.min.js";
+      // Create script element
+      scriptElement = document.createElement('script');
+      scriptElement.id = SCRIPT_ID;
+      scriptElement.type = 'text/javascript';
+      scriptElement.async = true;
+      scriptElement.crossOrigin = "anonymous";
+      scriptElement.src = "https://book.instantroofer.com/js/instant-roofer-google-ads-integration.min.js";
       
-      script.onerror = (error) => {
+      scriptElement.onerror = (error) => {
         console.error('Error loading InstantRoofer script:', error);
         toast({
           title: "Warning",
@@ -30,7 +32,7 @@ export const useScriptLoader = () => {
         });
       };
 
-      document.body.appendChild(script);
+      document.body.appendChild(scriptElement);
     };
 
     // Delay script loading
@@ -49,11 +51,11 @@ export const useScriptLoader = () => {
       window.clearTimeout(timeoutId);
       window.removeEventListener('scroll', scrollHandler);
       
-      // Remove script on unmount if it exists
+      // Remove script on unmount
       const existingScript = document.getElementById(SCRIPT_ID);
       if (existingScript) {
         existingScript.remove();
       }
     };
-  }, [toast]);
+  }, [toast]); // Only re-run if toast changes
 };
