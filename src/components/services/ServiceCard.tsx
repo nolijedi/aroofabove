@@ -84,7 +84,7 @@ const ServiceCard = ({
 
         {/* Back of card */}
         <div 
-          className="absolute w-full h-full backface-hidden rounded-xl overflow-hidden"
+          className="absolute w-full h-full backface-hidden [transform:rotateY(180deg)] rounded-xl overflow-hidden"
         >
           <div className="flex flex-col h-full bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-6 sm:p-8 text-white shadow-2xl">
             <h3 className="text-xl sm:text-2xl font-bold mb-6">{title}</h3>
