@@ -38,7 +38,7 @@ const Contact = () => {
               Get in touch with our expert team today.
             </p>
 
-            <div className="flex justify-center gap-6 mb-8">
+            <div className="flex justify-center gap-2 sm:gap-6 mb-8">
               {[
                 { Icon: Facebook, href: "https://facebook.com", label: "Facebook", delay: 0 },
                 { Icon: Twitter, href: "https://twitter.com", label: "Twitter", delay: 0.1 },
@@ -66,9 +66,9 @@ const Contact = () => {
                     damping: 20,
                     delay: 0.5 + delay
                   }}
-                  className="p-4 bg-gradient-to-br from-roofing-beige to-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+                  className="p-2 sm:p-4 bg-gradient-to-br from-roofing-beige to-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
                 >
-                  <Icon className="w-8 h-8 text-roofing-orange group-hover:text-roofing-orange-dark transition-colors" />
+                  <Icon className="w-5 h-5 sm:w-8 sm:h-8 text-roofing-orange group-hover:text-roofing-orange-dark transition-colors" />
                 </motion.a>
               ))}
             </div>
