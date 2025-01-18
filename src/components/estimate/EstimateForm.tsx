@@ -7,10 +7,25 @@ import { ProjectFields } from "./ProjectFields";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 
 export const EstimateForm = () => {
   const [referralSource, setReferralSource] = useState<string>("");
   const [otherSource, setOtherSource] = useState<string>("");
+  const { toast } = useToast();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Here we'll integrate your instant estimate calculation code
+    toast({
+      title: "Form Submitted",
+      description: "Thank you for your submission. We'll calculate your estimate shortly.",
+    });
+
+    // This is where we'll add your instant estimate calculation
+    // and show the result in a modal or toast notification
+  };
 
   return (
     <motion.div
@@ -24,11 +39,10 @@ export const EstimateForm = () => {
       <div className="absolute top-0 right-0 w-64 h-64 bg-roofing-orange/10 rounded-full -translate-y-32 translate-x-32 blur-3xl animate-spin-slow" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-roofing-orange/10 rounded-full translate-y-32 -translate-x-32 blur-3xl animate-spin-slow" />
       
-      {/* Content */}
       <div className="relative p-4 sm:p-6 md:p-8 backdrop-blur-sm w-full">
         <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-roofing-orange/20 to-roofing-orange-dark/20 rounded-bl-full" />
         
-        <form className="space-y-6 w-full">
+        <form onSubmit={handleSubmit} className="space-y-6 w-full">
           <div className="space-y-2 mb-8 text-center w-full">
             <h2 className="text-3xl font-bold text-roofing-charcoal text-center w-full">
               Get Your Free Estimate
