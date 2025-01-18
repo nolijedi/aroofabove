@@ -19,9 +19,6 @@ export const CalculatorSection = ({ showCalculator }: CalculatorSectionProps) =>
           className="w-full aspect-[0.53] h-[650px] border-none rounded-lg shadow-lg"
           title="Roof Estimate Calculator"
         />
-        <div className="text-center mt-4 text-sm text-gray-600">
-          Powered by <a href="https://www.instantroofer.com" className="text-roofing-orange hover:text-roofing-orange-dark transition-colors">Instant Roofer</a>
-        </div>
       </div>
     </motion.div>
   );
