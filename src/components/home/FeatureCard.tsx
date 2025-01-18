@@ -72,20 +72,20 @@ const FeatureCard = ({ feature, index }: FeatureCardProps) => {
           style={{ transform: 'rotateY(180deg)' }}
         >
           <div className="flex flex-col h-full text-white">
-            <h3 className="text-2xl font-semibold mb-6 text-roofing-cream">{feature.title}</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-roofing-cream">{feature.title}</h3>
             {feature.image && (
               <motion.div 
-                className="mb-4 rounded-lg overflow-hidden shadow-xl"
+                className="relative mb-4 rounded-lg overflow-hidden shadow-xl h-40 sm:h-48"
                 whileHover={{ scale: 1.05 }}
               >
                 <img 
                   src={feature.image} 
                   alt={feature.title}
-                  className="w-full h-48 object-cover transform hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover"
                 />
               </motion.div>
             )}
-            <p className="text-lg mb-8 text-roofing-cream/90 leading-relaxed">
+            <p className="text-sm sm:text-base text-roofing-cream/90 leading-relaxed">
               {feature.expandedDescription}
             </p>
           </div>
