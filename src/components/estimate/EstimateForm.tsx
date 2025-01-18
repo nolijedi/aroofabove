@@ -3,9 +3,7 @@ import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { FormHeader } from "./FormHeader";
 import { FormFields } from "./FormFields";
-import { ReferralSection } from "./ReferralSection";
 import { CalculatorSection } from "./CalculatorSection";
-import { useEstimateForm } from "@/hooks/useEstimateForm";
 
 interface IframeMessage {
   app?: string;
@@ -20,11 +18,7 @@ declare global {
 }
 
 export const EstimateForm = () => {
-  const [referralSource, setReferralSource] = useState<string>("");
-  const [otherSource, setOtherSource] = useState<string>("");
-  const [showCalculator, setShowCalculator] = useState(false);
   const { toast } = useToast();
-  const formData = useEstimateForm();
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -120,25 +114,6 @@ export const EstimateForm = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    setShowCalculator(true);
-    toast({
-      title: "Form submitted successfully!",
-      description: "Please use the calculator below for an instant estimate.",
-    });
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -153,23 +128,9 @@ export const EstimateForm = () => {
       <div className="relative p-4 sm:p-6 md:p-8 backdrop-blur-sm w-full">
         <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-roofing-orange/20 to-roofing-orange-dark/20 rounded-bl-full" />
         
-        <form onSubmit={handleSubmit} className="space-y-6 w-full">
+        <form className="space-y-6 w-full">
           <FormHeader />
-
-          {!showCalculator ? (
-            <>
-              <FormFields />
-              <ReferralSection
-                referralSource={referralSource}
-                otherSource={otherSource}
-                setReferralSource={setReferralSource}
-                setOtherSource={setOtherSource}
-                onSubmit={handleSubmit}
-              />
-            </>
-          ) : (
-            <CalculatorSection showCalculator={showCalculator} />
-          )}
+          <CalculatorSection showCalculator={true} />
         </form>
       </div>
     </motion.div>
