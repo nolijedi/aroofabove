@@ -1,13 +1,10 @@
 import { motion } from "framer-motion";
-import { Calculator } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { PersonalInfoFields } from "./PersonalInfoFields";
-import { AddressFields } from "./AddressFields";
-import { ProjectFields } from "./ProjectFields";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState, useEffect } from "react";
-import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { FormHeader } from "./FormHeader";
+import { FormFields } from "./FormFields";
+import { ReferralSection } from "./ReferralSection";
+import { CalculatorSection } from "./CalculatorSection";
 
 // Add type declaration for window.dataLayer
 declare global {
@@ -121,108 +118,21 @@ export const EstimateForm = () => {
         <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-roofing-orange/20 to-roofing-orange-dark/20 rounded-bl-full" />
         
         <form onSubmit={handleSubmit} className="space-y-6 w-full">
-          <div className="space-y-2 mb-8 text-center w-full">
-            <h2 className="text-3xl font-bold text-roofing-charcoal text-center w-full">
-              Get Your Free Estimate
-            </h2>
-            <p className="text-gray-600">
-              Fill out the form and select your material and get your customized price
-            </p>
-          </div>
+          <FormHeader />
 
           {!showCalculator ? (
-            <div className="space-y-8">
-              <motion.div 
-                whileHover={{ scale: 1.02 }}
-                className="bg-white/50 backdrop-blur-sm p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <PersonalInfoFields />
-              </motion.div>
-
-              <motion.div 
-                whileHover={{ scale: 1.02 }}
-                className="bg-white/50 backdrop-blur-sm p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <AddressFields />
-              </motion.div>
-
-              <motion.div 
-                whileHover={{ scale: 1.02 }}
-                className="bg-white/50 backdrop-blur-sm p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <ProjectFields />
-              </motion.div>
-
-              <motion.div 
-                whileHover={{ scale: 1.02 }}
-                className="bg-white/50 backdrop-blur-sm p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <div className="space-y-4">
-                  <label className="text-lg font-semibold text-roofing-charcoal block">
-                    How did you hear about us?
-                  </label>
-                  <Select value={referralSource} onValueChange={setReferralSource}>
-                    <SelectTrigger className="w-full bg-white/70">
-                      <SelectValue placeholder="Select an option" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="google">Google Search</SelectItem>
-                      <SelectItem value="facebook">Facebook</SelectItem>
-                      <SelectItem value="instagram">Instagram</SelectItem>
-                      <SelectItem value="friend">Friend or Family</SelectItem>
-                      <SelectItem value="neighbor">Neighbor</SelectItem>
-                      <SelectItem value="drive_by">Saw our work in the neighborhood</SelectItem>
-                      <SelectItem value="yelp">Yelp</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
-
-                  {referralSource === "other" && (
-                    <div className="mt-4">
-                      <Input
-                        type="text"
-                        placeholder="Please specify"
-                        value={otherSource}
-                        onChange={(e) => setOtherSource(e.target.value)}
-                        className="w-full bg-white/70"
-                      />
-                    </div>
-                  )}
-                </div>
-                
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="pt-4"
-                >
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-roofing-orange to-roofing-orange-dark text-white hover:opacity-90 group h-14 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                  >
-                    Get Estimate Now
-                    <Calculator className="ml-2 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
-                  </Button>
-                </motion.div>
-              </motion.div>
-            </div>
+            <>
+              <FormFields />
+              <ReferralSection
+                referralSource={referralSource}
+                otherSource={otherSource}
+                setReferralSource={setReferralSource}
+                setOtherSource={setOtherSource}
+                onSubmit={handleSubmit}
+              />
+            </>
           ) : (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="w-full flex flex-col items-center"
-            >
-              <div className="w-full max-w-[345px] mx-auto">
-                <iframe
-                  src="https://book.instantroofer.com/?product=estimate&id=daa2d386-4f15-4067-ad79-233c14420642"
-                  className="w-full aspect-[0.53] h-[650px] border-none rounded-lg shadow-lg"
-                  title="Roof Estimate Calculator"
-                />
-                <div className="text-center mt-4 text-sm text-gray-600">
-                  Powered by <a href="https://www.instantroofer.com" className="text-roofing-orange hover:text-roofing-orange-dark transition-colors">Instant Roofer</a>
-                </div>
-              </div>
-            </motion.div>
+            <CalculatorSection showCalculator={showCalculator} />
           )}
         </form>
       </div>
