@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { LucideIcon, Info, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface FeatureCardProps {
   feature: {
@@ -15,6 +16,7 @@ interface FeatureCardProps {
 
 const FeatureCard = ({ feature, index }: FeatureCardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const isMobile = useIsMobile();
   const Icon = feature.icon;
 
   return (
@@ -32,10 +34,10 @@ const FeatureCard = ({ feature, index }: FeatureCardProps) => {
           rotateY: isFlipped ? 180 : 0,
         }}
         transition={{ 
-          duration: 0.8,
+          duration: isMobile ? 0.4 : 0.8,
           type: "spring",
-          stiffness: 60,
-          damping: 15
+          stiffness: isMobile ? 80 : 60,
+          damping: isMobile ? 10 : 15
         }}
         className="relative w-full h-full preserve-3d cursor-pointer hover:scale-105 transition-transform duration-500"
       >
