@@ -48,10 +48,14 @@ const Navbar = () => {
           <DesktopNav navItems={navItems} currentPath={location.pathname} />
 
           <button
-            className="md:hidden absolute right-0 text-gray-600"
+            className="md:hidden absolute right-4 p-2 rounded-lg bg-roofing-orange text-white hover:bg-roofing-orange-dark transition-colors duration-300 shadow-lg hover:shadow-xl"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? <X size={16} /> : <Menu size={16} />}
+            {isOpen ? (
+              <X size={24} strokeWidth={2.5} className="transform rotate-90 transition-transform duration-300" />
+            ) : (
+              <Menu size={24} strokeWidth={2.5} className="transform hover:scale-110 transition-transform duration-300" />
+            )}
           </button>
         </div>
 
