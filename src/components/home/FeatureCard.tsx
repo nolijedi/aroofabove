@@ -34,10 +34,10 @@ const FeatureCard = ({ feature, index }: FeatureCardProps) => {
           rotateY: isFlipped ? 180 : 0,
         }}
         transition={{ 
-          duration: isMobile ? 0.4 : 0.8,
-          type: "spring",
-          stiffness: isMobile ? 80 : 60,
-          damping: isMobile ? 10 : 15
+          duration: isMobile ? 0.2 : 0.8,
+          type: isMobile ? "tween" : "spring",
+          stiffness: isMobile ? 100 : 60,
+          damping: isMobile ? 8 : 15
         }}
         className="relative w-full h-full preserve-3d cursor-pointer hover:scale-105 transition-transform duration-500"
       >
