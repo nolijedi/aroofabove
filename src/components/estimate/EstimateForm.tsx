@@ -7,7 +7,14 @@ import { ProjectFields } from "./ProjectFields";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
+
+// Add type declaration for window.dataLayer
+declare global {
+  interface Window {
+    dataLayer?: any[];
+  }
+}
 
 export const EstimateForm = () => {
   const [referralSource, setReferralSource] = useState<string>("");
