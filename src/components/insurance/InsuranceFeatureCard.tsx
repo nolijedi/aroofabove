@@ -80,7 +80,7 @@ const InsuranceFeatureCard = ({
                 <img 
                   src={feature.image} 
                   alt={feature.title}
-                  className="w-full h-64 object-cover transform hover:scale-110 transition-transform duration-500"
+                  className="w-full h-80 object-cover transform hover:scale-110 transition-transform duration-500"
                 />
               </motion.div>
             )}
