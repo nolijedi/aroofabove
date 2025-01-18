@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { EstimateForm } from "@/components/estimate/EstimateForm";
 import { EstimateSidebar } from "@/components/estimate/EstimateSidebar";
 
@@ -7,66 +7,40 @@ const Estimate = () => {
   const shouldReduceMotion = useReducedMotion();
   const pageRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    let observer: ResizeObserver | null = null;
-    let rafId: number | null = null;
-    let timeout: NodeJS.Timeout | null = null;
+  const handleResize = useCallback((entries: ResizeObserverEntry[]) => {
+    if (!Array.isArray(entries) || !entries.length) return;
     
-    const handleResize = (entries: ResizeObserverEntry[]) => {
-      if (!Array.isArray(entries) || !entries.length) return;
-      
-      // Log resize event (keeping for debugging purposes)
+    // Wrap the resize handling in requestAnimationFrame
+    requestAnimationFrame(() => {
       console.log('Page resized');
-    };
+    });
+  }, []);
 
-    const debouncedResize = (entries: ResizeObserverEntry[]) => {
-      // Clear existing timeout
-      if (timeout) {
-        clearTimeout(timeout);
-      }
+  useEffect(() => {
+    if (!pageRef.current) return;
 
-      // Clear existing animation frame
+    let rafId: number;
+    const observer = new ResizeObserver((entries) => {
+      // Cancel any pending animation frame
       if (rafId) {
         cancelAnimationFrame(rafId);
       }
 
-      // Set new timeout for debouncing
-      timeout = setTimeout(() => {
-        rafId = requestAnimationFrame(() => {
-          try {
-            handleResize(entries);
-          } catch (error) {
-            console.error('Error in resize handler:', error);
-          }
-        });
-      }, 150); // 150ms debounce
-    };
-    
-    try {
-      if (!pageRef.current) return;
-      
-      observer = new ResizeObserver((entries) => {
-        debouncedResize(entries);
+      // Schedule a new animation frame
+      rafId = requestAnimationFrame(() => {
+        handleResize(entries);
       });
+    });
 
-      observer.observe(pageRef.current);
-    } catch (error) {
-      console.error('Error setting up ResizeObserver:', error);
-    }
+    observer.observe(pageRef.current);
 
     return () => {
-      // Clean up all resources
-      if (observer) {
-        observer.disconnect();
-      }
+      observer.disconnect();
       if (rafId) {
         cancelAnimationFrame(rafId);
       }
-      if (timeout) {
-        clearTimeout(timeout);
-      }
     };
-  }, []);
+  }, [handleResize]);
 
   return (
     <main className="min-h-screen pt-32 pb-20" ref={pageRef}>
