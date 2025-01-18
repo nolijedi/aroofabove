@@ -30,7 +30,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="flex justify-center gap-8 py-12"
+            className="flex justify-center gap-4 sm:gap-6 py-8 px-2"
           >
             {[
               { Icon: Facebook, href: "https://facebook.com/aroofabove", label: "Facebook", delay: 0 },
@@ -59,9 +59,9 @@ const Hero = () => {
                   damping: 20,
                   delay: 0.5 + delay
                 }}
-                className="p-4 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group active:bg-roofing-orange/20"
+                className="p-2 sm:p-3 bg-roofing-beige rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group active:bg-roofing-orange/20"
               >
-                <Icon className="w-8 h-8 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
+                <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-roofing-charcoal group-hover:text-roofing-orange transition-colors" />
               </motion.a>
             ))}
           </motion.div>
