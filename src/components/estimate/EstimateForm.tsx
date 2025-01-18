@@ -4,8 +4,14 @@ import { Button } from "@/components/ui/button";
 import { PersonalInfoFields } from "./PersonalInfoFields";
 import { AddressFields } from "./AddressFields";
 import { ProjectFields } from "./ProjectFields";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
 
 export const EstimateForm = () => {
+  const [referralSource, setReferralSource] = useState<string>("");
+  const [otherSource, setOtherSource] = useState<string>("");
+
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -52,6 +58,44 @@ export const EstimateForm = () => {
               className="bg-white/50 backdrop-blur-sm p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <ProjectFields />
+            </motion.div>
+
+            <motion.div 
+              whileHover={{ scale: 1.02 }}
+              className="bg-white/50 backdrop-blur-sm p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              <div className="space-y-4">
+                <label className="text-lg font-semibold text-roofing-charcoal block">
+                  How did you hear about us?
+                </label>
+                <Select value={referralSource} onValueChange={setReferralSource}>
+                  <SelectTrigger className="w-full bg-white/70">
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="google">Google Search</SelectItem>
+                    <SelectItem value="facebook">Facebook</SelectItem>
+                    <SelectItem value="instagram">Instagram</SelectItem>
+                    <SelectItem value="friend">Friend or Family</SelectItem>
+                    <SelectItem value="neighbor">Neighbor</SelectItem>
+                    <SelectItem value="drive_by">Saw our work in the neighborhood</SelectItem>
+                    <SelectItem value="yelp">Yelp</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+
+                {referralSource === "other" && (
+                  <div className="mt-4">
+                    <Input
+                      type="text"
+                      placeholder="Please specify"
+                      value={otherSource}
+                      onChange={(e) => setOtherSource(e.target.value)}
+                      className="w-full bg-white/70"
+                    />
+                  </div>
+                )}
+              </div>
             </motion.div>
           </div>
           
