@@ -11,7 +11,7 @@ export const EstimateForm = () => {
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 1 }}
-      className="lg:col-span-2 relative overflow-hidden rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-500"
+      className="lg:col-span-2 relative overflow-hidden rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-500 w-full"
     >
       {/* Decorative background elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-roofing-cream via-roofing-beige to-roofing-orange/20 opacity-90" />
@@ -19,12 +19,12 @@ export const EstimateForm = () => {
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-roofing-orange/10 rounded-full translate-y-32 -translate-x-32 blur-3xl animate-spin-slow" />
       
       {/* Content */}
-      <div className="relative p-4 sm:p-6 md:p-8 backdrop-blur-sm">
+      <div className="relative p-4 sm:p-6 md:p-8 backdrop-blur-sm w-full">
         <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-roofing-orange/20 to-roofing-orange-dark/20 rounded-bl-full" />
         
-        <form className="space-y-6">
-          <div className="space-y-2 mb-8">
-            <h2 className="text-3xl font-bold text-roofing-charcoal">
+        <form className="space-y-6 w-full">
+          <div className="space-y-2 mb-8 text-center w-full">
+            <h2 className="text-3xl font-bold text-roofing-charcoal text-center w-full">
               Get Your Free Estimate
             </h2>
             <p className="text-gray-600">

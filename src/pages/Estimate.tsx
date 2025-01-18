@@ -35,13 +35,13 @@ const Estimate = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-roofing-orange/60 to-roofing-cream/40" />
       </div>
 
-      <div className="max-w-7xl mx-auto space-y-12 px-4 sm:px-6 lg:px-8"> {/* Added consistent padding */}
+      <div className="w-full px-2 sm:px-4 space-y-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl"
         >
-          <div className="container mx-auto text-center">
+          <div className="w-full text-center px-4">
             <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-2 relative">
               <span className="relative inline-block pb-2">
                 Get Your Free Estimate
@@ -60,9 +60,9 @@ const Estimate = () => {
           </div>
         </motion.div>
 
-        <div className="section-gradient-separator">
-          <div className="container mx-auto">
-            <div className="grid lg:grid-cols-3 gap-12">
+        <div className="section-gradient-separator w-full">
+          <div className="w-full">
+            <div className="grid lg:grid-cols-3 gap-6 md:gap-12">
               <EstimateForm />
               <EstimateSidebar />
             </div>
