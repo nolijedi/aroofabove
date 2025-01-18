@@ -18,7 +18,7 @@ export const CalculatorSection = ({ showCalculator }: CalculatorSectionProps) =>
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="w-full flex flex-col items-center relative px-4 sm:px-0"
+      className="w-full flex flex-col items-center relative px-0"
     >
       <div className="w-full min-w-[344px] max-w-[400px] mx-auto relative">
         {/* Decorative elements */}
@@ -50,7 +50,8 @@ export const CalculatorSection = ({ showCalculator }: CalculatorSectionProps) =>
                 style={{ 
                   width: '100%',
                   minWidth: '344px',
-                  maxWidth: '100%'
+                  maxWidth: '100%',
+                  margin: '0 auto'
                 }}
                 title="Roof Estimate Calculator"
               />
