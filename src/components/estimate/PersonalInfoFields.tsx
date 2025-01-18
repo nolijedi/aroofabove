@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
+import { useEstimateForm } from "@/hooks/useEstimateForm";
 
 export const PersonalInfoFields = () => {
+  const { firstName, lastName, email, phone, setField } = useEstimateForm();
+  
   const hoverAnimation = {
     scale: 1.02,
     transition: { type: "spring", stiffness: 300 }
@@ -21,6 +24,8 @@ export const PersonalInfoFields = () => {
           <Input
             type="text"
             placeholder="John"
+            value={firstName}
+            onChange={(e) => setField('firstName', e.target.value)}
             className="w-full bg-white/70 border-roofing-orange/20 focus:border-roofing-orange"
           />
         </motion.div>
@@ -34,6 +39,8 @@ export const PersonalInfoFields = () => {
           <Input
             type="text"
             placeholder="Doe"
+            value={lastName}
+            onChange={(e) => setField('lastName', e.target.value)}
             className="w-full bg-white/70 border-roofing-orange/20 focus:border-roofing-orange"
           />
         </motion.div>
@@ -47,6 +54,8 @@ export const PersonalInfoFields = () => {
           <Input
             type="email"
             placeholder="john@example.com"
+            value={email}
+            onChange={(e) => setField('email', e.target.value)}
             className="w-full bg-white/70 border-roofing-orange/20 focus:border-roofing-orange"
           />
         </motion.div>
@@ -60,6 +69,8 @@ export const PersonalInfoFields = () => {
           <Input
             type="tel"
             placeholder="(555) 123-4567"
+            value={phone}
+            onChange={(e) => setField('phone', e.target.value)}
             className="w-full bg-white/70 border-roofing-orange/20 focus:border-roofing-orange"
           />
         </motion.div>
