@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, Info, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowUpCircle } from "lucide-react";
 
 interface ServiceCardProps {
   index: number;
@@ -46,7 +45,7 @@ const ServiceCard = ({
         onMouseLeave={onMouseLeave}
       >
         {/* Front of card */}
-        <div className="absolute w-full h-full backface-hidden rounded-xl overflow-hidden">
+        <div className="absolute w-full h-full backface-hidden">
           <div className="flex flex-col h-full bg-gradient-to-br from-white via-roofing-cream to-roofing-beige p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-roofing-orange/20 backdrop-blur-sm transition-all duration-300 group-hover:shadow-2xl">
             <div className="flex items-center gap-4 mb-6">
               <div className="p-4 bg-gradient-to-br from-roofing-orange to-roofing-orange-dark rounded-xl text-white shadow-lg transform transition-transform duration-300 group-hover:scale-110">
@@ -73,18 +72,19 @@ const ServiceCard = ({
               ))}
             </ul>
             <motion.div
-              className="flex items-center justify-center gap-2 text-roofing-orange mt-auto"
+              className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-roofing-orange"
               animate={{ y: [0, 5, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <ArrowUpCircle className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
+              <Info className="w-5 h-5" />
+              <ArrowRight className="w-5 h-5" />
             </motion.div>
           </div>
         </div>
 
         {/* Back of card */}
         <div 
-          className="absolute w-full h-full backface-hidden [transform:rotateY(180deg)] rounded-xl overflow-hidden"
+          className="absolute w-full h-full backface-hidden rounded-xl overflow-hidden"
         >
           <div className="flex flex-col h-full bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-6 sm:p-8 text-white shadow-2xl">
             <h3 className="text-xl sm:text-2xl font-bold mb-6">{title}</h3>
@@ -107,7 +107,7 @@ const ServiceCard = ({
               >
                 <Link to="/estimate">
                   Get Estimate
-                  <ArrowUpCircle className="ml-2 h-4 w-4 group-hover:translate-y-1 transition-transform" />
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-y-1 transition-transform" />
                 </Link>
               </Button>
             </div>
