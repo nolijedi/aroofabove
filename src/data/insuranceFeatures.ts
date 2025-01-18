@@ -6,7 +6,7 @@ export const insuranceFeatures = [
     title: "Expert Claims Advocacy",
     description: "Our team of insurance specialists works directly with your insurance company to maximize your claim.",
     expandedDescription: "We have years of experience dealing with insurance companies and know exactly what documentation they need to approve your claim quickly.",
-    image: "/lovable-uploads/4bce1ec0-41ca-4e43-ae3b-8d433eb8d962.png"
+    image: "/lovable-uploads/b287a462-622e-4276-afdb-e1377c288027.png"
   },
   {
     icon: Clock,
