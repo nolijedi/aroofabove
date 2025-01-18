@@ -80,11 +80,11 @@ const Estimate = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-roofing-orange/60 to-roofing-cream/40" />
       </div>
 
-      <div className="w-full px-2 sm:px-4 space-y-12">
+      <div className="w-full px-0 sm:px-4 space-y-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl"
+          className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl mx-2 sm:mx-0"
         >
           <div className="w-full text-center px-4">
             <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-2 relative">
@@ -105,7 +105,7 @@ const Estimate = () => {
           </div>
         </motion.div>
 
-        <div className="section-gradient-separator w-full">
+        <div className="section-gradient-separator w-full mx-2 sm:mx-0">
           <div className="w-full">
             <div className="grid lg:grid-cols-3 gap-6 md:gap-12">
               <EstimateForm />
