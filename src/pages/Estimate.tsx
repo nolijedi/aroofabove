@@ -1,41 +1,27 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { EstimateForm } from "@/components/estimate/EstimateForm";
 import { EstimateSidebar } from "@/components/estimate/EstimateSidebar";
 
 const Estimate = () => {
   const shouldReduceMotion = useReducedMotion();
-  const observerRef = useRef<ResizeObserver | null>(null);
 
   useEffect(() => {
-    // Create the observer only once
-    observerRef.current = new ResizeObserver((entries) => {
-      // Use requestAnimationFrame to batch DOM updates
+    const resizeObserver = new ResizeObserver((entries) => {
       window.requestAnimationFrame(() => {
-        entries.forEach(entry => {
+        for (const entry of entries) {
           // Handle resize if needed
-          // Currently we're just observing, no specific action needed
-        });
+        }
       });
     });
 
-    // Query elements after the component is mounted
     const animatedElements = document.querySelectorAll('.animate-resize');
-    
-    // Observe each element
-    animatedElements.forEach(element => {
-      if (observerRef.current) {
-        observerRef.current.observe(element);
-      }
-    });
+    animatedElements.forEach(element => resizeObserver.observe(element));
 
-    // Cleanup function
     return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
+      resizeObserver.disconnect();
     };
-  }, []); // Empty dependency array since we only want to run this once
+  }, []);
 
   return (
     <main className="min-h-screen pt-32 pb-20">
