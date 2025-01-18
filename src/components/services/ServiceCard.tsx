@@ -45,7 +45,7 @@ const ServiceCard = ({
         onMouseLeave={onMouseLeave}
       >
         {/* Front of card */}
-        <div className="absolute w-full h-full backface-hidden">
+        <div className="absolute w-full h-full backface-hidden" style={{ transform: 'rotateY(0deg)' }}>
           <div className="flex flex-col h-full bg-gradient-to-br from-white via-roofing-cream to-roofing-beige p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-roofing-orange/20 backdrop-blur-sm transition-all duration-300 group-hover:shadow-2xl rounded-xl">
             <div className="flex items-center gap-4 mb-6">
               <div className="p-4 bg-gradient-to-br from-roofing-orange to-roofing-orange-dark rounded-xl text-white shadow-lg transform transition-transform duration-300 group-hover:scale-110">
@@ -84,9 +84,10 @@ const ServiceCard = ({
 
         {/* Back of card */}
         <div 
-          className="absolute w-full h-full backface-hidden [transform:rotateY(180deg)] rounded-xl overflow-hidden"
+          className="absolute w-full h-full backface-hidden"
+          style={{ transform: 'rotateY(180deg)' }}
         >
-          <div className="flex flex-col h-full bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-6 sm:p-8 text-white shadow-2xl">
+          <div className="flex flex-col h-full bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-6 sm:p-8 text-white shadow-2xl rounded-xl">
             <h3 className="text-xl sm:text-2xl font-bold mb-6">{title}</h3>
             {image && (
               <div className="relative mb-6 group/image">
