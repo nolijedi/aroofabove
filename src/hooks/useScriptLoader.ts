@@ -1,21 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 export const useScriptLoader = () => {
   const { toast } = useToast();
   const SCRIPT_ID = 'instant-roofer-script';
+  const isLoadingRef = useRef(false);
 
   useEffect(() => {
-    // Check if script is already loaded
-    if (document.getElementById(SCRIPT_ID)) {
-      return; // Script already exists, don't load it again
+    // Check if script is already loaded or is currently loading
+    if (document.getElementById(SCRIPT_ID) || isLoadingRef.current) {
+      return;
     }
 
     let timeoutId: number;
     let scriptElement: HTMLScriptElement | null = null;
 
     const loadScript = () => {
-      // Create script element
+      if (isLoadingRef.current) return;
+      isLoadingRef.current = true;
+
       scriptElement = document.createElement('script');
       scriptElement.id = SCRIPT_ID;
       scriptElement.type = 'text/javascript';
@@ -25,11 +28,16 @@ export const useScriptLoader = () => {
       
       scriptElement.onerror = (error) => {
         console.error('Error loading InstantRoofer script:', error);
+        isLoadingRef.current = false;
         toast({
           title: "Warning",
           description: "Some features might be limited. Please refresh the page.",
           variant: "destructive"
         });
+      };
+
+      scriptElement.onload = () => {
+        isLoadingRef.current = false;
       };
 
       document.body.appendChild(scriptElement);
@@ -50,6 +58,7 @@ export const useScriptLoader = () => {
     return () => {
       window.clearTimeout(timeoutId);
       window.removeEventListener('scroll', scrollHandler);
+      isLoadingRef.current = false;
       
       // Remove script on unmount
       const existingScript = document.getElementById(SCRIPT_ID);
