@@ -1,30 +1,42 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { EstimateForm } from "@/components/estimate/EstimateForm";
 import { EstimateSidebar } from "@/components/estimate/EstimateSidebar";
 
 const Estimate = () => {
   const shouldReduceMotion = useReducedMotion();
+  const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const resizeObserver = new ResizeObserver((entries) => {
-      window.requestAnimationFrame(() => {
-        for (const entry of entries) {
-          // Handle resize if needed
-        }
+    let observer: ResizeObserver | null = null;
+    
+    const setupResizeObserver = () => {
+      if (!pageRef.current) return;
+      
+      observer = new ResizeObserver((entries) => {
+        // Use requestAnimationFrame to batch DOM updates
+        window.requestAnimationFrame(() => {
+          if (!Array.isArray(entries) || !entries.length) return;
+          
+          // Handle resize if needed - currently just monitoring
+          console.log('Page resized');
+        });
       });
-    });
 
-    const animatedElements = document.querySelectorAll('.animate-resize');
-    animatedElements.forEach(element => resizeObserver.observe(element));
+      observer.observe(pageRef.current);
+    };
+
+    setupResizeObserver();
 
     return () => {
-      resizeObserver.disconnect();
+      if (observer) {
+        observer.disconnect();
+      }
     };
   }, []);
 
   return (
-    <main className="min-h-screen pt-32 pb-20">
+    <main className="min-h-screen pt-32 pb-20" ref={pageRef}>
       {/* Background Image and Overlay - matching Services page */}
       <div 
         className="fixed inset-0 bg-cover bg-center bg-no-repeat -z-10"
