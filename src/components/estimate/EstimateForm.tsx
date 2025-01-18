@@ -126,7 +126,7 @@ export const EstimateForm = () => {
               Get Your Free Estimate
             </h2>
             <p className="text-gray-600">
-              Fill out the form and select your material and get your customized price quote
+              Fill out the form and select your material and get your customized price
             </p>
           </div>
 
