@@ -10,36 +10,49 @@ const Estimate = () => {
   useEffect(() => {
     let observer: ResizeObserver | null = null;
     let rafId: number | null = null;
+    let timeout: NodeJS.Timeout | null = null;
     
-    const setupResizeObserver = () => {
+    const handleResize = (entries: ResizeObserverEntry[]) => {
+      if (!Array.isArray(entries) || !entries.length) return;
+      
+      // Log resize event (keeping for debugging purposes)
+      console.log('Page resized');
+    };
+
+    const debouncedResize = (entries: ResizeObserverEntry[]) => {
+      // Clear existing timeout
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+
+      // Clear existing animation frame
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+
+      // Set new timeout for debouncing
+      timeout = setTimeout(() => {
+        rafId = requestAnimationFrame(() => {
+          try {
+            handleResize(entries);
+          } catch (error) {
+            console.error('Error in resize handler:', error);
+          }
+        });
+      }, 150); // 150ms debounce
+    };
+    
+    try {
       if (!pageRef.current) return;
       
       observer = new ResizeObserver((entries) => {
-        // Cancel any pending rAF to avoid queuing multiple frames
-        if (rafId) {
-          window.cancelAnimationFrame(rafId);
-        }
-        
-        // Schedule a new frame
-        rafId = window.requestAnimationFrame(() => {
-          if (!Array.isArray(entries) || !entries.length) return;
-          
-          // Throttle resize handling to prevent excessive updates
-          const now = Date.now();
-          if (!setupResizeObserver.lastRun || now - setupResizeObserver.lastRun >= 16) {
-            console.log('Page resized');
-            setupResizeObserver.lastRun = now;
-          }
-        });
+        debouncedResize(entries);
       });
 
       observer.observe(pageRef.current);
-    };
-
-    // Add timestamp property to the function
-    setupResizeObserver.lastRun = 0;
-
-    setupResizeObserver();
+    } catch (error) {
+      console.error('Error setting up ResizeObserver:', error);
+    }
 
     return () => {
       // Clean up all resources
@@ -47,7 +60,10 @@ const Estimate = () => {
         observer.disconnect();
       }
       if (rafId) {
-        window.cancelAnimationFrame(rafId);
+        cancelAnimationFrame(rafId);
+      }
+      if (timeout) {
+        clearTimeout(timeout);
       }
     };
   }, []);
