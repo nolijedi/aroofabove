@@ -23,7 +23,7 @@ const EnhancedHero = () => {
           <div className="text-center space-y-8">
             <div className="mb-6" />
             <div className="mb-8" />
-            <div className="flex justify-center gap-8 mb-12 pointer-events-auto">
+            <div className="hidden md:flex justify-center gap-8 mb-12 pointer-events-auto">
               {socialLinks.map(({ Icon, href, label, delay }, index) => (
                 <motion.button
                   key={index}
