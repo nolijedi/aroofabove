@@ -11,7 +11,7 @@ export const EstimateForm = () => {
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 1 }}
-      className="lg:col-span-2 relative overflow-hidden rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-500"
+      className="lg:col-span-2 relative overflow-hidden rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-500 mx-2 sm:mx-4"
     >
       {/* Decorative background elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-roofing-cream via-roofing-beige to-roofing-orange/20 opacity-90" />
@@ -19,7 +19,7 @@ export const EstimateForm = () => {
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-roofing-orange/10 rounded-full translate-y-32 -translate-x-32 blur-3xl animate-spin-slow" />
       
       {/* Content */}
-      <div className="relative p-8 backdrop-blur-sm">
+      <div className="relative p-4 sm:p-6 md:p-8 backdrop-blur-sm">
         <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-roofing-orange/20 to-roofing-orange-dark/20 rounded-bl-full" />
         
         <form className="space-y-6">
@@ -35,21 +35,21 @@ export const EstimateForm = () => {
           <div className="space-y-8">
             <motion.div 
               whileHover={{ scale: 1.02 }}
-              className="bg-white/50 backdrop-blur-sm p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-white/50 backdrop-blur-sm p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <PersonalInfoFields />
             </motion.div>
 
             <motion.div 
               whileHover={{ scale: 1.02 }}
-              className="bg-white/50 backdrop-blur-sm p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-white/50 backdrop-blur-sm p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <AddressFields />
             </motion.div>
 
             <motion.div 
               whileHover={{ scale: 1.02 }}
-              className="bg-white/50 backdrop-blur-sm p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-white/50 backdrop-blur-sm p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <ProjectFields />
             </motion.div>
