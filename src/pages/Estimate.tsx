@@ -9,28 +9,45 @@ const Estimate = () => {
 
   useEffect(() => {
     let observer: ResizeObserver | null = null;
+    let rafId: number | null = null;
     
     const setupResizeObserver = () => {
       if (!pageRef.current) return;
       
       observer = new ResizeObserver((entries) => {
-        // Use requestAnimationFrame to batch DOM updates
-        window.requestAnimationFrame(() => {
+        // Cancel any pending rAF to avoid queuing multiple frames
+        if (rafId) {
+          window.cancelAnimationFrame(rafId);
+        }
+        
+        // Schedule a new frame
+        rafId = window.requestAnimationFrame(() => {
           if (!Array.isArray(entries) || !entries.length) return;
           
-          // Handle resize if needed - currently just monitoring
-          console.log('Page resized');
+          // Throttle resize handling to prevent excessive updates
+          const now = Date.now();
+          if (!setupResizeObserver.lastRun || now - setupResizeObserver.lastRun >= 16) {
+            console.log('Page resized');
+            setupResizeObserver.lastRun = now;
+          }
         });
       });
 
       observer.observe(pageRef.current);
     };
 
+    // Add timestamp property to the function
+    setupResizeObserver.lastRun = 0;
+
     setupResizeObserver();
 
     return () => {
+      // Clean up all resources
       if (observer) {
         observer.disconnect();
+      }
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
       }
     };
   }, []);
