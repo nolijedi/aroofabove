@@ -18,20 +18,20 @@ export const CalculatorSection = ({ showCalculator }: CalculatorSectionProps) =>
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="w-full flex flex-col items-center relative"
+      className="w-full flex flex-col items-center justify-center relative px-4 sm:px-6"
     >
-      <div className="w-full mx-auto relative">
+      <div className="w-full max-w-[400px] mx-auto relative">
         {/* Decorative elements */}
         <div className="absolute -top-8 -left-8 w-32 h-32 bg-roofing-orange/10 rounded-full blur-2xl animate-pulse" />
         <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-roofing-cream/20 rounded-full blur-2xl animate-pulse" />
         
         {/* Main content wrapper */}
         <motion.div
-          className="relative bg-white/90 backdrop-blur-sm p-4 sm:p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 w-full flex justify-center"
+          className="relative bg-white/90 backdrop-blur-sm p-4 sm:p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500"
           whileHover={{ scale: 1.02 }}
         >
           {/* Header */}
-          <div className="mb-6 relative text-center">
+          <div className="mb-6 text-center">
             <h3 className="text-2xl font-bold text-roofing-charcoal">
               Instant Estimate Calculator
             </h3>
@@ -41,16 +41,19 @@ export const CalculatorSection = ({ showCalculator }: CalculatorSectionProps) =>
           </div>
 
           {/* Calculator iframe with enhanced styling */}
-          <div className="relative w-[344px]">
+          <div className="relative flex justify-center">
             <div className="absolute inset-0 bg-gradient-to-br from-roofing-cream via-roofing-beige to-roofing-orange/20 opacity-30 rounded-lg" />
-            <iframe
-              src={urlWithParams}
-              className="w-[344px] h-[650px] border-none rounded-lg shadow-lg relative z-10"
-              style={{ 
-                display: 'block'
-              }}
-              title="Roof Estimate Calculator"
-            />
+            <div className="w-full max-w-[344px] overflow-hidden">
+              <iframe
+                src={urlWithParams}
+                className="w-full h-[650px] border-none rounded-lg shadow-lg relative z-10"
+                style={{ 
+                  maxWidth: '100%',
+                  display: 'block'
+                }}
+                title="Roof Estimate Calculator"
+              />
+            </div>
           </div>
 
           {/* Bottom decorative line */}
