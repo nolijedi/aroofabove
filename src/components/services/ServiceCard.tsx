@@ -46,7 +46,7 @@ const ServiceCard = ({
       >
         {/* Front of card */}
         <div className="absolute w-full h-full backface-hidden">
-          <div className="flex flex-col h-full bg-gradient-to-br from-white via-roofing-cream to-roofing-beige p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-roofing-orange/20 backdrop-blur-sm transition-all duration-300 group-hover:shadow-2xl">
+          <div className="flex flex-col h-full bg-gradient-to-br from-white via-roofing-cream to-roofing-beige p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-roofing-orange/20 backdrop-blur-sm transition-all duration-300 group-hover:shadow-2xl rounded-xl">
             <div className="flex items-center gap-4 mb-6">
               <div className="p-4 bg-gradient-to-br from-roofing-orange to-roofing-orange-dark rounded-xl text-white shadow-lg transform transition-transform duration-300 group-hover:scale-110">
                 <Icon className="w-8 h-8" />
