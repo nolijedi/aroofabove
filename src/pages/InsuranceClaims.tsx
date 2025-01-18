@@ -4,22 +4,11 @@ import CallToActionSection from "@/components/insurance/CallToActionSection";
 import InsuranceHeader from "@/components/insurance/InsuranceHeader";
 import WhyChooseUsSection from "@/components/insurance/WhyChooseUsSection";
 import ProcessSection from "@/components/insurance/ProcessSection";
-import CommonDamagesSection from "@/components/insurance/CommonDamagesSection";
 import WhyActNowSection from "@/components/insurance/WhyActNowSection";
 
 const InsuranceClaims = () => {
   return (
     <main className="min-h-screen pt-32 pb-16 px-4 relative">
-      {/* Background gradient overlay */}
-      <div 
-        className="fixed inset-0 bg-gradient-to-r from-roofing-orange/60 to-roofing-cream/40 -z-10"
-        style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24?q=80&w=2070')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      
       <div className="max-w-7xl mx-auto space-y-12">
         <div className="section-gradient-separator transform hover:scale-105 transition-all duration-500">
           <InsuranceHeader />
@@ -33,10 +22,6 @@ const InsuranceClaims = () => {
 
         <div className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-8 hover:shadow-2xl transition-all duration-500">
           <ProcessSection />
-        </div>
-
-        <div className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-8 hover:shadow-2xl transition-all duration-500">
-          <CommonDamagesSection />
         </div>
 
         <div className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-8 hover:shadow-2xl transition-all duration-500">
