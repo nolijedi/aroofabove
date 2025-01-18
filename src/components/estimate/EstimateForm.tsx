@@ -5,27 +5,65 @@ import { PersonalInfoFields } from "./PersonalInfoFields";
 import { AddressFields } from "./AddressFields";
 import { ProjectFields } from "./ProjectFields";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 export const EstimateForm = () => {
   const [referralSource, setReferralSource] = useState<string>("");
   const [otherSource, setOtherSource] = useState<string>("");
   const { toast } = useToast();
 
+  useEffect(() => {
+    // Load Roof Quote PRO™ script
+    const script = document.createElement('script');
+    script.src = "https://app.roofle.com/roof-quote-pro-widget.js?id=XXX-YOUR-TOOL-ID-HERE";
+    script.async = true;
+    script.onload = () => console.log('Loaded Roof Quote PRO™');
+    document.head.appendChild(script);
+
+    // Cleanup function
+    return () => {
+      const existingScript = document.querySelector('script[src*="roof-quote-pro-widget.js"]');
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Here we'll integrate your instant estimate calculation code
+    // Show loading toast
     toast({
-      title: "Form Submitted",
-      description: "Thank you for your submission. We'll calculate your estimate shortly.",
+      title: "Processing Estimate",
+      description: "Please wait while we calculate your estimate...",
     });
 
-    // This is where we'll add your instant estimate calculation
-    // and show the result in a modal or toast notification
+    // Trigger Roof Quote PRO™ widget
+    try {
+      // @ts-ignore - RoofQuotePro is added by the external script
+      if (window.RoofQuotePro && typeof window.RoofQuotePro.openWidget === 'function') {
+        // @ts-ignore
+        window.RoofQuotePro.openWidget();
+      } else {
+        toast({
+          title: "Error",
+          description: "Estimate calculator is not ready. Please try again in a moment.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Error opening Roof Quote PRO™:', error);
+      toast({
+        title: "Error",
+        description: "There was an error calculating your estimate. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
+
+  // ... keep existing code (JSX structure and other component logic)
 
   return (
     <motion.div
