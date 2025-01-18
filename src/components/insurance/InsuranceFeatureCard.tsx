@@ -71,7 +71,7 @@ const InsuranceFeatureCard = ({
           style={{ transform: 'rotateY(180deg)' }}
         >
           <div className="flex flex-col h-full text-white">
-            <h3 className="text-2xl font-semibold mb-6 text-roofing-cream">{feature.title}</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-roofing-cream">{feature.title}</h3>
             {feature.image && (
               <motion.div 
                 className="mb-4 rounded-lg overflow-hidden shadow-xl"
@@ -80,11 +80,11 @@ const InsuranceFeatureCard = ({
                 <img 
                   src={feature.image} 
                   alt={feature.title}
-                  className="w-full h-48 object-cover transform hover:scale-110 transition-transform duration-500"
+                  className="w-full h-64 object-cover transform hover:scale-110 transition-transform duration-500"
                 />
               </motion.div>
             )}
-            <p className="text-lg mb-8 text-roofing-cream/90 leading-relaxed">{feature.expandedDescription}</p>
+            <p className="text-lg text-roofing-cream/90 leading-relaxed">{feature.expandedDescription}</p>
           </div>
         </div>
       </div>
