@@ -60,6 +60,15 @@ export const EstimateForm = () => {
         const instantRooferScript = document.createElement('script');
         instantRooferScript.type = 'text/javascript';
         instantRooferScript.async = true;
+        instantRooferScript.crossOrigin = "anonymous";
+        instantRooferScript.onerror = (error) => {
+          console.error('Error loading InstantRoofer script:', error);
+          toast({
+            title: "Warning",
+            description: "Some features might be limited. Please refresh the page.",
+            variant: "destructive"
+          });
+        };
         instantRooferScript.src = "https://book.instantroofer.com/js/instant-roofer-google-ads-integration.min.js";
         document.body.appendChild(instantRooferScript);
         isScriptsLoaded = true;
@@ -77,7 +86,7 @@ export const EstimateForm = () => {
       window.clearTimeout(timeoutId);
       window.removeEventListener('scroll', scrollHandler);
     };
-  }, []);
+  }, [toast]);
 
   const isValidURL = (string: string) => {
     try {
