@@ -37,7 +37,7 @@ const ContactInfoCard = () => {
             <p>info@roofabove.com</p>
           </a>
           <a 
-            href="https://maps.google.com/?q=123+Roofing+St,+Dallas,+TX"
+            href="https://maps.google.com/?q=Roof+Above+Spokane+WA"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 text-roofing-charcoal/80 hover:text-roofing-orange transition-colors"
@@ -45,7 +45,7 @@ const ContactInfoCard = () => {
             <div className="w-10 h-10 bg-gradient-to-r from-roofing-beige to-white rounded-full flex items-center justify-center">
               <span className="text-xl">📍</span>
             </div>
-            <p>123 Roofing St, Dallas, TX</p>
+            <p>WE ARE HERE</p>
           </a>
         </div>
       </div>
