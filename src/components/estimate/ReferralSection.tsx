@@ -9,7 +9,7 @@ interface ReferralSectionProps {
   otherSource: string;
   setReferralSource: (value: string) => void;
   setOtherSource: (value: string) => void;
-  onSubmit: () => void;
+  onSubmit: (e: React.FormEvent) => void;
 }
 
 export const ReferralSection = ({
