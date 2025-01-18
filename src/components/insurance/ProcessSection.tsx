@@ -67,23 +67,23 @@ const ProcessSection = () => {
                 />
               </div>
 
-              <div className="relative flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
-                <div className="flex-shrink-0">
+              <div className="relative flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
+                <div className="flex-shrink-0 hidden sm:block">
                   <div className="p-3 sm:p-4 bg-white/80 rounded-full shadow-inner group-hover:scale-110 transition-transform duration-300">
                     <step.icon className="w-6 h-6 sm:w-8 sm:h-8 text-roofing-orange" />
                   </div>
                 </div>
 
-                <div className="space-y-2 w-full">
-                  <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                    <span className="flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-roofing-orange text-white rounded-full font-bold text-sm sm:text-base">
+                <div className="space-y-2 w-full text-center sm:text-left">
+                  <div className="flex flex-col sm:flex-row items-center sm:items-center gap-2 sm:gap-3">
+                    <span className="flex items-center justify-center w-8 h-8 sm:w-8 sm:h-8 bg-roofing-orange text-white rounded-full font-bold text-base">
                       {index + 1}
                     </span>
                     <h3 className="text-lg sm:text-xl font-semibold text-roofing-charcoal group-hover:text-roofing-orange transition-colors duration-300">
                       {step.title}
                     </h3>
                   </div>
-                  <p className="text-sm sm:text-base text-roofing-charcoal/80 sm:ml-11 font-medium">
+                  <p className="text-sm sm:text-base text-roofing-charcoal/80 sm:ml-11 font-medium px-2 sm:px-0">
                     {step.description}
                   </p>
                 </div>
@@ -94,7 +94,7 @@ const ProcessSection = () => {
                 <motion.div
                   initial={{ height: 0 }}
                   animate={{ height: "2rem" }}
-                  className="absolute left-7 sm:left-11 bottom-0 w-0.5 bg-gradient-to-b from-roofing-orange to-transparent"
+                  className="absolute left-1/2 sm:left-11 bottom-0 w-0.5 bg-gradient-to-b from-roofing-orange to-transparent"
                   style={{ transform: "translateY(100%)" }}
                 />
               )}
