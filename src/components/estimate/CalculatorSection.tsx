@@ -46,8 +46,12 @@ export const CalculatorSection = ({ showCalculator }: CalculatorSectionProps) =>
             <div className="w-full min-w-[344px] overflow-hidden">
               <iframe
                 src={urlWithParams}
-                className="w-full h-[550px] border-none rounded-lg shadow-lg relative z-10"
-                style={{ minWidth: '344px' }}
+                className="w-full h-[650px] border-none rounded-lg shadow-lg relative z-10"
+                style={{ 
+                  minWidth: '344px',
+                  width: '100%',
+                  maxWidth: '100%'
+                }}
                 title="Roof Estimate Calculator"
               />
             </div>
