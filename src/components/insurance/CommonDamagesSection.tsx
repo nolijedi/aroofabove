@@ -62,57 +62,58 @@ const CommonDamagesSection = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="h-[250px] perspective"
+              className="h-[250px] w-full"
               onMouseEnter={() => setFlippedCard(index)}
               onMouseLeave={() => setFlippedCard(null)}
             >
-              <div 
-                className="relative w-full h-full transition-all duration-500 preserve-3d cursor-pointer hover:scale-105"
-                style={{
-                  transform: `rotateY(${flippedCard === index ? '180deg' : '0deg'})`
-                }}
-              >
-                {/* Front of card */}
-                <div className={`absolute w-full h-full backface-hidden`}>
-                  <div className="bg-gradient-to-br from-white via-roofing-cream to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-6 h-full flex flex-col justify-between border border-roofing-orange/20">
-                    <div className="flex flex-col items-center text-center space-y-4">
-                      <motion.div 
-                        className="p-4 bg-white/80 rounded-full shadow-inner group-hover:scale-110 transition-transform duration-300"
-                        whileHover={{ scale: 1.1, rotate: 360 }}
-                        transition={{ duration: 0.5 }}
-                      >
-                        <damage.icon className="w-8 h-8 text-roofing-orange" />
-                      </motion.div>
+              <div className="relative w-full h-full [perspective:1000px]">
+                <div 
+                  className="relative w-full h-full [transform-style:preserve-3d] transition-all duration-500"
+                  style={{
+                    transform: `rotateY(${flippedCard === index ? '180deg' : '0deg'})`
+                  }}
+                >
+                  {/* Front of card */}
+                  <div className="absolute inset-0 [backface-visibility:hidden]">
+                    <div className="bg-gradient-to-br from-white via-roofing-cream to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-6 h-full flex flex-col justify-between border border-roofing-orange/20">
+                      <div className="flex flex-col items-center text-center space-y-4">
+                        <motion.div 
+                          className="p-4 bg-white/80 rounded-full shadow-inner group-hover:scale-110 transition-transform duration-300"
+                          whileHover={{ scale: 1.1, rotate: 360 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          <damage.icon className="w-8 h-8 text-roofing-orange" />
+                        </motion.div>
+                        
+                        <h3 className="text-lg font-semibold text-roofing-charcoal">
+                          {damage.title}
+                        </h3>
+                        <p className="text-sm text-gray-600">
+                          {damage.description}
+                        </p>
+                      </div>
                       
-                      <h3 className="text-lg font-semibold text-roofing-charcoal">
-                        {damage.title}
-                      </h3>
-                      <p className="text-sm text-gray-600">
-                        {damage.description}
+                      <motion.div
+                        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-roofing-orange"
+                        animate={{ y: [0, 5, 0] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        <Info className="w-5 h-5" />
+                        <ArrowRight className="w-5 h-5" />
+                      </motion.div>
+                    </div>
+                  </div>
+
+                  {/* Back of card */}
+                  <div 
+                    className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-6 flex items-center justify-center"
+                  >
+                    <div className="text-center">
+                      <h3 className="text-xl font-bold text-white mb-4">{damage.title}</h3>
+                      <p className="text-roofing-cream text-sm leading-relaxed">
+                        {damage.expandedDescription}
                       </p>
                     </div>
-                    
-                    <motion.div
-                      className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-roofing-orange"
-                      animate={{ y: [0, 5, 0] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      <Info className="w-5 h-5" />
-                      <ArrowRight className="w-5 h-5" />
-                    </motion.div>
-                  </div>
-                </div>
-
-                {/* Back of card */}
-                <div 
-                  className="absolute w-full h-full backface-hidden rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-6 flex items-center justify-center"
-                  style={{ transform: 'rotateY(180deg)' }}
-                >
-                  <div className="text-center">
-                    <h3 className="text-xl font-bold text-white mb-4">{damage.title}</h3>
-                    <p className="text-roofing-cream text-sm leading-relaxed">
-                      {damage.expandedDescription}
-                    </p>
                   </div>
                 </div>
               </div>
