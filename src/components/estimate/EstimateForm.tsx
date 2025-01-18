@@ -5,8 +5,8 @@ import { FormHeader } from "./FormHeader";
 import { FormFields } from "./FormFields";
 import { ReferralSection } from "./ReferralSection";
 import { CalculatorSection } from "./CalculatorSection";
+import { useEstimateForm } from "@/hooks/useEstimateForm";
 
-// Add type declaration for window.dataLayer
 declare global {
   interface Window {
     dataLayer?: any[];
@@ -18,25 +18,27 @@ export const EstimateForm = () => {
   const [otherSource, setOtherSource] = useState<string>("");
   const [showCalculator, setShowCalculator] = useState(false);
   const { toast } = useToast();
+  const formData = useEstimateForm();
 
   useEffect(() => {
-    // Handle messages from iframe
     const handleMessage = (event: MessageEvent) => {
       const expectedOrigin = "https://book.instantroofer.com";
       if (event.origin !== expectedOrigin) return;
 
       try {
-        const data = JSON.parse(event.data);
-        if (data) {
-          if (data.app === 'booking' && window.dataLayer) {
-            window.dataLayer.push({
-              'event': 'iframe_event',
-              'iframe_app': data.app,
-              'iframe_event_name': data.event
-            });
-          }
-          if (isValidURL(data?.redirectUrl)) {
-            window.location.href = data.redirectUrl;
+        if (typeof event.data === 'string') {
+          const data = JSON.parse(event.data);
+          if (data) {
+            if (data.app === 'booking' && window.dataLayer) {
+              window.dataLayer.push({
+                'event': 'iframe_event',
+                'iframe_app': data.app,
+                'iframe_event_name': data.event
+              });
+            }
+            if (isValidURL(data?.redirectUrl)) {
+              window.location.href = data.redirectUrl;
+            }
           }
         }
       } catch (e) {
@@ -72,10 +74,8 @@ export const EstimateForm = () => {
       }
     };
 
-    // Load script after 7000ms
     timeoutId = window.setTimeout(loadScripts, 7000);
 
-    // Load script on user scroll
     const scrollHandler = () => loadScripts();
     window.addEventListener('scroll', scrollHandler, { once: true });
 
@@ -96,6 +96,17 @@ export const EstimateForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in all required fields.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setShowCalculator(true);
     toast({
       title: "Form submitted successfully!",
