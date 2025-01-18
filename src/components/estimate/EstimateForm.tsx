@@ -7,6 +7,12 @@ import { ReferralSection } from "./ReferralSection";
 import { CalculatorSection } from "./CalculatorSection";
 import { useEstimateForm } from "@/hooks/useEstimateForm";
 
+interface IframeMessage {
+  app?: string;
+  event?: string;
+  redirectUrl?: string;
+}
+
 declare global {
   interface Window {
     dataLayer?: any[];
@@ -22,27 +28,47 @@ export const EstimateForm = () => {
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      const expectedOrigin = "https://book.instantroofer.com";
-      if (event.origin !== expectedOrigin) return;
-
       try {
+        // Validate origin
+        const expectedOrigin = "https://book.instantroofer.com";
+        if (event.origin !== expectedOrigin) {
+          console.log("Invalid origin:", event.origin);
+          return;
+        }
+
+        // Parse message data safely
+        let parsedData: IframeMessage | null = null;
         if (typeof event.data === 'string') {
-          const data = JSON.parse(event.data);
-          if (data) {
-            if (data.app === 'booking' && window.dataLayer) {
-              window.dataLayer.push({
-                'event': 'iframe_event',
-                'iframe_app': data.app,
-                'iframe_event_name': data.event
-              });
-            }
-            if (isValidURL(data?.redirectUrl)) {
-              window.location.href = data.redirectUrl;
-            }
+          try {
+            parsedData = JSON.parse(event.data);
+          } catch (parseError) {
+            console.error('Error parsing message data:', parseError);
+            return;
           }
+        } else if (typeof event.data === 'object') {
+          parsedData = event.data;
+        }
+
+        if (!parsedData) {
+          console.log('No valid data in message');
+          return;
+        }
+
+        // Handle Google Analytics tracking
+        if (parsedData.app === 'booking' && window.dataLayer) {
+          window.dataLayer.push({
+            'event': 'iframe_event',
+            'iframe_app': parsedData.app,
+            'iframe_event_name': parsedData.event
+          });
+        }
+
+        // Handle redirect if URL is valid
+        if (parsedData.redirectUrl && isValidURL(parsedData.redirectUrl)) {
+          window.location.href = parsedData.redirectUrl;
         }
       } catch (e) {
-        console.error('Error processing message:', e);
+        console.error('Error handling message:', e);
       }
     };
 
@@ -97,7 +123,6 @@ export const EstimateForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate required fields
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone) {
       toast({
         title: "Missing Information",
