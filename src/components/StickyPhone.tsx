@@ -15,13 +15,13 @@ const StickyPhone = () => {
         stiffness: 100,
         damping: 20
       }}
-      className="fixed bottom-64 left-4 z-40 ml-4 mb-4 pointer-events-none" // Changed from bottom-40 to bottom-64 (16rem)
+      className="fixed left-4 bottom-24 z-50 pointer-events-none"
     >
       <motion.div
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.95 }}
         onClick={handlePhoneClick}
-        className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group pointer-events-auto"
+        className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group pointer-events-auto cursor-pointer"
         animate={{
           scale: [1, 0, 1],
         }}
