@@ -43,12 +43,17 @@ export const CalculatorSection = ({ showCalculator }: CalculatorSectionProps) =>
           {/* Calculator iframe with enhanced styling */}
           <div className="relative flex justify-center">
             <div className="absolute inset-0 bg-gradient-to-br from-roofing-cream via-roofing-beige to-roofing-orange/20 opacity-30 rounded-lg" />
-            <div className="w-[344px] overflow-hidden">
+            <div className="w-[344px] h-[650px] overflow-hidden">
               <iframe
                 src={urlWithParams}
-                className="w-full h-[650px] border-none rounded-lg shadow-lg relative z-10"
+                className="w-[344px] h-[650px] border-none rounded-lg shadow-lg relative z-10"
                 style={{ 
-                  maxWidth: '100%',
+                  width: '344px',
+                  height: '650px',
+                  minWidth: '344px',
+                  minHeight: '650px',
+                  maxWidth: '344px',
+                  maxHeight: '650px',
                   display: 'block'
                 }}
                 title="Roof Estimate Calculator"
