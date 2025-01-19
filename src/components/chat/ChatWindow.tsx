@@ -27,8 +27,8 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
       }}
       className={`fixed bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-40 ${
         isMobile 
-          ? "inset-x-4 bottom-24 max-w-[400px] mx-auto h-[50vh]" // Reduced height and increased bottom spacing
-          : "bottom-24 right-8 w-[320px] h-[400px]"
+          ? "inset-x-4 bottom-20 max-w-[400px] mx-auto h-[480px]"
+          : "bottom-20 right-8 w-[380px] h-[520px]"
       }`}
     >
       <ChatHeader onClose={onClose} />
