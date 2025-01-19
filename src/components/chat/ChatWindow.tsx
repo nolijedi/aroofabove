@@ -5,6 +5,8 @@ import { ChatInput } from "./ChatInput";
 import { Message } from "@/types/chat";
 import { useMediaQuery } from "@/hooks/use-mobile";
 import Draggable from "react-draggable";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface ChatWindowProps {
   messages: Message[];
@@ -15,6 +17,11 @@ interface ChatWindowProps {
 
 export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatWindowProps) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const navigate = useNavigate();
+
+  const handleEstimateClick = () => {
+    navigate('/estimate');
+  };
 
   const windowContent = (
     <motion.div
@@ -36,6 +43,14 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
       }}
     >
       <ChatHeader onClose={onClose} />
+      <div className="px-3 py-2">
+        <Button 
+          onClick={handleEstimateClick}
+          className="w-full bg-roofing-orange hover:bg-roofing-orange-dark text-white font-medium"
+        >
+          Get Instant Estimate
+        </Button>
+      </div>
       <ChatMessages messages={messages} isTyping={isTyping} />
       <ChatInput onSendMessage={onSendMessage} isTyping={isTyping} />
     </motion.div>
