@@ -31,10 +31,15 @@ export const ChatWindow = ({
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 20, scale: 0.95 }}
-      transition={{ duration: 0.3, type: "spring", stiffness: 150, damping: 15 }}
-      className="fixed bottom-24 right-8 w-[400px] h-[600px] bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-[100]"
+      transition={{ 
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+        mass: 1
+      }}
+      className="fixed bottom-24 right-8 w-[400px] h-[600px] bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-[100]"
       style={{
-        maxHeight: "calc(100vh - 200px)",
+        maxHeight: "calc(100vh - 120px)",
       }}
     >
       <ChatHeader onClose={onClose} />

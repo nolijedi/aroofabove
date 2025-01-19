@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { ChatButton } from "./chat/ChatButton";
 import { ChatWindow } from "./chat/ChatWindow";
+import { useToast } from "@/components/ui/use-toast";
 
 interface Message {
   text: string;
@@ -9,55 +10,87 @@ interface Message {
   timestamp: Date;
 }
 
+const INITIAL_MESSAGE = {
+  text: "Hello! I'm your roofing assistant. How can I help you today?",
+  isBot: true,
+  timestamp: new Date()
+};
+
 export const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([{
-    text: "Hello! How can I help you with your roofing needs today?",
-    isBot: true,
-    timestamp: new Date()
-  }]);
+  const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
   const [inputValue, setInputValue] = useState("");
   const [isHammering, setIsHammering] = useState(false);
+  const { toast } = useToast();
 
   const handleSend = () => {
     if (inputValue.trim() === "") return;
 
+    // Visual feedback
     setIsHammering(true);
     setTimeout(() => setIsHammering(false), 1000);
 
+    // Add user message
     const userMessage: Message = {
-      text: inputValue,
+      text: inputValue.trim(),
       isBot: false,
       timestamp: new Date(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    setMessages(prev => [...prev, userMessage]);
     setInputValue("");
 
-    // Simulate bot response
+    // Simulate bot thinking and response
+    toast({
+      description: "Assistant is typing...",
+      duration: 1000,
+    });
+
     setTimeout(() => {
+      const botResponses = [
+        "I'd be happy to help you with your roofing needs. Could you tell me more about your project?",
+        "Thank you for reaching out! What specific roofing services are you interested in?",
+        "I understand you have questions about roofing. Would you like to schedule a free inspection?",
+        "We offer comprehensive roofing solutions. What type of roof do you currently have?",
+      ];
+
+      const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
+      
       const botMessage: Message = {
-        text: "Thank you for your message! One of our roofing experts will get back to you shortly. Is there anything specific you'd like to know about our services?",
+        text: randomResponse,
         isBot: true,
         timestamp: new Date(),
       };
-      setMessages((prev) => [...prev, botMessage]);
-    }, 1000);
+      
+      setMessages(prev => [...prev, botMessage]);
+    }, 1500);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
       handleSend();
+    }
+  };
+
+  const toggleChat = () => {
+    setIsOpen(!isOpen);
+    if (!isOpen) {
+      toast({
+        title: "Chat Opened",
+        description: "How can we help you today?",
+        duration: 2000,
+      });
     }
   };
 
   return (
     <>
       <ChatButton 
-        onClick={() => setIsOpen(!isOpen)} 
+        onClick={toggleChat} 
         isHammering={isHammering} 
       />
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" initial={false}>
         {isOpen && (
           <ChatWindow
             messages={messages}
