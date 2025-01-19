@@ -40,10 +40,10 @@ export const ChatWindow = ({
         damping: 20,
         mass: 1
       }}
-      className={`fixed right-8 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-30 ${
+      className={`fixed bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-30 ${
         isMobile 
-          ? 'bottom-20 left-4 right-4 h-[60vh] w-auto' 
-          : 'bottom-28 w-[400px] h-[500px]'
+          ? 'bottom-20 mx-4 h-[60vh] w-[calc(100%-2rem)]' 
+          : 'bottom-28 right-8 w-[400px] h-[500px]'
       }`}
       style={{
         maxHeight: isMobile ? "calc(100vh - 160px)" : "calc(100vh - 240px)",
