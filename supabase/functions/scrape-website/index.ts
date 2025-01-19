@@ -31,36 +31,48 @@ serve(async (req) => {
 
     console.log('Making request to Firecrawl API with body:', JSON.stringify(requestBody));
 
-    const response = await fetch('https://api.firecrawl.com/v1/scrape', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${FIRECRAWL_API_KEY}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'User-Agent': 'Deno/1.0'
-      },
-      body: JSON.stringify(requestBody)
-    });
+    // Using native Deno fetch with additional options
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 
-    console.log('Response status:', response.status);
-    console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Error response:', {
-        status: response.status,
-        statusText: response.statusText,
-        body: errorText
+    try {
+      const response = await fetch('https://api.firecrawl.com/v1/scrape', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${FIRECRAWL_API_KEY}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'User-Agent': 'Deno/1.0'
+        },
+        body: JSON.stringify(requestBody),
+        signal: controller.signal
       });
-      throw new Error(`Firecrawl API error: ${response.status} - ${errorText}`);
+
+      clearTimeout(timeoutId);
+
+      console.log('Response status:', response.status);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Error response:', {
+          status: response.status,
+          statusText: response.statusText,
+          body: errorText
+        });
+        throw new Error(`Firecrawl API error: ${response.status} - ${errorText}`);
+      }
+
+      const data = await response.json();
+      console.log('Scrape completed successfully');
+
+      return new Response(JSON.stringify(data), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    } catch (fetchError) {
+      clearTimeout(timeoutId);
+      throw fetchError;
     }
-
-    const data = await response.json();
-    console.log('Scrape completed successfully');
-
-    return new Response(JSON.stringify(data), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
   } catch (error) {
     console.error('Error details:', {
       message: error.message,
