@@ -6,14 +6,36 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Retry configuration
+const MAX_RETRIES = 3;
+const INITIAL_RETRY_DELAY = 1000; // 1 second
+
+async function retryWithExponentialBackoff(fn: () => Promise<Response>, retries = MAX_RETRIES, delay = INITIAL_RETRY_DELAY): Promise<Response> {
+  try {
+    return await fn();
+  } catch (error) {
+    if (retries === 0) throw error;
+    
+    console.log(`Retry attempt remaining: ${retries}. Waiting ${delay}ms before next attempt...`);
+    await new Promise(resolve => setTimeout(resolve, delay));
+    
+    return retryWithExponentialBackoff(fn, retries - 1, delay * 2);
+  }
+}
+
 serve(async (req) => {
+  console.log('Starting scrape-website function execution');
+  const startTime = Date.now();
+
   if (req.method === 'OPTIONS') {
+    console.log('Handling CORS preflight request');
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
     const FIRECRAWL_API_KEY = Deno.env.get('FIRECRAWL_API_KEY');
     if (!FIRECRAWL_API_KEY) {
+      console.error('Firecrawl API key not configured');
       throw new Error('Firecrawl API key not configured');
     }
 
@@ -27,60 +49,67 @@ serve(async (req) => {
       }
     };
 
-    console.log('Starting scrape request to Firecrawl API...');
+    console.log('Preparing Firecrawl API request with configuration:', {
+      url: requestBody.url,
+      limit: requestBody.limit,
+      options: requestBody.scrapeOptions
+    });
 
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 30000);
+    const makeRequest = () => fetch('https://api.firecrawl.com/v1/scrape', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${FIRECRAWL_API_KEY}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(requestBody)
+    });
 
-    try {
-      const response = await fetch('https://api.firecrawl.com/v1/scrape', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${FIRECRAWL_API_KEY}`,
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-        signal: controller.signal
+    // Set up timeout for the entire function
+    const FUNCTION_TIMEOUT = 25000; // 25 seconds
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('Function timeout exceeded')), FUNCTION_TIMEOUT);
+    });
+
+    // Execute request with retry mechanism and timeout
+    const response = await Promise.race([
+      retryWithExponentialBackoff(makeRequest),
+      timeoutPromise
+    ]);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Firecrawl API error response:', {
+        status: response.status,
+        statusText: response.statusText,
+        body: errorText,
+        executionTime: `${Date.now() - startTime}ms`
       });
-
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Firecrawl API error response:', {
-          status: response.status,
-          statusText: response.statusText,
-          body: errorText
-        });
-        throw new Error(`Firecrawl API error: ${response.status} - ${errorText}`);
-      }
-
-      const data = await response.json();
-      console.log('Scrape completed successfully');
-
-      return new Response(JSON.stringify(data), {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-
-    } catch (fetchError) {
-      clearTimeout(timeoutId);
-      if (fetchError.name === 'AbortError') {
-        throw new Error('Request timeout after 30 seconds');
-      }
-      throw fetchError;
+      throw new Error(`Firecrawl API error: ${response.status} - ${errorText}`);
     }
+
+    const data = await response.json();
+    console.log('Scrape completed successfully', {
+      executionTime: `${Date.now() - startTime}ms`,
+      dataSize: JSON.stringify(data).length
+    });
+
+    return new Response(JSON.stringify(data), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
 
   } catch (error) {
     console.error('Error in scrape-website function:', {
       message: error.message,
-      stack: error.stack
+      stack: error.stack,
+      executionTime: `${Date.now() - startTime}ms`
     });
 
     return new Response(
       JSON.stringify({ 
         error: error.message || 'An unexpected error occurred',
-        details: error.stack
+        details: error.stack,
+        executionTime: `${Date.now() - startTime}ms`
       }),
       {
         status: 500,
