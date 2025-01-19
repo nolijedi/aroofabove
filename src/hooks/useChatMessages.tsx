@@ -3,7 +3,7 @@ import { Message } from "@/types/chat";
 import { toast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
-const INITIAL_MESSAGE = `Hi! I'm your AI roofing assistant. How can I help you with your roofing project today?`;
+const INITIAL_MESSAGE = `Welcome to A Roof Above! How can I help you with your roofing project today?`;
 
 export const useChatMessages = () => {
   const [messages, setMessages] = useState<Message[]>([
@@ -50,7 +50,7 @@ export const useChatMessages = () => {
       console.error('Error generating AI response:', error);
       toast({
         title: "Connection Error",
-        description: error.message || "Having trouble connecting to the AI assistant. Please try again.",
+        description: error.message || "Having trouble connecting. Please try again.",
         variant: "destructive",
       });
       throw error;
