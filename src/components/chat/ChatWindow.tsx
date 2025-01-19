@@ -31,16 +31,16 @@ export const ChatWindow = ({
       }}
       className={`fixed bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-30 ${
         isMobile 
-          ? 'bottom-24 left-2 right-2 mx-auto h-[80vh] w-[96%]' 
-          : 'bottom-28 right-8 w-[450px] h-[600px]'
+          ? 'bottom-24 left-2 right-2 mx-auto h-[85vh] w-[96%]' 
+          : 'bottom-28 right-8 w-[500px] h-[750px]'
       }`}
       style={{
-        maxHeight: isMobile ? "calc(100vh - 180px)" : "calc(100vh - 240px)",
-        marginTop: "80px"
+        maxHeight: isMobile ? "calc(100vh - 160px)" : "calc(100vh - 200px)",
+        marginTop: "60px"
       }}
     >
       <ChatHeader onClose={onClose} />
-      <div className="h-[calc(100%-60px)] w-full overflow-hidden">
+      <div className="h-[calc(100%-40px)] w-full overflow-hidden">
         {isLoading ? (
           <LoadingSpinner />
         ) : isAuthenticated ? (
@@ -49,7 +49,7 @@ export const ChatWindow = ({
             className="w-full h-full"
             style={{ 
               minHeight: "100%",
-              height: isMobile ? "calc(80vh - 60px)" : "540px" // Subtracting header height
+              height: isMobile ? "calc(85vh - 40px)" : "710px" // Subtracting header height
             }}
             frameBorder="0"
             title="Chat Interface"
