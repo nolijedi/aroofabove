@@ -43,10 +43,12 @@ export const ChatWidget = () => {
       const hash = await generateHash(SECRET_KEY, USER_ID);
       console.log('Generated HMAC hash:', hash);
       
-      // In a real application, you would verify the hash with your backend
-      // For now, we'll simulate a successful authentication
-      setIsAuthenticated(true);
-      setIsLoading(false);
+      // Since we don't have an actual authentication endpoint,
+      // we'll simulate a successful authentication after hash generation
+      setTimeout(() => {
+        setIsAuthenticated(true);
+        setIsLoading(false);
+      }, 1000);
     } catch (error) {
       console.error('Authentication failed:', error);
       toast({
