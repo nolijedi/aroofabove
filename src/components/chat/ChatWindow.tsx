@@ -35,8 +35,8 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
       }}
       className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden flex flex-col ${
         isMobile 
-          ? "fixed inset-x-4 bottom-20 max-w-[280px] mx-auto h-[420px]" // Increased height for mobile
-          : "w-[280px] h-[480px]" // Increased height for desktop
+          ? "fixed inset-x-4 bottom-24 max-w-[280px] mx-auto h-[420px]" // Increased bottom spacing
+          : "w-[280px] h-[480px]"
       }`}
       style={{
         background: "linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(253,225,211,0.9) 100%)",
@@ -64,7 +64,7 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
     <Draggable
       handle=".chat-header"
       bounds="parent"
-      defaultPosition={{ x: window.innerWidth - 320, y: window.innerHeight - 580 }} // Adjusted position for new height
+      defaultPosition={{ x: window.innerWidth - 320, y: window.innerHeight - 640 }} // Increased Y position to move it further down
     >
       <div className="fixed z-40">
         {windowContent}
