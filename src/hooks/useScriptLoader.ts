@@ -12,9 +12,11 @@ export const useScriptLoader = () => {
   const isLoadingRef = useRef(false);
 
   const cleanupExistingScripts = () => {
-    const scripts = document.querySelectorAll(`script[id="${SCRIPT_ID}"]`);
-    scripts.forEach(script => script.remove());
+    // Remove any existing scripts with the same ID
+    const existingScripts = document.querySelectorAll(`script[id="${SCRIPT_ID}"]`);
+    existingScripts.forEach(script => script.remove());
     
+    // Clear our script reference if it exists
     if (scriptRef.current) {
       scriptRef.current.remove();
       scriptRef.current = null;
@@ -44,7 +46,20 @@ export const useScriptLoader = () => {
     });
   };
 
-  const createAndAppendScript = () => {
+  const loadScript = () => {
+    if (!mountedRef.current || isLoadingRef.current) {
+      console.log('Script loading prevented - component unmounted or already loading');
+      return;
+    }
+
+    // Clean up any existing scripts first
+    cleanupExistingScripts();
+    
+    // Set loading state
+    isLoadingRef.current = true;
+    
+    // Create and append new script
+    console.log('Creating new script element');
     const scriptTag = document.createElement('script');
     scriptTag.id = SCRIPT_ID;
     scriptTag.src = SCRIPT_URL;
@@ -56,23 +71,12 @@ export const useScriptLoader = () => {
     scriptRef.current = scriptTag;
   };
 
-  const loadScript = () => {
-    if (!mountedRef.current || isLoadingRef.current) {
-      console.log('Script loading prevented - component unmounted or already loading');
-      return;
-    }
-
-    cleanupExistingScripts();
-    isLoadingRef.current = true;
-    console.log('Creating new script element');
-    createAndAppendScript();
-  };
-
   useEffect(() => {
     console.log('Script loader mounted');
     mountedRef.current = true;
 
-    timeoutRef.current = window.setTimeout(loadScript, 2000);
+    // Delay initial load to ensure proper cleanup and initialization
+    timeoutRef.current = window.setTimeout(loadScript, 1000);
 
     return () => {
       console.log('Cleaning up script loader');
@@ -86,4 +90,6 @@ export const useScriptLoader = () => {
       cleanupExistingScripts();
     };
   }, [toast]);
+
+  return null;
 };
