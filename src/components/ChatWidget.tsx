@@ -4,17 +4,9 @@ import { ChatButton } from "./chat/ChatButton";
 import { ChatWindow } from "./chat/ChatWindow";
 import { toast } from "@/components/ui/use-toast";
 import { Message } from "@/types/chat";
+import { supabase } from "@/integrations/supabase/client";
 
-const INITIAL_MESSAGE = `Welcome to the Ultimate Roofing Sales Assistant! Ready to get your roofing project off the ground? Let's talk about how I can help you get the best deal, the best service, and the best results.
-
-I can help you with:
-• Instant Roofing Estimates
-• Material Selection
-• Cost Optimization
-• Project Planning
-• Special Deals & Offers
-
-How can I assist you today?`;
+const INITIAL_MESSAGE = `Hi! I'm your roofing assistant. How can I help you today?`;
 
 const SYSTEM_PROMPT = `You are a helpful and knowledgeable roofing sales assistant. Your main goal is to guide users towards getting an instant estimate using the Roofing Calculator. Here's how you should approach different topics:
 
@@ -43,14 +35,8 @@ export const ChatWidget = () => {
 
   const generateAIResponse = async (message: string): Promise<string> => {
     try {
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: "gpt-4o",
+      const { data: { text }, error } = await supabase.functions.invoke('chat', {
+        body: {
           messages: [
             {
               role: "system",
@@ -65,17 +51,11 @@ export const ChatWidget = () => {
               content: message,
             },
           ],
-          temperature: 0.7,
-          max_tokens: 150,
-        }),
+        },
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to generate response');
-      }
-
-      const data = await response.json();
-      return data.choices[0].message.content;
+      if (error) throw error;
+      return text;
     } catch (error) {
       console.error('Error generating AI response:', error);
       return "I apologize, but I'm having trouble connecting right now. Would you like to use our Roofing Calculator to get an instant estimate while we resolve this?";
