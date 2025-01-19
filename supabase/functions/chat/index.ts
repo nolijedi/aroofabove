@@ -10,7 +10,6 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
@@ -25,38 +24,27 @@ serve(async (req) => {
       throw new Error('API configuration error');
     }
 
-    // Format messages for Gemini API
-    const formattedMessages = messages.map((msg: any) => ({
-      role: msg.role,
-      parts: [{ text: msg.content }]
-    }));
-
-    // Add system prompt as first message
-    formattedMessages.unshift({
-      role: "user",
-      parts: [{ text: SYSTEM_PROMPT }]
-    });
-
-    console.log('Sending request to Gemini API with formatted messages:', formattedMessages);
-
-    const response = await fetch(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + GEMINI_API_KEY,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+    const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + GEMINI_API_KEY, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        contents: [
+          { role: "user", parts: [{ text: SYSTEM_PROMPT }] },
+          ...messages.map((msg: any) => ({
+            role: msg.role,
+            parts: [{ text: msg.content }]
+          }))
+        ],
+        generationConfig: {
+          temperature: 0.9, // Increased for more variety
+          maxOutputTokens: 800,
+          topP: 0.9,
+          topK: 40
         },
-        body: JSON.stringify({
-          contents: formattedMessages,
-          generationConfig: {
-            temperature: 0.8,
-            maxOutputTokens: 800,
-            topP: 0.9,
-            topK: 40
-          },
-        }),
-      }
-    );
+      }),
+    });
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -74,13 +62,10 @@ serve(async (req) => {
 
     return new Response(
       JSON.stringify({ text: data.candidates[0].content.parts[0].text }),
-      {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      },
+      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   } catch (error) {
     console.error('Error in chat function:', error);
-    
     return new Response(
       JSON.stringify({ 
         error: error.message || "An unexpected error occurred. Please try again."
