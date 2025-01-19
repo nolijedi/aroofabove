@@ -27,7 +27,7 @@ export const CalculatorSection = ({ showCalculator }: CalculatorSectionProps) =>
         
         {/* Main content wrapper */}
         <motion.div
-          className="relative bg-white/90 backdrop-blur-sm p-2 sm:p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 w-[344px] mx-auto"
+          className="relative bg-white/90 backdrop-blur-sm p-2 sm:p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 w-[344px] md:w-[500px] lg:w-[600px] mx-auto"
           whileHover={{ scale: 1.02 }}
         >
           {/* Header */}
@@ -43,18 +43,28 @@ export const CalculatorSection = ({ showCalculator }: CalculatorSectionProps) =>
           {/* Calculator iframe with enhanced styling */}
           <div className="relative flex justify-center">
             <div className="absolute inset-0 bg-gradient-to-br from-roofing-cream via-roofing-beige to-roofing-orange/20 opacity-30 rounded-lg" />
-            <div className="w-[344px] h-[650px]">
+            <div className="w-[344px] md:w-[500px] lg:w-[600px] h-[650px]">
               <iframe
                 src={urlWithParams}
-                className="w-[344px] h-[650px] border-none rounded-lg shadow-lg relative z-10"
+                className="w-[344px] md:w-[500px] lg:w-[600px] h-[650px] border-none rounded-lg shadow-lg relative z-10"
                 style={{ 
                   width: '344px',
-                  height: '650px',
                   minWidth: '344px',
-                  minHeight: '650px',
                   maxWidth: '344px',
+                  height: '650px',
+                  minHeight: '650px',
                   maxHeight: '650px',
-                  display: 'block'
+                  display: 'block',
+                  '@media (min-width: 768px)': {
+                    width: '500px',
+                    minWidth: '500px',
+                    maxWidth: '500px',
+                  },
+                  '@media (min-width: 1024px)': {
+                    width: '600px',
+                    minWidth: '600px',
+                    maxWidth: '600px',
+                  }
                 }}
                 title="Roof Estimate Calculator"
               />
