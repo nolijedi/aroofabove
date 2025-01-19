@@ -25,7 +25,7 @@ const FeatureCard = ({ feature, index }: FeatureCardProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.2 }}
-      className="h-[400px] w-full perspective"
+      className="h-[400px] w-full [perspective:1000px]"
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
     >
@@ -39,11 +39,14 @@ const FeatureCard = ({ feature, index }: FeatureCardProps) => {
           stiffness: isMobile ? 100 : 60,
           damping: isMobile ? 8 : 15
         }}
-        className="relative w-full h-full preserve-3d"
+        className="relative w-full h-full [transform-style:preserve-3d]"
+        style={{
+          transformOrigin: "center"
+        }}
       >
         {/* Front of card */}
         <div 
-          className="absolute inset-0 w-full h-full backface-hidden bg-gradient-to-br from-roofing-cream via-white to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 border border-roofing-orange/20"
+          className="absolute inset-0 w-full h-full [backface-visibility:hidden] bg-gradient-to-br from-roofing-cream via-white to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 border border-roofing-orange/20"
           style={{ transform: 'rotateY(0deg)' }}
         >
           <div className="flex flex-col items-center text-center space-y-4">
@@ -73,7 +76,7 @@ const FeatureCard = ({ feature, index }: FeatureCardProps) => {
 
         {/* Back of card */}
         <div 
-          className="absolute inset-0 w-full h-full backface-hidden bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8"
+          className="absolute inset-0 w-full h-full [backface-visibility:hidden] bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8"
           style={{ transform: 'rotateY(180deg)' }}
         >
           <div className="flex flex-col h-full">
