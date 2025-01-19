@@ -34,7 +34,11 @@ export const useChatMessages = () => {
 
       if (error) {
         console.error('Error generating AI response:', error);
-        throw error;
+        throw new Error(error.message);
+      }
+
+      if (data?.error) {
+        throw new Error(data.error);
       }
 
       if (!data?.text) {
@@ -46,10 +50,10 @@ export const useChatMessages = () => {
       console.error('Error generating AI response:', error);
       toast({
         title: "Connection Error",
-        description: "Having trouble connecting to the AI assistant. Please try again.",
+        description: error.message || "Having trouble connecting to the AI assistant. Please try again.",
         variant: "destructive",
       });
-      return "I apologize, but I'm having trouble connecting right now. Would you like to use our Roofing Calculator to get an instant estimate while we resolve this?";
+      throw error;
     }
   };
 
@@ -73,11 +77,11 @@ export const useChatMessages = () => {
       }]);
     } catch (error) {
       console.error("Error sending message:", error);
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
+      setMessages((prev) => [...prev, {
+        role: "assistant",
+        content: "I apologize, but I'm having trouble responding right now. Please try again in a moment.",
+        timestamp: new Date(),
+      }]);
     } finally {
       setIsTyping(false);
     }

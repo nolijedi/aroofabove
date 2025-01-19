@@ -37,6 +37,7 @@ RESPONSE GUIDELINES:
 Remember: Your main goal is to guide users towards using the Roofing Calculator for an instant estimate. Every conversation should naturally lead towards this action.`;
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
@@ -48,7 +49,7 @@ serve(async (req) => {
 
     if (!GEMINI_API_KEY) {
       console.error('GEMINI_API_KEY is not set');
-      throw new Error('GEMINI_API_KEY is not configured');
+      throw new Error('API configuration error');
     }
 
     const response = await fetch(
@@ -81,7 +82,7 @@ serve(async (req) => {
 
     if (!response.ok) {
       console.error('Gemini API error:', await response.text());
-      throw new Error('Failed to get response from Gemini API');
+      throw new Error(`Gemini API error: ${response.status}`);
     }
 
     const data = await response.json();
@@ -103,7 +104,7 @@ serve(async (req) => {
     
     return new Response(
       JSON.stringify({ 
-        error: "I apologize, but I'm having trouble connecting right now. Would you like to use our Roofing Calculator to get an instant estimate while we resolve this?"
+        error: error.message || "An unexpected error occurred. Please try again."
       }),
       {
         status: 500,
