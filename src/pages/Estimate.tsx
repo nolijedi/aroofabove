@@ -10,7 +10,6 @@ const Estimate = () => {
   const handleResize = useCallback((entries: ResizeObserverEntry[]) => {
     if (!Array.isArray(entries) || !entries.length) return;
     
-    // Wrap the resize handling in requestAnimationFrame
     requestAnimationFrame(() => {
       console.log('Page resized');
     });
@@ -21,12 +20,9 @@ const Estimate = () => {
 
     let rafId: number;
     const observer = new ResizeObserver((entries) => {
-      // Cancel any pending animation frame
       if (rafId) {
         cancelAnimationFrame(rafId);
       }
-
-      // Schedule a new animation frame
       rafId = requestAnimationFrame(() => {
         handleResize(entries);
       });
@@ -43,7 +39,7 @@ const Estimate = () => {
   }, [handleResize]);
 
   return (
-    <main className="min-h-screen pt-32 pb-20 overflow-x-hidden" ref={pageRef}>
+    <main className="min-h-screen pt-32 pb-20 overflow-x-hidden px-4 sm:px-6 lg:px-8 max-w-[1920px] mx-auto" ref={pageRef}>
       {/* Background Image and Overlay - matching Services page */}
       <div 
         className="fixed inset-0 bg-cover bg-center bg-no-repeat -z-10"
@@ -54,11 +50,11 @@ const Estimate = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-roofing-orange/60 to-roofing-cream/40" />
       </div>
 
-      <div className="w-full px-0 sm:px-4 space-y-12">
+      <div className="w-full space-y-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl mx-2 sm:mx-0"
+          className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl"
         >
           <div className="w-full text-center px-4">
             <h1 className="text-4xl md:text-5xl font-bold text-roofing-charcoal mb-2 relative">
@@ -79,7 +75,7 @@ const Estimate = () => {
           </div>
         </motion.div>
 
-        <div className="section-gradient-separator w-full mx-2 sm:mx-0">
+        <div className="section-gradient-separator">
           <div className="w-full">
             <div className="grid lg:grid-cols-3 gap-6 md:gap-12">
               <EstimateForm />

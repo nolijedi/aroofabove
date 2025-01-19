@@ -18,16 +18,16 @@ export const CalculatorSection = ({ showCalculator }: CalculatorSectionProps) =>
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="w-full flex flex-col items-start justify-center relative px-0 sm:px-4"
+      className="w-full flex flex-col items-center justify-center relative px-0 sm:px-4"
     >
-      <div className="w-full flex justify-start relative">
+      <div className="w-full flex justify-center relative">
         {/* Decorative elements */}
         <div className="absolute -top-8 -left-8 w-32 h-32 bg-roofing-orange/10 rounded-full blur-2xl animate-pulse" />
         <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-roofing-cream/20 rounded-full blur-2xl animate-pulse" />
         
         {/* Main content wrapper */}
         <motion.div
-          className="relative bg-white/90 backdrop-blur-sm p-2 sm:p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 w-[344px] mx-0"
+          className="relative bg-white/90 backdrop-blur-sm p-2 sm:p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 w-[344px] mx-auto"
           whileHover={{ scale: 1.02 }}
         >
           {/* Header */}
