@@ -53,7 +53,7 @@ export const ChatWidget = () => {
     <>
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-24 right-8 rounded-full p-4 bg-roofing-orange hover:bg-roofing-orange-dark shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 group z-50"
+        className="fixed bottom-8 right-8 rounded-full p-4 bg-roofing-orange hover:bg-roofing-orange-dark shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 group z-50"
         aria-label="Toggle chat"
       >
         <MessageCircle className="w-6 h-6 text-white" />
@@ -83,9 +83,9 @@ export const ChatWidget = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-36 right-8 w-[400px] h-[600px] bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-50"
+            className="fixed bottom-20 right-8 w-[400px] h-[600px] bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-50"
             style={{
-              maxHeight: "calc(100vh - 300px)",
+              maxHeight: "calc(100vh - 400px)",
               top: "auto"
             }}
           >
