@@ -21,7 +21,7 @@ export const ChatMessage = ({ message, index = 0 }: ChatMessageProps) => {
     >
       <motion.div 
         className={cn(
-          "p-1.5 rounded-full bg-gradient-to-br shadow-inner",
+          "p-1.5 rounded-full bg-gradient-to-br shadow-inner flex items-center justify-center w-8 h-8",
           message.role === "assistant"
             ? "from-roofing-orange/50 to-roofing-orange-dark/50" 
             : "from-roofing-charcoal/50 to-roofing-charcoal/30"
@@ -32,7 +32,7 @@ export const ChatMessage = ({ message, index = 0 }: ChatMessageProps) => {
           <img 
             src="/lovable-uploads/cfe74ea0-b3ce-4017-a778-51f7dd28f478.png"
             alt="Roofing Assistant"
-            className="w-5 h-5"
+            className="w-5 h-5 object-contain"
           />
         ) : (
           <User className="w-5 h-5 text-white/90" />
