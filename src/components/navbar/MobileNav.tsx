@@ -21,8 +21,9 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
             height: "auto",
             transition: {
               type: "spring",
-              stiffness: 100,
-              damping: 15
+              stiffness: 50, // Reduced from 100 for slower animation
+              damping: 12,   // Reduced from 15 for more bounce
+              duration: 0.8  // Increased duration
             }
           }}
           exit={{ 
@@ -30,8 +31,9 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
             height: 0,
             transition: {
               type: "spring",
-              stiffness: 300,
-              damping: 35
+              stiffness: 200,
+              damping: 25,
+              duration: 0.6
             }
           }}
           className="md:hidden pb-2 bg-roofing-charcoal/50 backdrop-blur-sm shadow-2xl rounded-b-xl overflow-hidden"
@@ -42,10 +44,16 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
             exit="closed"
             variants={{
               open: {
-                transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+                transition: { 
+                  staggerChildren: 0.15, // Increased from 0.1
+                  delayChildren: 0.3    // Increased from 0.2
+                }
               },
               closed: {
-                transition: { staggerChildren: 0.05, staggerDirection: -1 }
+                transition: { 
+                  staggerChildren: 0.08,
+                  staggerDirection: -1
+                }
               }
             }}
             className="px-4 py-2 space-y-2"
@@ -57,19 +65,24 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
                   open: {
                     x: 0,
                     opacity: 1,
+                    scale: 1,
+                    rotate: 0,
                     transition: {
                       type: "spring",
-                      stiffness: 100,
-                      damping: 15
+                      stiffness: 80,    // Reduced for slower animation
+                      damping: 12,      // Reduced for more bounce
+                      duration: 0.8     // Increased duration
                     }
                   },
                   closed: {
-                    x: -50,
+                    x: -100,
                     opacity: 0,
+                    scale: 0.8,
+                    rotate: -10,
                     transition: {
                       type: "spring",
-                      stiffness: 300,
-                      damping: 35
+                      stiffness: 200,
+                      damping: 25
                     }
                   }
                 }}
@@ -77,7 +90,7 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
               >
                 <Button
                   variant={currentPath === item.path ? "default" : "ghost"}
-                  className={`w-[90%] justify-center text-sm font-medium transform transition-all duration-300 hover:scale-105 ${
+                  className={`w-[90%] justify-center text-sm font-medium transform transition-all duration-500 hover:scale-110 ${
                     currentPath === item.path
                       ? "bg-roofing-orange hover:bg-roofing-orange-dark text-white"
                       : "bg-transparent text-white hover:bg-roofing-orange/20 hover:text-roofing-orange"
@@ -95,20 +108,22 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
                 open: {
                   y: 0,
                   opacity: 1,
+                  scale: 1,
                   transition: {
                     type: "spring",
-                    stiffness: 100,
-                    damping: 15,
-                    delay: 0.3
+                    stiffness: 60,    // Reduced for slower animation
+                    damping: 10,      // Reduced for more bounce
+                    delay: 0.5        // Increased delay
                   }
                 },
                 closed: {
-                  y: 20,
+                  y: 50,
                   opacity: 0,
+                  scale: 0.8,
                   transition: {
                     type: "spring",
-                    stiffness: 300,
-                    damping: 35
+                    stiffness: 200,
+                    damping: 25
                   }
                 }
               }}
@@ -116,7 +131,7 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
             >
               <Button
                 asChild
-                className="w-[90%] bg-roofing-orange hover:bg-roofing-orange-dark text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm font-bold rounded-lg"
+                className="w-[90%] bg-roofing-orange hover:bg-roofing-orange-dark text-white shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-110 text-sm font-bold rounded-lg"
               >
                 <Link to="/estimate" onClick={onClose}>
                   Get Estimate Now

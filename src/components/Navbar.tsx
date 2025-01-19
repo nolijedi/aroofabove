@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled ? "bg-white/10 backdrop-blur-sm shadow-lg" : "bg-transparent"
       }`}
     >
@@ -37,7 +37,7 @@ const Navbar = () => {
         <div className="flex items-center h-20 relative">
           <Link 
             to="/" 
-            className="absolute left-4 top-1/2 -translate-y-1/2 transition-transform duration-300 hover:scale-105 hover:rotate-2"
+            className="absolute left-4 top-1/2 -translate-y-1/2 transition-transform duration-500 hover:scale-105 hover:rotate-2"
           >
             <img 
               src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png" 
@@ -49,18 +49,33 @@ const Navbar = () => {
           <DesktopNav navItems={navItems} currentPath={location.pathname} />
 
           <motion.button
-            className="md:hidden absolute right-4 p-2 rounded-lg bg-roofing-orange text-white hover:bg-roofing-orange-dark transition-colors duration-300 shadow-lg hover:shadow-xl"
+            className="md:hidden absolute right-4 p-2 rounded-lg bg-roofing-orange text-white hover:bg-roofing-orange-dark transition-colors duration-500 shadow-lg hover:shadow-xl"
             onClick={() => setIsOpen(!isOpen)}
-            whileTap={{ scale: 0.9 }}
-            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.85, transition: { duration: 0.5 } }}
+            whileHover={{ scale: 1.15, transition: { duration: 0.5 } }}
           >
             <AnimatePresence mode="wait">
               <motion.div
                 key={isOpen ? "close" : "menu"}
                 initial={{ rotate: -180, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 180, opacity: 0 }}
-                transition={{ duration: 0.3 }}
+                animate={{ 
+                  rotate: 0, 
+                  opacity: 1,
+                  transition: {
+                    type: "spring",
+                    stiffness: 50,
+                    damping: 10,
+                    duration: 0.8
+                  }
+                }}
+                exit={{ 
+                  rotate: 180, 
+                  opacity: 0,
+                  transition: {
+                    duration: 0.5
+                  }
+                }}
+                transition={{ duration: 0.5 }}
               >
                 {isOpen ? (
                   <X size={24} strokeWidth={2.5} />
