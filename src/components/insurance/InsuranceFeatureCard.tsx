@@ -32,18 +32,22 @@ const InsuranceFeatureCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.2 }}
-      className="group h-[400px] perspective"
+      className="group h-[400px] [perspective:1000px]"
     >
       <div 
-        className="relative h-full w-full transition-all duration-500 preserve-3d hover:scale-105"
+        className="relative h-full w-full [transform-style:preserve-3d] transition-all duration-500 hover:scale-105"
         style={{
-          transform: `rotateY(${(flippedCards[index] || shouldStayFlipped[index]) ? '180deg' : '0deg'})`
+          transform: `rotateY(${(flippedCards[index] || shouldStayFlipped[index]) ? '180deg' : '0deg'})`,
+          transformOrigin: "center"
         }}
         onMouseEnter={() => onMouseEnter(index)}
         onMouseLeave={() => onMouseLeave(index)}
       >
         {/* Front of card */}
-        <div className="absolute inset-0 bg-gradient-to-br from-roofing-cream via-white to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 backface-hidden border border-roofing-orange/20">
+        <div 
+          className="absolute inset-0 [backface-visibility:hidden] bg-gradient-to-br from-roofing-cream via-white to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 border border-roofing-orange/20"
+          style={{ transform: 'rotateY(0deg)' }}
+        >
           <div className="flex flex-col items-center text-center space-y-4">
             <motion.div 
               whileHover={{ scale: 1.1, rotate: 360 }}
@@ -67,7 +71,7 @@ const InsuranceFeatureCard = ({
 
         {/* Back of card */}
         <div 
-          className="absolute inset-0 bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 backface-hidden"
+          className="absolute inset-0 [backface-visibility:hidden] bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8"
           style={{ transform: 'rotateY(180deg)' }}
         >
           <div className="flex flex-col h-full text-white">
