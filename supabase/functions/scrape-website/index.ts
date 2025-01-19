@@ -17,8 +17,6 @@ serve(async (req) => {
       throw new Error('Firecrawl API key not configured');
     }
 
-    console.log('Starting website scrape with Firecrawl API...');
-    
     const requestBody = {
       url: 'https://site.aroofabove.co',
       limit: 50,
@@ -29,7 +27,8 @@ serve(async (req) => {
       }
     };
 
-    console.log('Making request to Firecrawl API with body:', JSON.stringify(requestBody));
+    console.log('Starting scrape request to Firecrawl API...');
+    console.log('Request body:', JSON.stringify(requestBody));
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 30000);
@@ -54,7 +53,7 @@ serve(async (req) => {
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('Error response:', {
+        console.error('Error response from Firecrawl API:', {
           status: response.status,
           statusText: response.statusText,
           body: errorText
@@ -63,11 +62,12 @@ serve(async (req) => {
       }
 
       const data = await response.json();
-      console.log('Scrape completed successfully. Response data:', JSON.stringify(data).slice(0, 200) + '...');
+      console.log('Scrape completed successfully. Response:', JSON.stringify(data).slice(0, 200) + '...');
 
       return new Response(JSON.stringify(data), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
+
     } catch (fetchError) {
       clearTimeout(timeoutId);
       if (fetchError.name === 'AbortError') {
@@ -75,6 +75,7 @@ serve(async (req) => {
       }
       throw fetchError;
     }
+
   } catch (error) {
     console.error('Error details:', {
       message: error.message,
