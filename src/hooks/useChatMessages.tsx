@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Message } from "@/types/chat";
-import { toast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
 const INITIAL_MESSAGE = `Welcome to A Roof Above! How can I help you with your roofing project today?`;
@@ -25,11 +24,6 @@ export const useChatMessages = () => {
         console.log('Website data fetched successfully:', data);
       } catch (error) {
         console.error('Error fetching website data:', error);
-        toast({
-          title: "Error",
-          description: "Failed to load website information. Chat will continue with limited context.",
-          variant: "destructive",
-        });
       }
     };
 
@@ -70,11 +64,6 @@ export const useChatMessages = () => {
       return data.text;
     } catch (error) {
       console.error('Error generating AI response:', error);
-      toast({
-        title: "Connection Error",
-        description: error.message || "Having trouble connecting. Please try again.",
-        variant: "destructive",
-      });
       throw error;
     }
   };
