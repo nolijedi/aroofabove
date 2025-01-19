@@ -8,6 +8,7 @@ import Draggable from "react-draggable";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import { GripVertical } from "lucide-react";
 
 interface ChatWindowProps {
   messages: Message[];
@@ -25,35 +26,36 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
     navigate('/estimate');
   };
 
-  // Function to ensure the chat window stays within viewport bounds
   const ensureInViewport = () => {
     if (chatWindowRef.current) {
       const rect = chatWindowRef.current.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
       const viewportWidth = window.innerWidth;
-      const navbarHeight = 80; // Navbar height
+      const navbarHeight = 80;
+      const padding = 20;
 
+      // Calculate bounds
+      const maxTop = viewportHeight - rect.height - padding;
+      const maxLeft = viewportWidth - rect.width - padding;
+
+      // Adjust position if needed
       if (rect.top < navbarHeight) {
-        chatWindowRef.current.style.top = `${navbarHeight}px`;
+        chatWindowRef.current.style.top = `${navbarHeight + padding}px`;
       }
-      if (rect.bottom > viewportHeight) {
-        chatWindowRef.current.style.top = `${viewportHeight - rect.height}px`;
+      if (rect.top > maxTop) {
+        chatWindowRef.current.style.top = `${maxTop}px`;
       }
-      if (rect.left < 0) {
-        chatWindowRef.current.style.left = '0px';
+      if (rect.left < padding) {
+        chatWindowRef.current.style.left = `${padding}px`;
       }
-      if (rect.right > viewportWidth) {
-        chatWindowRef.current.style.left = `${viewportWidth - rect.width}px`;
+      if (rect.left > maxLeft) {
+        chatWindowRef.current.style.left = `${maxLeft}px`;
       }
     }
   };
 
-  // Add resize listener to ensure chat stays in viewport
   useEffect(() => {
-    const handleResize = () => {
-      ensureInViewport();
-    };
-
+    const handleResize = () => ensureInViewport();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -71,8 +73,8 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
       }}
       className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden flex flex-col ${
         isMobile 
-          ? "fixed left-4 right-4 bottom-28 max-w-[280px] mx-auto h-[420px]" 
-          : "w-[280px] h-[480px]"
+          ? "fixed left-1/2 -translate-x-1/2 bottom-28 w-[280px] h-[400px]" 
+          : "w-[320px] h-[440px]"
       }`}
       style={{
         background: "linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(253,225,211,0.9) 100%)",
@@ -89,6 +91,9 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
       </div>
       <ChatMessages messages={messages} isTyping={isTyping} />
       <ChatInput onSendMessage={onSendMessage} isTyping={isTyping} />
+      <div className="absolute top-1/2 -right-6 transform -translate-y-1/2 bg-roofing-orange/20 backdrop-blur-sm p-1 rounded-full cursor-move opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <GripVertical className="w-4 h-4 text-roofing-orange" />
+      </div>
     </motion.div>
   );
 
@@ -100,11 +105,14 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
     <Draggable
       handle=".chat-header"
       bounds="parent"
-      defaultPosition={{ x: window.innerWidth - 320, y: Math.min(window.innerHeight - 640, window.innerHeight - 100) }}
+      defaultPosition={{ 
+        x: Math.max(window.innerWidth / 2 - 160, 20), 
+        y: Math.max(window.innerHeight / 2 - 220, 100)
+      }}
       onDrag={ensureInViewport}
       onStop={ensureInViewport}
     >
-      <div className="fixed z-40" style={{ maxHeight: 'calc(100vh - 80px)', top: '80px' }}>
+      <div className="fixed z-40 group" style={{ maxHeight: 'calc(100vh - 100px)', top: '80px' }}>
         {windowContent}
       </div>
     </Draggable>
