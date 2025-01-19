@@ -40,10 +40,10 @@ export const ChatMessage = ({ message, index = 0 }: ChatMessageProps) => {
       </motion.div>
       <div
         className={cn(
-          "p-2 rounded-xl shadow-sm text-sm backdrop-blur-sm transition-all duration-300 group-hover:shadow-md",
+          "p-2 rounded-xl shadow-md text-sm backdrop-blur-sm transition-all duration-300 group-hover:shadow-lg",
           message.role === "assistant"
-            ? "bg-gradient-to-br from-white/80 to-white/60 text-roofing-charcoal border border-white/20"
-            : "bg-gradient-to-br from-roofing-orange to-roofing-orange-dark text-white"
+            ? "bg-white/90 text-roofing-charcoal border border-white/40"
+            : "bg-roofing-orange/95 text-white font-medium"
         )}
       >
         {message.content}
