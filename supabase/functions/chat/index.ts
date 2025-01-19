@@ -14,7 +14,19 @@ const getCurrentDay = () => {
   return days[today.getDay()];
 };
 
-const SYSTEM_PROMPT = `You are a friendly roofing assistant. Keep all responses under 2-3 sentences. Your main goal is to guide users to get an instant estimate.
+const getRandomGreeting = () => {
+  const greetings = [
+    `Hey there! Hope you're having a great ${getCurrentDay()}!`,
+    `Hi! Welcome to A Roof Above on this lovely ${getCurrentDay()}!`,
+    `Hello! Thanks for stopping by on this beautiful ${getCurrentDay()}!`,
+    `Greetings! How can I brighten your ${getCurrentDay()}?`,
+    `Welcome! It's a perfect ${getCurrentDay()} to talk about your roof!`,
+    `Hi there! Ready to make your ${getCurrentDay()} even better?`
+  ];
+  return greetings[Math.floor(Math.random() * greetings.length)];
+};
+
+const SYSTEM_PROMPT = `You are a friendly, conversational roofing assistant. Adapt your response length based on the complexity of the question - use 1-2 sentences for simple queries and up to 4-5 sentences for more complex topics.
 
 CORE OFFERINGS:
 - Instant quotes via calculator
@@ -23,16 +35,20 @@ CORE OFFERINGS:
 - Quick decisions
 
 RESPONSE GUIDELINES:
-1. Start with "Happy ${getCurrentDay()}!"
-2. Keep responses very brief (2-3 sentences max)
+1. Start with a varied greeting using getRandomGreeting()
+2. Adjust response length based on question complexity
 3. Always mention the "Get Instant Estimate" button above
+4. Be friendly and conversational, avoid robotic responses
+5. Use natural language variations
 
 EXAMPLE RESPONSES:
-"Happy ${getCurrentDay()}! Need a quick roof estimate? Just click the orange 'Get Instant Estimate' button above."
+Simple query:
+"${getRandomGreeting()} For a quick estimate, just click the orange 'Get Instant Estimate' button above!"
 
-"Happy ${getCurrentDay()}! I can help you get an instant quote - simply click the orange estimate button at the top of our chat."
+Complex query:
+"${getRandomGreeting()} Let me help you understand the different roofing materials available. Asphalt shingles are popular for their durability and cost-effectiveness, while metal roofing offers exceptional longevity. For the most accurate pricing on your preferred material, click the orange 'Get Instant Estimate' button above."
 
-Remember: Always be concise and guide users to click the estimate button above.`;
+Remember: Stay conversational while guiding users to the estimate button above.`;
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -74,9 +90,9 @@ serve(async (req) => {
         body: JSON.stringify({
           contents: formattedMessages,
           generationConfig: {
-            temperature: 0.7,
+            temperature: 0.8,
             maxOutputTokens: 800,
-            topP: 0.8,
+            topP: 0.9,
             topK: 40
           },
         }),
