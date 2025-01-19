@@ -29,7 +29,7 @@ const FeatureCard = ({ feature, index }: FeatureCardProps) => {
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
     >
-      <div className="relative w-full h-full [perspective:1000px]">
+      <div className="relative w-full h-full perspective">
         <motion.div
           animate={{ 
             rotateY: isFlipped ? 180 : 0,
@@ -40,11 +40,14 @@ const FeatureCard = ({ feature, index }: FeatureCardProps) => {
             stiffness: isMobile ? 100 : 60,
             damping: isMobile ? 8 : 15
           }}
-          className="relative w-full h-full [transform-style:preserve-3d]"
+          className="relative w-full h-full preserve-3d"
         >
           {/* Front of card */}
-          <div className="absolute inset-0 [backface-visibility:hidden] bg-gradient-to-br from-roofing-cream via-white to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 border border-roofing-orange/20">
-            <div className="flex flex-col items-center text-center space-y-4">
+          <div 
+            className="absolute inset-0 w-full h-full backface-hidden"
+            style={{ transform: 'rotateY(0deg)' }}
+          >
+            <div className="flex flex-col items-center text-center space-y-4 h-full bg-gradient-to-br from-roofing-cream via-white to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8 border border-roofing-orange/20">
               <motion.div 
                 whileHover={{ scale: 1.1, rotate: 360 }}
                 transition={{ duration: 0.5 }}
@@ -71,9 +74,10 @@ const FeatureCard = ({ feature, index }: FeatureCardProps) => {
 
           {/* Back of card */}
           <div 
-            className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8"
+            className="absolute inset-0 w-full h-full backface-hidden"
+            style={{ transform: 'rotateY(180deg)' }}
           >
-            <div className="flex flex-col h-full text-white">
+            <div className="flex flex-col h-full bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-8">
               <h3 className="text-2xl font-semibold mb-4 text-roofing-cream">{feature.title}</h3>
               {feature.image && (
                 <motion.div 
