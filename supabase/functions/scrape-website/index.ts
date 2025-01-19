@@ -6,14 +6,18 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-// Retry configuration
 const MAX_RETRIES = 3;
 const INITIAL_RETRY_DELAY = 1000; // 1 second
+const FUNCTION_TIMEOUT = 25000; // 25 seconds
 
 async function retryWithExponentialBackoff(fn: () => Promise<Response>, retries = MAX_RETRIES, delay = INITIAL_RETRY_DELAY): Promise<Response> {
   try {
-    return await fn();
+    const timeoutPromise = new Promise<Response>((_, reject) => {
+      setTimeout(() => reject(new Error('Request timeout')), 10000); // 10 second timeout per attempt
+    });
+    return await Promise.race([fn(), timeoutPromise]);
   } catch (error) {
+    console.error(`Attempt failed:`, error);
     if (retries === 0) throw error;
     
     console.log(`Retry attempt remaining: ${retries}. Waiting ${delay}ms before next attempt...`);
@@ -27,15 +31,14 @@ serve(async (req) => {
   console.log('Starting scrape-website function execution');
   const startTime = Date.now();
 
+  // Handle CORS preflight
   if (req.method === 'OPTIONS') {
-    console.log('Handling CORS preflight request');
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
     const FIRECRAWL_API_KEY = Deno.env.get('FIRECRAWL_API_KEY');
     if (!FIRECRAWL_API_KEY) {
-      console.error('Firecrawl API key not configured');
       throw new Error('Firecrawl API key not configured');
     }
 
@@ -49,7 +52,7 @@ serve(async (req) => {
       }
     };
 
-    console.log('Preparing Firecrawl API request with configuration:', {
+    console.log('Making request to Firecrawl API with configuration:', {
       url: requestBody.url,
       limit: requestBody.limit,
       options: requestBody.scrapeOptions
@@ -66,7 +69,6 @@ serve(async (req) => {
     });
 
     // Set up timeout for the entire function
-    const FUNCTION_TIMEOUT = 25000; // 25 seconds
     const timeoutPromise = new Promise((_, reject) => {
       setTimeout(() => reject(new Error('Function timeout exceeded')), FUNCTION_TIMEOUT);
     });
@@ -79,7 +81,7 @@ serve(async (req) => {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Firecrawl API error response:', {
+      console.error('Firecrawl API error:', {
         status: response.status,
         statusText: response.statusText,
         body: errorText,
@@ -106,7 +108,7 @@ serve(async (req) => {
     });
 
     return new Response(
-      JSON.stringify({ 
+      JSON.stringify({
         error: error.message || 'An unexpected error occurred',
         details: error.stack,
         executionTime: `${Date.now() - startTime}ms`
