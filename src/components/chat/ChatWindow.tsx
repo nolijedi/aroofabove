@@ -37,9 +37,9 @@ export const ChatWindow = ({
         damping: 20,
         mass: 1
       }}
-      className="fixed bottom-24 right-8 w-[400px] h-[600px] bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-[100]"
+      className="fixed bottom-28 right-8 w-[400px] h-[500px] bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-40"
       style={{
-        maxHeight: "calc(100vh - 120px)",
+        maxHeight: "calc(100vh - 180px)",
       }}
     >
       <ChatHeader onClose={onClose} />

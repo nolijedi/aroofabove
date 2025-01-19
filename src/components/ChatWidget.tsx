@@ -2,7 +2,6 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { ChatButton } from "./chat/ChatButton";
 import { ChatWindow } from "./chat/ChatWindow";
-import { useToast } from "@/components/ui/use-toast";
 
 interface Message {
   text: string;
@@ -21,7 +20,6 @@ export const ChatWidget = () => {
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
   const [inputValue, setInputValue] = useState("");
   const [isHammering, setIsHammering] = useState(false);
-  const { toast } = useToast();
 
   const handleSend = () => {
     if (inputValue.trim() === "") return;
@@ -40,12 +38,7 @@ export const ChatWidget = () => {
     setMessages(prev => [...prev, userMessage]);
     setInputValue("");
 
-    // Simulate bot thinking and response
-    toast({
-      description: "Assistant is typing...",
-      duration: 1000,
-    });
-
+    // Simulate bot response
     setTimeout(() => {
       const botResponses = [
         "I'd be happy to help you with your roofing needs. Could you tell me more about your project?",
@@ -75,13 +68,6 @@ export const ChatWidget = () => {
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
-    if (!isOpen) {
-      toast({
-        title: "Chat Opened",
-        description: "How can we help you today?",
-        duration: 2000,
-      });
-    }
   };
 
   return (
