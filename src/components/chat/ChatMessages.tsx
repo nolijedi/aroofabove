@@ -21,17 +21,17 @@ export const ChatMessages = ({ messages, isTyping }: ChatMessagesProps) => {
   }, [messages]);
 
   return (
-    <ScrollArea className="flex-grow p-4 space-y-4">
+    <ScrollArea className="flex-grow p-3 space-y-3">
       {messages.map((message, index) => (
         <ChatMessage key={index} message={message} />
       ))}
       {isTyping && (
         <div className="flex items-center space-x-2 text-gray-500">
-          <div className="w-8 h-8 rounded-full bg-roofing-orange flex items-center justify-center">
+          <div className="w-6 h-6 rounded-full bg-roofing-orange flex items-center justify-center">
             <img 
               src="/lovable-uploads/cfe74ea0-b3ce-4017-a778-51f7dd28f478.png" 
               alt="House Icon"
-              className="w-5 h-5"
+              className="w-4 h-4"
             />
           </div>
           <LoadingSpinner />

@@ -21,7 +21,7 @@ export const ChatInput = ({ onSendMessage, isTyping }: ChatInputProps) => {
   return (
     <form 
       onSubmit={handleSubmit}
-      className="border-t border-gray-200 p-4 bg-white/50"
+      className="border-t border-gray-200 p-2 bg-white/50"
     >
       <div className="flex gap-2">
         <input
@@ -29,15 +29,15 @@ export const ChatInput = ({ onSendMessage, isTyping }: ChatInputProps) => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Type your message..."
-          className="flex-1 px-4 py-2 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-roofing-orange focus:border-transparent"
+          className="flex-1 px-3 py-1.5 text-sm rounded-full border border-gray-200 focus:outline-none focus:ring-1 focus:ring-roofing-orange focus:border-transparent"
           disabled={isTyping}
         />
         <Button
           type="submit"
           disabled={!message.trim() || isTyping}
-          className="rounded-full w-10 h-10 p-0 bg-roofing-orange hover:bg-roofing-orange-dark"
+          className="rounded-full w-8 h-8 p-0 bg-roofing-orange hover:bg-roofing-orange-dark"
         >
-          <Send className="w-5 h-5 text-white" />
+          <Send className="w-4 h-4 text-white" />
         </Button>
       </div>
     </form>

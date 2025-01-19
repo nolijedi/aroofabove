@@ -28,8 +28,8 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
       }}
       className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden ${
         isMobile 
-          ? "fixed inset-x-4 bottom-20 max-w-[320px] mx-auto h-[380px]"
-          : "w-[300px] h-[400px]"
+          ? "fixed inset-x-4 bottom-20 max-w-[280px] mx-auto h-[320px]"
+          : "w-[280px] h-[320px]"
       }`}
       style={{
         background: "linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(253,225,211,0.9) 100%)",
@@ -49,7 +49,7 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
     <Draggable
       handle=".chat-header"
       bounds="parent"
-      defaultPosition={{ x: window.innerWidth - 360, y: window.innerHeight - 500 }}
+      defaultPosition={{ x: window.innerWidth - 320, y: window.innerHeight - 420 }}
     >
       <div className="fixed z-40" style={{ cursor: 'move' }}>
         {windowContent}
