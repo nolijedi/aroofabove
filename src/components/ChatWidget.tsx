@@ -83,7 +83,11 @@ export const ChatWidget = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-36 right-8 w-[400px] h-[600px] bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-50"
+            className="fixed md:bottom-36 bottom-48 right-8 w-[400px] h-[600px] bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-50"
+            style={{
+              maxHeight: "calc(100vh - 100px)",
+              top: "auto"
+            }}
           >
             <ChatHeader onClose={() => setIsOpen(false)} />
             <ChatMessages messages={messages} />
