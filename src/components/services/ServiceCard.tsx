@@ -34,7 +34,7 @@ const ServiceCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.2 }}
-      className="group perspective h-[500px] sm:h-[450px]"
+      className="group h-[500px] sm:h-[450px] perspective"
     >
       <div 
         className="relative w-full h-full preserve-3d transition-all duration-500 cursor-pointer"
@@ -46,10 +46,10 @@ const ServiceCard = ({
       >
         {/* Front of card */}
         <div 
-          className="absolute inset-0 w-full h-full backface-hidden"
+          className="absolute inset-0 w-full h-full backface-hidden bg-gradient-to-br from-white via-roofing-cream to-roofing-beige p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-roofing-orange/20 backdrop-blur-sm transition-all duration-300 group-hover:shadow-2xl rounded-xl"
           style={{ transform: 'rotateY(0deg)' }}
         >
-          <div className="flex flex-col h-full bg-gradient-to-br from-white via-roofing-cream to-roofing-beige p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-roofing-orange/20 backdrop-blur-sm transition-all duration-300 group-hover:shadow-2xl rounded-xl">
+          <div className="flex flex-col h-full">
             <div className="flex items-center gap-4 mb-6">
               <div className="p-4 bg-gradient-to-br from-roofing-orange to-roofing-orange-dark rounded-xl text-white shadow-lg transform transition-transform duration-300 group-hover:scale-110">
                 <Icon className="w-8 h-8" />
@@ -87,10 +87,10 @@ const ServiceCard = ({
 
         {/* Back of card */}
         <div 
-          className="absolute inset-0 w-full h-full backface-hidden"
+          className="absolute inset-0 w-full h-full backface-hidden bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-6 sm:p-8 text-white shadow-2xl rounded-xl"
           style={{ transform: 'rotateY(180deg)' }}
         >
-          <div className="flex flex-col h-full bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-6 sm:p-8 text-white shadow-2xl rounded-xl">
+          <div className="flex flex-col h-full">
             <h3 className="text-xl sm:text-2xl font-bold mb-6">{title}</h3>
             {image && (
               <div className="relative mb-6 group/image">
