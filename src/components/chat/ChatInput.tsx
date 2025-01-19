@@ -1,4 +1,4 @@
-import { Send } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";
 
@@ -7,9 +7,16 @@ interface ChatInputProps {
   setInputValue: (value: string) => void;
   handleSend: () => void;
   handleKeyPress: (e: React.KeyboardEvent) => void;
+  isLoading?: boolean;
 }
 
-export const ChatInput = ({ inputValue, setInputValue, handleSend, handleKeyPress }: ChatInputProps) => {
+export const ChatInput = ({ 
+  inputValue, 
+  setInputValue, 
+  handleSend, 
+  handleKeyPress,
+  isLoading = false 
+}: ChatInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
@@ -22,12 +29,18 @@ export const ChatInput = ({ inputValue, setInputValue, handleSend, handleKeyPres
         onKeyPress={handleKeyPress}
         placeholder="Type your message..."
         className="flex-1 px-4 py-2 text-base border rounded-full focus:outline-none focus:ring-2 focus:ring-roofing-orange/30 focus:border-transparent bg-white/30"
+        disabled={isLoading}
       />
       <Button
         onClick={handleSend}
         className="bg-gradient-to-r from-roofing-orange/50 to-roofing-orange-dark/50 hover:from-roofing-orange-dark/60 hover:to-roofing-orange-dark/70 rounded-full h-10 w-10 p-0 flex items-center justify-center"
+        disabled={isLoading}
       >
-        <Send className="w-5 h-5 text-white/90" />
+        {isLoading ? (
+          <Loader2 className="w-5 h-5 text-white/90 animate-spin" />
+        ) : (
+          <Send className="w-5 h-5 text-white/90" />
+        )}
       </Button>
     </div>
   );

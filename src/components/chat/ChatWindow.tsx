@@ -17,6 +17,7 @@ interface ChatWindowProps {
   handleSend: () => void;
   handleKeyPress: (e: React.KeyboardEvent) => void;
   onClose: () => void;
+  isLoading?: boolean;
 }
 
 export const ChatWindow = ({
@@ -26,6 +27,7 @@ export const ChatWindow = ({
   handleSend,
   handleKeyPress,
   onClose,
+  isLoading = false,
 }: ChatWindowProps) => {
   const isMobile = useIsMobile();
 
@@ -57,6 +59,7 @@ export const ChatWindow = ({
         setInputValue={setInputValue}
         handleSend={handleSend}
         handleKeyPress={handleKeyPress}
+        isLoading={isLoading}
       />
     </motion.div>
   );
