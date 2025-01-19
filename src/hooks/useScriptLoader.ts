@@ -12,15 +12,22 @@ export const useScriptLoader = () => {
   const isLoadingRef = useRef(false);
 
   const cleanupExistingScripts = () => {
-    // Remove any existing scripts with the same ID
-    const existingScripts = document.querySelectorAll(`script[id="${SCRIPT_ID}"]`);
-    existingScripts.forEach(script => script.remove());
+    // First, remove all existing instances of the script
+    const existingScripts = document.querySelectorAll(`script#${SCRIPT_ID}`);
+    existingScripts.forEach(script => {
+      script.remove();
+      console.log('Removed existing script instance');
+    });
     
-    // Clear our script reference if it exists
+    // Clear our script reference
     if (scriptRef.current) {
       scriptRef.current.remove();
       scriptRef.current = null;
+      console.log('Cleared script reference');
     }
+
+    // Reset loading state
+    isLoadingRef.current = false;
   };
 
   const handleScriptLoad = () => {
@@ -39,6 +46,7 @@ export const useScriptLoader = () => {
     if (!mountedRef.current) return;
     
     isLoadingRef.current = false;
+    cleanupExistingScripts();
     toast({
       variant: "destructive",
       title: "Error",
@@ -47,6 +55,7 @@ export const useScriptLoader = () => {
   };
 
   const loadScript = () => {
+    // Prevent loading if unmounted or already loading
     if (!mountedRef.current || isLoadingRef.current) {
       console.log('Script loading prevented - component unmounted or already loading');
       return;
@@ -58,11 +67,12 @@ export const useScriptLoader = () => {
     // Set loading state
     isLoadingRef.current = true;
     
-    // Create and append new script
+    // Create and append new script with unique timestamp to prevent caching
     console.log('Creating new script element');
+    const timestamp = new Date().getTime();
     const scriptTag = document.createElement('script');
     scriptTag.id = SCRIPT_ID;
-    scriptTag.src = SCRIPT_URL;
+    scriptTag.src = `${SCRIPT_URL}?v=${timestamp}`;
     scriptTag.async = true;
     scriptTag.onload = handleScriptLoad;
     scriptTag.onerror = handleScriptError;
@@ -75,8 +85,8 @@ export const useScriptLoader = () => {
     console.log('Script loader mounted');
     mountedRef.current = true;
 
-    // Delay initial load to ensure proper cleanup and initialization
-    timeoutRef.current = window.setTimeout(loadScript, 1000);
+    // Delay initial load slightly to ensure proper cleanup
+    timeoutRef.current = window.setTimeout(loadScript, 500);
 
     return () => {
       console.log('Cleaning up script loader');
@@ -86,7 +96,6 @@ export const useScriptLoader = () => {
         window.clearTimeout(timeoutRef.current);
       }
       
-      isLoadingRef.current = false;
       cleanupExistingScripts();
     };
   }, [toast]);
