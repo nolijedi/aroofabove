@@ -57,11 +57,11 @@ export const ChatWidget = () => {
     <>
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-20 right-4 md:bottom-8 md:right-8 rounded-full px-6 py-6 bg-roofing-orange hover:bg-roofing-orange-dark shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 group"
+        className="fixed bottom-20 right-4 md:bottom-8 md:right-8 rounded-full p-3 bg-roofing-orange/80 hover:bg-roofing-orange-dark/90 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 group backdrop-blur-sm"
         aria-label="Toggle chat"
       >
-        <MessageCircle className="w-6 h-6" />
-        <span className="text-sm font-medium">Chat Now</span>
+        <MessageCircle className="w-4 h-4" />
+        <span className="text-xs font-medium">Chat Now</span>
       </Button>
 
       <AnimatePresence>
@@ -71,24 +71,24 @@ export const ChatWidget = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-36 right-4 md:bottom-24 md:right-8 w-[calc(100%-2rem)] md:w-[400px] bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden z-50"
+            className="fixed bottom-36 right-4 md:bottom-24 md:right-8 w-[300px] bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/50 overflow-hidden z-50"
           >
-            <div className="bg-gradient-to-r from-roofing-orange to-roofing-orange-dark p-4 flex justify-between items-center">
+            <div className="bg-gradient-to-r from-roofing-orange/80 to-roofing-orange-dark/80 p-3 flex justify-between items-center backdrop-blur-sm">
               <div className="flex items-center gap-2">
-                <Bot className="w-6 h-6 text-white animate-bounce" />
-                <h3 className="text-white font-semibold">Roofing Assistant</h3>
+                <Bot className="w-4 h-4 text-white animate-bounce" />
+                <h3 className="text-white font-semibold text-sm">Roofing Assistant</h3>
               </div>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsOpen(false)}
-                className="text-white hover:bg-white/20 rounded-full"
+                className="text-white hover:bg-white/20 rounded-full h-6 w-6"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </Button>
             </div>
 
-            <div className="h-[400px] overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-roofing-cream/20 to-transparent">
+            <div className="h-[300px] overflow-y-auto p-3 space-y-3 bg-gradient-to-b from-roofing-cream/10 to-transparent">
               {messages.map((message, index) => (
                 <motion.div
                   key={index}
@@ -102,20 +102,20 @@ export const ChatWidget = () => {
                 >
                   <div className={cn(
                     "p-1 rounded-full",
-                    message.isBot ? "bg-roofing-orange" : "bg-roofing-charcoal"
+                    message.isBot ? "bg-roofing-orange/80" : "bg-roofing-charcoal/80"
                   )}>
                     {message.isBot ? (
-                      <Bot className="w-4 h-4 text-white" />
+                      <Bot className="w-3 h-3 text-white" />
                     ) : (
-                      <User className="w-4 h-4 text-white" />
+                      <User className="w-3 h-3 text-white" />
                     )}
                   </div>
                   <div
                     className={cn(
-                      "p-3 rounded-2xl shadow-md",
+                      "p-2 rounded-xl shadow-sm text-sm",
                       message.isBot
-                        ? "bg-white text-roofing-charcoal"
-                        : "bg-roofing-orange text-white"
+                        ? "bg-white/80 backdrop-blur-sm text-roofing-charcoal"
+                        : "bg-gradient-to-r from-roofing-orange/80 to-roofing-orange-dark/80 backdrop-blur-sm text-white"
                     )}
                   >
                     {message.text}
@@ -125,7 +125,7 @@ export const ChatWidget = () => {
               <div ref={messagesEndRef} />
             </div>
 
-            <div className="border-t p-4 bg-white flex gap-2">
+            <div className="border-t border-gray-200/50 p-3 bg-white/80 backdrop-blur-sm flex gap-2">
               <input
                 ref={inputRef}
                 type="text"
@@ -133,13 +133,13 @@ export const ChatWidget = () => {
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
-                className="flex-1 px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-roofing-orange focus:border-transparent"
+                className="flex-1 px-3 py-1 text-sm border rounded-full focus:outline-none focus:ring-2 focus:ring-roofing-orange/50 focus:border-transparent bg-white/50"
               />
               <Button
                 onClick={handleSend}
-                className="bg-roofing-orange hover:bg-roofing-orange-dark rounded-full px-6"
+                className="bg-roofing-orange/80 hover:bg-roofing-orange-dark/90 rounded-full h-7 w-7 p-0 flex items-center justify-center"
               >
-                <Send className="w-5 h-5" />
+                <Send className="w-3 h-3" />
               </Button>
             </div>
           </motion.div>
