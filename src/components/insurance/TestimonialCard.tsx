@@ -24,7 +24,7 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.2 }}
-      className="h-[450px] perspective"
+      className="h-[450px] [perspective:1000px]"
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
     >
@@ -36,10 +36,14 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
           stiffness: 100,
           damping: 20
         }}
-        className="relative w-full h-full preserve-3d cursor-pointer hover:scale-105 transition-transform duration-300"
+        className="relative w-full h-full [transform-style:preserve-3d] cursor-pointer hover:scale-105 transition-transform duration-300"
+        style={{ transformOrigin: "center" }}
       >
         {/* Front of card */}
-        <div className="absolute w-full h-full backface-hidden">
+        <div 
+          className="absolute w-full h-full [backface-visibility:hidden] rounded-xl"
+          style={{ transform: 'rotateY(0deg)' }}
+        >
           <div className="bg-gradient-to-br from-white via-roofing-cream to-roofing-beige backdrop-blur-sm rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-6 h-full flex flex-col justify-between border border-roofing-orange/20">
             <div className="flex flex-col items-center text-center space-y-3">
               <motion.div 
@@ -86,7 +90,7 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => {
 
         {/* Back of card */}
         <div 
-          className="absolute w-full h-full backface-hidden rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-6 flex items-center justify-center"
+          className="absolute w-full h-full [backface-visibility:hidden] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-gradient-to-br from-roofing-orange via-roofing-orange-dark to-roofing-charcoal p-6 flex items-center justify-center"
           style={{ transform: 'rotateY(180deg)' }}
         >
           <div className="text-center">
