@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Message } from "@/types/chat";
 import { toast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -14,6 +14,27 @@ export const useChatMessages = () => {
     },
   ]);
   const [isTyping, setIsTyping] = useState(false);
+  const [websiteData, setWebsiteData] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchWebsiteData = async () => {
+      try {
+        const { data, error } = await supabase.functions.invoke('scrape-website');
+        if (error) throw error;
+        setWebsiteData(data);
+        console.log('Website data fetched successfully:', data);
+      } catch (error) {
+        console.error('Error fetching website data:', error);
+        toast({
+          title: "Error",
+          description: "Failed to load website information. Chat will continue with limited context.",
+          variant: "destructive",
+        });
+      }
+    };
+
+    fetchWebsiteData();
+  }, []);
 
   const generateAIResponse = async (message: string): Promise<string> => {
     try {
@@ -29,6 +50,7 @@ export const useChatMessages = () => {
               content: message,
             },
           ],
+          websiteData: websiteData,
         },
       });
 
