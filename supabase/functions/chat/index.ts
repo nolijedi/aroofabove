@@ -52,6 +52,20 @@ serve(async (req) => {
       throw new Error('API configuration error');
     }
 
+    // Format messages for Gemini API
+    const formattedMessages = messages.map((msg: any) => ({
+      role: msg.role,
+      parts: [{ text: msg.content }]
+    }));
+
+    // Add system prompt as first message
+    formattedMessages.unshift({
+      role: "user",
+      parts: [{ text: SYSTEM_PROMPT }]
+    });
+
+    console.log('Sending request to Gemini API with formatted messages:', formattedMessages);
+
     const response = await fetch(
       'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + GEMINI_API_KEY,
       {
@@ -60,16 +74,7 @@ serve(async (req) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          contents: [
-            {
-              parts: [{ text: SYSTEM_PROMPT }],
-              role: "system"
-            },
-            ...messages.map((msg: any) => ({
-              parts: [{ text: msg.content }],
-              role: msg.role
-            }))
-          ],
+          contents: formattedMessages,
           generationConfig: {
             temperature: 0.7,
             maxOutputTokens: 800,
@@ -81,8 +86,9 @@ serve(async (req) => {
     );
 
     if (!response.ok) {
-      console.error('Gemini API error:', await response.text());
-      throw new Error(`Gemini API error: ${response.status}`);
+      const errorText = await response.text();
+      console.error('Gemini API error response:', errorText);
+      throw new Error(`Gemini API error: ${response.status} - ${errorText}`);
     }
 
     const data = await response.json();
