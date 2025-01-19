@@ -39,14 +39,11 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
         stiffness: 300,
         damping: 30,
       }}
-      className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden flex flex-col ${
+      className={`bg-transparent backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden flex flex-col ${
         isMobile 
           ? "fixed left-1/2 -translate-x-1/2 bottom-28 w-[280px] h-[360px]" 
           : "w-[320px] h-[400px]"
       }`}
-      style={{
-        background: "linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(253,225,211,0.9) 100%)",
-      }}
     >
       <ChatHeader onClose={onClose} />
       <div className="px-3 py-2">
