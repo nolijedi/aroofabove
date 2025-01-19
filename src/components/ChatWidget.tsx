@@ -35,7 +35,7 @@ export const ChatWidget = () => {
 
   const generateAIResponse = async (message: string): Promise<string> => {
     try {
-      const { data: { text }, error } = await supabase.functions.invoke('chat', {
+      const { data, error } = await supabase.functions.invoke('chat', {
         body: {
           messages: [
             {
@@ -54,8 +54,18 @@ export const ChatWidget = () => {
         },
       });
 
-      if (error) throw error;
-      return text;
+      if (error) {
+        console.error('Error generating AI response:', error);
+        
+        // Handle rate limit error specifically
+        if (error.message?.includes('429') || error.status === 429) {
+          return "I apologize, but we've reached our current usage limit. Would you like to use our Roofing Calculator to get an instant estimate while we resolve this?";
+        }
+        
+        throw error;
+      }
+
+      return data.text;
     } catch (error) {
       console.error('Error generating AI response:', error);
       return "I apologize, but I'm having trouble connecting right now. Would you like to use our Roofing Calculator to get an instant estimate while we resolve this?";

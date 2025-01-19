@@ -9,7 +9,7 @@ const corsHeaders = {
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders })
+    return new Response(null, { headers: corsHeaders })
   }
 
   try {
@@ -50,7 +50,13 @@ serve(async (req) => {
     console.error('Error in chat function:', error)
     
     let errorMessage = 'An error occurred while processing your request.'
-    if (error.message.includes('API key')) {
+    let statusCode = 400
+
+    // Handle specific OpenAI error cases
+    if (error.message.includes('429') || error.message.includes('quota')) {
+      errorMessage = "I apologize, but we've reached our current usage limit. Please try again in a few minutes or use our Roofing Calculator for an instant estimate."
+      statusCode = 429
+    } else if (error.message.includes('API key')) {
       errorMessage = 'There was an issue with the API configuration. Please try again later.'
     }
 
@@ -60,7 +66,7 @@ serve(async (req) => {
         details: error.message 
       }),
       {
-        status: 400,
+        status: statusCode,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       },
     )
