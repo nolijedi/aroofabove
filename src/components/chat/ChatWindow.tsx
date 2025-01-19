@@ -46,7 +46,7 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
       <div className="px-3 py-2">
         <Button 
           onClick={handleEstimateClick}
-          className="w-full bg-roofing-orange hover:bg-roofing-orange-dark text-white font-medium"
+          className="w-full bg-roofing-orange hover:bg-roofing-orange-dark text-white font-semibold shadow-lg transform transition-all duration-200 hover:scale-105"
         >
           Get Instant Estimate
         </Button>
