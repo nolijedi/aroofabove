@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { ChatButton } from "./chat/ChatButton";
-import { ChatWindow } from "./chat/ChatWindow";
-import { toast } from "./ui/use-toast";
-import { Message } from "@/types/chat";
-
-export const ChatWidget = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
+import { ChatWindow } [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
       content: "Hello! How can I help you today?",
@@ -54,7 +48,7 @@ export const ChatWidget = () => {
     <>
       <ChatButton 
         onClick={() => setIsOpen(!isOpen)}
-        isOpen={isOpen}
+        isHammering={isOpen}
       />
       <AnimatePresence mode="wait" initial={false}>
         {isOpen && (
