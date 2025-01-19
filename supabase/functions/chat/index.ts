@@ -46,6 +46,11 @@ serve(async (req) => {
     
     console.log('Processing chat request with messages:', messages);
 
+    if (!GEMINI_API_KEY) {
+      console.error('GEMINI_API_KEY is not set');
+      throw new Error('GEMINI_API_KEY is not configured');
+    }
+
     const response = await fetch(
       'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + GEMINI_API_KEY,
       {
@@ -74,14 +79,21 @@ serve(async (req) => {
       }
     );
 
+    if (!response.ok) {
+      console.error('Gemini API error:', await response.text());
+      throw new Error('Failed to get response from Gemini API');
+    }
+
     const data = await response.json();
     console.log('Received response from Gemini:', data);
 
-    const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text || 
-      "I apologize, but I'm having trouble connecting right now. Would you like to use our Roofing Calculator to get an instant estimate while we resolve this?";
+    if (!data.candidates?.[0]?.content?.parts?.[0]?.text) {
+      console.error('Invalid response format from Gemini:', data);
+      throw new Error('Invalid response format from Gemini API');
+    }
 
     return new Response(
-      JSON.stringify({ text: generatedText }),
+      JSON.stringify({ text: data.candidates[0].content.parts[0].text }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       },

@@ -3,21 +3,7 @@ import { Message } from "@/types/chat";
 import { toast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
-const INITIAL_MESSAGE = `Hi! I'm your AI roofing assistant powered by Gemini. How can I help you today?`;
-
-const SYSTEM_PROMPT = `You are a helpful and knowledgeable roofing sales assistant. Your main goal is to guide users towards getting an instant estimate using the Roofing Calculator. Here's how you should approach different topics:
-
-1. For questions about pricing or estimates: Encourage using the Roofing Calculator for instant, accurate quotes
-2. For material questions: Explain options but emphasize that specific pricing is available through the Calculator
-3. For repair vs replacement: Help assess but recommend getting an estimate first
-4. For timeline questions: Emphasize that getting started begins with an estimate
-5. Always be professional, concise, and focused on moving towards action
-
-Remember to:
-- Always suggest using the Roofing Calculator for specific numbers
-- Be enthusiastic but professional
-- Keep responses under 3-4 sentences
-- Focus on immediate action steps`;
+const INITIAL_MESSAGE = `Hi! I'm your AI roofing assistant. How can I help you with your roofing project today?`;
 
 export const useChatMessages = () => {
   const [messages, setMessages] = useState<Message[]>([
@@ -34,10 +20,6 @@ export const useChatMessages = () => {
       const { data, error } = await supabase.functions.invoke('chat', {
         body: {
           messages: [
-            {
-              role: "system",
-              content: SYSTEM_PROMPT,
-            },
             ...messages.map(msg => ({
               role: msg.role,
               content: msg.content,
@@ -55,9 +37,18 @@ export const useChatMessages = () => {
         throw error;
       }
 
+      if (!data?.text) {
+        throw new Error('Invalid response format');
+      }
+
       return data.text;
     } catch (error) {
       console.error('Error generating AI response:', error);
+      toast({
+        title: "Connection Error",
+        description: "Having trouble connecting to the AI assistant. Please try again.",
+        variant: "destructive",
+      });
       return "I apologize, but I'm having trouble connecting right now. Would you like to use our Roofing Calculator to get an instant estimate while we resolve this?";
     }
   };
