@@ -28,7 +28,6 @@ serve(async (req) => {
     };
 
     console.log('Starting scrape request to Firecrawl API...');
-    console.log('Request body:', JSON.stringify(requestBody));
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 30000);
@@ -40,7 +39,6 @@ serve(async (req) => {
           'Authorization': `Bearer ${FIRECRAWL_API_KEY}`,
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'User-Agent': 'Deno/1.0'
         },
         body: JSON.stringify(requestBody),
         signal: controller.signal
@@ -48,12 +46,9 @@ serve(async (req) => {
 
       clearTimeout(timeoutId);
 
-      console.log('Response status:', response.status);
-      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('Error response from Firecrawl API:', {
+        console.error('Firecrawl API error response:', {
           status: response.status,
           statusText: response.statusText,
           body: errorText
@@ -62,7 +57,7 @@ serve(async (req) => {
       }
 
       const data = await response.json();
-      console.log('Scrape completed successfully. Response:', JSON.stringify(data).slice(0, 200) + '...');
+      console.log('Scrape completed successfully');
 
       return new Response(JSON.stringify(data), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -77,17 +72,15 @@ serve(async (req) => {
     }
 
   } catch (error) {
-    console.error('Error details:', {
+    console.error('Error in scrape-website function:', {
       message: error.message,
-      stack: error.stack,
-      cause: error.cause
+      stack: error.stack
     });
 
     return new Response(
       JSON.stringify({ 
         error: error.message || 'An unexpected error occurred',
-        details: error.stack,
-        cause: error.cause
+        details: error.stack
       }),
       {
         status: 500,
