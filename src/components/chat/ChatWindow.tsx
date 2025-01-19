@@ -26,7 +26,7 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
         stiffness: 300,
         damping: 30,
       }}
-      className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden ${
+      className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden flex flex-col ${
         isMobile 
           ? "fixed inset-x-4 bottom-20 max-w-[280px] mx-auto h-[320px]"
           : "w-[280px] h-[320px]"
@@ -51,7 +51,7 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
       bounds="parent"
       defaultPosition={{ x: window.innerWidth - 320, y: window.innerHeight - 420 }}
     >
-      <div className="fixed z-40" style={{ cursor: 'move' }}>
+      <div className="fixed z-40">
         {windowContent}
       </div>
     </Draggable>

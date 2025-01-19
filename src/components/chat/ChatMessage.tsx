@@ -15,7 +15,7 @@ export const ChatMessage = ({ message, index = 0 }: ChatMessageProps) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.1 }}
       className={cn(
-        "flex items-start gap-1.5 max-w-[85%]",
+        "flex items-start gap-1.5 max-w-[85%] group",
         message.role === "assistant" ? "" : "ml-auto flex-row-reverse"
       )}
     >
@@ -23,9 +23,10 @@ export const ChatMessage = ({ message, index = 0 }: ChatMessageProps) => {
         className={cn(
           "p-1 rounded-full bg-gradient-to-br shadow-sm flex items-center justify-center w-6 h-6",
           message.role === "assistant"
-            ? "from-roofing-orange/50 to-roofing-orange-dark/50" 
-            : "from-roofing-charcoal/50 to-roofing-charcoal/30"
+            ? "from-roofing-orange to-roofing-orange-dark" 
+            : "from-roofing-charcoal to-roofing-charcoal/80"
         )}
+        whileHover={{ scale: 1.1 }}
       >
         {message.role === "assistant" ? (
           <img 
@@ -39,10 +40,10 @@ export const ChatMessage = ({ message, index = 0 }: ChatMessageProps) => {
       </motion.div>
       <div
         className={cn(
-          "p-2 rounded-xl shadow-sm text-sm backdrop-blur-sm",
+          "p-2 rounded-xl shadow-sm text-sm backdrop-blur-sm transition-all duration-300 group-hover:shadow-md",
           message.role === "assistant"
-            ? "bg-gradient-to-br from-white/60 to-white/50 text-roofing-charcoal"
-            : "bg-gradient-to-br from-roofing-orange/50 to-roofing-orange-dark/50 text-white"
+            ? "bg-gradient-to-br from-white/80 to-white/60 text-roofing-charcoal border border-white/20"
+            : "bg-gradient-to-br from-roofing-orange to-roofing-orange-dark text-white"
         )}
       >
         {message.content}
