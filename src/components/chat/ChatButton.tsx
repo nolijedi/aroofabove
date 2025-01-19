@@ -13,11 +13,9 @@ export const ChatButton = ({ onClick, isHammering }: ChatButtonProps) => {
       className="fixed bottom-8 right-8 rounded-full p-4 bg-roofing-orange hover:bg-roofing-orange-dark shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 group z-50"
       aria-label="Toggle chat"
     >
-      <img 
-        src="/lovable-uploads/dd8b00d4-1c0e-4313-828e-ccc65c05d63a.png" 
-        alt="Chat" 
-        className="w-6 h-6"
-      />
+      <div className="relative flex items-center justify-center w-10 h-10 bg-white rounded-full">
+        <span className="text-xs font-medium text-roofing-orange">Live Chat</span>
+      </div>
       <span className="text-base font-medium text-white">Chat Now</span>
       {isHammering && (
         <motion.img
