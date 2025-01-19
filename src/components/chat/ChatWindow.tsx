@@ -4,6 +4,7 @@ import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
 import { Message } from "@/types/chat";
 import { useMediaQuery } from "@/hooks/use-mobile";
+import Draggable from "react-draggable";
 
 interface ChatWindowProps {
   messages: Message[];
@@ -15,7 +16,7 @@ interface ChatWindowProps {
 export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatWindowProps) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  return (
+  const windowContent = (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -25,15 +26,34 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
         stiffness: 300,
         damping: 30,
       }}
-      className={`fixed bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-40 ${
+      className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden ${
         isMobile 
-          ? "inset-x-4 bottom-20 max-w-[400px] mx-auto h-[480px]"
-          : "bottom-20 right-8 w-[380px] h-[520px]"
+          ? "fixed inset-x-4 bottom-24 max-w-[400px] mx-auto h-[400px]"
+          : "w-[320px] h-[420px]"
       }`}
+      style={{
+        background: "linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(253,225,211,0.9) 100%)",
+      }}
     >
       <ChatHeader onClose={onClose} />
       <ChatMessages messages={messages} isTyping={isTyping} />
       <ChatInput onSendMessage={onSendMessage} isTyping={isTyping} />
     </motion.div>
+  );
+
+  if (isMobile) {
+    return windowContent;
+  }
+
+  return (
+    <Draggable
+      handle=".chat-header"
+      bounds="parent"
+      defaultPosition={{ x: window.innerWidth - 400, y: window.innerHeight - 600 }}
+    >
+      <div className="fixed z-40" style={{ cursor: 'move' }}>
+        {windowContent}
+      </div>
+    </Draggable>
   );
 };

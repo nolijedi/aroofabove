@@ -1,5 +1,4 @@
-import { Bot, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { X } from "lucide-react";
 
 interface ChatHeaderProps {
   onClose: () => void;
@@ -7,19 +6,17 @@ interface ChatHeaderProps {
 
 export const ChatHeader = ({ onClose }: ChatHeaderProps) => {
   return (
-    <div className="bg-gradient-to-r from-roofing-orange/30 to-roofing-orange-dark/30 p-2 flex justify-between items-center backdrop-blur-sm">
-      <div className="flex items-center gap-2">
-        <Bot className="w-4 h-4 text-white animate-bounce" />
-        <h3 className="text-base font-semibold text-white">Roofing Assistant</h3>
+    <div className="chat-header bg-roofing-orange/90 p-4 flex justify-between items-center cursor-move">
+      <div className="flex items-center space-x-2">
+        <span className="text-white font-semibold">Chat with us</span>
+        <span className="text-xs text-white/80">(Drag to move)</span>
       </div>
-      <Button
-        variant="ghost"
-        size="icon"
+      <button
         onClick={onClose}
-        className="text-white hover:bg-white/20 rounded-full h-6 w-6"
+        className="text-white hover:text-white/80 transition-colors"
       >
-        <X className="w-4 h-4" />
-      </Button>
+        <X size={20} />
+      </button>
     </div>
   );
 };
