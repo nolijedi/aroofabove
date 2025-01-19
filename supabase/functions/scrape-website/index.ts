@@ -13,7 +13,7 @@ const FUNCTION_TIMEOUT = 25000; // 25 seconds
 async function retryWithExponentialBackoff(fn: () => Promise<Response>, retries = MAX_RETRIES, delay = INITIAL_RETRY_DELAY): Promise<Response> {
   try {
     const timeoutPromise = new Promise<Response>((_, reject) => {
-      setTimeout(() => reject(new Error('Request timeout')), 10000); // 10 second timeout per attempt
+      setTimeout(() => reject(new Error('Request timeout')), 10000);
     });
     return await Promise.race([fn(), timeoutPromise]);
   } catch (error) {
@@ -41,6 +41,8 @@ serve(async (req) => {
     if (!FIRECRAWL_API_KEY) {
       throw new Error('Firecrawl API key not configured');
     }
+
+    console.log('Validating API key configuration...');
 
     const requestBody = {
       url: 'https://site.aroofabove.co',
