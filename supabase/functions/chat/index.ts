@@ -1,74 +1,66 @@
-import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
-import OpenAI from 'https://esm.sh/openai@4.20.1'
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
+};
 
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders })
+    return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const openaiKey = Deno.env.get('OPENAI_API_KEY')
-    if (!openaiKey) {
-      console.error('OpenAI API key is not configured')
-      throw new Error('OpenAI API key is not configured')
-    }
+    const { messages } = await req.json();
+    const lastMessage = messages[messages.length - 1].content;
+    const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY');
 
-    const { messages } = await req.json()
-    if (!messages || !Array.isArray(messages)) {
-      console.error('Invalid messages format:', messages)
-      throw new Error('Invalid messages format')
-    }
+    console.log('Processing chat request with message:', lastMessage);
 
-    console.log('Processing chat request with messages:', JSON.stringify(messages))
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{ text: lastMessage }]
+          }],
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 800,
+          },
+        }),
+      }
+    );
 
-    const openai = new OpenAI({
-      apiKey: openaiKey
-    })
+    const data = await response.json();
+    console.log('Received response from Gemini:', data);
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: messages,
-      temperature: 0.7,
-      max_tokens: 500,
-    })
-
-    console.log('Received response from OpenAI:', completion.choices[0])
+    // Extract the generated text from Gemini's response
+    const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text || 
+      "I apologize, but I'm having trouble processing your request at the moment. Please try again.";
 
     return new Response(
-      JSON.stringify({ text: completion.choices[0].message.content }),
+      JSON.stringify({ text: generatedText }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       },
-    )
+    );
   } catch (error) {
-    console.error('Error in chat function:', error)
+    console.error('Error in chat function:', error);
     
-    let errorMessage = 'An error occurred while processing your request.'
-    let statusCode = 400
-
-    // Handle specific OpenAI error cases
-    if (error.message.includes('429') || error.message.includes('quota')) {
-      errorMessage = "I apologize, but we've reached our current usage limit. Please try again in a few minutes or use our Roofing Calculator for an instant estimate."
-      statusCode = 429
-    } else if (error.message.includes('API key')) {
-      errorMessage = 'There was an issue with the API configuration. Please try again later.'
-    }
-
     return new Response(
       JSON.stringify({ 
-        error: errorMessage,
-        details: error.message 
+        error: "I apologize, but I'm having trouble connecting right now. Would you like to use our Roofing Calculator to get an instant estimate while we resolve this?"
       }),
       {
-        status: statusCode,
+        status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       },
-    )
+    );
   }
-})
+});

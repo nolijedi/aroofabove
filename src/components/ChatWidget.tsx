@@ -6,7 +6,7 @@ import { toast } from "@/components/ui/use-toast";
 import { Message } from "@/types/chat";
 import { supabase } from "@/integrations/supabase/client";
 
-const INITIAL_MESSAGE = `Hi! I'm your roofing assistant. How can I help you today?`;
+const INITIAL_MESSAGE = `Hi! I'm your AI roofing assistant powered by Gemini. How can I help you today?`;
 
 const SYSTEM_PROMPT = `You are a helpful and knowledgeable roofing sales assistant. Your main goal is to guide users towards getting an instant estimate using the Roofing Calculator. Here's how you should approach different topics:
 
@@ -56,12 +56,6 @@ export const ChatWidget = () => {
 
       if (error) {
         console.error('Error generating AI response:', error);
-        
-        // Handle rate limit error specifically
-        if (error.message?.includes('429') || error.status === 429) {
-          return "I apologize, but we've reached our current usage limit. Would you like to use our Roofing Calculator to get an instant estimate while we resolve this?";
-        }
-        
         throw error;
       }
 
