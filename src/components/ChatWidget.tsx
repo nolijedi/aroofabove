@@ -16,28 +16,19 @@ I can help you with:
 
 How can I assist you today?`;
 
-const generateRoofingResponse = (message: string): string => {
-  // Keywords to look for in user messages
-  const keywords = {
-    estimate: "Would you like to get an instant estimate? I can help you use our Roofing Calculator to get accurate pricing right now!",
-    price: "The best way to get accurate pricing is through our Roofing Calculator. Would you like me to help you get an instant estimate?",
-    material: "We offer various high-quality roofing materials. To get specific pricing for different materials, let's use our Roofing Calculator. Would you like to try it now?",
-    repair: "Whether you need repairs or a full replacement, I can help you determine the best solution. Let's start with a quick estimate using our Roofing Calculator.",
-    time: "We can get started right away! The first step is getting an accurate estimate through our Roofing Calculator. Would you like to do that now?",
-  };
+const SYSTEM_PROMPT = `You are a helpful and knowledgeable roofing sales assistant. Your main goal is to guide users towards getting an instant estimate using the Roofing Calculator. Here's how you should approach different topics:
 
-  // Default response if no keywords match
-  let response = "I can help you with that! The best way to start is by getting an instant estimate using our Roofing Calculator. Would you like to try it now?";
+1. For questions about pricing or estimates: Encourage using the Roofing Calculator for instant, accurate quotes
+2. For material questions: Explain options but emphasize that specific pricing is available through the Calculator
+3. For repair vs replacement: Help assess but recommend getting an estimate first
+4. For timeline questions: Emphasize that getting started begins with an estimate
+5. Always be professional, concise, and focused on moving towards action
 
-  // Check for keywords in the message
-  Object.entries(keywords).forEach(([key, value]) => {
-    if (message.toLowerCase().includes(key)) {
-      response = value;
-    }
-  });
-
-  return response;
-};
+Remember to:
+- Always suggest using the Roofing Calculator for specific numbers
+- Be enthusiastic but professional
+- Keep responses under 3-4 sentences
+- Focus on immediate action steps`;
 
 export const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,10 +41,50 @@ export const ChatWidget = () => {
   ]);
   const [isTyping, setIsTyping] = useState(false);
 
+  const generateAIResponse = async (message: string): Promise<string> => {
+    try {
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-4o",
+          messages: [
+            {
+              role: "system",
+              content: SYSTEM_PROMPT,
+            },
+            ...messages.map(msg => ({
+              role: msg.role,
+              content: msg.content,
+            })),
+            {
+              role: "user",
+              content: message,
+            },
+          ],
+          temperature: 0.7,
+          max_tokens: 150,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate response');
+      }
+
+      const data = await response.json();
+      return data.choices[0].message.content;
+    } catch (error) {
+      console.error('Error generating AI response:', error);
+      return "I apologize, but I'm having trouble connecting right now. Would you like to use our Roofing Calculator to get an instant estimate while we resolve this?";
+    }
+  };
+
   const handleSendMessage = async (message: string) => {
     if (!message.trim()) return;
 
-    // Add user message
     const userMessage: Message = {
       role: "user",
       content: message,
@@ -63,16 +94,12 @@ export const ChatWidget = () => {
     setIsTyping(true);
 
     try {
-      // Simulate AI response with roofing-specific content
-      setTimeout(() => {
-        const aiResponse: Message = {
-          role: "assistant",
-          content: generateRoofingResponse(message),
-          timestamp: new Date(),
-        };
-        setMessages((prev) => [...prev, aiResponse]);
-        setIsTyping(false);
-      }, 1000);
+      const aiResponse = await generateAIResponse(message);
+      setMessages((prev) => [...prev, {
+        role: "assistant",
+        content: aiResponse,
+        timestamp: new Date(),
+      }]);
     } catch (error) {
       console.error("Error sending message:", error);
       toast({
@@ -80,6 +107,7 @@ export const ChatWidget = () => {
         description: "Failed to send message. Please try again.",
         variant: "destructive",
       });
+    } finally {
       setIsTyping(false);
     }
   };
