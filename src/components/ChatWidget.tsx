@@ -11,7 +11,11 @@ interface Message {
 
 export const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([{
+    text: "Hello! How can I help you with your roofing needs today?",
+    isBot: true,
+    timestamp: new Date()
+  }]);
   const [inputValue, setInputValue] = useState("");
   const [isHammering, setIsHammering] = useState(false);
 
@@ -30,9 +34,10 @@ export const ChatWidget = () => {
     setMessages((prev) => [...prev, userMessage]);
     setInputValue("");
 
+    // Simulate bot response
     setTimeout(() => {
       const botMessage: Message = {
-        text: "Thank you for reaching out! How can I help you with your roofing needs?",
+        text: "Thank you for your message! One of our roofing experts will get back to you shortly. Is there anything specific you'd like to know about our services?",
         isBot: true,
         timestamp: new Date(),
       };

@@ -32,10 +32,9 @@ export const ChatWindow = ({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 20, scale: 0.95 }}
       transition={{ duration: 0.2 }}
-      className="fixed bottom-20 right-8 w-[400px] h-[600px] bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-50"
+      className="fixed bottom-24 right-8 w-[400px] h-[600px] bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-50"
       style={{
         maxHeight: "calc(100vh - 400px)",
-        top: "auto"
       }}
     >
       <ChatHeader onClose={onClose} />
