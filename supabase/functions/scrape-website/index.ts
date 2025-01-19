@@ -14,7 +14,6 @@ serve(async (req) => {
   try {
     const FIRECRAWL_API_KEY = Deno.env.get('FIRECRAWL_API_KEY');
     if (!FIRECRAWL_API_KEY) {
-      console.error('Firecrawl API key not configured');
       throw new Error('Firecrawl API key not configured');
     }
 
@@ -24,33 +23,26 @@ serve(async (req) => {
       url: 'https://site.aroofabove.co',
       limit: 50,
       scrapeOptions: {
-        formats: ['markdown', 'html'],
-        waitForNetworkRequests: true,
-        waitTime: 5000
+        formats: ['markdown', 'html']
       }
     };
 
-    console.log('Making request to Firecrawl API with body:', JSON.stringify(requestBody));
+    console.log('Making request to Firecrawl API...');
 
-    const response = await fetch('https://api.firecrawl.com/scrape', {
+    const response = await fetch('https://api.firecrawl.com/v1/scrape', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${FIRECRAWL_API_KEY}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(requestBody)
     });
 
-    console.log('Received response from Firecrawl API:', {
-      status: response.status,
-      statusText: response.statusText,
-      headers: Object.fromEntries(response.headers.entries())
-    });
+    console.log('Firecrawl API response status:', response.status);
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Firecrawl API error response:', {
+      console.error('Firecrawl API error:', {
         status: response.status,
         statusText: response.statusText,
         body: errorText
@@ -59,26 +51,18 @@ serve(async (req) => {
     }
 
     const data = await response.json();
-    console.log('Website scrape completed successfully:', {
-      status: response.status,
-      dataLength: JSON.stringify(data).length
-    });
+    console.log('Website scrape completed successfully');
 
     return new Response(JSON.stringify(data), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    console.error('Error in scrape-website function:', {
-      error: error.message,
-      stack: error.stack,
-      name: error.name
-    });
+    console.error('Error in scrape-website function:', error);
 
     return new Response(
       JSON.stringify({ 
         error: error.message || 'An unexpected error occurred',
-        details: error.stack,
-        name: error.name
+        details: error.stack
       }),
       {
         status: 500,
