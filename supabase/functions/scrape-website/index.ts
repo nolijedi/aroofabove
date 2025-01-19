@@ -8,28 +8,26 @@ const corsHeaders = {
 
 const MAX_RETRIES = 3;
 const INITIAL_RETRY_DELAY = 1000; // 1 second
+const REQUEST_TIMEOUT = 10000; // 10 seconds
 const FUNCTION_TIMEOUT = 25000; // 25 seconds
 
 async function retryWithExponentialBackoff(fn: () => Promise<Response>, retries = MAX_RETRIES, delay = INITIAL_RETRY_DELAY): Promise<Response> {
   try {
     const timeoutPromise = new Promise<Response>((_, reject) => {
-      setTimeout(() => reject(new Error('Request timeout')), 10000);
+      setTimeout(() => reject(new Error('Request timeout')), REQUEST_TIMEOUT);
     });
     return await Promise.race([fn(), timeoutPromise]);
   } catch (error) {
-    console.error(`Attempt failed:`, error);
     if (retries === 0) throw error;
-    
-    console.log(`Retry attempt remaining: ${retries}. Waiting ${delay}ms before next attempt...`);
+    console.error(`Attempt failed (${MAX_RETRIES - retries + 1}/${MAX_RETRIES}):`, error);
     await new Promise(resolve => setTimeout(resolve, delay));
-    
     return retryWithExponentialBackoff(fn, retries - 1, delay * 2);
   }
 }
 
 serve(async (req) => {
-  console.log('Starting scrape-website function execution');
   const startTime = Date.now();
+  console.log('Starting scrape-website function execution');
 
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
@@ -66,6 +64,7 @@ serve(async (req) => {
         'Authorization': `Bearer ${FIRECRAWL_API_KEY}`,
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'User-Agent': 'Supabase Edge Function'
       },
       body: JSON.stringify(requestBody)
     });
