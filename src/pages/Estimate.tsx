@@ -6,24 +6,28 @@ import { EstimateSidebar } from "@/components/estimate/EstimateSidebar";
 const Estimate = () => {
   const shouldReduceMotion = useReducedMotion();
   const pageRef = useRef<HTMLDivElement>(null);
+  const resizeTimeoutRef = useRef<number>();
 
   const handleResize = useCallback((entries: ResizeObserverEntry[]) => {
     if (!Array.isArray(entries) || !entries.length) return;
     
-    requestAnimationFrame(() => {
+    // Clear any existing timeout
+    if (resizeTimeoutRef.current) {
+      window.clearTimeout(resizeTimeoutRef.current);
+    }
+
+    // Debounce the resize handling
+    resizeTimeoutRef.current = window.setTimeout(() => {
       console.log('Page resized');
-    });
+    }, 100); // 100ms debounce
   }, []);
 
   useEffect(() => {
     if (!pageRef.current) return;
 
-    let rafId: number;
     const observer = new ResizeObserver((entries) => {
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-      }
-      rafId = requestAnimationFrame(() => {
+      // Request animation frame to ensure smooth handling
+      window.requestAnimationFrame(() => {
         handleResize(entries);
       });
     });
@@ -32,8 +36,9 @@ const Estimate = () => {
 
     return () => {
       observer.disconnect();
-      if (rafId) {
-        cancelAnimationFrame(rafId);
+      // Clean up timeout on unmount
+      if (resizeTimeoutRef.current) {
+        window.clearTimeout(resizeTimeoutRef.current);
       }
     };
   }, [handleResize]);
