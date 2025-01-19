@@ -23,7 +23,7 @@ export const ChatMessages = ({ messages }: ChatMessagesProps) => {
   }, [messages]);
 
   return (
-    <div className="h-[400px] overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-roofing-cream/5 to-transparent">
+    <div className="h-[480px] overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-roofing-cream/5 to-transparent">
       {messages.map((message, index) => (
         <ChatMessage key={index} message={message} index={index} />
       ))}

@@ -53,19 +53,19 @@ export const ChatWidget = () => {
     <>
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-36 right-4 md:bottom-24 md:right-8 rounded-full p-4 bg-roofing-orange/20 hover:bg-roofing-orange-dark/40 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 group backdrop-blur-sm"
+        className="fixed bottom-24 right-8 rounded-full p-4 bg-roofing-orange hover:bg-roofing-orange-dark shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 group z-50"
         aria-label="Toggle chat"
       >
-        <MessageCircle className="w-6 h-6 text-white/90" />
-        <span className="text-base font-medium text-white/90">Chat Now</span>
+        <MessageCircle className="w-6 h-6 text-white" />
+        <span className="text-base font-medium text-white">Chat Now</span>
         {isHammering && (
           <motion.img
-            src="/lovable-uploads/a941ea90-1b0d-4427-9ee9-3fb213b016a6.png"
+            src="/lovable-uploads/3919685d-d81f-479f-9598-603008a61953.png"
             alt="Hammer"
-            className="absolute -top-8 -right-8 w-14 h-14"
+            className="absolute -top-12 -right-8 w-16 h-16"
             animate={{
               rotate: [0, -45, 0],
-              y: [0, -2, 0],
+              y: [0, -5, 0],
             }}
             transition={{
               duration: 0.3,
@@ -83,7 +83,7 @@ export const ChatWidget = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-48 right-4 md:bottom-36 md:right-8 w-[350px] bg-white/40 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-50"
+            className="fixed bottom-36 right-8 w-[400px] h-[600px] bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-50"
           >
             <ChatHeader onClose={() => setIsOpen(false)} />
             <ChatMessages messages={messages} />
