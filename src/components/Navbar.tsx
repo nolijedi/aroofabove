@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import DesktopNav from "./navbar/DesktopNav";
 import MobileNav from "./navbar/MobileNav";
 import { NavItem } from "./navbar/types";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,16 +48,28 @@ const Navbar = () => {
 
           <DesktopNav navItems={navItems} currentPath={location.pathname} />
 
-          <button
+          <motion.button
             className="md:hidden absolute right-4 p-2 rounded-lg bg-roofing-orange text-white hover:bg-roofing-orange-dark transition-colors duration-300 shadow-lg hover:shadow-xl"
             onClick={() => setIsOpen(!isOpen)}
+            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.1 }}
           >
-            {isOpen ? (
-              <X size={24} strokeWidth={2.5} className="transform rotate-90 transition-transform duration-300" />
-            ) : (
-              <Menu size={24} strokeWidth={2.5} className="transform hover:scale-110 transition-transform duration-300" />
-            )}
-          </button>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={isOpen ? "close" : "menu"}
+                initial={{ rotate: -180, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 180, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {isOpen ? (
+                  <X size={24} strokeWidth={2.5} />
+                ) : (
+                  <Menu size={24} strokeWidth={2.5} />
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </motion.button>
         </div>
 
         <MobileNav 
