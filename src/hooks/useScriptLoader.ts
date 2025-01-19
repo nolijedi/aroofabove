@@ -5,28 +5,36 @@ export const useScriptLoader = () => {
   const { toast } = useToast();
   const SCRIPT_ID = 'instant-roofer-script';
   const isLoadingRef = useRef(false);
+  const scriptRef = useRef<HTMLScriptElement | null>(null);
 
   useEffect(() => {
-    // Check if script is already loaded or is currently loading
-    if (document.getElementById(SCRIPT_ID) || isLoadingRef.current) {
+    // Check if script is already loaded
+    const existingScript = document.getElementById(SCRIPT_ID);
+    if (existingScript || isLoadingRef.current) {
       return;
     }
 
     let timeoutId: number;
-    let scriptElement: HTMLScriptElement | null = null;
 
     const loadScript = () => {
       if (isLoadingRef.current) return;
+      
+      // Remove any existing script first
+      const oldScript = document.getElementById(SCRIPT_ID);
+      if (oldScript) {
+        oldScript.remove();
+      }
+
       isLoadingRef.current = true;
 
-      scriptElement = document.createElement('script');
-      scriptElement.id = SCRIPT_ID;
-      scriptElement.type = 'text/javascript';
-      scriptElement.async = true;
-      scriptElement.crossOrigin = "anonymous";
-      scriptElement.src = "https://book.instantroofer.com/js/instant-roofer-google-ads-integration.min.js";
+      scriptRef.current = document.createElement('script');
+      scriptRef.current.id = SCRIPT_ID;
+      scriptRef.current.type = 'text/javascript';
+      scriptRef.current.async = true;
+      scriptRef.current.crossOrigin = "anonymous";
+      scriptRef.current.src = "https://book.instantroofer.com/js/instant-roofer-google-ads-integration.min.js";
       
-      scriptElement.onerror = (error) => {
+      scriptRef.current.onerror = (error) => {
         console.error('Error loading InstantRoofer script:', error);
         isLoadingRef.current = false;
         toast({
@@ -36,11 +44,11 @@ export const useScriptLoader = () => {
         });
       };
 
-      scriptElement.onload = () => {
+      scriptRef.current.onload = () => {
         isLoadingRef.current = false;
       };
 
-      document.body.appendChild(scriptElement);
+      document.body.appendChild(scriptRef.current);
     };
 
     // Delay script loading
@@ -60,10 +68,9 @@ export const useScriptLoader = () => {
       window.removeEventListener('scroll', scrollHandler);
       isLoadingRef.current = false;
       
-      // Remove script on unmount
-      const existingScript = document.getElementById(SCRIPT_ID);
-      if (existingScript) {
-        existingScript.remove();
+      // Clean up script on unmount
+      if (scriptRef.current) {
+        scriptRef.current.remove();
       }
     };
   }, [toast]); // Only re-run if toast changes
