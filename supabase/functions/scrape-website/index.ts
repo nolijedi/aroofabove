@@ -31,29 +31,10 @@ serve(async (req) => {
 
     console.log('Making request to Firecrawl API with body:', JSON.stringify(requestBody));
 
-    // Using native Deno fetch with additional options and better error handling
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+    const timeoutId = setTimeout(() => controller.abort(), 30000);
 
     try {
-      // Test the API endpoint first
-      const testResponse = await fetch('https://api.firecrawl.com/v1/health', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${FIRECRAWL_API_KEY}`,
-          'User-Agent': 'Deno/1.0'
-        },
-        signal: controller.signal
-      });
-
-      if (!testResponse.ok) {
-        console.error('Firecrawl API health check failed:', testResponse.status);
-        throw new Error('Firecrawl API is not accessible');
-      }
-
-      console.log('Firecrawl API health check passed, proceeding with scrape request');
-
-      // Main scrape request
       const response = await fetch('https://api.firecrawl.com/v1/scrape', {
         method: 'POST',
         headers: {
