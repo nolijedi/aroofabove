@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ChatHeader } from "./ChatHeader";
 import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface Message {
   text: string;
@@ -26,6 +27,8 @@ export const ChatWindow = ({
   handleKeyPress,
   onClose,
 }: ChatWindowProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -37,9 +40,13 @@ export const ChatWindow = ({
         damping: 20,
         mass: 1
       }}
-      className="fixed bottom-28 right-8 w-[400px] h-[500px] bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-30"
+      className={`fixed right-8 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-30 ${
+        isMobile 
+          ? 'bottom-20 left-4 right-4 h-[60vh] w-auto' 
+          : 'bottom-28 w-[400px] h-[500px]'
+      }`}
       style={{
-        maxHeight: "calc(100vh - 240px)",
+        maxHeight: isMobile ? "calc(100vh - 160px)" : "calc(100vh - 240px)",
         marginTop: "80px"
       }}
     >
