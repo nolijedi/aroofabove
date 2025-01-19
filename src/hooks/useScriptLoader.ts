@@ -7,8 +7,11 @@ export const useScriptLoader = () => {
   const isLoadingRef = useRef(false);
   const scriptRef = useRef<HTMLScriptElement | null>(null);
   const timeoutRef = useRef<number | null>(null);
+  const mountedRef = useRef(false);
 
   useEffect(() => {
+    mountedRef.current = true;
+
     // Check if script is already loaded or loading
     const existingScript = document.getElementById(SCRIPT_ID);
     if (existingScript) {
@@ -22,8 +25,8 @@ export const useScriptLoader = () => {
     }
 
     const loadScript = () => {
-      if (isLoadingRef.current) {
-        console.log('Script load already in progress');
+      if (!mountedRef.current || isLoadingRef.current) {
+        console.log('Script load cancelled - component unmounted or load in progress');
         return;
       }
       
@@ -38,33 +41,38 @@ export const useScriptLoader = () => {
       isLoadingRef.current = true;
       console.log('Starting script load');
 
-      scriptRef.current = document.createElement('script');
-      scriptRef.current.id = SCRIPT_ID;
-      scriptRef.current.type = 'text/javascript';
-      scriptRef.current.async = true;
-      scriptRef.current.crossOrigin = "anonymous";
-      scriptRef.current.src = "https://book.instantroofer.com/js/instant-roofer-google-ads-integration.min.js";
+      const script = document.createElement('script');
+      script.id = SCRIPT_ID;
+      script.type = 'text/javascript';
+      script.async = true;
+      script.crossOrigin = "anonymous";
+      script.src = "https://book.instantroofer.com/js/instant-roofer-google-ads-integration.min.js";
       
-      scriptRef.current.onerror = (error) => {
+      script.onerror = (error) => {
         console.error('Error loading InstantRoofer script:', error);
-        isLoadingRef.current = false;
-        toast({
-          title: "Warning",
-          description: "Some features might be limited. Please refresh the page.",
-          variant: "destructive"
-        });
+        if (mountedRef.current) {
+          isLoadingRef.current = false;
+          toast({
+            title: "Warning",
+            description: "Some features might be limited. Please refresh the page.",
+            variant: "destructive"
+          });
+        }
       };
 
-      scriptRef.current.onload = () => {
+      script.onload = () => {
         console.log('Script loaded successfully');
-        isLoadingRef.current = false;
+        if (mountedRef.current) {
+          isLoadingRef.current = false;
+        }
       };
 
-      document.body.appendChild(scriptRef.current);
+      document.body.appendChild(script);
+      scriptRef.current = script;
     };
 
-    // Delay script loading
-    timeoutRef.current = window.setTimeout(loadScript, 2000);
+    // Delay initial script loading
+    timeoutRef.current = window.setTimeout(loadScript, 1500);
 
     // Add scroll listener for earlier loading
     const scrollHandler = () => {
@@ -79,13 +87,16 @@ export const useScriptLoader = () => {
     // Cleanup function
     return () => {
       console.log('Cleaning up script loader');
+      mountedRef.current = false;
+      
       if (timeoutRef.current) {
         window.clearTimeout(timeoutRef.current);
       }
+      
       window.removeEventListener('scroll', scrollHandler);
       isLoadingRef.current = false;
       
-      // Only remove the script if we're unmounting
+      // Only remove the script if we're unmounting and it exists
       if (scriptRef.current && document.body.contains(scriptRef.current)) {
         scriptRef.current.remove();
       }
