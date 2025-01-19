@@ -1,33 +1,20 @@
 import { motion } from "framer-motion";
 import { ChatHeader } from "./ChatHeader";
-import { ChatMessages } from "./ChatMessages";
-import { ChatInput } from "./ChatInput";
+import { LoadingSpinner } from "./LoadingSpinner";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-interface Message {
-  text: string;
-  isBot: boolean;
-  timestamp: Date;
-}
-
 interface ChatWindowProps {
-  messages: Message[];
-  inputValue: string;
-  setInputValue: (value: string) => void;
-  handleSend: () => void;
-  handleKeyPress: (e: React.KeyboardEvent) => void;
   onClose: () => void;
-  isLoading?: boolean;
+  isLoading: boolean;
+  isAuthenticated: boolean;
+  iframeUrl: string;
 }
 
 export const ChatWindow = ({
-  messages,
-  inputValue,
-  setInputValue,
-  handleSend,
-  handleKeyPress,
   onClose,
-  isLoading = false,
+  isLoading,
+  isAuthenticated,
+  iframeUrl,
 }: ChatWindowProps) => {
   const isMobile = useIsMobile();
 
@@ -44,7 +31,7 @@ export const ChatWindow = ({
       }}
       className={`fixed bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-30 ${
         isMobile 
-          ? 'bottom-20 mx-4 h-[60vh] w-[calc(100%-2rem)]' 
+          ? 'bottom-20 left-2 right-2 mx-auto h-[70vh] w-[96%]' 
           : 'bottom-28 right-8 w-[400px] h-[500px]'
       }`}
       style={{
@@ -53,14 +40,23 @@ export const ChatWindow = ({
       }}
     >
       <ChatHeader onClose={onClose} />
-      <ChatMessages messages={messages} />
-      <ChatInput
-        inputValue={inputValue}
-        setInputValue={setInputValue}
-        handleSend={handleSend}
-        handleKeyPress={handleKeyPress}
-        isLoading={isLoading}
-      />
+      <div className="h-[calc(100%-60px)] w-full overflow-hidden">
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : isAuthenticated ? (
+          <iframe
+            src={iframeUrl}
+            className="w-full h-full"
+            style={{ minHeight: "100%" }}
+            frameBorder="0"
+            title="Chat Interface"
+          />
+        ) : (
+          <div className="flex items-center justify-center h-full text-gray-500">
+            Failed to load chat interface
+          </div>
+        )}
+      </div>
     </motion.div>
   );
 };
