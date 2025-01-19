@@ -85,7 +85,7 @@ export const ChatWidget = () => {
             transition={{ duration: 0.2 }}
             className="fixed bottom-36 right-8 w-[400px] h-[600px] bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-50"
             style={{
-              maxHeight: "calc(100vh - 200px)",
+              maxHeight: "calc(100vh - 300px)",
               top: "auto"
             }}
           >
