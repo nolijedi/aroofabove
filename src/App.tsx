@@ -14,6 +14,7 @@ import InsuranceClaims from "./pages/InsuranceClaims";
 import PromoCountdown from "./components/PromoCountdown";
 import ScrollToTop from "./components/ScrollToTop";
 import StickyPhone from "./components/StickyPhone";
+import { ChatWidget } from "./components/ChatWidget";
 
 // Add styles to hide Lovable widget
 const styles = document.createElement('style');
@@ -61,6 +62,7 @@ const App = () => (
           <Footer />
           <PromoCountdown />
           <StickyPhone />
+          <ChatWidget />
         </div>
       </BrowserRouter>
     </TooltipProvider>
