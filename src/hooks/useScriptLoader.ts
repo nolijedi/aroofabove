@@ -11,35 +11,36 @@ export const useScriptLoader = () => {
 
   useEffect(() => {
     mountedRef.current = true;
+    console.log('Initializing script loader');
 
-    // Check if script is already loaded or loading
+    // Check if script is already loaded
     const existingScript = document.getElementById(SCRIPT_ID);
     if (existingScript) {
       console.log('Script already exists, skipping load');
       return;
     }
 
+    // Prevent multiple simultaneous loading attempts
     if (isLoadingRef.current) {
       console.log('Script is currently loading, skipping');
       return;
     }
 
     const loadScript = () => {
-      if (!mountedRef.current || isLoadingRef.current) {
-        console.log('Script load cancelled - component unmounted or load in progress');
+      if (!mountedRef.current) {
+        console.log('Component unmounted, canceling script load');
         return;
       }
-      
-      // Remove any existing script first to prevent duplicates
-      const oldScript = document.getElementById(SCRIPT_ID);
-      if (oldScript) {
-        console.log('Removing old script');
-        oldScript.remove();
+
+      // Remove any existing script to prevent duplicates
+      if (scriptRef.current) {
+        console.log('Removing existing script');
+        scriptRef.current.remove();
+        scriptRef.current = null;
       }
 
-      // Set loading flag
       isLoadingRef.current = true;
-      console.log('Starting script load');
+      console.log('Creating new script element');
 
       const script = document.createElement('script');
       script.id = SCRIPT_ID;
@@ -49,7 +50,7 @@ export const useScriptLoader = () => {
       script.src = "https://book.instantroofer.com/js/instant-roofer-google-ads-integration.min.js";
       
       script.onerror = (error) => {
-        console.error('Error loading InstantRoofer script:', error);
+        console.error('Error loading script:', error);
         if (mountedRef.current) {
           isLoadingRef.current = false;
           toast({
@@ -72,17 +73,7 @@ export const useScriptLoader = () => {
     };
 
     // Delay initial script loading
-    timeoutRef.current = window.setTimeout(loadScript, 1500);
-
-    // Add scroll listener for earlier loading
-    const scrollHandler = () => {
-      if (timeoutRef.current) {
-        window.clearTimeout(timeoutRef.current);
-      }
-      loadScript();
-    };
-    
-    window.addEventListener('scroll', scrollHandler, { once: true });
+    timeoutRef.current = window.setTimeout(loadScript, 1000);
 
     // Cleanup function
     return () => {
@@ -93,13 +84,18 @@ export const useScriptLoader = () => {
         window.clearTimeout(timeoutRef.current);
       }
       
-      window.removeEventListener('scroll', scrollHandler);
       isLoadingRef.current = false;
-      
-      // Only remove the script if we're unmounting and it exists
+
+      // Remove script on unmount
       if (scriptRef.current && document.body.contains(scriptRef.current)) {
         scriptRef.current.remove();
       }
+
+      // Remove any other instances that might exist
+      const existingScript = document.getElementById(SCRIPT_ID);
+      if (existingScript) {
+        existingScript.remove();
+      }
     };
-  }, [toast]); // Only re-run if toast changes
+  }, [toast]);
 };
