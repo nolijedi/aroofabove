@@ -6,26 +6,37 @@ export const useScriptLoader = () => {
   const SCRIPT_ID = 'instant-roofer-script';
   const isLoadingRef = useRef(false);
   const scriptRef = useRef<HTMLScriptElement | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
-    // Check if script is already loaded
+    // Check if script is already loaded or loading
     const existingScript = document.getElementById(SCRIPT_ID);
-    if (existingScript || isLoadingRef.current) {
+    if (existingScript) {
+      console.log('Script already exists, skipping load');
       return;
     }
 
-    let timeoutId: number;
+    if (isLoadingRef.current) {
+      console.log('Script is currently loading, skipping');
+      return;
+    }
 
     const loadScript = () => {
-      if (isLoadingRef.current) return;
+      if (isLoadingRef.current) {
+        console.log('Script load already in progress');
+        return;
+      }
       
-      // Remove any existing script first
+      // Remove any existing script first to prevent duplicates
       const oldScript = document.getElementById(SCRIPT_ID);
       if (oldScript) {
+        console.log('Removing old script');
         oldScript.remove();
       }
 
+      // Set loading flag
       isLoadingRef.current = true;
+      console.log('Starting script load');
 
       scriptRef.current = document.createElement('script');
       scriptRef.current.id = SCRIPT_ID;
@@ -45,6 +56,7 @@ export const useScriptLoader = () => {
       };
 
       scriptRef.current.onload = () => {
+        console.log('Script loaded successfully');
         isLoadingRef.current = false;
       };
 
@@ -52,11 +64,13 @@ export const useScriptLoader = () => {
     };
 
     // Delay script loading
-    timeoutId = window.setTimeout(loadScript, 7000);
+    timeoutRef.current = window.setTimeout(loadScript, 2000);
 
     // Add scroll listener for earlier loading
     const scrollHandler = () => {
-      window.clearTimeout(timeoutId);
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
+      }
       loadScript();
     };
     
@@ -64,12 +78,15 @@ export const useScriptLoader = () => {
 
     // Cleanup function
     return () => {
-      window.clearTimeout(timeoutId);
+      console.log('Cleaning up script loader');
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
+      }
       window.removeEventListener('scroll', scrollHandler);
       isLoadingRef.current = false;
       
-      // Clean up script on unmount
-      if (scriptRef.current) {
+      // Only remove the script if we're unmounting
+      if (scriptRef.current && document.body.contains(scriptRef.current)) {
         scriptRef.current.remove();
       }
     };
