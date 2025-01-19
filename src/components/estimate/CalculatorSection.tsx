@@ -47,25 +47,6 @@ export const CalculatorSection = ({ showCalculator }: CalculatorSectionProps) =>
               <iframe
                 src={urlWithParams}
                 className="w-[344px] md:w-[500px] lg:w-[600px] h-[650px] border-none rounded-lg shadow-lg relative z-10"
-                style={{ 
-                  width: '344px',
-                  minWidth: '344px',
-                  maxWidth: '344px',
-                  height: '650px',
-                  minHeight: '650px',
-                  maxHeight: '650px',
-                  display: 'block',
-                  '@media (min-width: 768px)': {
-                    width: '500px',
-                    minWidth: '500px',
-                    maxWidth: '500px',
-                  },
-                  '@media (min-width: 1024px)': {
-                    width: '600px',
-                    minWidth: '600px',
-                    maxWidth: '600px',
-                  }
-                }}
                 title="Roof Estimate Calculator"
               />
             </div>

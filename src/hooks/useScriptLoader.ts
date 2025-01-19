@@ -32,12 +32,18 @@ export const useScriptLoader = () => {
         return;
       }
 
-      // Remove any existing script to prevent duplicates
-      if (scriptRef.current) {
-        console.log('Removing existing script');
-        scriptRef.current.remove();
-        scriptRef.current = null;
-      }
+      // Clean up any existing script instances
+      const cleanup = () => {
+        const scripts = document.querySelectorAll(`script[id="${SCRIPT_ID}"]`);
+        scripts.forEach(script => script.remove());
+        if (scriptRef.current) {
+          scriptRef.current.remove();
+          scriptRef.current = null;
+        }
+      };
+
+      // Clean up before adding new script
+      cleanup();
 
       isLoadingRef.current = true;
       console.log('Creating new script element');
@@ -73,9 +79,8 @@ export const useScriptLoader = () => {
     };
 
     // Delay initial script loading
-    timeoutRef.current = window.setTimeout(loadScript, 1000);
+    timeoutRef.current = window.setTimeout(loadScript, 2000);
 
-    // Cleanup function
     return () => {
       console.log('Cleaning up script loader');
       mountedRef.current = false;
@@ -86,15 +91,12 @@ export const useScriptLoader = () => {
       
       isLoadingRef.current = false;
 
-      // Remove script on unmount
-      if (scriptRef.current && document.body.contains(scriptRef.current)) {
+      // Clean up all script instances on unmount
+      const scripts = document.querySelectorAll(`script[id="${SCRIPT_ID}"]`);
+      scripts.forEach(script => script.remove());
+      
+      if (scriptRef.current) {
         scriptRef.current.remove();
-      }
-
-      // Remove any other instances that might exist
-      const existingScript = document.getElementById(SCRIPT_ID);
-      if (existingScript) {
-        existingScript.remove();
       }
     };
   }, [toast]);
