@@ -1,65 +1,42 @@
 import { motion } from "framer-motion";
 import { ChatHeader } from "./ChatHeader";
-import { LoadingSpinner } from "./LoadingSpinner";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { ChatMessages } from "./ChatMessages";
+import { ChatInput } from "./ChatInput";
+import { Message } from "@/types/chat";
+import { useMediaQuery } from "@/hooks/use-mobile";
 
 interface ChatWindowProps {
+  messages: Message[];
+  onSendMessage: (message: string) => void;
   onClose: () => void;
-  isLoading: boolean;
-  isAuthenticated: boolean;
-  iframeUrl: string;
+  isTyping: boolean;
 }
 
-export const ChatWindow = ({
-  onClose,
-  isLoading,
-  isAuthenticated,
-  iframeUrl,
-}: ChatWindowProps) => {
-  const isMobile = useIsMobile();
+export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatWindowProps) => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 20, scale: 0.95 }}
-      transition={{ 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 20 }}
+      transition={{
         type: "spring",
-        stiffness: 100,
-        damping: 20,
-        mass: 1
+        stiffness: 300,
+        damping: 30,
       }}
-      className={`fixed bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-30 ${
+      className={`fixed bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden z-50 ${
         isMobile 
-          ? 'bottom-20 left-4 right-4 max-w-[400px] mx-auto' 
-          : 'bottom-24 right-8 w-[380px]'
+          ? "inset-x-4 bottom-24 max-w-[500px] mx-auto" 
+          : "bottom-24 right-8 w-[400px]"
       }`}
       style={{
-        height: isMobile ? "calc(100vh - 180px)" : "600px",
-        maxHeight: isMobile ? "600px" : "calc(100vh - 180px)",
+        height: isMobile ? "70vh" : "600px",
       }}
     >
       <ChatHeader onClose={onClose} />
-      <div className="h-[calc(100%-48px)] w-full overflow-hidden bg-white">
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : isAuthenticated ? (
-          <iframe
-            src={iframeUrl}
-            className="w-full h-full"
-            style={{ 
-              minHeight: "100%",
-              height: "100%"
-            }}
-            frameBorder="0"
-            title="Chat Interface"
-          />
-        ) : (
-          <div className="flex items-center justify-center h-full text-gray-500">
-            Failed to load chat interface
-          </div>
-        )}
-      </div>
+      <ChatMessages messages={messages} isTyping={isTyping} />
+      <ChatInput onSendMessage={onSendMessage} isTyping={isTyping} />
     </motion.div>
   );
 };

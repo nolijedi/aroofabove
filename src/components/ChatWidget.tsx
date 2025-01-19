@@ -3,90 +3,66 @@ import { AnimatePresence } from "framer-motion";
 import { ChatButton } from "./chat/ChatButton";
 import { ChatWindow } from "./chat/ChatWindow";
 import { toast } from "./ui/use-toast";
-
-const CHATBASE_IFRAME_URL = "https://www.chatbase.co/chatbot-iframe/FmTI1L5ssl5lbyiEnur4r";
-const SECRET_KEY = 'b1ow6vd8cct46fxxu5hy3f8a73fffh53';
-const USER_ID = 'nolijedi';
+import { Message } from "@/types/chat";
 
 export const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isHammering, setIsHammering] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      role: "assistant",
+      content: "Hello! How can I help you today?",
+      timestamp: new Date(),
+    },
+  ]);
+  const [isTyping, setIsTyping] = useState(false);
 
-  const generateHash = async (secret: string, userId: string) => {
+  const handleSendMessage = async (message: string) => {
+    if (!message.trim()) return;
+
+    // Add user message
+    const userMessage: Message = {
+      role: "user",
+      content: message,
+      timestamp: new Date(),
+    };
+    setMessages((prev) => [...prev, userMessage]);
+    setIsTyping(true);
+
     try {
-      const encoder = new TextEncoder();
-      const keyData = encoder.encode(secret);
-      const cryptoKey = await window.crypto.subtle.importKey(
-        'raw',
-        keyData,
-        { name: 'HMAC', hash: 'SHA-256' },
-        false,
-        ['sign']
-      );
-
-      const data = encoder.encode(userId);
-      const signature = await window.crypto.subtle.sign('HMAC', cryptoKey, data);
-      return Array.from(new Uint8Array(signature))
-        .map(b => b.toString(16).padStart(2, '0'))
-        .join('');
-    } catch (error) {
-      console.error('Error generating hash:', error);
-      throw error;
-    }
-  };
-
-  const initChat = async () => {
-    try {
-      setIsLoading(true);
-      const hash = await generateHash(SECRET_KEY, USER_ID);
-      console.log('Generated HMAC hash:', hash);
-      
-      // Since we don't have an actual authentication endpoint,
-      // we'll simulate a successful authentication after hash generation
+      // Simulate AI response (replace with actual API call later)
       setTimeout(() => {
-        setIsAuthenticated(true);
-        setIsLoading(false);
+        const aiResponse: Message = {
+          role: "assistant",
+          content: "I understand you said: " + message + ". How can I assist you further?",
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, aiResponse]);
+        setIsTyping(false);
       }, 1000);
     } catch (error) {
-      console.error('Authentication failed:', error);
+      console.error("Error sending message:", error);
       toast({
         title: "Error",
-        description: "Failed to initialize chat. Please try again later.",
+        description: "Failed to send message. Please try again.",
         variant: "destructive",
       });
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (isOpen && !isAuthenticated) {
-      initChat();
-    }
-  }, [isOpen, isAuthenticated]);
-
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
-    if (!isOpen) {
-      setIsHammering(true);
-      setTimeout(() => setIsHammering(false), 1000);
+      setIsTyping(false);
     }
   };
 
   return (
     <>
       <ChatButton 
-        onClick={toggleChat} 
-        isHammering={isHammering} 
+        onClick={() => setIsOpen(!isOpen)}
+        isOpen={isOpen}
       />
       <AnimatePresence mode="wait" initial={false}>
         {isOpen && (
           <ChatWindow
+            messages={messages}
+            onSendMessage={handleSendMessage}
             onClose={() => setIsOpen(false)}
-            isLoading={isLoading}
-            isAuthenticated={isAuthenticated}
-            iframeUrl={CHATBASE_IFRAME_URL}
+            isTyping={isTyping}
           />
         )}
       </AnimatePresence>
