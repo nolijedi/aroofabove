@@ -13,13 +13,21 @@ serve(async (req) => {
   }
 
   try {
+    const apiKey = Deno.env.get('OPENAI_API_KEY')
+    if (!apiKey) {
+      console.error('OpenAI API key is not configured')
+      throw new Error('OpenAI API key is not configured')
+    }
+
+    console.log('Initializing OpenAI client...')
     const openai = new OpenAI({
-      apiKey: Deno.env.get('OPENAI_API_KEY'),
+      apiKey: apiKey,
     })
 
     const { messages } = await req.json()
 
     if (!messages || !Array.isArray(messages)) {
+      console.error('Invalid messages format:', messages)
       throw new Error('Messages array is required')
     }
 
@@ -32,6 +40,11 @@ serve(async (req) => {
       max_tokens: 150,
     })
 
+    if (!completion.choices || completion.choices.length === 0) {
+      console.error('No completion choices returned from OpenAI')
+      throw new Error('Failed to generate response')
+    }
+
     const text = completion.choices[0]?.message?.content || "I apologize, but I couldn't generate a response. Please try again."
 
     console.log('OpenAI response:', text)
@@ -42,9 +55,19 @@ serve(async (req) => {
     )
   } catch (error) {
     console.error('Error in chat function:', error)
+    // Check if it's an OpenAI API error
+    if (error.response) {
+      console.error('OpenAI API Error:', {
+        status: error.response.status,
+        data: error.response.data
+      })
+    }
     return new Response(
-      JSON.stringify({ error: error.message }),
-      { 
+      JSON.stringify({ 
+        error: error.message,
+        details: error.response?.data || null
+      }),
+      {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       },
