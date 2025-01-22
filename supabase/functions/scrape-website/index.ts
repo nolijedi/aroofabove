@@ -18,6 +18,11 @@ async function retryWithExponentialBackoff(fn: () => Promise<Response>, retries 
       setTimeout(() => reject(new Error('Request timeout')), REQUEST_TIMEOUT);
     });
     const response = await Promise.race([fn(), timeoutPromise]);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
     console.log(`Request attempt ${MAX_RETRIES - retries + 1} succeeded`);
     return response;
   } catch (error) {
@@ -87,17 +92,6 @@ serve(async (req) => {
       retryWithExponentialBackoff(makeRequest),
       timeoutPromise
     ]);
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Firecrawl API error:', {
-        status: response.status,
-        statusText: response.statusText,
-        body: errorText,
-        executionTime: `${Date.now() - startTime}ms`
-      });
-      throw new Error(`Firecrawl API error: ${response.status} - ${errorText}`);
-    }
 
     const data = await response.json();
     console.log('Scrape completed successfully', {

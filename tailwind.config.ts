@@ -74,25 +74,12 @@ export default {
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
-        },module.exports = {
-          theme: {
-            extend: {
-              keyframes: {
-                'phone-pulse': {
-                  '0%, 100%': { transform: 'scale(1)' },
-                  '25%': { transform: 'scale(1.5)' },
-                  '50%': { transform: 'scale(2)' },
-                  '75%': { transform: 'scale(1.5)' },
-                },
-              },
-              animation: {
-                'phone-pulse': 'phone-pulse 2s ease-in-out infinite',
-              },
-            },
-          },
-        }
-        
-        
+        },
+        "phone-pulse": {
+          "0%, 100%": { transform: "scale(1)" },
+          "25%": { transform: "scale(1.5)" },
+          "50%": { transform: "scale(2)" },
+          "75%": { transform: "scale(1.5)" },
         },
         "spin-slow": {
           "100%": {
