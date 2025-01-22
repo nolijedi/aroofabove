@@ -17,7 +17,7 @@
   width: 100%;
   height: 2px;
   background: linear-gradient(90deg, 
-    theme('colors.roofing-orange') 0%,
+    rgb(249 115 22) 0%,
     rgba(255, 255, 255, 0) 100%
   );
   opacity: 0.3;
@@ -26,8 +26,8 @@
 .section-gradient-separator:nth-child(even) {
   background: linear-gradient(
     90deg,
-    rgba(theme('colors.roofing-cream'), 0.1) 15%,
-    rgba(theme('colors.roofing-cream'), 0.05) 50%,
+    rgba(254, 247, 205, 0.1) 15%,
+    rgba(254, 247, 205, 0.05) 50%,
     transparent 85%
   );
 }
@@ -35,8 +35,8 @@
 .section-gradient-separator:nth-child(3n) {
   background: linear-gradient(
     90deg,
-    rgba(theme('colors.roofing-beige'), 0.1) 15%,
-    rgba(theme('colors.roofing-beige'), 0.05) 50%,
+    rgba(253, 225, 211, 0.1) 15%,
+    rgba(253, 225, 211, 0.05) 50%,
     transparent 85%
   );
 }
@@ -44,29 +44,29 @@
 .section-gradient-separator:nth-child(4n) {
   background: linear-gradient(
     90deg,
-    rgba(theme('colors.roofing-orange'), 0.06) 15%,
-    rgba(theme('colors.roofing-orange'), 0.03) 50%,
+    rgba(249, 115, 22, 0.06) 15%,
+    rgba(249, 115, 22, 0.03) 50%,
     transparent 85%
   );
 }
 
 .section-gradient-separator:nth-child(even)::after {
   background: linear-gradient(90deg, 
-    theme('colors.roofing-cream') 0%,
+    rgb(254 247 205) 0%,
     rgba(255, 255, 255, 0) 100%
   );
 }
 
 .section-gradient-separator:nth-child(3n)::after {
   background: linear-gradient(90deg, 
-    theme('colors.roofing-beige') 0%,
+    rgb(253 225 211) 0%,
     rgba(255, 255, 255, 0) 100%
   );
 }
 
 .section-gradient-separator:nth-child(4n)::after {
   background: linear-gradient(90deg, 
-    theme('colors.roofing-orange-dark') 0%,
+    rgb(234 88 12) 0%,
     rgba(255, 255, 255, 0) 100%
   );
 }
