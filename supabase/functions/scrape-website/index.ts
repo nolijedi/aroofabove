@@ -17,20 +17,29 @@ async function retryWithExponentialBackoff(fn: () => Promise<Response>, retries 
     const timeoutPromise = new Promise<Response>((_, reject) => {
       setTimeout(() => reject(new Error('Request timeout')), REQUEST_TIMEOUT);
     });
+    
     const response = await Promise.race([fn(), timeoutPromise]);
     
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorText = await response.text();
+      console.error('API error response:', {
+        status: response.status,
+        statusText: response.statusText,
+        body: errorText
+      });
+      throw new Error(`HTTP error! status: ${response.status} - ${errorText}`);
     }
     
     console.log(`Request attempt ${MAX_RETRIES - retries + 1} succeeded`);
     return response;
   } catch (error) {
+    console.error(`Attempt ${MAX_RETRIES - retries + 1}/${MAX_RETRIES} failed:`, error);
+    
     if (retries === 0) {
       console.error('All retry attempts failed:', error);
       throw error;
     }
-    console.error(`Attempt ${MAX_RETRIES - retries + 1}/${MAX_RETRIES} failed:`, error);
+    
     console.log(`Waiting ${delay}ms before next attempt...`);
     await new Promise(resolve => setTimeout(resolve, delay));
     return retryWithExponentialBackoff(fn, retries - 1, delay * 2);
