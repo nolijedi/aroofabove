@@ -75,19 +75,10 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-<<<<<<< HEAD
         'phone-pulse': {
-          '0%, 100%': { transform: 'scale(1)' },
-          '25%': { transform: 'scale(1.5)' },
-          '50%': { transform: 'scale(2)' },
-          '75%': { transform: 'scale(1.5)' },
-=======
-        "phone-pulse": {
-          "0%, 100%": { transform: "scale(1)" },
-          "25%": { transform: "scale(1.5)" },
-          "50%": { transform: "scale(2)" },
-          "75%": { transform: "scale(1.5)" },
->>>>>>> aba876f6bf00d368580752249a268bda52adf6b8
+          '0%': { transform: 'scale(2.5)' },
+          '50%': { transform: 'scale(0)' },
+          '100%': { transform: 'scale(2.5)' },
         },
         "spin-slow": {
           "100%": {

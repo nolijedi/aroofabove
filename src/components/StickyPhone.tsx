@@ -21,7 +21,7 @@ const StickyPhone = () => {
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.95 }}
         onClick={handlePhoneClick}
-        className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group pointer-events-auto cursor-pointer"
+        **className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group pointer-events-auto cursor-pointer animate-phone-pulse"**  // Highlighted changes here
         animate={{
           scale: [1, 0, 1],
         }}
