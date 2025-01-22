@@ -1,6 +1,6 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
-export default {
+const config: Config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -76,9 +76,9 @@ export default {
           to: { height: "0" },
         },
         'phone-pulse': {
-          '0%': { transform: 'scale(2.5)' },
+          '0%': { transform: 'scale(1.5)' },
           '50%': { transform: 'scale(0)' },
-          '100%': { transform: 'scale(2.5)' },
+          '100%': { transform: 'scale(1.5)' },
         },
         "spin-slow": {
           "100%": {
@@ -89,10 +89,14 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        'phone-pulse': 'phone-pulse 2s ease-in-out infinite',
+        'phone-pulse': 'phone-pulse 4s ease-in-out infinite',
         "spin-slow": "spin-slow 12s linear infinite",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+  plugins: [
+    require('tailwindcss-animate')
+  ],
+}
+
+export default config;
