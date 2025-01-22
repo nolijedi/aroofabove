@@ -7,9 +7,8 @@ const corsHeaders = {
 };
 
 const MAX_RETRIES = 3;
-const INITIAL_RETRY_DELAY = 1000; // 1 second
-const REQUEST_TIMEOUT = 10000; // 10 seconds
-const FUNCTION_TIMEOUT = 25000; // 25 seconds
+const INITIAL_RETRY_DELAY = 1000;
+const REQUEST_TIMEOUT = 10000;
 
 async function retryWithExponentialBackoff(fn: () => Promise<Response>, retries = MAX_RETRIES, delay = INITIAL_RETRY_DELAY): Promise<Response> {
   try {
@@ -47,9 +46,6 @@ async function retryWithExponentialBackoff(fn: () => Promise<Response>, retries 
 }
 
 serve(async (req) => {
-  const startTime = Date.now();
-  console.log('Starting scrape-website function execution');
-
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -62,23 +58,7 @@ serve(async (req) => {
       throw new Error('Firecrawl API key not configured');
     }
 
-    console.log('API key validation successful');
-
-    const requestBody = {
-      url: 'https://site.aroofabove.co',
-      limit: 50,
-      scrapeOptions: {
-        formats: ['markdown', 'html'],
-        waitForNetworkRequests: true,
-        waitTime: 3000
-      }
-    };
-
-    console.log('Making request to Firecrawl API with configuration:', {
-      url: requestBody.url,
-      limit: requestBody.limit,
-      options: requestBody.scrapeOptions
-    });
+    console.log('Starting scrape request with configuration');
 
     const makeRequest = () => fetch('https://api.firecrawl.com/v1/scrape', {
       method: 'POST',
@@ -88,23 +68,21 @@ serve(async (req) => {
         'Accept': 'application/json',
         'User-Agent': 'Supabase Edge Function'
       },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify({
+        url: 'https://site.aroofabove.co',
+        limit: 50,
+        scrapeOptions: {
+          formats: ['markdown', 'html'],
+          waitForNetworkRequests: true,
+          waitTime: 3000
+        }
+      })
     });
 
-    // Set up timeout for the entire function
-    const timeoutPromise = new Promise((_, reject) => {
-      setTimeout(() => reject(new Error('Function timeout exceeded')), FUNCTION_TIMEOUT);
-    });
-
-    // Execute request with retry mechanism and timeout
-    const response = await Promise.race([
-      retryWithExponentialBackoff(makeRequest),
-      timeoutPromise
-    ]);
-
+    const response = await retryWithExponentialBackoff(makeRequest);
     const data = await response.json();
+
     console.log('Scrape completed successfully', {
-      executionTime: `${Date.now() - startTime}ms`,
       dataSize: JSON.stringify(data).length
     });
 
@@ -113,17 +91,11 @@ serve(async (req) => {
     });
 
   } catch (error) {
-    console.error('Error in scrape-website function:', {
-      message: error.message,
-      stack: error.stack,
-      executionTime: `${Date.now() - startTime}ms`
-    });
-
+    console.error('Error in scrape-website function:', error);
     return new Response(
       JSON.stringify({
         error: error.message || 'An unexpected error occurred',
-        details: error.stack,
-        executionTime: `${Date.now() - startTime}ms`
+        details: error.stack
       }),
       {
         status: 500,
