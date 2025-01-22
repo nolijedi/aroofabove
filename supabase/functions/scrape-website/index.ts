@@ -13,13 +13,20 @@ const FUNCTION_TIMEOUT = 25000; // 25 seconds
 
 async function retryWithExponentialBackoff(fn: () => Promise<Response>, retries = MAX_RETRIES, delay = INITIAL_RETRY_DELAY): Promise<Response> {
   try {
+    console.log(`Making request attempt ${MAX_RETRIES - retries + 1}/${MAX_RETRIES}`);
     const timeoutPromise = new Promise<Response>((_, reject) => {
       setTimeout(() => reject(new Error('Request timeout')), REQUEST_TIMEOUT);
     });
-    return await Promise.race([fn(), timeoutPromise]);
+    const response = await Promise.race([fn(), timeoutPromise]);
+    console.log(`Request attempt ${MAX_RETRIES - retries + 1} succeeded`);
+    return response;
   } catch (error) {
-    if (retries === 0) throw error;
-    console.error(`Attempt failed (${MAX_RETRIES - retries + 1}/${MAX_RETRIES}):`, error);
+    if (retries === 0) {
+      console.error('All retry attempts failed:', error);
+      throw error;
+    }
+    console.error(`Attempt ${MAX_RETRIES - retries + 1}/${MAX_RETRIES} failed:`, error);
+    console.log(`Waiting ${delay}ms before next attempt...`);
     await new Promise(resolve => setTimeout(resolve, delay));
     return retryWithExponentialBackoff(fn, retries - 1, delay * 2);
   }
@@ -37,10 +44,11 @@ serve(async (req) => {
   try {
     const FIRECRAWL_API_KEY = Deno.env.get('FIRECRAWL_API_KEY');
     if (!FIRECRAWL_API_KEY) {
+      console.error('Firecrawl API key not configured');
       throw new Error('Firecrawl API key not configured');
     }
 
-    console.log('Validating API key configuration...');
+    console.log('API key validation successful');
 
     const requestBody = {
       url: 'https://site.aroofabove.co',
