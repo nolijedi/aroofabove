@@ -76,9 +76,15 @@ const config: Config = {
           to: { height: "0" },
         },
         'phone-pulse': {
+<<<<<<< HEAD
           '0%': { transform: 'scale(1.5)' },
           '50%': { transform: 'scale(0)' },
           '100%': { transform: 'scale(1.5)' },
+=======
+          '0%': { transform: 'scale(1.2)' },
+          '50%': { transform: 'scale(0.9)' },
+          '100%': { transform: 'scale(1.2)' },
+>>>>>>> 482e6b21a06335933913aa83eb6219468174299a
         },
         "spin-slow": {
           "100%": {
@@ -89,6 +95,7 @@ const config: Config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+<<<<<<< HEAD
         'phone-pulse': 'phone-pulse 4s ease-in-out infinite',
         "spin-slow": "spin-slow 12s linear infinite",
       },
@@ -100,3 +107,15 @@ const config: Config = {
 }
 
 export default config;
+=======
+        'phone-pulse': 'phone-pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        "spin-slow": "spin-slow 30s linear infinite",
+      },
+    },
+  },
+  plugins: [require("tailwindcss-animate")],
+  server: {
+    port: 8080
+  }
+} satisfies Config;
+>>>>>>> 482e6b21a06335933913aa83eb6219468174299a

@@ -8,13 +8,14 @@ const corsHeaders = {
 
 const MAX_RETRIES = 3;
 const INITIAL_RETRY_DELAY = 1000;
-const REQUEST_TIMEOUT = 10000;
+const REQUEST_TIMEOUT = 30000; // Increased timeout to 30 seconds
 
 async function retryWithExponentialBackoff(fn: () => Promise<Response>, retries = MAX_RETRIES, delay = INITIAL_RETRY_DELAY): Promise<Response> {
   try {
     console.log(`Making request attempt ${MAX_RETRIES - retries + 1}/${MAX_RETRIES}`);
+    
     const timeoutPromise = new Promise<Response>((_, reject) => {
-      setTimeout(() => reject(new Error('Request timeout')), REQUEST_TIMEOUT);
+      setTimeout(() => reject(new Error(`Request timeout after ${REQUEST_TIMEOUT}ms`)), REQUEST_TIMEOUT);
     });
     
     const response = await Promise.race([fn(), timeoutPromise]);
