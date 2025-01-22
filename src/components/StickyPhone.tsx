@@ -1,57 +1,98 @@
-import { Phone } from "lucide-react";
-import { motion } from "framer-motion";
+import type { Config } from "tailwindcss";
 
-const StickyPhone = () => {
-  const handlePhoneClick = () => {
-    window.location.href = "tel:509-400-5911";
-  };
-
-  return (
-    <motion.div
-      initial={{ x: -100 }}
-      animate={{ x: 0 }}
-      transition={{
-        type: "spring",
-        stiffness: 100,
-        damping: 20
-      }}
-      className="fixed left-2 bottom-40 z-50 pointer-events-none"
-    >
-      <motion.div
-        whileHover={{ scale: 1.2 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={handlePhoneClick}
-        className="relative bg-roofing-orange/50 hover:bg-roofing-orange-dark text-white p-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group pointer-events-auto cursor-pointer animate-phone-pulse"
-        animate={{
-          scale: [1, 0, 1],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      >
-        <div className="absolute inset-0 w-full h-full">
-          <div className="flex items-center justify-center w-full h-full">
-            <Phone className="w-12 h-12 text-white relative z-10" />
-          </div>
-          <svg className="absolute inset-0 w-full h-full animate-spin-slow" viewBox="0 0 100 100">
-            <defs>
-              <path
-                id="circle"
-                d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
-              />
-            </defs>
-            <text className="text-xs fill-white">
-              <textPath href="#circle" startOffset="0%">
-                CLICK HERE • CALL US NOW • CLICK HERE • CALL US NOW •
-              </textPath>
-            </text>
-          </svg>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-};
-
-export default StickyPhone;
+export default {
+  darkMode: ["class"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
+  prefix: "",
+  theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
+    extend: {
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        roofing: {
+          orange: "#F97316",
+          "orange-dark": "#EA580C",
+          charcoal: "#221F26",
+          beige: "#FDE1D3",
+          cream: "#FEF7CD",
+          "off-white": "#F8F8F8",
+        },
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        'phone-pulse': {
+          '0%': { transform: 'scale(1.5)' },
+          '50%': { transform: 'scale(0)' },
+          '100%': { transform: 'scale(1.5)' },
+        },
+        "spin-slow": {
+          "100%": {
+            transform: "rotate(-360deg)",
+          },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        'phone-pulse': 'phone-pulse 4s ease-in-out infinite',  // Updated duration to 4s
+        "spin-slow": "spin-slow 12s linear infinite",
+      },
+    },
+  },
+  plugins: [require("tailwindcss-animate")],
+} satisfies Config;

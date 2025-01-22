@@ -1,9 +1,9 @@
 export const animations = {
   phoneRing: {
     keyframes: `@keyframes phone-pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.5); }
-      100% { transform: scale(0.6); }
+      0% { transform: scale(1.5); }
+      50% { transform: scale(0); }
+      100% { transform: scale(1.5); }
     }`,
     className: 'animate-phone-pulse'
   },
