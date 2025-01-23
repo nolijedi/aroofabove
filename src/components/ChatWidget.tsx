@@ -24,7 +24,6 @@ export const ChatWidget = () => {
     <>
       <ChatButton 
         onClick={() => setIsOpen(!isOpen)}
-        isHammering={isOpen}
       />
       <AnimatePresence mode="wait" initial={false}>
         {isOpen && (
