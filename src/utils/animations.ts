@@ -7,7 +7,7 @@ export const animations = {
       75% { transform: scale(0.8); opacity: 0.3; }
       100% { transform: scale(1); opacity: 0.2; }
     }`,
-    className: 'animate-phone-pulse'
+    className: 'animate-live-chat-pulse'
   },
   liveChatPulse: {
     keyframes: `@keyframes live-chat-pulse {
