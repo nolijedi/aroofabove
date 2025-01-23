@@ -8,7 +8,7 @@ interface ChatButtonProps {
 export const ChatButton = ({ onClick }: ChatButtonProps) => {
   return (
     <motion.div
-      className="fixed bottom-6 left-6 z-40"
+      className="fixed bottom-6 left-6 z-40 animate-live-chat-pulse" // Added animation class here
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
     >
@@ -21,14 +21,11 @@ export const ChatButton = ({ onClick }: ChatButtonProps) => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <div className="relative">
-            <div className="absolute inset-0 bg-roofing-orange rounded-full animate-live-chat-pulse opacity-40"></div>
-            <img 
-              src="/lovable-uploads/cfe74ea0-b3ce-4017-a778-51f7dd28f478.png"
-              alt="Chat Icon"
-              className="w-8 h-8 object-contain"
-            />
-          </div>
+          <img 
+            src="/lovable-uploads/cfe74ea0-b3ce-4017-a778-51f7dd28f478.png"
+            alt="Chat Icon"
+            className="w-8 h-8 object-contain"
+          />
           <span className="text-xs font-medium text-white whitespace-nowrap">Live Chat</span>
         </motion.div>
       </Button>
