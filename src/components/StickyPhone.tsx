@@ -5,7 +5,7 @@ const StickyPhone = () => {
   return (
     <motion.a
       href="tel:509-400-5911"
-      className="fixed bottom-6 right-6 z-40 bg-roofing-orange/80 hover:bg-roofing-orange-dark text-white p-4 rounded-full shadow-lg transition-all duration-300 group w-[68px] h-[68px] flex flex-col items-center justify-center animate-phone-pulse"
+      className="fixed bottom-6 right-6 z-40 bg-roofing-orange/80 hover:bg-roofing-orange-dark text-white p-4 rounded-full shadow-lg transition-all duration-300 group w-[68px] h-[68px] flex flex-col items-center justify-center animate-live-chat-pulse"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       whileHover={{ scale: 1.1 }}
