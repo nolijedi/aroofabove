@@ -8,7 +8,7 @@ const corsHeaders = {
 
 const MAX_RETRIES = 3;
 const INITIAL_RETRY_DELAY = 1000;
-const REQUEST_TIMEOUT = 30000; // Increased timeout to 30 seconds
+const REQUEST_TIMEOUT = 30000;
 
 async function retryWithExponentialBackoff(fn: () => Promise<Response>, retries = MAX_RETRIES, delay = INITIAL_RETRY_DELAY): Promise<Response> {
   try {
@@ -84,7 +84,9 @@ serve(async (req) => {
     const data = await response.json();
 
     console.log('Scrape completed successfully', {
-      dataSize: JSON.stringify(data).length
+      dataSize: JSON.stringify(data).length,
+      status: response.status,
+      headers: Object.fromEntries(response.headers.entries())
     });
 
     return new Response(JSON.stringify(data), {
@@ -93,6 +95,21 @@ serve(async (req) => {
 
   } catch (error) {
     console.error('Error in scrape-website function:', error);
+    
+    // Check if the error is related to the API key
+    if (error.message.includes('API key')) {
+      return new Response(
+        JSON.stringify({
+          error: 'Invalid or missing API key',
+          details: error.message
+        }),
+        {
+          status: 401,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
     return new Response(
       JSON.stringify({
         error: error.message || 'An unexpected error occurred',
