@@ -22,7 +22,7 @@ export const ChatButton = ({ onClick }: ChatButtonProps) => {
           whileTap={{ scale: 0.9 }}
         >
           <div className="relative">
-            <div className="absolute inset-0 bg-roofing-orange rounded-full animate-phone-pulse opacity-40"></div>
+            <div className="absolute inset-0 bg-roofing-orange rounded-full animate-live-chat-pulse opacity-40"></div>
             <img 
               src="/lovable-uploads/cfe74ea0-b3ce-4017-a778-51f7dd28f478.png"
               alt="Chat Icon"

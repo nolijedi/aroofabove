@@ -11,7 +11,7 @@ const StickyPhone = () => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
     >
-      <div className="absolute inset-0 bg-roofing-orange rounded-full animate-phone-pulse opacity-40"></div>
+      <div className="absolute inset-0 bg-roofing-orange rounded-full animate-live-chat-pulse opacity-40"></div>
       <div className="relative flex flex-col items-center gap-1">
         <Phone className="w-8 h-8 group-hover:scale-110 transition-transform duration-300" />
         <span className="text-xs font-medium text-white whitespace-nowrap">Call Now</span>
