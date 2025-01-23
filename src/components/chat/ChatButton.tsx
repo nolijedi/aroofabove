@@ -8,7 +8,7 @@ interface ChatButtonProps {
 export const ChatButton = ({ onClick }: ChatButtonProps) => {
   return (
     <motion.div
-      className="fixed bottom-6 left-6 z-40 animate-live-chat-pulse"
+      className="fixed bottom-[198px] left-6 z-40 animate-live-chat-pulse"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
     >
