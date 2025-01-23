@@ -4,9 +4,20 @@ import { Phone, Mail, Facebook, Instagram, Twitter, Linkedin, Youtube } from "lu
 import { motion } from "framer-motion";
 
 const Hero = () => {
+  const socialLinks = [
+    { Icon: Facebook, href: "https://facebook.com/aroofabove", label: "Facebook", delay: 0 },
+    { Icon: Instagram, href: "https://instagram.com/aroofabove", label: "Instagram", delay: 0.1 },
+    { Icon: Twitter, href: "https://twitter.com/aroofabove", label: "Twitter", delay: 0.2 },
+    { Icon: Linkedin, href: "https://linkedin.com/company/aroofabove", label: "LinkedIn", delay: 0.3 },
+    { Icon: Youtube, href: "https://youtube.com/@aroofabove", label: "YouTube", delay: 0.4 }
+  ];
+
+  const handleSocialClick = (href: string) => {
+    window.open(href, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-roofing-charcoal">
-      {/* Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-48 pb-12">
         <div className="text-center space-y-8">
           <motion.h1 
@@ -32,13 +43,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             className="flex justify-center gap-4 sm:gap-6 py-8 px-2"
           >
-            {[
-              { Icon: Facebook, href: "https://facebook.com/aroofabove", label: "Facebook", delay: 0 },
-              { Icon: Instagram, href: "https://instagram.com/aroofabove", label: "Instagram", delay: 0.1 },
-              { Icon: Twitter, href: "https://twitter.com/aroofabove", label: "Twitter", delay: 0.2 },
-              { Icon: Linkedin, href: "https://linkedin.com/company/aroofabove", label: "LinkedIn", delay: 0.3 },
-              { Icon: Youtube, href: "https://youtube.com/@aroofabove", label: "YouTube", delay: 0.4 }
-            ].map(({ Icon, href, label, delay }, index) => (
+            {socialLinks.map(({ Icon, href, label, delay }, index) => (
               <motion.a
                 key={index}
                 href={href}
@@ -89,7 +94,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Decorative Wave */}
       <div className="absolute bottom-0 left-0 right-0">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="text-roofing-beige">
           <path 

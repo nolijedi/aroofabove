@@ -1,10 +1,10 @@
-import EnhancedHero from "@/components/EnhancedHero";
+import Hero from "@/components/Hero";
 import Features from "@/components/home/Features";
 
 const Index = () => {
   return (
     <main className="min-h-screen">
-      <EnhancedHero />
+      <Hero />
       <Features />
     </main>
   );
