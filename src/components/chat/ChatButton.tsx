@@ -24,14 +24,12 @@ export const ChatButton = ({ onClick, isHammering }: ChatButtonProps) => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <div className="relative w-8 h-8 scale-x-[-1]">
-            <img 
-              src="/lovable-uploads/cfe74ea0-b3ce-4017-a778-51f7dd28f478.png" 
-              alt="Chat Icon"
-              className="w-full h-full object-contain"
-            />
-          </div>
-          <span className="text-[11px] font-medium text-white whitespace-nowrap">Live Chat</span>
+          <img 
+            src="/lovable-uploads/180a1862-a108-4134-9eec-bd0556fb5d46.png"
+            alt="Chat Icon"
+            className="w-8 h-8 object-contain"
+          />
+          <span className="text-xs font-medium text-white whitespace-nowrap">Live Chat</span>
         </motion.div>
       </Button>
     </motion.div>

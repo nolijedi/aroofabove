@@ -5,7 +5,7 @@ const StickyPhone = () => {
   return (
     <motion.a
       href="tel:509-400-5911"
-      className="fixed bottom-6 right-6 z-40 bg-roofing-orange/80 hover:bg-roofing-orange-dark text-white p-4 rounded-full shadow-lg transition-all duration-300 group"
+      className="fixed bottom-6 right-6 z-40 bg-roofing-orange/80 hover:bg-roofing-orange-dark text-white p-4 rounded-full shadow-lg transition-all duration-300 group w-[68px] h-[68px] flex items-center justify-center"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       whileHover={{ scale: 1.1 }}
@@ -14,7 +14,7 @@ const StickyPhone = () => {
     >
       <div className="absolute inset-0 bg-roofing-orange rounded-full animate-phone-pulse opacity-40"></div>
       <div className="relative flex flex-col items-center gap-1">
-        <Phone className="w-7 h-7 group-hover:scale-110 transition-transform duration-300" />
+        <Phone className="w-8 h-8 group-hover:scale-110 transition-transform duration-300" />
         <span className="text-xs font-medium whitespace-nowrap">Call Now</span>
       </div>
     </motion.a>
