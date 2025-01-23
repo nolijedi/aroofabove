@@ -103,7 +103,7 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         'phone-pulse': 'phone-pulse 3s ease-in-out infinite',
-        'live-chat-pulse': 'live-chat-pulse 3s ease-in-out infinite', // Applying the animation
+        'live-chat-pulse': 'live-chat-pulse 3s ease-in-out infinite',
         "spin-slow": "spin-slow 12s linear infinite",
         "float": "float 6s ease-in-out infinite",
       },
