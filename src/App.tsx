@@ -57,6 +57,7 @@ const App = () => (
               <Route path="/contact" element={<Contact />} />
               <Route path="/estimate" element={<Estimate />} />
               <Route path="/insurance-claims" element={<InsuranceClaims />} />
+              <Route path="*" element={<Index />} /> {/* Add catch-all route */}
             </Routes>
           </main>
           <Footer />
