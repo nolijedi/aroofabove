@@ -75,7 +75,7 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        'phone-pulse': {
+        'phone-pulse': { // Identical animation for phone icon
           '0%': { transform: 'scale(1)', opacity: '0.2' },
           '25%': { transform: 'scale(0.8)', opacity: '0.3' },
           '50%': { transform: 'scale(1.6)', opacity: '0.1' },

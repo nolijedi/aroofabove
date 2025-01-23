@@ -98,8 +98,8 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        'phone-pulse': 'phone-pulse 6s ease-in-out infinite', // Updated to 6 seconds for phone pulse
-        'live-chat-pulse': 'live-chat-pulse 3s ease-in-out infinite',
+        'phone-pulse': 'phone-pulse 2s ease-in-out infinite', // Updated to 6 seconds for phone pulse
+        'live-chat-pulse': 'live-chat-pulse 2s ease-in-out infinite',
         "spin-slow": "spin-slow 12s linear infinite",
       },
     },
