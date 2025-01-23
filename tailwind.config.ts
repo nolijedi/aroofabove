@@ -76,9 +76,18 @@ export default {
           to: { height: "0" },
         },
         'phone-pulse': {
-          '0%': { transform: 'scale(1)', opacity: '0.4' },
-          '50%': { transform: 'scale(1.4)', opacity: '0.2' },
-          '100%': { transform: 'scale(1)', opacity: '0.4' },
+          '0%': { transform: 'scale(1)', opacity: '0.2' },
+          '25%': { transform: 'scale(0.8)', opacity: '0.3' },
+          '50%': { transform: 'scale(1.6)', opacity: '0.1' },
+          '75%': { transform: 'scale(0.8)', opacity: '0.3' },
+          '100%': { transform: 'scale(1)', opacity: '0.2' },
+        },
+        'live-chat-pulse': { // Identical animation for live chat icon
+          '0%': { transform: 'scale(1)', opacity: '0.2' },
+          '25%': { transform: 'scale(0.8)', opacity: '0.3' },
+          '50%': { transform: 'scale(1.6)', opacity: '0.1' },
+          '75%': { transform: 'scale(0.8)', opacity: '0.3' },
+          '100%': { transform: 'scale(1)', opacity: '0.2' },
         },
         "spin-slow": {
           "100%": {
@@ -93,7 +102,8 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        'phone-pulse': 'phone-pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'phone-pulse': 'phone-pulse 3s ease-in-out infinite',
+        'live-chat-pulse': 'live-chat-pulse 3s ease-in-out infinite', // Applying the animation
         "spin-slow": "spin-slow 12s linear infinite",
         "float": "float 6s ease-in-out infinite",
       },
