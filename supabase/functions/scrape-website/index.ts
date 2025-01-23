@@ -75,7 +75,8 @@ serve(async (req) => {
         scrapeOptions: {
           formats: ['markdown', 'html'],
           waitForNetworkRequests: true,
-          waitTime: 3000
+          waitTime: 3000,
+          maxRetries: 3
         }
       })
     });
@@ -110,10 +111,12 @@ serve(async (req) => {
       );
     }
 
+    // Return a more detailed error response
     return new Response(
       JSON.stringify({
         error: error.message || 'An unexpected error occurred',
-        details: error.stack
+        details: error.stack,
+        timestamp: new Date().toISOString()
       }),
       {
         status: 500,
