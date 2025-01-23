@@ -95,7 +95,4 @@ export default {
     },
   },
   plugins: [require("tailwindcss-animate")],
-  server: {
-    port: 8080
-  }
 } satisfies Config;
