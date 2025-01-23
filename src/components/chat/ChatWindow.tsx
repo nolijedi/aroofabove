@@ -31,19 +31,22 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
   const windowContent = (
     <motion.div
       ref={chatWindowRef}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, scale: 0.95, y: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95, y: 20 }}
       transition={{
         type: "spring",
         stiffness: 300,
         damping: 30,
       }}
-      className={`bg-transparent backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden flex flex-col ${
+      className={`bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden flex flex-col ${
         isMobile 
-          ? "fixed left-1/2 -translate-x-1/2 bottom-28 w-[280px] h-[360px]" 
+          ? "fixed left-1/2 -translate-x-1/2 bottom-28 w-[90vw] max-w-[320px] h-[60vh] max-h-[400px]" 
           : "w-[320px] h-[400px]"
       }`}
+      style={{
+        maxHeight: 'calc(100vh - 160px)',
+      }}
     >
       <ChatHeader onClose={onClose} />
       <div className="px-3 py-2">
@@ -56,9 +59,6 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
       </div>
       <ChatMessages messages={messages} isTyping={isTyping} />
       <ChatInput onSendMessage={onSendMessage} isTyping={isTyping} />
-      <div className="absolute top-1/2 -right-6 transform -translate-y-1/2 bg-roofing-orange/20 backdrop-blur-sm p-1 rounded-full cursor-move opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-        <GripVertical className="w-4 h-4 text-roofing-orange" />
-      </div>
     </motion.div>
   );
 

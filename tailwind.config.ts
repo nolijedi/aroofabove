@@ -76,14 +76,18 @@ export default {
           to: { height: "0" },
         },
         'phone-pulse': {
-          '0%': { transform: 'scale(1.2)' },
-          '50%': { transform: 'scale(0.9)' },
-          '100%': { transform: 'scale(1.2)' },
+          '0%': { transform: 'scale(1)', opacity: '0.4' },
+          '50%': { transform: 'scale(1.4)', opacity: '0.2' },
+          '100%': { transform: 'scale(1)', opacity: '0.4' },
         },
         "spin-slow": {
           "100%": {
             transform: "rotate(-360deg)",
           },
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
         },
       },
       animation: {
@@ -91,6 +95,7 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         'phone-pulse': 'phone-pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         "spin-slow": "spin-slow 12s linear infinite",
+        "float": "float 6s ease-in-out infinite",
       },
     },
   },
