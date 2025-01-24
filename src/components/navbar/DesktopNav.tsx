@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { NavItem } from "./types";
 
@@ -10,28 +9,57 @@ interface DesktopNavProps {
 const DesktopNav = ({ navItems, currentPath }: DesktopNavProps) => {
   return (
     <div className="hidden md:flex items-center justify-between flex-1 pl-28">
-      <div className="flex items-center justify-center space-x-2 flex-1">
+      <div className="flex items-center justify-center space-x-4 flex-1">
         {navItems.map((item) => (
-          <Button
-            key={item.path}
-            variant={currentPath === item.path ? "default" : "ghost"}
-            className={`${
-              currentPath === item.path
-                ? "bg-roofing-orange hover:bg-roofing-orange-dark text-white"
-                : "bg-roofing-cream/80 text-roofing-charcoal hover:bg-roofing-cream hover:text-roofing-orange"
-            } text-sm px-2 py-1`}
-            asChild
+          <Link 
+            key={item.path} 
+            to={item.path}
+            className={`
+              px-6 py-2.5 rounded-lg
+              text-sm font-medium
+              transition-all duration-300
+              ${currentPath === item.path 
+                ? "bg-roofing-orange text-white hover:bg-roofing-orange-dark"
+                : "bg-roofing-cream/90 text-roofing-charcoal hover:bg-roofing-cream"
+              }
+              border border-transparent hover:border-roofing-orange/20
+              shadow-sm hover:shadow-md
+            `}
           >
-            <Link to={item.path}>{item.label}</Link>
-          </Button>
+            {item.label}
+          </Link>
         ))}
       </div>
-      <Button
-        asChild
-        className="bg-roofing-beige hover:bg-roofing-beige/90 text-roofing-charcoal hover:text-roofing-charcoal/90 animate-bounce-pause shadow-lg hover:shadow-xl transition-all duration-300 text-sm px-2 py-1 border-2 border-black"
-      >
-        <Link to="/estimate">Get Estimate Now</Link>
-      </Button>
+      <div className="flex items-center space-x-4">
+        <Link 
+          to="/estimate"
+          className="
+            px-6 py-2.5 rounded-lg
+            bg-roofing-orange text-white
+            hover:bg-roofing-orange-dark
+            shadow-lg hover:shadow-xl
+            transition-all duration-300
+            text-sm font-medium
+            animate-bounce-subtle
+            border-2 border-transparent
+          "
+        >
+          Get Free Estimate
+        </Link>
+        <Link 
+          to="/contact"
+          className="
+            px-6 py-2.5 rounded-lg
+            border-2 border-roofing-orange
+            text-roofing-orange
+            hover:bg-roofing-orange hover:text-white
+            transition-all duration-300
+            text-sm font-medium
+          "
+        >
+          Contact Us
+        </Link>
+      </div>
     </div>
   );
 };

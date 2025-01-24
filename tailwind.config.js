@@ -19,6 +19,9 @@ module.exports = {
       colors: {
         'roofing-orange': '#F97316',
         'roofing-orange-dark': '#EA580C',
+        'roofing-charcoal': '#1C1917',
+        'roofing-cream': '#FAFAF9',
+        'roofing-beige': '#F5F5F4',
       },
       keyframes: {
         "hammer-swing": {
