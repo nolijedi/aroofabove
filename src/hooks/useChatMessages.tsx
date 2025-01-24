@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Message } from "@/types/chat";
 import { supabase } from "@/integrations/supabase/client";
 
-const INITIAL_MESSAGE = `Welcome to A Roof Above! How can I help you with your roofing project today?`;
+const INITIAL_MESSAGE = "Hello! I'm your AI assistant. How can I help you today?";
 
 export const useChatMessages = () => {
   const [messages, setMessages] = useState<Message[]>([
@@ -15,40 +15,21 @@ export const useChatMessages = () => {
   ]);
   const [isTyping, setIsTyping] = useState(false);
 
-  const generateAIResponse = async (message: string): Promise<string> => {
+  const generateAIResponse = async (message: string) => {
     try {
       const { data, error } = await supabase.functions.invoke('chat', {
-        body: {
-          messages: [
-            ...messages.map(msg => ({
-              role: msg.role,
-              content: msg.content,
-            })),
-            {
-              role: "user",
-              content: message,
-            },
-          ],
-        },
+        body: { message },
       });
 
       if (error) {
-        console.error('Error generating AI response:', error);
-        throw new Error(error.message);
+        console.error('Error calling chat function:', error);
+        return "I apologize, but I'm having trouble responding right now. Please try again in a moment.";
       }
 
-      if (data?.error) {
-        throw new Error(data.error);
-      }
-
-      if (!data?.text) {
-        throw new Error('Invalid response format');
-      }
-
-      return data.text;
+      return data?.response || "I apologize, but I received an empty response. Please try again.";
     } catch (error) {
       console.error('Error generating AI response:', error);
-      throw error;
+      return "I apologize, but I'm having trouble responding right now. Please try again in a moment.";
     }
   };
 
@@ -61,6 +42,7 @@ export const useChatMessages = () => {
       content: message,
       createdAt: new Date(),
     };
+    
     setMessages((prev) => [...prev, userMessage]);
     setIsTyping(true);
 
@@ -85,9 +67,5 @@ export const useChatMessages = () => {
     }
   };
 
-  return {
-    messages,
-    isTyping,
-    handleSendMessage,
-  };
+  return { messages, isTyping, handleSendMessage };
 };

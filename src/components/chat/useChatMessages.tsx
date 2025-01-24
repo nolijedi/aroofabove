@@ -2,38 +2,27 @@ import { useState, useEffect } from "react";
 import { Message } from "@/types/chat";
 import { supabase } from "@/integrations/supabase/client";
 
-const INITIAL_MESSAGE = `Welcome to A Roof Above! How can I help you with your roofing project today?`;
+const INITIAL_MESSAGE = "Hello! I'm your AI assistant. How can I help you today?";
 
 export const useChatMessages = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
-  const [websiteData, setWebsiteData] = useState<any>(null);
+  const [isTrainingMode, setIsTrainingMode] = useState(false);
 
-  // Fetch Website Data (API Integration)
-  useEffect(() => {
-    const fetchWebsiteData = async () => {
-      try {
-        const { data, error } = await supabase.functions.invoke('get-website-data');
-        if (error) throw error;
-        setWebsiteData(data);
-        console.log('Website data fetched successfully:', data);
-      } catch (error) {
-        console.error('Error fetching website data:', error);
-      }
-    };
-
-    fetchWebsiteData();
-  }, []);
-
-  // Fetch stored memory
   const fetchMemoryFromBackend = async () => {
     try {
       const { data, error } = await supabase
         .from('memory')
         .select('content')
+        .order('created_at', { ascending: false })
+        .limit(1)
         .single();
-      if (error) throw error;
-      console.log('Fetched memory:', data);
+
+      if (error) {
+        console.error('Error fetching memory:', error);
+        return INITIAL_MESSAGE;
+      }
+
       return data?.content || INITIAL_MESSAGE;
     } catch (error) {
       console.error('Error fetching memory:', error);
@@ -41,64 +30,67 @@ export const useChatMessages = () => {
     }
   };
 
-  // Update memory in backend
-  const updateMemoryInBackend = async (newMemory: string) => {
+  const updateMemoryInBackend = async (content: string) => {
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('memory')
-        .upsert({ content: newMemory }, { onConflict: 'id' });
-      if (error) throw error;
-      console.log('Memory updated successfully:', data);
+        .insert([{ content }]);
+
+      if (error) {
+        console.error('Error updating memory:', error);
+      }
     } catch (error) {
       console.error('Error updating memory:', error);
     }
   };
 
-  // Generate AI response, integrating website data
-  const generateAIResponse = async (message: string): Promise<string> => {
+  const generateAIResponse = async (message: string) => {
     try {
       const { data, error } = await supabase.functions.invoke('chat', {
-        body: {
-          messages: [
-            ...messages.map(msg => ({
-              role: msg.role,
-              content: msg.content,
-            })),
-            {
-              role: "user",
-              content: message,
-            },
-          ],
-          websiteData: websiteData,
-        },
+        body: { message, isTrainingMode },
       });
 
       if (error) {
-        console.error('Error generating AI response:', error);
-        throw new Error(error.message);
+        console.error('Error calling chat function:', error);
+        return "I apologize, but I'm having trouble responding right now. Please try again in a moment.";
       }
 
-      if (data?.error) {
-        throw new Error(data.error);
-      }
-
-      if (!data?.text) {
-        throw new Error('Invalid response format');
-      }
-
-      return data.text;
+      return data?.response || "I apologize, but I received an empty response. Please try again.";
     } catch (error) {
       console.error('Error generating AI response:', error);
-      throw error;
+      return "I apologize, but I'm having trouble responding right now. Please try again in a moment.";
     }
   };
 
-  // Handle user messages
-  const handleUserMessage = async (message: string) => {
-    if (message.startsWith("master:")) {
-      const command = message.slice(7).trim();
-      
-      // Update memory based on the "master" command
+  const handleSendMessage = async (message: string) => {
+    if (!message.trim()) return;
+
+    // Check for training mode command
+    if (message.toLowerCase() === "/train") {
+      setIsTrainingMode(true);
+      setMessages((prev) => [...prev, {
+        id: crypto.randomUUID(),
+        role: "assistant",
+        content: "Entering training mode. Please provide the training data.",
+        createdAt: new Date(),
+      }]);
+      return;
+    }
+
+    // Handle training mode update
+    if (isTrainingMode) {
+      if (message.toLowerCase() === "/done") {
+        setIsTrainingMode(false);
+        setMessages((prev) => [...prev, {
+          id: crypto.randomUUID(),
+          role: "assistant",
+          content: "Training mode completed. How can I assist you?",
+          createdAt: new Date(),
+        }]);
+        return;
+      }
+
+      const command = message;
       const updatedMemory = `Updated memory: ${command}`;
       await updateMemoryInBackend(updatedMemory);
       
@@ -118,6 +110,7 @@ export const useChatMessages = () => {
       content: message,
       createdAt: new Date(),
     };
+    
     setMessages((prev) => [...prev, userMessage]);
     setIsTyping(true);
 
@@ -142,7 +135,6 @@ export const useChatMessages = () => {
     }
   };
 
-  // Initialize chat memory when the component mounts
   useEffect(() => {
     const initializeChat = async () => {
       const memory = await fetchMemoryFromBackend();
@@ -156,9 +148,5 @@ export const useChatMessages = () => {
     initializeChat();
   }, []);
 
-  return {
-    messages,
-    isTyping,
-    handleSendMessage: handleUserMessage,
-  };
+  return { messages, isTyping, handleSendMessage };
 };
