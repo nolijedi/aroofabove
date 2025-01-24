@@ -1,30 +1,16 @@
-import { useState, useEffect } from 'react';
+import React from "react";
 
 interface TypingEffectProps {
-  text: string;
-  speed?: number;
+    text: string;
+    speed?: number;
 }
 
-export const TypingEffect = ({ text, speed = 30 }: TypingEffectProps) => {
-  const [displayedText, setDisplayedText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText(prev => prev + text[currentIndex]);
-        setCurrentIndex(prev => prev + 1);
-      }, speed);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [currentIndex, text, speed]);
-
-  // Reset effect when text changes
-  useEffect(() => {
-    setDisplayedText('');
-    setCurrentIndex(0);
-  }, [text]);
-
-  return <span className="whitespace-pre-wrap">{displayedText}</span>;
+const TypingEffect: React.FC<TypingEffectProps> = ({ text, speed = 50 }) => {
+    return (
+        <div className="typing-effect">
+            {text}
+        </div>
+    );
 };
+
+export default TypingEffect;

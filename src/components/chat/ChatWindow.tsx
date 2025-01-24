@@ -1,103 +1,90 @@
-import { useRef } from "react";
-import { motion, useDragControls, PanInfo } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { useMediaQuery } from "@/hooks/use-mobile";
-import { ChatHeader } from "./ChatHeader";
-import { ChatMessages } from "./ChatMessages";
-import { ChatInput } from "./ChatInput";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+import { motion, useDragControls } from "framer-motion";
 import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ChatMessages } from "./ChatMessages";
 import { Message } from "@/types/chat";
-import { ChatLoadingIndicator } from "./ChatLoadingIndicator";
 
 interface ChatWindowProps {
-  messages: Message[];
-  onSendMessage: (message: string) => Promise<void>;
-  onClose: () => void;
-  isTyping: boolean;
+    isMinimized?: boolean;
+    onClose: () => void;
+    messages: Message[];
+    onSendMessage: (message: string) => Promise<void>;
+    isTyping: boolean;
 }
 
-export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatWindowProps) => {
-  const isMobile = useMediaQuery("(max-width: 768px)");
-  const navigate = useNavigate();
-  const dragControls = useDragControls();
-  const constraintsRef = useRef<HTMLDivElement>(null);
+export const ChatWindow: React.FC<ChatWindowProps> = ({
+    isMinimized = false,
+    onClose,
+    messages,
+    onSendMessage,
+    isTyping,
+}) => {
+    const [inputValue, setInputValue] = useState("");
+    const dragControls = useDragControls();
+    const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const handleEstimateClick = () => {
-    onClose();
-    navigate("/estimate");
-  };
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
 
-  return (
-    <div ref={constraintsRef} className="fixed inset-0 pointer-events-none">
-      <motion.div
-        drag
-        dragControls={dragControls}
-        dragMomentum={false}
-        dragConstraints={constraintsRef}
-        dragElastic={0}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 10 }}
-        transition={{ duration: 0.2 }}
-        className={`
-          fixed bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col
-          w-[250px] h-[320px]
-          bottom-[80px] right-[80px]
-          border border-gray-200
-          pointer-events-auto
-          transform-gpu
-        `}
-        style={{
-          zIndex: 9999,
-          boxShadow: '0 4px 24px rgba(0, 0, 0, 0.12)',
-        }}
-      >
-        {/* Header - Draggable Area */}
-        <div 
-          onPointerDown={(e) => dragControls.start(e)}
-          className="bg-gradient-to-r from-roofing-orange to-roofing-orange-dark p-4 text-white flex justify-between items-center cursor-move"
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (inputValue.trim()) {
+            try {
+                await onSendMessage(inputValue);
+                setInputValue("");
+            } catch (error) {
+                console.error("Error sending message:", error);
+            }
+        }
+    };
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.2 }}
+            drag
+            dragControls={dragControls}
+            className={`fixed w-[300px] h-[400px] bottom-[80px] right-[80px] bg-white rounded-lg shadow-xl flex flex-col border border-gray-200 z-[100] ${isMinimized ? 'hidden' : ''}`}
+            onPointerDown={(e) => dragControls.start(e)}
         >
-          <div>
-            <h3 className="font-semibold">Chat with Us</h3>
-            <p className="text-xs opacity-90">We typically reply within minutes</p>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-1 hover:bg-white/20 rounded-full transition-colors"
-          >
-            <X size={20} />
-          </button>
-        </div>
+            <div className="bg-gradient-to-r from-roofing-orange to-roofing-orange-dark p-3 flex justify-between items-center rounded-t-lg">
+                <div>
+                    <h3 className="text-white font-semibold">Chat with Us</h3>
+                    <p className="text-white text-xs opacity-80">We typically reply within minutes</p>
+                </div>
+                <button onClick={onClose} className="text-white hover:text-gray-200 transition-colors">
+                    <X size={20} />
+                </button>
+            </div>
 
-        {/* Estimate Button */}
-        <div className="p-3 bg-gray-50 border-b border-gray-200">
-          <Button
-            variant="default"
-            className="w-full bg-roofing-orange hover:bg-roofing-orange-dark text-white font-medium"
-            onClick={handleEstimateClick}
-          >
-            Get Instant Estimate Now
-          </Button>
-        </div>
+            <ChatMessages messages={messages} isTyping={isTyping} />
 
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto bg-gray-50 p-4">
-          <ChatMessages 
-            messages={messages} 
-            isTyping={isTyping}
-            loadingIndicator={<ChatLoadingIndicator />}
-          />
-        </div>
-
-        {/* Input */}
-        <div className="p-4 bg-white border-t border-gray-200">
-          <ChatInput 
-            onSendMessage={onSendMessage}
-            isTyping={isTyping}
-          />
-        </div>
-      </motion.div>
-    </div>
-  );
+            <form onSubmit={handleSubmit} className="p-3 border-t border-gray-200">
+                <div className="flex gap-2">
+                    <textarea
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        placeholder="Type your message..."
+                        className="flex-1 p-2 border border-gray-200 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-roofing-orange focus:border-transparent"
+                        rows={2}
+                    />
+                    <Button 
+                        type="submit" 
+                        className="bg-roofing-orange hover:bg-roofing-orange-dark text-white"
+                        disabled={!inputValue.trim()}
+                    >
+                        Send
+                    </Button>
+                </div>
+            </form>
+        </motion.div>
+    );
 };

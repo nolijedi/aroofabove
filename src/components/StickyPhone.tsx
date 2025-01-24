@@ -1,25 +1,47 @@
 import { Phone } from "lucide-react";
 import { motion } from "framer-motion";
 
-const StickyPhone = () => {
+export const StickyPhone = () => {
   return (
-    <motion.div
-      className="fixed md:bottom-32 md:right-6 bottom-24 right-6 z-40"
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
+    <motion.a
+      href="tel:509-400-5911"
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ 
+        opacity: [0.4, 1, 0.4],
+        scale: [0.85, 1.1, 0.85],
+      }}
+      whileHover={{ 
+        scale: 1.2,
+        rotate: 360,
+        opacity: 1,
+        transition: { duration: 0.5 }
+      }}
+      whileTap={{ scale: 0.9 }}
+      transition={{
+        opacity: {
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut"
+        },
+        scale: {
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }
+      }}
+      className={`
+        fixed bottom-[120px] right-6
+        z-50 flex flex-col items-center justify-center
+        w-[68px] h-[68px] rounded-full
+        bg-gradient-to-br from-roofing-orange to-roofing-orange-dark
+        shadow-lg hover:shadow-xl
+        transition-all duration-300
+        group
+      `}
     >
-      <motion.a
-        href="tel:509-400-5911"
-        className="bg-roofing-orange/80 hover:bg-roofing-orange-dark text-white p-4 rounded-full shadow-lg transition-all duration-300 group w-[68px] h-[68px] flex flex-col items-center justify-center animate-phone-pulse"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <div className="relative flex flex-col items-center gap-1">
-          <Phone className="w-8 h-8 group-hover:scale-110 transition-transform duration-300" />
-          <span className="text-xs font-medium text-white whitespace-nowrap">Call Now</span>
-        </div>
-      </motion.a>
-    </motion.div>
+      <Phone className="w-8 h-8 text-white group-hover:scale-110 transition-transform duration-300" />
+      <span className="text-xs font-medium text-white whitespace-nowrap mt-1">Call Us</span>
+    </motion.a>
   );
 };
 
