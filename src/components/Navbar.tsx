@@ -10,10 +10,11 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 28);
+      setIsScrolled(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -29,71 +30,53 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`sticky top-8 left-0 right-0 z-40 transition-all duration-500 ${
-        isScrolled ? "bg-white/10 backdrop-blur-sm shadow-lg" : "bg-transparent"
+      className={`fixed left-0 right-0 z-40 transition-all duration-500 ${
+        isHomePage ? 'top-8' : 'top-0'
+      } ${
+        isScrolled 
+          ? "bg-white/10 backdrop-blur-sm shadow-lg" 
+          : isHomePage 
+            ? "bg-roofing-charcoal/95" 
+            : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center h-16 relative">
           <Link 
             to="/" 
-            className="absolute left-4 top-1/2 -translate-y-1/2 transition-transform duration-500 hover:scale-105 hover:rotate-2"
+            className="absolute left-4 top-1/2 -translate-y-1/2 transition-transform duration-500 hover:scale-105"
           >
             <img 
-              src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png" 
+              src="/images/logo-new1.png" 
               alt="A Roof Above Logo" 
-              className="h-14 w-auto"
+              className="h-12 w-auto"
             />
           </Link>
 
           <DesktopNav navItems={navItems} currentPath={location.pathname} />
 
+          {/* Mobile menu button */}
           <motion.button
-            className="md:hidden absolute right-4 p-2 rounded-lg bg-roofing-orange text-white hover:bg-roofing-orange-dark transition-colors duration-500 shadow-lg hover:shadow-xl"
             onClick={() => setIsOpen(!isOpen)}
-            whileTap={{ scale: 0.85, transition: { duration: 0.5 } }}
-            whileHover={{ scale: 1.15, transition: { duration: 0.5 } }}
+            className="md:hidden absolute right-4 top-1/2 -translate-y-1/2 text-roofing-orange hover:text-roofing-orange-dark transition-colors"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={isOpen ? "close" : "menu"}
-                initial={{ rotate: -180, opacity: 0 }}
-                animate={{ 
-                  rotate: 0, 
-                  opacity: 1,
-                  transition: {
-                    type: "spring",
-                    stiffness: 50,
-                    damping: 10,
-                    duration: 0.8
-                  }
-                }}
-                exit={{ 
-                  rotate: 180, 
-                  opacity: 0,
-                  transition: {
-                    duration: 0.5
-                  }
-                }}
-                transition={{ duration: 0.5 }}
-              >
-                {isOpen ? (
-                  <X size={24} strokeWidth={2.5} />
-                ) : (
-                  <Menu size={24} strokeWidth={2.5} />
-                )}
-              </motion.div>
-            </AnimatePresence>
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
           </motion.button>
         </div>
-
-        <MobileNav 
-          isOpen={isOpen}
-          navItems={navItems}
-          currentPath={location.pathname}
-          onClose={() => setIsOpen(false)}
-        />
       </div>
+
+      {/* Mobile Navigation */}
+      <AnimatePresence>
+        {isOpen && (
+          <MobileNav
+            navItems={navItems}
+            currentPath={location.pathname}
+            onClose={() => setIsOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
