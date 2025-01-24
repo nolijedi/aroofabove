@@ -1,152 +1,83 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { Message } from "@/types/chat";
 import { supabase } from "@/integrations/supabase/client";
-
-const INITIAL_MESSAGE = "Hello! I'm your AI assistant. How can I help you today?";
 
 export const useChatMessages = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
-  const [isTrainingMode, setIsTrainingMode] = useState(false);
 
-  const fetchMemoryFromBackend = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('memory')
-        .select('content')
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .single();
+  const addInitialMessage = useCallback(() => {
+    const initialMessage: Message = {
+      id: crypto.randomUUID(),
+      role: "assistant",
+      content: "Hello! I'm your roofing assistant. How can I help you today?",
+      createdAt: new Date(),
+    };
+    setMessages([initialMessage]);
+  }, []);
 
-      if (error) {
-        console.error('Error fetching memory:', error);
-        return INITIAL_MESSAGE;
-      }
+  const handleSendMessage = useCallback(async (content: string) => {
+    if (!content.trim()) return;
 
-      return data?.content || INITIAL_MESSAGE;
-    } catch (error) {
-      console.error('Error fetching memory:', error);
-      return INITIAL_MESSAGE;
-    }
-  };
-
-  const updateMemoryInBackend = async (content: string) => {
-    try {
-      const { error } = await supabase
-        .from('memory')
-        .insert([{ content }]);
-
-      if (error) {
-        console.error('Error updating memory:', error);
-      }
-    } catch (error) {
-      console.error('Error updating memory:', error);
-    }
-  };
-
-  const generateAIResponse = async (message: string) => {
-    try {
-      const { data, error } = await supabase.functions.invoke('chat', {
-        body: { message, isTrainingMode },
-      });
-
-      if (error) {
-        console.error('Error calling chat function:', error);
-        return "I apologize, but I'm having trouble responding right now. Please try again in a moment.";
-      }
-
-      return data?.response || "I apologize, but I received an empty response. Please try again.";
-    } catch (error) {
-      console.error('Error generating AI response:', error);
-      return "I apologize, but I'm having trouble responding right now. Please try again in a moment.";
-    }
-  };
-
-  const handleSendMessage = async (message: string) => {
-    if (!message.trim()) return;
-
-    // Check for training mode command
-    if (message.toLowerCase() === "/train") {
-      setIsTrainingMode(true);
-      setMessages((prev) => [...prev, {
-        id: crypto.randomUUID(),
-        role: "assistant",
-        content: "Entering training mode. Please provide the training data.",
-        createdAt: new Date(),
-      }]);
-      return;
-    }
-
-    // Handle training mode update
-    if (isTrainingMode) {
-      if (message.toLowerCase() === "/done") {
-        setIsTrainingMode(false);
-        setMessages((prev) => [...prev, {
-          id: crypto.randomUUID(),
-          role: "assistant",
-          content: "Training mode completed. How can I assist you?",
-          createdAt: new Date(),
-        }]);
-        return;
-      }
-
-      const command = message;
-      const updatedMemory = `Updated memory: ${command}`;
-      await updateMemoryInBackend(updatedMemory);
-      
-      setMessages((prev) => [...prev, {
-        id: crypto.randomUUID(),
-        role: "assistant",
-        content: "Training updated successfully. I'm now back in normal chat mode. How can I assist you further?",
-        createdAt: new Date(),
-      }]);
-      return;
-    }
-
-    // Normal message handling
+    // Add user message
     const userMessage: Message = {
       id: crypto.randomUUID(),
       role: "user",
-      content: message,
+      content: content.trim(),
       createdAt: new Date(),
     };
-    
-    setMessages((prev) => [...prev, userMessage]);
+
+    setMessages(prev => [...prev, userMessage]);
     setIsTyping(true);
 
     try {
-      const aiResponse = await generateAIResponse(message);
-      setMessages((prev) => [...prev, {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: [...messages, userMessage].map(({ role, content }) => ({
+            role,
+            content,
+          })),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to get response");
+      }
+
+      const data = await response.json();
+      
+      const assistantMessage: Message = {
         id: crypto.randomUUID(),
         role: "assistant",
-        content: aiResponse,
+        content: data.text,
         createdAt: new Date(),
-      }]);
+      };
+
+      setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
-      console.error("Error sending message:", error);
-      setMessages((prev) => [...prev, {
+      console.error("Error in chat:", error);
+      
+      const errorMessage: Message = {
         id: crypto.randomUUID(),
         role: "assistant",
-        content: "I apologize, but I'm having trouble responding right now. Please try again in a moment.",
+        content: "I apologize, but I encountered an error. Please try again.",
         createdAt: new Date(),
-      }]);
+      };
+
+      setMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsTyping(false);
     }
+  }, [messages]);
+
+  return {
+    messages,
+    isTyping,
+    handleSendMessage,
+    addInitialMessage,
   };
-
-  useEffect(() => {
-    const initializeChat = async () => {
-      const memory = await fetchMemoryFromBackend();
-      setMessages([{
-        id: crypto.randomUUID(),
-        role: "assistant",
-        content: memory,
-        createdAt: new Date(),
-      }]);
-    };
-    initializeChat();
-  }, []);
-
-  return { messages, isTyping, handleSendMessage };
 };
