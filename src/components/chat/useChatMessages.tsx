@@ -46,7 +46,7 @@ export const useChatMessages = () => {
     try {
       const { data, error } = await supabase
         .from('memory')
-        .upsert({ content: newMemory }, { onConflict: ['id'] });
+        .upsert({ content: newMemory }, { onConflict: 'id' });
       if (error) throw error;
       console.log('Memory updated successfully:', data);
     } catch (error) {
@@ -69,7 +69,7 @@ export const useChatMessages = () => {
               content: message,
             },
           ],
-          websiteData: websiteData, // Include website-specific data for GPT API to reference
+          websiteData: websiteData,
         },
       });
 
