@@ -15,6 +15,7 @@ import PromoCountdown from "./components/PromoCountdown";
 import ScrollToTop from "./components/ScrollToTop";
 import StickyPhone from "./components/StickyPhone";
 import { ChatWidget } from "./components/ChatWidget";
+import ButtonTest from "./components/ui/ButtonTest";
 
 // Add styles to hide Lovable widget
 const styles = document.createElement('style');
@@ -58,6 +59,8 @@ const App = () => (
               <Route path="/estimate" element={<Estimate />} />
               <Route path="/insurance-claims" element={<InsuranceClaims />} />
               <Route path="*" element={<Index />} /> {/* Add catch-all route */}
+              <Route path="/button-test" element={<ButtonTest />} />
+
             </Routes>
           </main>
           <Footer />

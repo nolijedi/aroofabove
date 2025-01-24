@@ -28,3 +28,27 @@
     --radius: 0.5rem;
   }
 }
+
+/* Social Icon Styles */
+.social-icon {
+  padding: 0.75rem;
+  background-color: var(--beige);
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icon:hover {
+  transform: translateY(-5px) scale(1.2);
+  background-color: var(--orange);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.social-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}

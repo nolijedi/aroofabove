@@ -1,8 +1,9 @@
+// ChatWindow.tsx
 import { useRef } from "react";
-import { motion } from "framer-motion";
+import { motion } from "framer-motion";  // Corrected import
 import { ChatHeader } from "./ChatHeader";
 import { ChatMessages } from "./ChatMessages";
-import { ChatInput } from "./ChatInput";
+import { ChatInput } from "./ChatInput";  
 import { Message } from "@/types/chat";
 import { useMediaQuery } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";

@@ -75,31 +75,15 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        'phone-pulse': {
-          '0%': { transform: 'scale(1)', opacity: '0.2' },
-          '25%': { transform: 'scale(0.8)', opacity: '0.3' },
-          '50%': { transform: 'scale(1.6)', opacity: '0.1' },
-          '75%': { transform: 'scale(0.8)', opacity: '0.3' },
-          '100%': { transform: 'scale(1)', opacity: '0.2' },
-        },
-        'live-chat-pulse': {
-          '0%': { transform: 'scale(1)', opacity: '0.2' },
-          '25%': { transform: 'scale(0.8)', opacity: '0.3' },
-          '50%': { transform: 'scale(1.6)', opacity: '0.1' },
-          '75%': { transform: 'scale(0.8)', opacity: '0.3' },
-          '100%': { transform: 'scale(1)', opacity: '0.2' },
-        },
-        "spin-slow": {
-          "100%": {
-            transform: "rotate(-360deg)",
-          },
+        "icon-bounce": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-5px)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        'phone-pulse': 'phone-pulse 2s ease-in-out infinite', // Matched to 2 seconds
-        'live-chat-pulse': 'live-chat-pulse 2s ease-in-out infinite',
+        "icon-bounce": "icon-bounce 0.6s infinite ease-in-out",
         "spin-slow": "spin-slow 12s linear infinite",
       },
     },
