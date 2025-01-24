@@ -1,39 +1,39 @@
-import { RefObject, useEffect } from "react";
+import { RefObject, useCallback } from "react";
 
 export const useViewportBoundary = (
-  ref: RefObject<HTMLDivElement>,
   navbarHeight: number = 80,
   padding: number = 20
 ) => {
-  const ensureInViewport = () => {
-    if (ref.current) {
-      const rect = ref.current.getBoundingClientRect();
+  const ensureInViewport = useCallback((e?: any, data?: any) => {
+    if (data) {
       const viewportHeight = window.innerHeight;
       const viewportWidth = window.innerWidth;
+      const element = e.target;
+      const rect = element.getBoundingClientRect();
 
       const maxTop = viewportHeight - rect.height - padding;
       const maxLeft = viewportWidth - rect.width - padding;
 
-      if (rect.top < navbarHeight) {
-        ref.current.style.top = `${navbarHeight + padding}px`;
-      }
-      if (rect.top > maxTop) {
-        ref.current.style.top = `${maxTop}px`;
-      }
-      if (rect.left < padding) {
-        ref.current.style.left = `${padding}px`;
-      }
-      if (rect.left > maxLeft) {
-        ref.current.style.left = `${maxLeft}px`;
-      }
-    }
-  };
+      let newY = data.y;
+      let newX = data.x;
 
-  useEffect(() => {
-    const handleResize = () => ensureInViewport();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+      if (data.y < navbarHeight + padding) {
+        newY = navbarHeight + padding;
+      }
+      if (data.y > maxTop) {
+        newY = maxTop;
+      }
+      if (data.x < padding) {
+        newX = padding;
+      }
+      if (data.x > maxLeft) {
+        newX = maxLeft;
+      }
+
+      return { x: newX, y: newY };
+    }
+    return undefined;
+  }, [navbarHeight, padding]);
 
   return { ensureInViewport };
 };

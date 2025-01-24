@@ -8,41 +8,28 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useViewportBoundary } from "@/hooks/useViewportBoundary";
 import { DraggableContainer } from "./DraggableContainer";
+import { Message } from "@/types/chat";
 
 interface ChatWindowProps {
-  isOpen: boolean;
+  messages: Message[];
+  onSendMessage: (message: string) => void;
   onClose: () => void;
+  isTyping: boolean;
 }
 
-export const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
+export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatWindowProps) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
   const navigate = useNavigate();
-  const { checkBoundary } = useViewportBoundary();
+  const { ensureInViewport } = useViewportBoundary();
 
   const handleEstimateClick = () => {
     onClose();
     navigate("/estimate");
   };
 
-  const windowContent = (
-    <>
-      <Button
-        variant="outline"
-        className="absolute top-2 right-2 z-50"
-        onClick={handleEstimateClick}
-      >
-        Get Free Estimate
-      </Button>
-      <ChatMessages messagesEndRef={messagesEndRef} />
-      <ChatInput />
-    </>
-  );
-
-  if (!isOpen) return null;
-
   return (
-    <DraggableContainer onDrag={checkBoundary} onStop={checkBoundary}>
+    <DraggableContainer onDrag={ensureInViewport} onStop={ensureInViewport}>
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -61,7 +48,21 @@ export const ChatWindow = ({ isOpen, onClose }: ChatWindowProps) => {
         }}
       >
         <ChatHeader onClose={onClose} />
-        {windowContent}
+        <Button
+          variant="outline"
+          className="absolute top-2 right-2 z-50"
+          onClick={handleEstimateClick}
+        >
+          Get Free Estimate
+        </Button>
+        <ChatMessages 
+          messages={messages} 
+          isTyping={isTyping}
+        />
+        <ChatInput 
+          onSendMessage={onSendMessage}
+          isTyping={isTyping}
+        />
       </motion.div>
     </DraggableContainer>
   );
