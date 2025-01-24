@@ -1,8 +1,9 @@
-import { Configuration, OpenAIApi } from "openai";
+// Import OpenAI types from Deno-compatible package
+import { Configuration, OpenAIApi } from "https://deno.land/x/openai@v4.24.0/mod.ts";
 
 // OpenAI API initialization
 const configuration = new Configuration({
-  apiKey: "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", // Insert your OpenAI API key here
+  apiKey: Deno.env.get("OPENAI_API_KEY"),
 });
 const openai = new OpenAIApi(configuration);
 
