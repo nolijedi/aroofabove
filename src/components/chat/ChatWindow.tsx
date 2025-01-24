@@ -1,10 +1,10 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { useMediaQuery } from "@/hooks/use-mobile";
 import { ChatHeader } from "./ChatHeader";
 import { ChatMessages } from "./ChatMessages";
-import { ChatInput } from "./ChatInput";  
-import { useMediaQuery } from "@/hooks/use-mobile";
-import { Button } from "@/components/ui/button";
+import { ChatInput } from "./ChatInput";
 import { useNavigate } from "react-router-dom";
 import { useViewportBoundary } from "@/hooks/useViewportBoundary";
 import { DraggableContainer } from "./DraggableContainer";
@@ -12,13 +12,12 @@ import { Message } from "@/types/chat";
 
 interface ChatWindowProps {
   messages: Message[];
-  onSendMessage: (message: string) => void;
+  onSendMessage: (message: string) => Promise<void>;
   onClose: () => void;
   isTyping: boolean;
 }
 
 export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatWindowProps) => {
-  const messagesEndRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
   const navigate = useNavigate();
   const { ensureInViewport } = useViewportBoundary();
@@ -34,17 +33,16 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        transition={{
-          duration: 0.2,
-          ease: "easeOut"
-        }}
-        className={`bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden flex flex-col ${
-          isMobile 
-            ? "fixed inset-x-4 bottom-24 w-auto h-[60vh]" 
-            : "w-[320px] h-[400px]"
-        }`}
+        transition={{ duration: 0.2 }}
+        className={`
+          fixed bg-white rounded-lg shadow-lg overflow-hidden flex flex-col
+          ${isMobile ? 'w-[95vw] h-[80vh] bottom-20' : 'w-[400px] h-[600px] bottom-4'}
+          ${isMobile ? 'left-[2.5vw]' : 'right-4'}
+        `}
         style={{
-          maxHeight: isMobile ? 'calc(100vh - 160px)' : '400px',
+          maxWidth: isMobile ? '95vw' : '400px',
+          maxHeight: isMobile ? '80vh' : '600px',
+          zIndex: 1000,
         }}
       >
         <ChatHeader onClose={onClose} />

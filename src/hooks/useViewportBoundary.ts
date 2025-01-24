@@ -1,4 +1,4 @@
-import { RefObject, useCallback } from "react";
+import { useCallback } from "react";
 
 export const useViewportBoundary = (
   navbarHeight: number = 80,
