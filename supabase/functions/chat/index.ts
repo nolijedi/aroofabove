@@ -48,7 +48,7 @@ serve(async (req) => {
         contents: [
           { role: "user", parts: [{ text: SYSTEM_PROMPT }] },
           ...messages.map((msg: any) => ({
-            role: msg.role,
+            role: msg.role === "assistant" ? "model" : "user",
             parts: [{ text: msg.content }]
           }))
         ],
