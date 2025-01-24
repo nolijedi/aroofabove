@@ -13,7 +13,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
+      setIsScrolled(window.scrollY > 28);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -29,12 +29,12 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`sticky top-8 left-0 right-0 z-40 transition-all duration-500 ${
         isScrolled ? "bg-white/10 backdrop-blur-sm shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center h-20 relative">
+        <div className="flex items-center h-16 relative">
           <Link 
             to="/" 
             className="absolute left-4 top-1/2 -translate-y-1/2 transition-transform duration-500 hover:scale-105 hover:rotate-2"
@@ -42,7 +42,7 @@ const Navbar = () => {
             <img 
               src="/lovable-uploads/c03dc4bd-7520-4829-aa3d-9b436d3d547c.png" 
               alt="A Roof Above Logo" 
-              className="h-16 w-auto"
+              className="h-14 w-auto"
             />
           </Link>
 

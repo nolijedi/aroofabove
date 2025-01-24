@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ChatMessages } from "./ChatMessages";
 import { Message } from "@/types/chat";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 interface ChatWindowProps {
     isMinimized?: boolean;
@@ -71,29 +72,44 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
             )}
         >
             <div 
-                className="bg-gradient-to-r from-roofing-orange to-roofing-orange-dark p-4 flex justify-between items-center rounded-t-2xl relative overflow-hidden cursor-move"
-                onPointerDown={handleDragStart}
+                className="flex items-center justify-between px-4 py-3 bg-roofing-orange"
             >
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_107%,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0.1)_5%,rgba(255,255,255,0)_45%)]" />
-                <div className="relative">
-                    <div className="flex items-center gap-2">
-                        <motion.img 
-                            src="/images/hammer-icon.svg" 
-                            alt="Hammer Icon" 
-                            className="w-6 h-6"
-                            animate={isTyping ? { rotate: [-10, 20, -10] } : { rotate: 0 }}
-                            transition={{ repeat: Infinity, duration: 0.6, ease: "easeInOut" }}
-                        />
-                        <h3 className="text-white font-semibold">Chat with Eve</h3>
+                <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">
+                        <div className="w-5 h-5 bg-white mask-beaker" />
                     </div>
-                    <p className="text-white/80 text-xs mt-1">Her roofing knowledge is sure to impress you</p>
+                    <div>
+                        <h2 className="text-lg font-semibold text-white leading-tight">Chat with Eve</h2>
+                        <p className="text-white/80 text-xs">Your Roofing Expert</p>
+                    </div>
                 </div>
-                <button 
-                    onClick={onClose}
-                    className="relative text-white/90 hover:text-white transition-colors hover:bg-white/10 p-2 rounded-lg"
-                >
-                    <X size={20} />
-                </button>
+                <div className="flex items-center gap-3">
+                    <motion.div 
+                        className="bg-gradient-to-r from-roofing-orange-dark to-roofing-orange p-2 border-b"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                    >
+                        <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                        >
+                            <Button
+                                asChild
+                                className="w-full bg-white text-roofing-orange hover:bg-white/90 font-semibold shadow-lg"
+                            >
+                                <Link to="/estimate">Get Instant Estimate</Link>
+                            </Button>
+                        </motion.div>
+                    </motion.div>
+                    <button 
+                        onClick={onClose}
+                        className="text-white/90 hover:text-white hover:bg-white/10 p-1.5 rounded-lg transition-colors"
+                    >
+                        <X size={18} />
+                    </button>
+                </div>
             </div>
 
             <div className="flex-1 overflow-hidden bg-chat-pattern">

@@ -15,6 +15,7 @@ import PromoCountdown from "./components/PromoCountdown";
 import ScrollToTop from "./components/ScrollToTop";
 import StickyPhone from "./components/StickyPhone";
 import { ChatWidget } from "./components/ChatWidget";
+import TopBar from "./components/TopBar";
 import ButtonTest from "./components/ui/ButtonTest";
 
 // Add styles to hide Lovable widget
@@ -49,21 +50,24 @@ const App = () => (
             <div className="absolute inset-0 bg-gradient-to-r from-roofing-orange/60 to-roofing-cream/40" />
           </div>
           
-          <Navbar />
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/why-choose-us" element={<WhyChooseUs />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/estimate" element={<Estimate />} />
-              <Route path="/insurance-claims" element={<InsuranceClaims />} />
-              <Route path="*" element={<Index />} /> {/* Add catch-all route */}
-              <Route path="/button-test" element={<ButtonTest />} />
-
-            </Routes>
-          </main>
-          <Footer />
+          {/* Content */}
+          <div className="relative z-10 flex-1 flex flex-col">
+            <TopBar />
+            <Navbar />
+            <main className="flex-1">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/why-choose-us" element={<WhyChooseUs />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/estimate" element={<Estimate />} />
+                <Route path="/insurance-claims" element={<InsuranceClaims />} />
+                <Route path="*" element={<Index />} /> {/* Add catch-all route */}
+                <Route path="/button-test" element={<ButtonTest />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
           <PromoCountdown />
           <StickyPhone />
           <ChatWidget />
