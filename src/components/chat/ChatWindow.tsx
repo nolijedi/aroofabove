@@ -36,13 +36,14 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
         transition={{ duration: 0.2 }}
         className={`
           fixed bg-white rounded-lg shadow-lg overflow-hidden flex flex-col
-          ${isMobile ? 'w-[95vw] h-[80vh] bottom-20' : 'w-[400px] h-[600px] bottom-4'}
-          ${isMobile ? 'left-[2.5vw]' : 'right-4'}
+          ${isMobile ? 'w-[95vw] h-[80vh]' : 'w-[400px] h-[600px]'}
+          left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
         `}
         style={{
           maxWidth: isMobile ? '95vw' : '400px',
           maxHeight: isMobile ? '80vh' : '600px',
           zIndex: 1000,
+          touchAction: 'none', // Improve touch handling
         }}
       >
         <ChatHeader onClose={onClose} />

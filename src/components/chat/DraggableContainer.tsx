@@ -10,42 +10,19 @@ interface DraggableContainerProps {
 export const DraggableContainer = ({ children, onDrag, onStop }: DraggableContainerProps) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  if (!isMobile) {
-    return (
-      <Draggable
-        handle=".chat-header"
-        bounds="parent"
-        defaultPosition={{ 
-          x: Math.max(window.innerWidth / 2 - 160, 20), 
-          y: Math.max(window.innerHeight / 2 - 200, 100)
-        }}
-        onDrag={onDrag}
-        onStop={onStop}
-      >
-        <div className="fixed z-40 group">
-          {children}
-        </div>
-      </Draggable>
-    );
-  }
-
-  // Mobile-specific dragging configuration
   return (
     <Draggable
       handle=".chat-header"
-      bounds={{
-        top: 20,
-        bottom: window.innerHeight - 200
-      }}
-      axis="y"
-      defaultPosition={{
-        x: 0,
-        y: window.innerHeight - 400
-      }}
+      bounds="body"
+      defaultPosition={{ x: 0, y: 0 }}
       onDrag={onDrag}
       onStop={onStop}
+      {...(isMobile ? {
+        axis: "both",
+        positionOffset: { x: "0", y: "0" }
+      } : {})}
     >
-      <div className="fixed z-40 left-0 right-0">
+      <div className={`fixed z-40 ${isMobile ? 'w-full' : ''}`}>
         {children}
       </div>
     </Draggable>
