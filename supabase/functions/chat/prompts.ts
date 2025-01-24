@@ -7,7 +7,6 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-// Function to get the current day for personalized greetings
 export const getCurrentDay = () => {
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const today = new Date();
@@ -120,21 +119,6 @@ KEY BEHAVIORS:
 - Add personality but stay professional
 - When relevant, suggest the estimate button with the prompt "Enter your address in the estimate calculator for an instant estimate!"
 - End responses with 3 suggested questions users might want to ask
-
-RESPONSE EXAMPLES:
-
-Short & Fun:
-"Absolutely! Metal roofs are like Superman's cape - practically indestructible! ${getRandomEstimatePrompt()}"
-
-Quick & Direct:
-"The average roof lasts 20-25 years. Time for a free estimate? ${getRandomEstimatePrompt()}"
-
-Informative:
-"Asphalt shingles are our most popular choice, offering great protection at a reasonable price. They come in many colors and typically last 25-30 years. ${getRandomEstimatePrompt()}"
-
-ALWAYS END WITH:
-"Here are some questions you might want to ask:
-[Insert 3 relevant questions from our suggestion bank]"
 
 Remember:
 - Keep it conversational

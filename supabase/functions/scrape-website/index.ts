@@ -30,23 +30,28 @@ serve(async (req) => {
   }
 
   try {
-    // Check if FIRECRAWL_API_KEY is configured
     if (!FIRECRAWL_API_KEY) {
       throw new Error('FIRECRAWL_API_KEY is not configured');
     }
 
-    // Log the start of the request
     console.log('Starting website scraping request');
 
-    // Get the URL to scrape from the request body
-    const { url } = await req.json();
+    // Parse the request body
+    let requestBody;
+    try {
+      requestBody = await req.json();
+    } catch (error) {
+      console.error('Error parsing request body:', error);
+      throw new Error('Invalid JSON in request body');
+    }
+
+    const url = requestBody?.url;
     if (!url) {
       throw new Error('URL is required');
     }
 
     console.log('Scraping URL:', url);
 
-    // Make the request to Firecrawl API with proper configuration
     const response = await retryWithExponentialBackoff(async () => {
       const firecrawlResponse = await fetch('https://api.firecrawl.com/v1/scrape', {
         method: 'POST',
@@ -71,12 +76,12 @@ serve(async (req) => {
         throw new Error(`Firecrawl API error: ${firecrawlResponse.status} - ${errorText}`);
       }
 
-      return firecrawlResponse.json();
+      const responseData = await firecrawlResponse.json();
+      return responseData;
     });
 
     console.log('Successfully scraped website');
 
-    // Return the scraped data
     return new Response(
       JSON.stringify(response),
       {
@@ -91,7 +96,6 @@ serve(async (req) => {
   } catch (error) {
     console.error('Error in scrape-website function:', error);
 
-    // Return a detailed error response
     return new Response(
       JSON.stringify({
         error: error.message || 'An unexpected error occurred',
