@@ -13,22 +13,6 @@ export const useChatMessages = () => {
     },
   ]);
   const [isTyping, setIsTyping] = useState(false);
-  const [websiteData, setWebsiteData] = useState<any>(null);
-
-  useEffect(() => {
-    const fetchWebsiteData = async () => {
-      try {
-        const { data, error } = await supabase.functions.invoke('scrape-website');
-        if (error) throw error;
-        setWebsiteData(data);
-        console.log('Website data fetched successfully:', data);
-      } catch (error) {
-        console.error('Error fetching website data:', error);
-      }
-    };
-
-    fetchWebsiteData();
-  }, []);
 
   const generateAIResponse = async (message: string): Promise<string> => {
     try {
@@ -44,7 +28,6 @@ export const useChatMessages = () => {
               content: message,
             },
           ],
-          websiteData: websiteData,
         },
       });
 

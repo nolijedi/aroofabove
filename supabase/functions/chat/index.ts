@@ -18,14 +18,7 @@ serve(async (req) => {
   try {
     console.log('Processing chat request...');
     
-    let body;
-    try {
-      body = await req.json();
-    } catch (error) {
-      console.error('Error parsing request body:', error);
-      throw new Error('Invalid JSON in request body');
-    }
-
+    const body = await req.json();
     const { messages } = body;
     
     if (!messages || !Array.isArray(messages)) {
@@ -48,7 +41,7 @@ serve(async (req) => {
         contents: [
           { role: "user", parts: [{ text: SYSTEM_PROMPT }] },
           ...messages.map((msg: any) => ({
-            role: msg.role,
+            role: msg.role === "assistant" ? "model" : "user",
             parts: [{ text: msg.content }]
           }))
         ],
