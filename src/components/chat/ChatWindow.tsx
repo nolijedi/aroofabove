@@ -1,6 +1,5 @@
-// ChatWindow.tsx
 import { useRef } from "react";
-import { motion } from "framer-motion";  // Corrected import
+import { motion } from "framer-motion";
 import { ChatHeader } from "./ChatHeader";
 import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";  
@@ -8,7 +7,6 @@ import { Message } from "@/types/chat";
 import { useMediaQuery } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { GripVertical } from "lucide-react";
 import { useViewportBoundary } from "@/hooks/useViewportBoundary";
 import { DraggableContainer } from "./DraggableContainer";
 
@@ -42,11 +40,11 @@ export const ChatWindow = ({ messages, onSendMessage, onClose, isTyping }: ChatW
       }}
       className={`bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200/30 overflow-hidden flex flex-col ${
         isMobile 
-          ? "fixed left-1/2 -translate-x-1/2 bottom-28 w-[90vw] max-w-[320px] h-[60vh] max-h-[400px]" 
+          ? "fixed inset-x-4 bottom-24 w-auto max-w-[95vw] h-[60vh]" 
           : "w-[320px] h-[400px]"
       }`}
       style={{
-        maxHeight: 'calc(100vh - 160px)',
+        maxHeight: isMobile ? 'calc(100vh - 160px)' : '400px',
       }}
     >
       <ChatHeader onClose={onClose} />
