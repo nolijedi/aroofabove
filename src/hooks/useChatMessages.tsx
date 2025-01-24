@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Message } from "@/types/chat";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -7,9 +7,10 @@ const INITIAL_MESSAGE = `Welcome to A Roof Above! How can I help you with your r
 export const useChatMessages = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
+      id: crypto.randomUUID(),
       role: "assistant",
       content: INITIAL_MESSAGE,
-      timestamp: new Date(),
+      createdAt: new Date(),
     },
   ]);
   const [isTyping, setIsTyping] = useState(false);
@@ -55,9 +56,10 @@ export const useChatMessages = () => {
     if (!message.trim()) return;
 
     const userMessage: Message = {
+      id: crypto.randomUUID(),
       role: "user",
       content: message,
-      timestamp: new Date(),
+      createdAt: new Date(),
     };
     setMessages((prev) => [...prev, userMessage]);
     setIsTyping(true);
@@ -65,16 +67,18 @@ export const useChatMessages = () => {
     try {
       const aiResponse = await generateAIResponse(message);
       setMessages((prev) => [...prev, {
+        id: crypto.randomUUID(),
         role: "assistant",
         content: aiResponse,
-        timestamp: new Date(),
+        createdAt: new Date(),
       }]);
     } catch (error) {
       console.error("Error sending message:", error);
       setMessages((prev) => [...prev, {
+        id: crypto.randomUUID(),
         role: "assistant",
         content: "I apologize, but I'm having trouble responding right now. Please try again in a moment.",
-        timestamp: new Date(),
+        createdAt: new Date(),
       }]);
     } finally {
       setIsTyping(false);

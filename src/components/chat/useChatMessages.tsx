@@ -37,7 +37,7 @@ export const useChatMessages = () => {
       return data?.content || INITIAL_MESSAGE;
     } catch (error) {
       console.error('Error fetching memory:', error);
-      return INITIAL_MESSAGE; // Fallback to initial message if there's an error
+      return INITIAL_MESSAGE;
     }
   };
 
@@ -102,22 +102,21 @@ export const useChatMessages = () => {
       const updatedMemory = `Updated memory: ${command}`;
       await updateMemoryInBackend(updatedMemory);
       
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: "Training updated successfully. I'm now back in normal chat mode. How can I assist you further?",
-          timestamp: new Date(),
-        },
-      ]);
+      setMessages((prev) => [...prev, {
+        id: crypto.randomUUID(),
+        role: "assistant",
+        content: "Training updated successfully. I'm now back in normal chat mode. How can I assist you further?",
+        createdAt: new Date(),
+      }]);
       return;
     }
 
     // Normal message handling
     const userMessage: Message = {
+      id: crypto.randomUUID(),
       role: "user",
       content: message,
-      timestamp: new Date(),
+      createdAt: new Date(),
     };
     setMessages((prev) => [...prev, userMessage]);
     setIsTyping(true);
@@ -125,16 +124,18 @@ export const useChatMessages = () => {
     try {
       const aiResponse = await generateAIResponse(message);
       setMessages((prev) => [...prev, {
+        id: crypto.randomUUID(),
         role: "assistant",
         content: aiResponse,
-        timestamp: new Date(),
+        createdAt: new Date(),
       }]);
     } catch (error) {
       console.error("Error sending message:", error);
       setMessages((prev) => [...prev, {
+        id: crypto.randomUUID(),
         role: "assistant",
         content: "I apologize, but I'm having trouble responding right now. Please try again in a moment.",
-        timestamp: new Date(),
+        createdAt: new Date(),
       }]);
     } finally {
       setIsTyping(false);
@@ -145,13 +146,12 @@ export const useChatMessages = () => {
   useEffect(() => {
     const initializeChat = async () => {
       const memory = await fetchMemoryFromBackend();
-      setMessages([
-        {
-          role: "assistant",
-          content: memory,
-          timestamp: new Date(),
-        },
-      ]);
+      setMessages([{
+        id: crypto.randomUUID(),
+        role: "assistant",
+        content: memory,
+        createdAt: new Date(),
+      }]);
     };
     initializeChat();
   }, []);
