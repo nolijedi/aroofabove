@@ -1,83 +1,106 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Message } from "@/types/chat";
 import { supabase } from "@/integrations/supabase/client";
 
-export const useChatMessages = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [isTyping, setIsTyping] = useState(false);
+const INITIAL_MESSAGE = `Welcome to A Roof Above! How can I help you with your roofing project today?`;
 
-  const addInitialMessage = useCallback(() => {
-    const initialMessage: Message = {
-      id: crypto.randomUUID(),
+export const useChatMessages = () => {
+  const [messages, setMessages] = useState<Message[]>([
+    {
       role: "assistant",
-      content: "Hello! I'm your roofing assistant. How can I help you today?",
-      createdAt: new Date(),
+      content: INITIAL_MESSAGE,
+      timestamp: new Date(),
+    },
+  ]);
+  const [isTyping, setIsTyping] = useState(false);
+  const [websiteData, setWebsiteData] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchWebsiteData = async () => {
+      try {
+        const { data, error } = await supabase.functions.invoke('scrape-website');
+        if (error) throw error;
+        setWebsiteData(data);
+        console.log('Website data fetched successfully:', data);
+      } catch (error) {
+        console.error('Error fetching website data:', error);
+      }
     };
-    setMessages([initialMessage]);
+
+    fetchWebsiteData();
   }, []);
 
-  const handleSendMessage = useCallback(async (content: string) => {
-    if (!content.trim()) return;
+  const generateAIResponse = async (message: string): Promise<string> => {
+    try {
+      const { data, error } = await supabase.functions.invoke('chat', {
+        body: {
+          messages: [
+            ...messages.map(msg => ({
+              role: msg.role,
+              content: msg.content,
+            })),
+            {
+              role: "user",
+              content: message,
+            },
+          ],
+          websiteData: websiteData,
+        },
+      });
 
-    // Add user message
+      if (error) {
+        console.error('Error generating AI response:', error);
+        throw new Error(error.message);
+      }
+
+      if (data?.error) {
+        throw new Error(data.error);
+      }
+
+      if (!data?.text) {
+        throw new Error('Invalid response format');
+      }
+
+      return data.text;
+    } catch (error) {
+      console.error('Error generating AI response:', error);
+      throw error;
+    }
+  };
+
+  const handleSendMessage = async (message: string) => {
+    if (!message.trim()) return;
+
     const userMessage: Message = {
-      id: crypto.randomUUID(),
       role: "user",
-      content: content.trim(),
-      createdAt: new Date(),
+      content: message,
+      timestamp: new Date(),
     };
-
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setIsTyping(true);
 
     try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          messages: [...messages, userMessage].map(({ role, content }) => ({
-            role,
-            content,
-          })),
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to get response");
-      }
-
-      const data = await response.json();
-      
-      const assistantMessage: Message = {
-        id: crypto.randomUUID(),
+      const aiResponse = await generateAIResponse(message);
+      setMessages((prev) => [...prev, {
         role: "assistant",
-        content: data.text,
-        createdAt: new Date(),
-      };
-
-      setMessages(prev => [...prev, assistantMessage]);
+        content: aiResponse,
+        timestamp: new Date(),
+      }]);
     } catch (error) {
-      console.error("Error in chat:", error);
-      
-      const errorMessage: Message = {
-        id: crypto.randomUUID(),
+      console.error("Error sending message:", error);
+      setMessages((prev) => [...prev, {
         role: "assistant",
-        content: "I apologize, but I encountered an error. Please try again.",
-        createdAt: new Date(),
-      };
-
-      setMessages(prev => [...prev, errorMessage]);
+        content: "I apologize, but I'm having trouble responding right now. Please try again in a moment.",
+        timestamp: new Date(),
+      }]);
     } finally {
       setIsTyping(false);
     }
-  }, [messages]);
+  };
 
   return {
     messages,
     isTyping,
     handleSendMessage,
-    addInitialMessage,
   };
 };

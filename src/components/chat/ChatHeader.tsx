@@ -21,7 +21,7 @@ export const ChatHeader = ({ onClose }: ChatHeaderProps) => {
       </div>
       <motion.button
         onClick={onClose}
-        className="text-white/90 hover:text-white p-1 rounded-full bg-roofing-orange-dark/50 hover:bg-roofing-orange-dark transition-all duration-300"
+        className="text-white/90 hover:text-white p-1 rounded-full bg-roofing-orange-dark/50 hover:bg-roofing-orange-dark transition-all duration-200"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >

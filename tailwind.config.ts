@@ -75,19 +75,15 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        'phone-pulse': { // Identical animation for phone icon
-          '0%': { transform: 'scale(1)', opacity: '0.2' },
-          '25%': { transform: 'scale(0.8)', opacity: '0.3' },
-          '50%': { transform: 'scale(1.6)', opacity: '0.1' },
-          '75%': { transform: 'scale(0.8)', opacity: '0.3' },
-          '100%': { transform: 'scale(1)', opacity: '0.2' },
+        'phone-pulse': {
+          '0%': { transform: 'scale(1)', opacity: '0.4' },
+          '50%': { transform: 'scale(0.8)', opacity: '0.6' },
+          '100%': { transform: 'scale(1)', opacity: '0.4' },
         },
-        'live-chat-pulse': { // Identical animation for live chat icon
-          '0%': { transform: 'scale(1)', opacity: '0.2' },
-          '25%': { transform: 'scale(0.8)', opacity: '0.3' },
-          '50%': { transform: 'scale(1.6)', opacity: '0.1' },
-          '75%': { transform: 'scale(0.8)', opacity: '0.3' },
-          '100%': { transform: 'scale(1)', opacity: '0.2' },
+        'live-chat-pulse': {
+          '0%': { transform: 'scale(1)', opacity: '0.4' },
+          '50%': { transform: 'scale(0.8)', opacity: '0.6' },
+          '100%': { transform: 'scale(1)', opacity: '0.4' },
         },
         "spin-slow": {
           "100%": {
@@ -102,10 +98,10 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        'phone-pulse': 'phone-pulse 3s ease-in-out infinite',
-        'live-chat-pulse': 'live-chat-pulse 3s ease-in-out infinite',
-        "spin-slow": "spin-slow 12s linear infinite",
-        "float": "float 6s ease-in-out infinite",
+        "spin-slow": "spin-slow 8s linear infinite",
+        "float": "float 3s ease-in-out infinite",
+        "live-chat-pulse": "live-chat-pulse 15s ease-in-out infinite",
+        "phone-pulse": "phone-pulse 15s ease-in-out infinite",
       },
     },
   },

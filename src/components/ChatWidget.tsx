@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { ChatButton } from "./chat/ChatButton";
 import { ChatWindow } from "./chat/ChatWindow";
 import { useChatMessages } from "@/hooks/useChatMessages";
+import { MessageCircle } from "lucide-react";
 
 // Add styles to hide Lovable widget
 const styles = document.createElement('style');
@@ -20,12 +21,21 @@ export const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { messages, isTyping, handleSendMessage } = useChatMessages();
 
+  // Close chat when pressing Escape
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false);
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, []);
+
   return (
     <>
-      <ChatButton 
-        onClick={() => setIsOpen(!isOpen)}
-      />
-      <AnimatePresence mode="wait" initial={false}>
+      {/* Chat Button */}
+      <ChatButton onClick={() => setIsOpen(!isOpen)} />
+      {/* Chat Window */}
+      <AnimatePresence>
         {isOpen && (
           <ChatWindow
             messages={messages}

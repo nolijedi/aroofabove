@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(2 2)">
+    <!-- Hammer head -->
+    <path fill="#ff6b00" d="M3,4 L12,4 L12,8 L3,8 L3,4 Z" />
+    <!-- Hammer handle -->
+    <rect fill="#666666" x="7" y="8" width="2" height="10" />
+  </g>
+</svg>
