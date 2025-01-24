@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800px" height="800px" viewBox="0 0 800 800" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M300,100 L500,100 L450,300 L500,650 C500,680 480,700 450,700 L350,700 C320,700 300,680 300,650 L350,300 L300,100 Z" fill="#E5E7EB"/>
+        <path d="M200,50 L600,50 C630,50 650,70 650,100 L650,150 C650,180 630,200 600,200 L200,200 C170,200 150,180 150,150 L150,100 C150,70 170,50 200,50 Z" fill="#F97316"/>
+    </g>
+</svg>
