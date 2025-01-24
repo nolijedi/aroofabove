@@ -1,6 +1,5 @@
 project_id = "xwqwukqukudpzgdkyasu"
 
-[global]
 [global.env]
 FIRECRAWL_API_KEY = "env"
-OPENAI_API_KEY = "env"
+GEMINI_API_KEY = "env"

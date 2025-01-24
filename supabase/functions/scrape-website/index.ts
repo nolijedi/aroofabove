@@ -30,11 +30,11 @@ serve(async (req) => {
   }
 
   try {
+    console.log('Starting website scraping request');
+
     if (!FIRECRAWL_API_KEY) {
       throw new Error('FIRECRAWL_API_KEY is not configured');
     }
-
-    console.log('Starting website scraping request');
 
     // Parse the request body
     let requestBody;
@@ -76,8 +76,7 @@ serve(async (req) => {
         throw new Error(`Firecrawl API error: ${firecrawlResponse.status} - ${errorText}`);
       }
 
-      const responseData = await firecrawlResponse.json();
-      return responseData;
+      return await firecrawlResponse.json();
     });
 
     console.log('Successfully scraped website');

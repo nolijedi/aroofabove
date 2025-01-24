@@ -10,14 +10,29 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const { messages } = await req.json();
+    console.log('Processing chat request...');
     
-    console.log('Processing chat request with messages:', messages);
+    let body;
+    try {
+      body = await req.json();
+    } catch (error) {
+      console.error('Error parsing request body:', error);
+      throw new Error('Invalid JSON in request body');
+    }
+
+    const { messages } = body;
+    
+    if (!messages || !Array.isArray(messages)) {
+      throw new Error('Messages array is required');
+    }
+
+    console.log('Sending request to Gemini API with messages:', messages);
 
     if (!GEMINI_API_KEY) {
       console.error('GEMINI_API_KEY is not set');
@@ -38,7 +53,7 @@ serve(async (req) => {
           }))
         ],
         generationConfig: {
-          temperature: 0.9, // Increased for more variety
+          temperature: 0.9,
           maxOutputTokens: 800,
           topP: 0.9,
           topK: 40
@@ -68,7 +83,9 @@ serve(async (req) => {
     console.error('Error in chat function:', error);
     return new Response(
       JSON.stringify({ 
-        error: error.message || "An unexpected error occurred. Please try again."
+        error: error.message || "An unexpected error occurred. Please try again.",
+        details: error.stack,
+        timestamp: new Date().toISOString()
       }),
       {
         status: 500,
