@@ -1,57 +1,61 @@
 import { Message } from "@/types/chat";
-import { ChatMessage } from "./ChatMessage";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 interface ChatMessagesProps {
-    messages: Message[];
-    isTyping: boolean;
+  messages: Message[];
+  isTyping: boolean;
 }
 
-export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isTyping }) => {
-    return (
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent hover:scrollbar-thumb-gray-300">
-            <AnimatePresence mode="popLayout">
-                {messages.map((message, index) => (
-                    <motion.div
-                        key={message.id || index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                    >
-                        <ChatMessage 
-                            message={message} 
-                            isTyping={index === messages.length - 1 && isTyping && message.role === "assistant"}
-                        />
-                    </motion.div>
-                ))}
-                {isTyping && messages[messages.length - 1]?.role !== "assistant" && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="flex items-center gap-2 px-4 py-2"
-                    >
-                        <motion.div 
-                            className="w-6 h-6 rounded-lg bg-gradient-to-br from-roofing-orange to-roofing-orange-dark flex items-center justify-center shadow-lg shadow-roofing-orange/20"
-                            animate={{ rotate: [-10, 20, -10] }}
-                            transition={{ duration: 0.6, repeat: Infinity, ease: "easeInOut" }}
-                        >
-                            <img 
-                                src="/images/hammer-icon.svg"
-                                alt="Assistant"
-                                className="w-4 h-4"
-                            />
-                        </motion.div>
-                        <div className="flex gap-1">
-                            <div className="w-2 h-2 bg-roofing-orange/30 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                            <div className="w-2 h-2 bg-roofing-orange/30 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                            <div className="w-2 h-2 bg-roofing-orange/30 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div>
-    );
+export const ChatMessages = ({ messages, isTyping }: ChatMessagesProps) => {
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
+
+  return (
+    <div className="flex-1 overflow-y-auto bg-gray-50/50 p-3 space-y-2.5 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
+      {messages.map((message) => (
+        <motion.div
+          key={message.id}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+          className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+        >
+          <div
+            className={`
+              max-w-[85%] p-2.5 rounded-xl text-sm
+              ${message.role === 'user'
+                ? 'bg-roofing-orange text-white rounded-br-none'
+                : 'bg-white shadow-sm border border-gray-100 text-gray-800 rounded-bl-none'
+              }
+            `}
+          >
+            {message.content}
+          </div>
+        </motion.div>
+      ))}
+      
+      {isTyping && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex justify-start"
+        >
+          <div className="bg-white shadow-sm border border-gray-100 text-gray-600 p-2.5 rounded-xl rounded-bl-none flex items-center gap-2 text-sm">
+            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+            <span>Typing...</span>
+          </div>
+        </motion.div>
+      )}
+      <div ref={messagesEndRef} />
+    </div>
+  );
 };

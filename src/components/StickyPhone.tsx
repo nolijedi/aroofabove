@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 export const StickyPhone = () => {
   return (
     <motion.a
-      href="tel:509-400-5911"
+      href="tel:+1234567890"
       initial={{ opacity: 0, scale: 0 }}
       animate={{ 
         opacity: [0.4, 1, 0.4],
@@ -12,9 +12,8 @@ export const StickyPhone = () => {
       }}
       whileHover={{ 
         scale: 1.2,
-        rotate: 360,
         opacity: 1,
-        transition: { duration: 0.5 }
+        transition: { duration: 0.3 }
       }}
       whileTap={{ scale: 0.9 }}
       transition={{
@@ -30,17 +29,18 @@ export const StickyPhone = () => {
         }
       }}
       className={`
-        fixed bottom-[120px] right-6
-        z-50 flex flex-col items-center justify-center
-        w-[68px] h-[68px] rounded-full
-        bg-gradient-to-br from-roofing-orange to-roofing-orange-dark
+        fixed bottom-[120px] left-6
+        z-[100]
+        flex flex-col items-center justify-center
+        w-16 h-16 rounded-full
+        bg-gradient-to-br from-roofing-orange/90 to-roofing-orange-dark/90
         shadow-lg hover:shadow-xl
         transition-all duration-300
         group
       `}
     >
-      <Phone className="w-8 h-8 text-white group-hover:scale-110 transition-transform duration-300" />
-      <span className="text-xs font-medium text-white whitespace-nowrap mt-1">Call Us</span>
+      <Phone className="w-7 h-7 text-white group-hover:scale-110 transition-transform duration-300" />
+      <span className="text-xs font-medium text-white whitespace-nowrap mt-1">Call Now</span>
     </motion.a>
   );
 };

@@ -17,6 +17,8 @@ import StickyPhone from "./components/StickyPhone";
 import { ChatWidget } from "./components/ChatWidget";
 import TopBar from "./components/TopBar";
 import ButtonTest from "./components/ui/ButtonTest";
+import { ChatButton } from "./components/chat/ChatButton";
+import { AnimatePresence } from "framer-motion";
 
 // Add styles to hide Lovable widget
 const styles = document.createElement('style');
@@ -71,6 +73,9 @@ const AppContent = () => {
         <PromoCountdown />
         <StickyPhone />
         <ChatWidget />
+        <AnimatePresence>
+          <ChatButton />
+        </AnimatePresence>
       </div>
     </>
   );

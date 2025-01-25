@@ -1,66 +1,73 @@
 // ChatInput.tsx
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, KeyboardEvent } from "react";
+import { motion } from "framer-motion";
 import { Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 
 interface ChatInputProps {
-  onSendMessage: (message: string) => Promise<void>;
+  onSendMessage: (message: string) => void;
   isTyping: boolean;
 }
 
 export const ChatInput = ({ onSendMessage, isTyping }: ChatInputProps) => {
   const [message, setMessage] = useState("");
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = "0px";
-      const scrollHeight = textareaRef.current.scrollHeight;
-      textareaRef.current.style.height = scrollHeight + "px";
-    }
-  }, [message]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!message.trim() || isTyping) return;
-
-    setMessage("");
-    await onSendMessage(message);
+    if (message.trim() && !isTyping) {
+      onSendMessage(message.trim());
+      setMessage("");
+    }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSubmit(e);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2 items-end">
-      <Textarea
-        ref={textareaRef}
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder="Type your message..."
-        className="min-h-[40px] max-h-[120px] resize-none bg-gray-50 border-gray-200 focus:ring-roofing-orange focus:border-roofing-orange"
-        disabled={isTyping}
-        rows={1}
-      />
-      <Button
-        type="submit"
-        size="icon"
-        disabled={!message.trim() || isTyping}
-        className={`
-          flex-shrink-0 h-10 w-10
-          bg-roofing-orange hover:bg-roofing-orange-dark 
-          disabled:opacity-50 disabled:cursor-not-allowed
-          transition-all duration-200
-        `}
-      >
-        <Send className="h-4 w-4" />
-      </Button>
+    <form 
+      onSubmit={handleSubmit}
+      className="p-3 border-t border-gray-100 bg-white"
+    >
+      <div className="relative flex items-center gap-2">
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="Type your message..."
+          className="
+            w-full px-3 py-2 pr-10
+            bg-gray-50 rounded-xl
+            focus:outline-none focus:ring-2 focus:ring-roofing-orange/20
+            disabled:opacity-50
+            text-gray-800 text-sm
+            placeholder-gray-400
+          "
+          disabled={isTyping}
+        />
+        <motion.button
+          type="submit"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          disabled={!message.trim() || isTyping}
+          className="
+            absolute right-2
+            w-7 h-7
+            flex items-center justify-center
+            bg-roofing-orange text-white
+            rounded-lg
+            disabled:opacity-50
+            disabled:cursor-not-allowed
+            transition-colors
+            hover:bg-roofing-orange-dark
+          "
+        >
+          <Send size={14} />
+        </motion.button>
+      </div>
     </form>
   );
 };

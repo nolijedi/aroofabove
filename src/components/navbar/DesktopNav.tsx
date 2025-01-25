@@ -1,65 +1,54 @@
 import { Link } from "react-router-dom";
 import { NavItem } from "./types";
+import { cn } from "@/lib/utils";
 
 interface DesktopNavProps {
   navItems: NavItem[];
   currentPath: string;
 }
 
+const buttonBaseStyles = "px-4 py-2.5 rounded-lg text-sm font-medium w-[130px] text-center whitespace-nowrap";
+
 const DesktopNav = ({ navItems, currentPath }: DesktopNavProps) => {
   return (
-    <div className="hidden md:flex items-center justify-between flex-1 pl-28">
-      <div className="flex items-center justify-center space-x-4 flex-1">
-        {navItems.map((item) => (
-          <Link 
-            key={item.path} 
+    <div className="hidden md:flex items-center justify-end flex-1 gap-2 pr-2">
+      {navItems.map((item) => {
+        const isActive = currentPath === item.path;
+        return (
+          <Link
+            key={item.path}
             to={item.path}
-            className={`
-              px-6 py-2.5 rounded-lg
-              text-sm font-medium
-              transition-all duration-300
-              ${currentPath === item.path 
-                ? "bg-roofing-orange text-white hover:bg-roofing-orange-dark"
-                : "bg-roofing-cream/90 text-roofing-charcoal hover:bg-roofing-cream"
-              }
-              border border-transparent hover:border-roofing-orange/20
-              shadow-sm hover:shadow-md
-            `}
+            className={cn(
+              buttonBaseStyles,
+              isActive
+                ? "bg-roofing-orange text-white"
+                : "bg-gray-200/90 text-gray-800 hover:bg-gray-300/90"
+            )}
           >
             {item.label}
           </Link>
-        ))}
-      </div>
-      <div className="flex items-center space-x-4">
-        <Link 
-          to="/estimate"
-          className="
-            px-6 py-2.5 rounded-lg
-            bg-roofing-orange text-white
-            hover:bg-roofing-orange-dark
-            shadow-lg hover:shadow-xl
-            transition-all duration-300
-            text-sm font-medium
-            animate-bounce-subtle
-            border-2 border-transparent
-          "
-        >
-          Get Free Estimate
-        </Link>
-        <Link 
-          to="/contact"
-          className="
-            px-6 py-2.5 rounded-lg
-            border-2 border-roofing-orange
-            text-roofing-orange
-            hover:bg-roofing-orange hover:text-white
-            transition-all duration-300
-            text-sm font-medium
-          "
-        >
-          Contact Us
-        </Link>
-      </div>
+        );
+      })}
+      <Link
+        to="/estimate"
+        className={cn(
+          buttonBaseStyles,
+          "bg-roofing-orange text-white",
+          "hover:bg-roofing-orange-dark"
+        )}
+      >
+        Get Free Estimate
+      </Link>
+      <Link
+        to="/contact"
+        className={cn(
+          buttonBaseStyles,
+          "border border-roofing-orange text-roofing-orange",
+          "hover:bg-roofing-orange hover:text-white"
+        )}
+      >
+        Contact Us
+      </Link>
     </div>
   );
 };

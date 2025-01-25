@@ -1,4 +1,4 @@
-import { X, GripHorizontal } from "lucide-react";
+import { X } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface ChatHeaderProps {
@@ -7,25 +7,26 @@ interface ChatHeaderProps {
 
 export const ChatHeader = ({ onClose }: ChatHeaderProps) => {
   return (
-    <div className="chat-header bg-gradient-to-r from-roofing-orange/90 to-roofing-orange-dark/90 p-3 flex justify-between items-center cursor-move relative group">
-      <div className="flex items-center space-x-2">
+    <div className="bg-gradient-to-r from-roofing-orange to-roofing-orange-dark p-4 flex justify-between items-center">
+      <div className="flex items-center gap-3">
         <motion.img
-          src="/lovable-uploads/cfe74ea0-b3ce-4017-a778-51f7dd28f478.png"
-          alt="Chat Icon"
-          className="w-5 h-5"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          src="/images/logo-new1.png"
+          alt="A Roof Above Logo"
+          className="h-6 w-auto"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
         />
-        <span className="text-white text-sm font-medium">Chat with us</span>
-        <GripHorizontal className="w-4 h-4 text-white/50 group-hover:text-white/80 transition-colors duration-200" />
+        <span className="text-white font-medium">Chat with us</span>
       </div>
+      
       <motion.button
         onClick={onClose}
-        className="text-white/90 hover:text-white p-1 rounded-full bg-roofing-orange-dark/50 hover:bg-roofing-orange-dark transition-all duration-200"
+        className="text-white/90 hover:text-white p-1.5 rounded-lg hover:bg-black/10 transition-colors"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <X size={16} />
+        <X size={18} />
       </motion.button>
     </div>
   );
