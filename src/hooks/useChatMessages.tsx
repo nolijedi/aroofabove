@@ -14,22 +14,6 @@ export const useChatMessages = () => {
     },
   ]);
   const [isTyping, setIsTyping] = useState(false);
-  const [websiteData, setWebsiteData] = useState<any>(null);
-
-  useEffect(() => {
-    const fetchWebsiteData = async () => {
-      try {
-        const { data, error } = await supabase.functions.invoke('scrape-website');
-        if (error) throw error;
-        setWebsiteData(data);
-        console.log('Website data fetched successfully:', data);
-      } catch (error) {
-        console.error('Error fetching website data:', error);
-      }
-    };
-
-    fetchWebsiteData();
-  }, []);
 
   const generateAIResponse = async (message: string): Promise<string> => {
     try {
@@ -45,23 +29,10 @@ export const useChatMessages = () => {
               content: message,
             },
           ],
-          websiteData: websiteData,
         },
       });
 
-      if (error) {
-        console.error('Error generating AI response:', error);
-        throw new Error(error.message);
-      }
-
-      if (data?.error) {
-        throw new Error(data.error);
-      }
-
-      if (!data?.text) {
-        throw new Error('Invalid response format');
-      }
-
+      if (error) throw error;
       return data.text;
     } catch (error) {
       console.error('Error generating AI response:', error);
@@ -69,42 +40,38 @@ export const useChatMessages = () => {
     }
   };
 
-  const handleSendMessage = async (message: string) => {
-    if (!message.trim()) return;
-
-    const userMessage: Message = {
+  const addMessage = async (content: string, role: "user" | "assistant" = "user") => {
+    const newMessage: Message = {
       id: crypto.randomUUID(),
-      role: "user",
-      content: message,
+      role,
+      content,
       createdAt: new Date(),
     };
-    setMessages((prev) => [...prev, userMessage]);
-    setIsTyping(true);
 
-    try {
-      const aiResponse = await generateAIResponse(message);
-      setMessages((prev) => [...prev, {
-        id: crypto.randomUUID(),
-        role: "assistant",
-        content: aiResponse,
-        createdAt: new Date(),
-      }]);
-    } catch (error) {
-      console.error("Error sending message:", error);
-      setMessages((prev) => [...prev, {
-        id: crypto.randomUUID(),
-        role: "assistant",
-        content: "I apologize, but I'm having trouble responding right now. Please try again in a moment.",
-        createdAt: new Date(),
-      }]);
-    } finally {
-      setIsTyping(false);
+    setMessages(prevMessages => [...prevMessages, newMessage]);
+
+    if (role === "user") {
+      setIsTyping(true);
+      try {
+        const aiResponse = await generateAIResponse(content);
+        const aiMessage: Message = {
+          id: crypto.randomUUID(),
+          role: "assistant",
+          content: aiResponse,
+          createdAt: new Date(),
+        };
+        setMessages(prevMessages => [...prevMessages, aiMessage]);
+      } catch (error) {
+        console.error('Error in chat:', error);
+      } finally {
+        setIsTyping(false);
+      }
     }
   };
 
   return {
     messages,
     isTyping,
-    handleSendMessage,
+    addMessage,
   };
 };
