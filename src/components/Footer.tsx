@@ -58,7 +58,7 @@ const Footer = () => {
           <div className="hidden md:block w-px h-20 bg-white/20 absolute left-1/3 top-1/2 -translate-y-1/2" />
 
           {/* Contact Information */}
-          <div className="text-white text-center w-full md:pl-40">
+          <div className="text-white text-center w-full md:pl-28">
               <p className="text-sm mb-1 md:mb-2">
                 <span className="font-medium">Phone : </span>
                 <a href="tel:509-400-5911" className="hover:text-roofing-orange">509-400-5911</a>
