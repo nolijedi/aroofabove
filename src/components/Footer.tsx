@@ -75,15 +75,20 @@ const Footer = () => {
           <div className="hidden md:block w-px h-20 bg-white/20 absolute right-1/3 top-1/2 -translate-y-1/2" />
 
           {/* Logo and Copyright */}
-          <div className="flex flex-col items-center space-y-2">
-            <img
-              src="/lovable-uploads/2d080e69-c586-4861-8316-7ec496261217.png"
-              alt="A Roof Above Logo"
-              className="h-16 w-auto"
-            />
-            <p className="text-white text-sm">
-              Copyright {new Date().getFullYear()} • All Rights Reserved
-            </p>
+          <div className="flex flex-col items-center space-y-4">
+            <div className="flex items-center gap-4">
+              <p className="text-white text-sm">
+                Copyright {new Date().getFullYear()}
+              </p>
+              <img
+                src="/lovable-uploads/2d080e69-c586-4861-8316-7ec496261217.png"
+                alt="A Roof Above Logo"
+                className="h-16 w-auto"
+              />
+              <p className="text-white text-sm whitespace-nowrap">
+                All Rights Reserved
+              </p>
+            </div>
           </div>
         </div>
       </div>
