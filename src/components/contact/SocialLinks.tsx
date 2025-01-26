@@ -1,12 +1,10 @@
 import { motion } from "framer-motion";
-import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 
 const socialLinks = [
-  { Icon: Facebook, href: "https://facebook.com/aroofabove", label: "Facebook", delay: 0 },
-  { Icon: Twitter, href: "https://twitter.com/aroofabove", label: "Twitter", delay: 0.1 },
-  { Icon: Instagram, href: "https://instagram.com/aroofabove", label: "Instagram", delay: 0.2 },
-  { Icon: Linkedin, href: "https://linkedin.com/company/aroofabove", label: "LinkedIn", delay: 0.3 },
-  { Icon: Youtube, href: "https://youtube.com/@aroofabove", label: "YouTube", delay: 0.4 }
+  { Icon: Facebook, href: "https://www.facebook.com/aroofabovellc/", label: "Facebook", delay: 0 },
+  { Icon: Instagram, href: "https://instagram.com/a_roof_above_llc", label: "Instagram", delay: 0.1 },
+  { Icon: Linkedin, href: "https://www.linkedin.com/in/aroofabove/", label: "LinkedIn", delay: 0.2 }
 ];
 
 const SocialLinks = () => {

@@ -14,11 +14,11 @@ const TopBar = () => {
             jc@aroofabove.co
           </a>
           <a 
-            href="tel:+1234567890" 
+            href="tel:+15094005911" 
             className="flex items-center gap-1.5 text-xs hover:text-white/90 transition-colors"
           >
             <Phone size={12} className="text-white" />
-            (123) 456-7890
+            (509) 400-5911
           </a>
         </div>
       </div>

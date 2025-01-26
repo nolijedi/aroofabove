@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 export const StickyPhone = () => {
   return (
     <motion.a
-      href="tel:+1234567890"
+      href="tel:+15094005911"
       initial={{ opacity: 0, scale: 0 }}
       animate={{ 
         opacity: [0.4, 1, 0.4],

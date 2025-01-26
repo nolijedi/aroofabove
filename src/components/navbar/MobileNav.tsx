@@ -19,7 +19,6 @@ const menuVariants = {
     transition: {
       duration: 0.3,
       ease: [0.04, 0.62, 0.23, 0.98],
-      when: "afterChildren",
     }
   },
   open: {
@@ -28,17 +27,20 @@ const menuVariants = {
     transition: {
       duration: 0.4,
       ease: [0.04, 0.62, 0.23, 0.98],
-      when: "beforeChildren",
-      staggerChildren: 0.05,
     }
   }
 };
 
 const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [hoverDropdown, setHoverDropdown] = useState<string | null>(null);
 
   const handleDropdownClick = (label: string) => {
     setOpenDropdown(openDropdown === label ? null : label);
+  };
+
+  const handleDropdownHover = (label: string | null) => {
+    setHoverDropdown(label);
   };
 
   return (
@@ -54,28 +56,34 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
             (item.dropdown?.some(dropItem => currentPath === dropItem.path));
 
           if (item.dropdown) {
+            const isDropdownOpen = openDropdown === item.label || hoverDropdown === item.label;
             return (
-              <div key={item.label}>
+              <div 
+                key={item.label}
+                className="relative"
+                onMouseEnter={() => handleDropdownHover(item.label)}
+                onMouseLeave={() => handleDropdownHover(null)}
+              >
                 <button
                   onClick={() => handleDropdownClick(item.label)}
                   className={cn(
-                    "flex items-center justify-between w-full px-4 py-2.5 rounded-lg text-sm font-medium",
+                    "flex items-center justify-between w-full px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200",
                     isActive
-                      ? "bg-roofing-orange text-white"
-                      : "bg-gray-200/90 text-gray-800"
+                      ? "bg-roofing-orange text-white hover:bg-roofing-orange/90"
+                      : "bg-gray-200/90 text-gray-800 hover:bg-roofing-orange hover:text-white"
                   )}
                 >
                   {item.label}
                   <ChevronDown className={cn(
                     "w-4 h-4 transition-transform",
-                    openDropdown === item.label && "transform rotate-180"
+                    isDropdownOpen && "transform rotate-180"
                   )} />
                 </button>
-                <motion.div
-                  initial="closed"
-                  animate={openDropdown === item.label ? "open" : "closed"}
-                  variants={menuVariants}
-                  className="pl-4 space-y-1 mt-1"
+                <div
+                  className={cn(
+                    "pl-4 space-y-1 mt-1 overflow-hidden transition-all duration-200",
+                    isDropdownOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                  )}
                 >
                   {item.dropdown.map((dropItem) => (
                     <Link
@@ -83,17 +91,17 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
                       to={dropItem.path}
                       onClick={onClose}
                       className={cn(
-                        "flex items-center px-4 py-2 rounded-lg text-sm font-medium",
+                        "flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200",
                         currentPath === dropItem.path
-                          ? "bg-roofing-orange text-white"
-                          : "bg-gray-100 text-gray-800"
+                          ? "bg-roofing-orange text-white hover:bg-roofing-orange/90"
+                          : "bg-gray-100 text-gray-800 hover:bg-roofing-orange hover:text-white"
                       )}
                     >
                       <ChevronRight className="w-4 h-4 mr-2" />
                       {dropItem.label}
                     </Link>
                   ))}
-                </motion.div>
+                </div>
               </div>
             );
           }
@@ -104,10 +112,10 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
               to={item.path}
               onClick={onClose}
               className={cn(
-                "block px-4 py-2.5 rounded-lg text-sm font-medium",
-                isActive
-                  ? "bg-roofing-orange text-white"
-                  : "bg-gray-200/90 text-gray-800"
+                "block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200",
+                currentPath === item.path
+                  ? "bg-roofing-orange text-white hover:bg-roofing-orange/90"
+                  : "bg-gray-200/90 text-gray-800 hover:bg-roofing-orange hover:text-white"
               )}
             >
               {item.label}
@@ -117,14 +125,14 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
         <Link
           to="/estimate"
           onClick={onClose}
-          className="block px-4 py-2.5 rounded-lg text-sm font-medium bg-roofing-orange text-white"
+          className="block px-4 py-2.5 rounded-lg text-sm font-medium bg-roofing-orange text-white hover:bg-roofing-orange/90 transition-colors duration-200"
         >
           Get Free Estimate
         </Link>
         <Link
           to="/contact"
           onClick={onClose}
-          className="block px-4 py-2.5 rounded-lg text-sm font-medium border border-roofing-orange text-roofing-orange"
+          className="block px-4 py-2.5 rounded-lg text-sm font-medium border border-roofing-orange text-roofing-orange hover:bg-roofing-orange hover:text-white transition-colors duration-200"
         >
           Contact Us
         </Link>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import PrivacyPolicyContent from "./legal/PrivacyPolicyContent";
 import TermsContent from "./legal/TermsContent";
@@ -14,6 +14,10 @@ const Footer = () => {
     { to: "/services", label: "Services" },
     { to: "/why-choose-us", label: "Why Choose Us" },
     { to: "/insurance-claims", label: "Insurance Claims" },
+    { to: "/financing", label: "Financing" },
+    { to: "/faq", label: "FAQ" },
+    { to: "/product", label: "Products" },
+    { to: "/careers", label: "Careers" },
     { to: "/estimate", label: "Get Estimate" },
     { to: "/contact", label: "Contact" },
   ];
@@ -27,10 +31,9 @@ const Footer = () => {
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <div className="flex space-x-2">
                 {[
-                  { Icon: Facebook, href: "https://facebook.com/aroofabove", label: "Facebook" },
-                  { Icon: Instagram, href: "https://instagram.com/aroofabove", label: "Instagram" },
-                  { Icon: Twitter, href: "https://twitter.com/aroofabove", label: "Twitter" },
-                  { Icon: Youtube, href: "https://youtube.com/@aroofabove", label: "YouTube" }
+                  { Icon: Facebook, href: "https://www.facebook.com/aroofabovellc/", label: "Facebook" },
+                  { Icon: Instagram, href: "https://instagram.com/a_roof_above_llc", label: "Instagram" },
+                  { Icon: Linkedin, href: "https://www.linkedin.com/in/aroofabove/", label: "LinkedIn" }
                 ].map(({ Icon, href, label }) => (
                   <a
                     key={label}
@@ -87,7 +90,7 @@ const Footer = () => {
             </Dialog>
             <span className="text-gray-500">|</span>
             <span className="text-gray-400">
-              © {new Date().getFullYear()} A Roof Above
+              {new Date().getFullYear()} A Roof Above
             </span>
           </div>
         </div>
