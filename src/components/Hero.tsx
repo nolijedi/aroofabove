@@ -7,22 +7,9 @@ import { useEffect, useState } from "react";
 const Hero = () => {
   return (
     <div className="relative min-h-screen w-full bg-roofing-charcoal">
-      {/* Background container */}
-      <div className="absolute inset-0" style={{ top: '64px' }}>
-        {/* GIF Background */}
-        <img
-          src="/images/hero-roof.gif"
-          alt="Roofing Process"
-          className="w-full h-full object-cover"
-        />
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/60" />
-      </div>
-
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-48 pb-12">
-        <div className="text-center space-y-8">
+      <div className="relative z-10 w-full">
+        <div className="px-4 sm:px-6 lg:px-8 pt-48 text-center space-y-8 max-w-7xl mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -44,11 +31,26 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="relative"
+            className="mb-24"
           >
             <SocialLinks />
           </motion.div>
         </div>
+        
+        {/* GIF Section */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="relative w-full"
+        >
+          <img
+            src="/images/hero-roof.gif"
+            alt="Roofing Process"
+            className="w-full h-auto object-contain"
+          />
+          <div className="absolute inset-0 bg-black/30" />
+        </motion.div>
       </div>
     </div>
   );
