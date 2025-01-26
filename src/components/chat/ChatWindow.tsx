@@ -31,9 +31,19 @@ export const ChatWindow = ({
     setPosition({ x: 0, y: 0 });
   }, []);
 
-  // Calculate initial position (center of screen)
-  const initialX = Math.max(0, (window.innerWidth - 350) / 2);
-  const initialY = Math.max(0, (window.innerHeight - 450) / 2);
+  // Calculate initial position based on screen size
+  const isMobile = window.innerWidth <= 768;
+  const navbarHeight = 80; // Standard navbar height
+  
+  // Smaller window dimensions
+  const windowWidth = 300;  // Reduced from 350
+  const windowHeight = 400; // Reduced from 450
+  
+  const initialX = isMobile
+    ? Math.max(0, (window.innerWidth - windowWidth) / 2)
+    : Math.max(0, window.innerWidth - windowWidth - 20); // 20px margin from right
+    
+  const initialY = Math.max(navbarHeight + 20, 0); // Always position below navbar with 20px margin
 
   return (
     <>
@@ -42,42 +52,30 @@ export const ChatWindow = ({
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
         transition={{ duration: 0.2 }}
-        className="fixed inset-0 bg-black/20 z-[999]"
+        className="fixed inset-0 bg-black/20 z-[98]"
         onClick={onClose}
       />
-      <div className="fixed inset-0 z-[1000] pointer-events-none" ref={constraintsRef}>
+      <div className="fixed inset-0 z-[99] pointer-events-none" ref={constraintsRef}>
         <motion.div
           drag
           dragControls={dragControls}
           dragMomentum={false}
           dragConstraints={constraintsRef}
-          dragElastic={0}
-          initial={{ opacity: 0, scale: 0.95, x: initialX, y: initialY }}
-          animate={{ 
-            opacity: 1, 
-            scale: 1,
-            x: position.x + initialX,
-            y: position.y + initialY,
+          style={{
+            position: "absolute",
+            left: position.x || initialX,
+            top: position.y || initialY,
+            width: windowWidth,
+            height: windowHeight,
           }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.2 }}
+          className="bg-white rounded-lg shadow-lg overflow-hidden pointer-events-auto flex flex-col"
           onDragEnd={(_, info) => {
-            setPosition(prev => ({
-              x: prev.x + info.offset.x,
-              y: prev.y + info.offset.y
-            }));
+            setPosition({
+              x: position.x + info.offset.x,
+              y: Math.max(navbarHeight, position.y + info.offset.y), // Prevent dragging above navbar
+            });
           }}
           onClick={(e) => e.stopPropagation()}
-          className={`
-            absolute
-            w-[350px] h-[450px]
-            bg-white rounded-xl
-            shadow-2xl
-            flex flex-col
-            overflow-hidden
-            border border-gray-100
-            pointer-events-auto
-          `}
         >
           {/* Header */}
           <div 

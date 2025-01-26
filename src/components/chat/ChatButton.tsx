@@ -59,17 +59,18 @@ export const ChatButton = () => {
         }}
         className={`
           fixed bottom-[120px] right-6
-          z-[100]
+          z-[101]
           flex flex-col items-center justify-center
           w-16 h-16 rounded-full
           bg-gradient-to-br from-roofing-orange/90 to-roofing-orange-dark/90
           shadow-lg hover:shadow-xl
           transition-all duration-300
           group
+          ${isOpen ? 'opacity-0 pointer-events-none' : ''}
         `}
       >
         <MessageSquare className="w-7 h-7 text-white group-hover:scale-110 transition-transform duration-300" />
-        <span className="text-xs font-medium text-white whitespace-nowrap mt-1">Chat Live</span>
+        <span className="text-xs font-medium text-white whitespace-nowrap mt-1">Chat Now</span>
       </motion.button>
     </>
   );
