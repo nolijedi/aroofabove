@@ -19,6 +19,10 @@ export const ChatButton = () => {
     setIsOpen(false);
   };
 
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       <AnimatePresence>
@@ -33,7 +37,7 @@ export const ChatButton = () => {
       </AnimatePresence>
 
       <motion.button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleToggle}
         initial={{ opacity: 0, scale: 0 }}
         animate={{ 
           opacity: [0.4, 1, 0.4],
@@ -61,7 +65,7 @@ export const ChatButton = () => {
           fixed bottom-[120px] right-6
           z-[101]
           flex flex-col items-center justify-center
-          w-16 h-16 rounded-full
+          w-[72px] h-[72px] rounded-full
           bg-gradient-to-br from-roofing-orange/90 to-roofing-orange-dark/90
           shadow-lg hover:shadow-xl
           transition-all duration-300
@@ -70,7 +74,7 @@ export const ChatButton = () => {
         `}
       >
         <MessageSquare className="w-7 h-7 text-white group-hover:scale-110 transition-transform duration-300" />
-        <span className="text-xs font-medium text-white whitespace-nowrap mt-1">Chat Now</span>
+        <span className="text-xs font-medium text-white whitespace-nowrap mt-1">Chat Live</span>
       </motion.button>
     </>
   );

@@ -22,6 +22,7 @@ export const ChatWindow = ({
   isTyping,
 }: ChatWindowProps) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
   const [showLogs, setShowLogs] = useState(false);
   const constraintsRef = useRef(null);
   const dragControls = useDragControls();
@@ -31,19 +32,38 @@ export const ChatWindow = ({
     setPosition({ x: 0, y: 0 });
   }, []);
 
+  // Update constraints on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (constraintsRef.current) {
+        const bounds = constraintsRef.current.getBoundingClientRect();
+        const maxX = bounds.width - 300 - 20;  
+        const maxY = bounds.height - 400 - 20;
+        
+        setPosition(prev => ({
+          x: Math.min(Math.max(0, prev.x), maxX),
+          y: Math.min(Math.max(80, prev.y), maxY)
+        }));
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Calculate initial position based on screen size
   const isMobile = window.innerWidth <= 768;
-  const navbarHeight = 80; // Standard navbar height
+  const navbarHeight = 80; 
   
   // Smaller window dimensions
-  const windowWidth = 300;  // Reduced from 350
-  const windowHeight = 400; // Reduced from 450
+  const windowWidth = 300;  
+  const windowHeight = 400; 
   
   const initialX = isMobile
     ? Math.max(0, (window.innerWidth - windowWidth) / 2)
-    : Math.max(0, window.innerWidth - windowWidth - 20); // 20px margin from right
+    : Math.max(0, window.innerWidth - windowWidth - 20);
     
-  const initialY = Math.max(navbarHeight + 20, 0); // Always position below navbar with 20px margin
+  const initialY = Math.max(navbarHeight + 20, 0);
 
   return (
     <>
@@ -61,20 +81,31 @@ export const ChatWindow = ({
           dragControls={dragControls}
           dragMomentum={false}
           dragConstraints={constraintsRef}
+          dragElastic={0}
+          onDragStart={() => setIsDragging(true)}
+          onDragEnd={(_, info) => {
+            setIsDragging(false);
+            const bounds = constraintsRef.current?.getBoundingClientRect();
+            if (bounds) {
+              const maxX = bounds.width - windowWidth - 20;
+              const maxY = bounds.height - windowHeight - 20;
+              const newX = Math.min(Math.max(0, position.x + info.offset.x), maxX);
+              const newY = Math.min(Math.max(navbarHeight, position.y + info.offset.y), maxY);
+              setPosition({ x: newX, y: newY });
+            }
+          }}
           style={{
             position: "absolute",
             left: position.x || initialX,
             top: position.y || initialY,
             width: windowWidth,
             height: windowHeight,
+            touchAction: "none"
           }}
-          className="bg-white rounded-lg shadow-lg overflow-hidden pointer-events-auto flex flex-col"
-          onDragEnd={(_, info) => {
-            setPosition({
-              x: position.x + info.offset.x,
-              y: Math.max(navbarHeight, position.y + info.offset.y), // Prevent dragging above navbar
-            });
-          }}
+          className={`
+            bg-white rounded-lg shadow-lg overflow-hidden pointer-events-auto flex flex-col
+            ${isDragging ? 'cursor-grabbing' : ''}
+          `}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}

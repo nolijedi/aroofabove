@@ -32,7 +32,7 @@ export const StickyPhone = () => {
         fixed bottom-[120px] left-6
         z-[100]
         flex flex-col items-center justify-center
-        w-16 h-16 rounded-full
+        w-[72px] h-[72px] rounded-full
         bg-gradient-to-br from-roofing-orange/90 to-roofing-orange-dark/90
         shadow-lg hover:shadow-xl
         transition-all duration-300

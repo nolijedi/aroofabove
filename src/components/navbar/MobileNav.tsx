@@ -1,7 +1,9 @@
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { NavItem } from "./types";
-import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -10,138 +12,124 @@ interface MobileNavProps {
   onClose: () => void;
 }
 
+const menuVariants = {
+  closed: {
+    opacity: 0,
+    height: 0,
+    transition: {
+      duration: 0.3,
+      ease: [0.04, 0.62, 0.23, 0.98],
+      when: "afterChildren",
+    }
+  },
+  open: {
+    opacity: 1,
+    height: "auto",
+    transition: {
+      duration: 0.4,
+      ease: [0.04, 0.62, 0.23, 0.98],
+      when: "beforeChildren",
+      staggerChildren: 0.05,
+    }
+  }
+};
+
 const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) => {
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
+  const handleDropdownClick = (label: string) => {
+    setOpenDropdown(openDropdown === label ? null : label);
+  };
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ 
-            opacity: 1, 
-            height: "auto",
-            transition: {
-              type: "spring",
-              stiffness: 50, // Reduced from 100 for slower animation
-              damping: 12,   // Reduced from 15 for more bounce
-              duration: 0.8  // Increased duration
-            }
-          }}
-          exit={{ 
-            opacity: 0, 
-            height: 0,
-            transition: {
-              type: "spring",
-              stiffness: 200,
-              damping: 25,
-              duration: 0.6
-            }
-          }}
-          className="md:hidden pb-2 bg-roofing-charcoal/50 backdrop-blur-sm shadow-2xl rounded-b-xl overflow-hidden"
-        >
-          <motion.div 
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={{
-              open: {
-                transition: { 
-                  staggerChildren: 0.15, // Increased from 0.1
-                  delayChildren: 0.3    // Increased from 0.2
-                }
-              },
-              closed: {
-                transition: { 
-                  staggerChildren: 0.08,
-                  staggerDirection: -1
-                }
-              }
-            }}
-            className="px-4 py-2 space-y-2"
-          >
-            {navItems.map((item, index) => (
-              <motion.div
-                key={item.path}
-                variants={{
-                  open: {
-                    x: 0,
-                    opacity: 1,
-                    scale: 1,
-                    rotate: 0,
-                    transition: {
-                      type: "spring",
-                      stiffness: 80,    // Reduced for slower animation
-                      damping: 12,      // Reduced for more bounce
-                      duration: 0.8     // Increased duration
-                    }
-                  },
-                  closed: {
-                    x: -100,
-                    opacity: 0,
-                    scale: 0.8,
-                    rotate: -10,
-                    transition: {
-                      type: "spring",
-                      stiffness: 200,
-                      damping: 25
-                    }
-                  }
-                }}
-                className="flex justify-center"
-              >
-                <Button
-                  variant={currentPath === item.path ? "default" : "ghost"}
-                  className={`w-[90%] justify-center text-sm font-medium transform transition-all duration-500 hover:scale-110 ${
-                    currentPath === item.path
-                      ? "bg-roofing-orange hover:bg-roofing-orange-dark text-white"
-                      : "bg-transparent text-white hover:bg-roofing-orange/20 hover:text-roofing-orange"
-                  }`}
-                  asChild
+    <motion.div
+      initial="closed"
+      animate={isOpen ? "open" : "closed"}
+      variants={menuVariants}
+      className="md:hidden overflow-hidden bg-white"
+    >
+      <div className="px-4 py-2 space-y-2">
+        {navItems.map((item, index) => {
+          const isActive = currentPath === item.path ||
+            (item.dropdown?.some(dropItem => currentPath === dropItem.path));
+
+          if (item.dropdown) {
+            return (
+              <div key={item.label}>
+                <button
+                  onClick={() => handleDropdownClick(item.label)}
+                  className={cn(
+                    "flex items-center justify-between w-full px-4 py-2.5 rounded-lg text-sm font-medium",
+                    isActive
+                      ? "bg-roofing-orange text-white"
+                      : "bg-gray-200/90 text-gray-800"
+                  )}
                 >
-                  <Link to={item.path} onClick={onClose}>
-                    {item.label}
-                  </Link>
-                </Button>
-              </motion.div>
-            ))}
-            <motion.div
-              variants={{
-                open: {
-                  y: 0,
-                  opacity: 1,
-                  scale: 1,
-                  transition: {
-                    type: "spring",
-                    stiffness: 60,    // Reduced for slower animation
-                    damping: 10,      // Reduced for more bounce
-                    delay: 0.5        // Increased delay
-                  }
-                },
-                closed: {
-                  y: 50,
-                  opacity: 0,
-                  scale: 0.8,
-                  transition: {
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 25
-                  }
-                }
-              }}
-              className="flex justify-center pt-2"
+                  {item.label}
+                  <ChevronDown className={cn(
+                    "w-4 h-4 transition-transform",
+                    openDropdown === item.label && "transform rotate-180"
+                  )} />
+                </button>
+                <motion.div
+                  initial="closed"
+                  animate={openDropdown === item.label ? "open" : "closed"}
+                  variants={menuVariants}
+                  className="pl-4 space-y-1 mt-1"
+                >
+                  {item.dropdown.map((dropItem) => (
+                    <Link
+                      key={dropItem.path}
+                      to={dropItem.path}
+                      onClick={onClose}
+                      className={cn(
+                        "flex items-center px-4 py-2 rounded-lg text-sm font-medium",
+                        currentPath === dropItem.path
+                          ? "bg-roofing-orange text-white"
+                          : "bg-gray-100 text-gray-800"
+                      )}
+                    >
+                      <ChevronRight className="w-4 h-4 mr-2" />
+                      {dropItem.label}
+                    </Link>
+                  ))}
+                </motion.div>
+              </div>
+            );
+          }
+
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              onClick={onClose}
+              className={cn(
+                "block px-4 py-2.5 rounded-lg text-sm font-medium",
+                isActive
+                  ? "bg-roofing-orange text-white"
+                  : "bg-gray-200/90 text-gray-800"
+              )}
             >
-              <Button
-                asChild
-                className="w-[90%] bg-roofing-orange hover:bg-roofing-orange-dark text-white shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-110 text-sm font-bold rounded-lg"
-              >
-                <Link to="/estimate" onClick={onClose}>
-                  Get Estimate Now
-                </Link>
-              </Button>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+              {item.label}
+            </Link>
+          );
+        })}
+        <Link
+          to="/estimate"
+          onClick={onClose}
+          className="block px-4 py-2.5 rounded-lg text-sm font-medium bg-roofing-orange text-white"
+        >
+          Get Free Estimate
+        </Link>
+        <Link
+          to="/contact"
+          onClick={onClose}
+          className="block px-4 py-2.5 rounded-lg text-sm font-medium border border-roofing-orange text-roofing-orange"
+        >
+          Contact Us
+        </Link>
+      </div>
+    </motion.div>
   );
 };
 

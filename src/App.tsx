@@ -19,6 +19,10 @@ import TopBar from "./components/TopBar";
 import ButtonTest from "./components/ui/ButtonTest";
 import { ChatButton } from "./components/chat/ChatButton";
 import { AnimatePresence } from "framer-motion";
+import Financing from "./pages/Financing";
+import FAQ from "./pages/FAQ";
+import Product from "./pages/Product";
+import Careers from "./pages/Careers";
 
 // Add styles to hide Lovable widget
 const styles = document.createElement('style');
@@ -64,8 +68,12 @@ const AppContent = () => {
               <Route path="/contact" element={<Contact />} />
               <Route path="/estimate" element={<Estimate />} />
               <Route path="/insurance-claims" element={<InsuranceClaims />} />
-              <Route path="*" element={<Index />} /> {/* Add catch-all route */}
+              <Route path="/financing" element={<Financing />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/product" element={<Product />} />
+              <Route path="/careers" element={<Careers />} />
               <Route path="/button-test" element={<ButtonTest />} />
+              <Route path="*" element={<Index />} /> {/* Catch-all route */}
             </Routes>
           </main>
           <Footer />
