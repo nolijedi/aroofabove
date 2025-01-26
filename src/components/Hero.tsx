@@ -2,11 +2,26 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import SocialLinks from "@/components/contact/SocialLinks";
+import { useEffect, useState } from "react";
 
 const Hero = () => {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-roofing-charcoal">
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-48 pb-12">
+    <div className="relative min-h-screen w-full bg-roofing-charcoal">
+      {/* Background container */}
+      <div className="absolute inset-0" style={{ top: '64px' }}>
+        {/* GIF Background */}
+        <img
+          src="/images/hero-roof.gif"
+          alt="Roofing Process"
+          className="w-full h-full object-cover"
+        />
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-48 pb-12">
         <div className="text-center space-y-8">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}

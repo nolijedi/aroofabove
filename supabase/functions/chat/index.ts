@@ -1,5 +1,6 @@
 import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.3';
 import { SYSTEM_PROMPT } from "./prompts.ts";
 
 const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY');
@@ -16,20 +17,50 @@ const corsHeaders = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
+// Initialize Supabase client with service role key
+const supabase = createClient(
+  'https://xwqwukqukudpzgdkyasu.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3cXd1a3F1a3VkcHpnZGt5YXN1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwNjIzMjQwMCwiZXhwIjoyMDIxODA4NDAwfQ.7a33468e77122b44e0a3034e14f95843a1283d7c5b6e0dcd6eb4bef0882822b0',
+  {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false
+    }
+  }
+);
+
 serve(async (req) => {
   console.log('Function started');
-  console.log('Request URL:', req.url);
-  console.log('Request method:', req.method);
   
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
-    console.log('Handling OPTIONS request');
-    return new Response(null, { headers: corsHeaders });
+    return new Response('ok', { headers: corsHeaders });
   }
 
   try {
+    // Test database connection first
+    console.log('Testing database connection...');
+    const { data: testData, error: testError } = await supabase
+      .from('chat_logs')
+      .select('count(*)')
+      .limit(1);
+    
+    if (testError) {
+      console.error('Database connection test failed:', testError);
+      throw testError;
+    }
+    console.log('Database connection successful:', testData);
+
+    const { messages, websiteData } = await req.json();
+    const headers = Object.fromEntries(req.headers);
+    const sessionId = crypto.randomUUID();
+
+    console.log('Request received:', {
+      messageCount: messages.length,
+      sessionId,
+      headers
+    });
+
     // Log request details for debugging
-    const headers = Object.fromEntries(req.headers.entries());
     console.log('Request headers:', JSON.stringify(headers, null, 2));
     
     // Check for GEMINI_API_KEY
@@ -73,8 +104,8 @@ serve(async (req) => {
     }
     
     // Validate messages array
-    const { messages } = body;
-    if (!messages || !Array.isArray(messages)) {
+    const { messages: messagesArray, sessionId: sessionIdFromBody = crypto.randomUUID() } = body;
+    if (!messagesArray || !Array.isArray(messagesArray)) {
       console.error('Invalid messages format:', JSON.stringify(body, null, 2));
       return new Response(
         JSON.stringify({ 
@@ -88,13 +119,44 @@ serve(async (req) => {
       );
     }
 
-    console.log('Preparing Gemini API request with messages:', JSON.stringify(messages, null, 2));
+    // Log the user's message
+    const userMessage = messagesArray[messagesArray.length - 1];
+    if (userMessage.role === 'user') {
+      console.log('Attempting to log user message...');
+      console.log('Session ID:', sessionIdFromBody);
+      console.log('IP:', headers['x-forwarded-for'] || headers['cf-connecting-ip']);
+      console.log('User Agent:', headers['user-agent']);
+      console.log('Message:', userMessage.content);
+
+      const { data: logData, error: logError } = await supabase
+        .from('chat_logs')
+        .insert({
+          session_id: sessionIdFromBody,
+          ip_address: headers['x-forwarded-for'] || headers['cf-connecting-ip'],
+          user_agent: headers['user-agent'],
+          message_content: userMessage.content,
+          role: 'user',
+          metadata: {
+            headers: headers,
+            timestamp: new Date().toISOString()
+          }
+        })
+        .select();
+
+      if (logError) {
+        console.error('Error logging user message:', logError);
+        throw logError;
+      }
+      console.log('Successfully logged user message:', logData);
+    }
+
+    console.log('Preparing Gemini API request with messages:', JSON.stringify(messagesArray, null, 2));
 
     // Make Gemini API request
     const geminiRequestBody = {
       contents: [
         { role: "user", parts: [{ text: SYSTEM_PROMPT }] },
-        ...messages.map((msg: any) => ({
+        ...messagesArray.map((msg: any) => ({
           role: msg.role === "assistant" ? "model" : "user",
           parts: [{ text: msg.content }]
         }))
@@ -153,7 +215,35 @@ serve(async (req) => {
       );
     }
 
-    const result = { text: data.candidates[0].content.parts[0].text };
+    const assistantResponse = data.candidates[0].content.parts[0].text;
+
+    // Log the assistant's response
+    console.log('Attempting to log assistant response...');
+    console.log('Session ID:', sessionIdFromBody);
+    console.log('Message:', assistantResponse);
+
+    const { data: assistantLogData, error: assistantLogError } = await supabase
+      .from('chat_logs')
+      .insert({
+        session_id: sessionIdFromBody,
+        ip_address: headers['x-forwarded-for'] || headers['cf-connecting-ip'],
+        user_agent: headers['user-agent'],
+        message_content: assistantResponse,
+        role: 'assistant',
+        metadata: {
+          headers: headers,
+          timestamp: new Date().toISOString()
+        }
+      })
+      .select();
+
+    if (assistantLogError) {
+      console.error('Error logging assistant message:', assistantLogError);
+      throw assistantLogError;
+    }
+    console.log('Successfully logged assistant message:', assistantLogData);
+
+    const result = { text: assistantResponse, sessionId: sessionIdFromBody };
     console.log('Sending successful response:', JSON.stringify(result, null, 2));
 
     return new Response(

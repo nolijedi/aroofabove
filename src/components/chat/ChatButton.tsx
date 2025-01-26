@@ -19,33 +19,21 @@ export const ChatButton = () => {
     setIsOpen(false);
   };
 
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
-
   return (
     <>
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed bottom-20 right-6 z-[100]"
-          >
-            <ChatWindow
-              messages={messages}
-              onSendMessage={handleSendMessage}
-              onClose={handleClose}
-              isTyping={isTyping}
-            />
-          </motion.div>
+          <ChatWindow
+            onClose={handleClose}
+            messages={messages}
+            onSendMessage={handleSendMessage}
+            isTyping={isTyping}
+          />
         )}
       </AnimatePresence>
 
       <motion.button
-        onClick={isOpen ? handleClose : handleOpen}
+        onClick={() => setIsOpen(!isOpen)}
         initial={{ opacity: 0, scale: 0 }}
         animate={{ 
           opacity: [0.4, 1, 0.4],
