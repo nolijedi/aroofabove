@@ -85,20 +85,6 @@ const Footer = () => {
               <p>Copyright {new Date().getFullYear()}</p>
               <p>All Rights Reserved</p>
             </div>
-            <div className="flex gap-4 mt-2">
-              <Link
-                to="/contact"
-                className="bg-roofing-orange text-white px-4 py-1.5 rounded text-sm hover:bg-roofing-orange/90 transition-colors"
-              >
-                Contact Us
-              </Link>
-              <Link
-                to="/estimate"
-                className="bg-transparent text-white px-4 py-1.5 rounded border border-white hover:bg-white/10 transition-colors text-sm"
-              >
-                Call Now
-              </Link>
-            </div>
           </div>
         </div>
       </div>
