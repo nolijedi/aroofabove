@@ -58,17 +58,15 @@ const Footer = () => {
           <div className="hidden md:block w-px h-20 bg-white/20 absolute left-1/3 top-1/2 -translate-y-1/2" />
 
           {/* Contact Information */}
-          <div className="text-white text-center">
-            <div className="space-y-2">
-              <p className="flex items-center justify-center gap-2">
-                <span className="font-medium">Phone :</span>
+          <div className="text-white pl-40 text-center">
+              <p className="text-sm mb-2">
+                <span className="font-medium">Phone : </span>
                 <a href="tel:509-400-5911" className="hover:text-roofing-orange">509-400-5911</a>
               </p>
-              <p className="flex items-center justify-center gap-2">
-                <span className="font-medium">Email :</span>
+              <p className="text-sm">
+                <span className="font-medium">Email : </span>
                 <a href="mailto:jc@aroofabove.com" className="hover:text-roofing-orange">jc@aroofabove.com</a>
               </p>
-            </div>
           </div>
 
           {/* White Separator */}
