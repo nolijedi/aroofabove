@@ -81,7 +81,7 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed left-0 right-0 z-40 transition-all duration-500 ${
-        isHomePage ? 'top-8' : 'top-0'
+        isHomePage ? 'top-16' : 'top-8'
       } ${
         isScrolled 
           ? "bg-white/10 backdrop-blur-sm shadow-lg" 
@@ -91,8 +91,8 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-[1600px] mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-16 relative">
-          <div className="w-[160px] flex-shrink-0">
+        <div className="flex items-center justify-between h-20 relative">
+          <div className="w-[160px] flex-shrink-0 pt-2">
             <Link 
               to="/" 
               className="transition-transform duration-500 hover:scale-105 block"

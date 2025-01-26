@@ -81,10 +81,9 @@ const Footer = () => {
               alt="A Roof Above Logo"
               className="h-16 w-auto"
             />
-            <div className="text-white text-center text-sm">
-              <p>Copyright {new Date().getFullYear()}</p>
-              <p>All Rights Reserved</p>
-            </div>
+            <p className="text-white text-sm">
+              Copyright {new Date().getFullYear()} • All Rights Reserved
+            </p>
           </div>
         </div>
       </div>
