@@ -75,7 +75,7 @@ const Footer = () => {
           {/* Logo and Copyright */}
           <div className="flex flex-col items-center space-y-2 md:space-y-4">
             <div className="flex items-center gap-2 md:gap-4">
-              <p className="text-white text-xs md:text-sm">
+              <p className="text-white text-xs md:text-sm whitespace-nowrap">
                 Copyright {new Date().getFullYear()}
               </p>
               <img
