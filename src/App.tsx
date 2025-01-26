@@ -23,6 +23,7 @@ import Financing from "./pages/Financing";
 import FAQ from "./pages/FAQ";
 import Product from "./pages/Product";
 import Careers from "./pages/Careers";
+import ContactForm from "./pages/ContactForm";
 
 // Add styles to hide Lovable widget
 const styles = document.createElement('style');
@@ -73,6 +74,7 @@ const AppContent = () => {
               <Route path="/product" element={<Product />} />
               <Route path="/careers" element={<Careers />} />
               <Route path="/button-test" element={<ButtonTest />} />
+              <Route path="/contact-form" element={<ContactForm />} />
               <Route path="*" element={<Index />} /> {/* Catch-all route */}
             </Routes>
           </main>

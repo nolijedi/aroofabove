@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const ContactInfoCard = () => {
   return (
@@ -36,17 +37,15 @@ const ContactInfoCard = () => {
             </div>
             <p>jc@aroofabove.co</p>
           </a>
-          <a 
-            href="https://maps.google.com/?q=Roof+Above+Spokane+WA"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 text-roofing-charcoal/80 hover:text-roofing-orange transition-colors"
+          <Link 
+            to="/contact-form"
+            className="flex items-center gap-3 text-roofing-charcoal/80 hover:text-roofing-orange transition-colors w-full"
           >
             <div className="w-10 h-10 bg-gradient-to-r from-roofing-beige to-white rounded-full flex items-center justify-center">
-              <span className="text-xl">📍</span>
+              <span className="text-xl">💬</span>
             </div>
-            <p>WE ARE HERE</p>
-          </a>
+            <p>Message Us Here</p>
+          </Link>
         </div>
       </div>
     </motion.div>

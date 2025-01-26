@@ -105,7 +105,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <DesktopNav navItems={navItems} currentPath={location.pathname} />
+          <DesktopNav navItems={navItems.filter(item => item.path !== '/contact')} currentPath={location.pathname} />
 
           {/* Mobile Menu Button */}
           <button
