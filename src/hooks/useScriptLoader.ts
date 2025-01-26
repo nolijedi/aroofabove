@@ -35,10 +35,6 @@ export const useScriptLoader = () => {
     if (!mountedRef.current) return;
     
     isLoadingRef.current = false;
-    toast({
-      title: "Calculator loaded",
-      description: "The estimate calculator is ready to use.",
-    });
   };
 
   const handleScriptError = () => {

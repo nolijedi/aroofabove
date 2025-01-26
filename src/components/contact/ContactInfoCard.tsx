@@ -28,13 +28,13 @@ const ContactInfoCard = () => {
             <p>(509) 400-5911</p>
           </a>
           <a 
-            href="mailto:info@roofabove.com"
+            href="mailto:jc@aroofabove.co"
             className="flex items-center gap-3 text-roofing-charcoal/80 hover:text-roofing-orange transition-colors"
           >
             <div className="w-10 h-10 bg-gradient-to-r from-roofing-beige to-white rounded-full flex items-center justify-center">
               <span className="text-xl">✉️</span>
             </div>
-            <p>info@roofabove.com</p>
+            <p>jc@aroofabove.co</p>
           </a>
           <a 
             href="https://maps.google.com/?q=Roof+Above+Spokane+WA"
