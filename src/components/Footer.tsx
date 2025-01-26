@@ -33,10 +33,10 @@ const Footer = () => {
       </div>
 
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 py-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8 relative">
+      <div className="max-w-7xl mx-auto px-4 py-3 md:py-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8 relative">
           {/* Social Media Links */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center justify-center w-full md:w-auto space-x-6 md:space-x-4">
             {[
               { Icon: Facebook, href: "https://www.facebook.com/aroofabovellc/", color: "#1877F2" },
               { Icon: Instagram, href: "https://instagram.com/a_roof_above_llc", color: "#E4405F" },
@@ -49,17 +49,17 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="transition-transform hover:scale-110"
               >
-                <Icon className="w-8 h-8" style={{ color }} />
+                <Icon className="w-6 h-6 md:w-8 md:h-8" style={{ color }} />
               </a>
             ))}
           </div>
 
-          {/* White Separator */}
+          {/* White Separator - Hidden on mobile */}
           <div className="hidden md:block w-px h-20 bg-white/20 absolute left-1/3 top-1/2 -translate-y-1/2" />
 
           {/* Contact Information */}
-          <div className="text-white pl-40 text-center">
-              <p className="text-sm mb-2">
+          <div className="text-white text-center w-full md:pl-40">
+              <p className="text-sm mb-1 md:mb-2">
                 <span className="font-medium">Phone : </span>
                 <a href="tel:509-400-5911" className="hover:text-roofing-orange">509-400-5911</a>
               </p>
@@ -69,21 +69,21 @@ const Footer = () => {
               </p>
           </div>
 
-          {/* White Separator */}
+          {/* White Separator - Hidden on mobile */}
           <div className="hidden md:block w-px h-20 bg-white/20 absolute right-1/3 top-1/2 -translate-y-1/2" />
 
           {/* Logo and Copyright */}
-          <div className="flex flex-col items-center space-y-4">
-            <div className="flex items-center gap-4">
-              <p className="text-white text-sm">
+          <div className="flex flex-col items-center space-y-2 md:space-y-4">
+            <div className="flex items-center gap-2 md:gap-4">
+              <p className="text-white text-xs md:text-sm">
                 Copyright {new Date().getFullYear()}
               </p>
               <img
                 src="/lovable-uploads/2d080e69-c586-4861-8316-7ec496261217.png"
                 alt="A Roof Above Logo"
-                className="h-16 w-auto"
+                className="h-12 md:h-16 w-auto"
               />
-              <p className="text-white text-sm whitespace-nowrap">
+              <p className="text-white text-xs md:text-sm whitespace-nowrap">
                 All Rights Reserved
               </p>
             </div>
