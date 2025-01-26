@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 const Hero = () => {
   return (
-    <div className="relative min-h-screen w-full bg-roofing-charcoal">
+    <div className="w-full bg-roofing-charcoal flex flex-col">
       {/* Content */}
       <div className="relative z-10 w-full">
         <div className="px-4 sm:px-6 lg:px-8 pt-48 text-center space-y-8 max-w-7xl mx-auto">
@@ -47,7 +47,7 @@ const Hero = () => {
           <img
             src="/images/hero-roof.gif"
             alt="Roofing Process"
-            className="w-full h-auto object-contain"
+            className="w-full block"
           />
           <div className="absolute inset-0 bg-black/30" />
         </motion.div>
