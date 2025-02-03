@@ -6,7 +6,7 @@ import { useChatMessages } from "@/hooks/useChatMessages";
 
 export const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { messages, isTyping, handleSendMessage } = useChatMessages();
+  const { messages, isTyping, addMessage } = useChatMessages();
 
   // Close chat when pressing Escape
   useEffect(() => {
@@ -20,13 +20,16 @@ export const ChatWidget = () => {
   return (
     <>
       {/* Chat Button */}
-      <ChatButton onClick={() => setIsOpen(!isOpen)} />
+      <div onClick={() => setIsOpen(!isOpen)}>
+        <ChatButton />
+      </div>
+      
       {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
           <ChatWindow
             messages={messages}
-            onSendMessage={handleSendMessage}
+            onSendMessage={addMessage}
             onClose={() => setIsOpen(false)}
             isTyping={isTyping}
           />
