@@ -9,6 +9,39 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      chat_logs: {
+        Row: {
+          created_at: string | null
+          id: string
+          ip_address: string | null
+          message_content: string
+          metadata: Json | null
+          role: string
+          session_id: string
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          ip_address?: string | null
+          message_content: string
+          metadata?: Json | null
+          role: string
+          session_id: string
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          ip_address?: string | null
+          message_content?: string
+          metadata?: Json | null
+          role?: string
+          session_id?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       memory: {
         Row: {
           content: string
@@ -47,7 +80,27 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      call_chat_api: {
+        Args: {
+          message: string
+        }
+        Returns: Json
+      }
+      get_chat_logs: {
+        Args: {
+          pass: string
+        }
+        Returns: {
+          created_at: string | null
+          id: string
+          ip_address: string | null
+          message_content: string
+          metadata: Json | null
+          role: string
+          session_id: string
+          user_agent: string | null
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
