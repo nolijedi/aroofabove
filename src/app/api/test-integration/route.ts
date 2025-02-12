@@ -1,10 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextResponse } from 'next/server'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'GET') {
-    return res.status(405).json({ message: 'Method not allowed' })
-  }
-
+export async function GET() {
   try {
     // Test GoHighLevel API connection
     const goHighLevelTest = await testGoHighLevelConnection()
@@ -15,17 +11,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       test: 'integration_test'
     }
 
-    return res.status(200).json({
+    return NextResponse.json({
       gohighlevel: goHighLevelTest,
       analytics: analyticsTest,
       message: 'Integration test completed'
     })
   } catch (error) {
     console.error('Integration test failed:', error)
-    return res.status(500).json({ 
+    return NextResponse.json({ 
       error: 'Integration test failed',
       details: error instanceof Error ? error.message : 'Unknown error'
-    })
+    }, { status: 500 })
   }
 }
 
