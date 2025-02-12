@@ -62,62 +62,71 @@ const FAQ = () => {
   const categories = Array.from(new Set(faqItems.map(item => item.category)));
 
   return (
-    <div className="container mx-auto px-4 py-16 mt-20">
-      {/* Introduction */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-4xl mx-auto text-center mb-16"
-      >
-        <h1 className="text-4xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h1>
-        <p className="text-lg text-gray-600">
-          Find answers to common questions about our services, processes, and policies.
-        </p>
-      </motion.div>
+    <main className="min-h-screen pt-32 pb-16 px-4 relative">
+      <div className="max-w-7xl mx-auto space-y-12">
+        {/* Introduction */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-8 hover:shadow-2xl transition-all duration-500 text-center"
+        >
+          <h1 className="text-4xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h1>
+          <p className="text-lg text-gray-800">
+            Find answers to common questions about our services, processes, and policies.
+          </p>
+        </motion.div>
 
-      {/* FAQ Categories */}
-      <div className="max-w-4xl mx-auto">
+        {/* FAQ Categories */}
         {categories.map((category, categoryIndex) => (
           <motion.div
             key={category}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: categoryIndex * 0.1 }}
-            className="mb-8"
+            className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-8 hover:shadow-2xl transition-all duration-500"
           >
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">{category} Questions</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-roofing-orange to-roofing-orange-dark bg-clip-text text-transparent">
+              {category} Questions
+            </h2>
             <div className="space-y-4">
               {faqItems
                 .filter(item => item.category === category)
                 .map((item, index) => (
-                  <div
+                  <motion.div
                     key={index}
-                    className="bg-white rounded-lg shadow-lg overflow-hidden"
+                    initial={false}
+                    animate={{ height: openItem === item.question ? "auto" : "auto" }}
+                    className="backdrop-blur-sm bg-white/50 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
                   >
                     <button
                       onClick={() => setOpenItem(openItem === item.question ? null : item.question)}
-                      className="w-full px-6 py-4 flex items-center justify-between text-left"
+                      className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-white/10 transition-colors duration-300"
                     >
                       <span className="font-medium text-gray-900">{item.question}</span>
                       <ChevronDown
                         className={cn(
-                          "w-5 h-5 text-gray-500 transition-transform",
-                          openItem === item.question && "transform rotate-180"
+                          "w-5 h-5 text-gray-500 transition-transform duration-300",
+                          openItem === item.question ? "transform rotate-180" : ""
                         )}
                       />
                     </button>
                     {openItem === item.question && (
-                      <div className="px-6 pb-4">
-                        <p className="text-gray-600">{item.answer}</p>
-                      </div>
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="px-6 py-4 text-gray-700 bg-white/50"
+                      >
+                        {item.answer}
+                      </motion.div>
                     )}
-                  </div>
+                  </motion.div>
                 ))}
             </div>
           </motion.div>
         ))}
       </div>
-    </div>
+    </main>
   );
 };
 

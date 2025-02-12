@@ -37,7 +37,7 @@ const ServiceCard = ({
       className="group h-[500px] sm:h-[450px] [perspective:1000px]"
     >
       <div 
-        className="relative w-full h-full [transform-style:preserve-3d] transition-all duration-500 cursor-pointer"
+        className="relative w-full h-full [transform-style:preserve-3d] transition-all duration-500 hover:scale-105"
         style={{
           transform: `rotateY(${flipped ? '180deg' : '0deg'})`,
           transformOrigin: "center"
@@ -47,14 +47,18 @@ const ServiceCard = ({
       >
         {/* Front of card */}
         <div 
-          className="absolute inset-0 w-full h-full [backface-visibility:hidden] bg-gradient-to-br from-white via-roofing-cream to-roofing-beige p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-roofing-orange/20 backdrop-blur-sm transition-all duration-300 group-hover:shadow-2xl rounded-xl"
+          className="absolute inset-0 w-full h-full [backface-visibility:hidden] bg-gradient-to-br from-roofing-cream via-white to-roofing-beige p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-roofing-orange/20 backdrop-blur-sm rounded-xl"
           style={{ transform: 'rotateY(0deg)' }}
         >
           <div className="flex flex-col h-full">
             <div className="flex items-center gap-4 mb-6">
-              <div className="p-4 bg-gradient-to-br from-roofing-orange to-roofing-orange-dark rounded-xl text-white shadow-lg transform transition-transform duration-300 group-hover:scale-110">
+              <motion.div 
+                whileHover={{ scale: 1.1, rotate: 360 }}
+                transition={{ duration: 0.5 }}
+                className="p-4 bg-gradient-to-r from-roofing-orange to-roofing-orange-dark rounded-xl text-white shadow-lg"
+              >
                 <Icon className="w-8 h-8" />
-              </div>
+              </motion.div>
               <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-roofing-charcoal to-roofing-orange-dark bg-clip-text text-transparent">
                 {title}
               </h3>
@@ -80,8 +84,8 @@ const ServiceCard = ({
               animate={{ y: [0, 5, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <Info className="w-5 h-5" />
-              <ArrowRight className="w-5 h-5" />
+              <Info className="w-5 h-5 animate-pulse" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </motion.div>
           </div>
         </div>
@@ -92,18 +96,21 @@ const ServiceCard = ({
           style={{ transform: 'rotateY(180deg)' }}
         >
           <div className="flex flex-col h-full">
-            <h3 className="text-xl sm:text-2xl font-bold mb-6">{title}</h3>
+            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-roofing-cream">{title}</h3>
             {image && (
-              <div className="relative mb-6 group/image">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-300" />
+              <motion.div 
+                className="relative mb-6 group/image rounded-lg overflow-hidden shadow-xl"
+                whileHover={{ scale: 1.05 }}
+              >
                 <img 
                   src={image} 
                   alt={title}
-                  className="w-full h-36 sm:h-48 object-cover rounded-lg shadow-lg transform transition-transform duration-300 group-hover/image:scale-105"
+                  className="w-full h-36 sm:h-48 object-cover transform hover:scale-110 transition-transform duration-500"
                 />
-              </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-300" />
+              </motion.div>
             )}
-            <p className="text-base sm:text-lg mb-6 sm:mb-8 text-roofing-cream flex-grow">{fact}</p>
+            <p className="text-base sm:text-lg mb-6 sm:mb-8 text-roofing-cream/90 flex-grow">{fact}</p>
             <div className="mt-auto">
               <Button
                 asChild
@@ -112,7 +119,7 @@ const ServiceCard = ({
               >
                 <Link to="/estimate">
                   Get Estimate
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-y-1 transition-transform" />
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
             </div>

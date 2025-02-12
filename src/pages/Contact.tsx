@@ -6,7 +6,7 @@ import ContactInfoCard from "@/components/contact/ContactInfoCard";
 
 const Contact = () => {
   return (
-    <main className="min-h-screen pt-16 pb-8 relative">
+    <main className="min-h-screen flex flex-col pt-48 pb-16 px-4 relative">
       {/* Background Image and Overlay */}
       <div 
         className="fixed inset-0 bg-cover bg-center bg-no-repeat -z-10"
@@ -17,11 +17,11 @@ const Contact = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-roofing-orange/60 to-roofing-cream/40" />
       </div>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto space-y-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-4 mb-4"
+          className="section-gradient-separator backdrop-blur-sm bg-white/30 rounded-xl shadow-xl p-8 hover:shadow-2xl transition-all duration-500"
         >
           <ContactHeader />
           <div className="mt-8">
@@ -29,7 +29,7 @@ const Contact = () => {
           </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 mt-4">
+        <div className="grid md:grid-cols-2 gap-8">
           <EstimateCard />
           <ContactInfoCard />
         </div>

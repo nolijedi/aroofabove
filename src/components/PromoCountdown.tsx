@@ -9,10 +9,7 @@ const PromoCountdown = () => {
   const { isVisible, isClosed, isExitIntent, timeLeft, setIsClosed } = usePromoVisibility();
   const { position, setIsHovered } = usePromoAnimation(isVisible, isClosed);
 
-  console.log("PromoCountdown render - isVisible:", isVisible, "isClosed:", isClosed, "timeLeft:", timeLeft);
-
   if (isClosed) {
-    console.log("Promo is closed by user");
     return null;
   }
 
@@ -20,31 +17,41 @@ const PromoCountdown = () => {
     e.stopPropagation();
     setIsClosed(true);
     localStorage.setItem('promoClosedPermanently', 'true');
-    console.log("Promo closed permanently by user");
   };
 
   return (
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ 
             opacity: 1,
+            scale: 1,
             x: position.x,
             y: position.y,
             transition: {
-              opacity: { duration: 0.3 },
-              x: { type: "spring", stiffness: 100, damping: 20 },
-              y: { type: "spring", stiffness: 100, damping: 20 }
+              opacity: { duration: 0.4, ease: "easeOut" },
+              scale: { duration: 0.4, ease: "easeOut" },
+              x: { type: "spring", stiffness: 50, damping: 15 }, // Smoother spring animation
+              y: { type: "spring", stiffness: 50, damping: 15 }  // Smoother spring animation
             }
           }}
-          exit={{ opacity: 0, y: 20 }}
-          className="fixed z-[9999]"
+          exit={{ 
+            opacity: 0,
+            scale: 0.9,
+            transition: { duration: 0.3, ease: "easeIn" }
+          }}
+          className="fixed z-[9999] transform-gpu" // Added transform-gpu for smoother animations
           style={{ 
             pointerEvents: isClosed ? 'none' : 'auto',
+            willChange: 'transform', // Optimize for animations
           }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
+          whileHover={{ 
+            scale: 1.02,
+            transition: { duration: 0.2 }
+          }}
         >
           <PromoContent
             isExitIntent={isExitIntent}

@@ -1,13 +1,11 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { ChatWindow } from "./ChatWindow";
 import { MessageSquare } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChatWindow } from "./ChatWindow";
 import { useChatMessages } from "@/hooks/useChatMessages";
+import { useState } from "react";
 
 export const ChatButton = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
   const { messages, isTyping, addMessage } = useChatMessages();
 
   const handleSendMessage = async (content: string) => {
@@ -25,18 +23,8 @@ export const ChatButton = () => {
 
   return (
     <>
-      <AnimatePresence>
-        {isOpen && (
-          <ChatWindow
-            onClose={handleClose}
-            messages={messages}
-            onSendMessage={handleSendMessage}
-            isTyping={isTyping}
-          />
-        )}
-      </AnimatePresence>
-
       <motion.button
+        data-chat-button
         onClick={handleToggle}
         initial={{ opacity: 0, scale: 0 }}
         animate={{ 
@@ -70,12 +58,22 @@ export const ChatButton = () => {
           shadow-lg hover:shadow-xl
           transition-all duration-300
           group
-          ${isOpen ? 'opacity-0 pointer-events-none' : ''}
         `}
       >
         <MessageSquare className="w-7 h-7 text-white group-hover:scale-110 transition-transform duration-300" />
         <span className="text-xs font-medium text-white whitespace-nowrap mt-1">Chat Live</span>
       </motion.button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <ChatWindow
+            onClose={handleClose}
+            messages={messages}
+            onSendMessage={handleSendMessage}
+            isTyping={isTyping}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 };

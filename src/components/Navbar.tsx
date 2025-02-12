@@ -72,7 +72,9 @@ const Navbar = () => {
       dropdown: [
         { path: "/faq", label: "FAQ" },
         { path: "/product", label: "Product" },
-        { path: "/careers", label: "Careers" }
+        { path: "/careers", label: "Careers" },
+        { path: "/application", label: "Apply Now" },
+        { path: "/admin", label: "Admin Portal" },
       ]
     },
     { path: "/contact", label: "Contact" },

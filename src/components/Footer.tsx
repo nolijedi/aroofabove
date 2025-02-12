@@ -72,6 +72,28 @@ const Footer = () => {
           {/* White Separator - Hidden on mobile */}
           <div className="hidden md:block w-px h-20 bg-white/20 absolute right-1/3 top-1/2 -translate-y-1/2" />
 
+          {/* Resources */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Resources</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/careers" className="hover:text-roofing-orange transition-colors">
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <Link to="/application" className="hover:text-roofing-orange transition-colors">
+                  Apply Now
+                </Link>
+              </li>
+              <li>
+                <Link to="/admin" className="hover:text-roofing-orange transition-colors">
+                  Admin Portal
+                </Link>
+              </li>
+            </ul>
+          </div>
+
           {/* Logo and Copyright */}
           <div className="flex flex-col items-center space-y-2 md:space-y-4">
             <div className="flex items-center gap-2 md:gap-4">
@@ -79,13 +101,10 @@ const Footer = () => {
                 Copyright {new Date().getFullYear()}
               </p>
               <img
-                src="/lovable-uploads/2d080e69-c586-4861-8316-7ec496261217.png"
-                alt="A Roof Above Logo"
-                className="h-12 md:h-16 w-auto"
+                src="/images/logo-white.png"
+                alt="A Roof Above LLC"
+                className="h-8 md:h-10 w-auto"
               />
-              <p className="text-white text-xs md:text-sm whitespace-nowrap">
-                All Rights Reserved
-              </p>
             </div>
           </div>
         </div>

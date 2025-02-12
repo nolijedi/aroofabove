@@ -1,6 +1,41 @@
 import { useState, useCallback } from "react";
 import { Message } from "@/types/chat";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/supabase";
+
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const SYSTEM_PROMPT = `You are Eve, the friendly roofing assistant for A Roof Above. Vary your response style between:
+
+1. Quick, snappy answers (1-2 sentences)
+2. Casual, sometimes humorous responses
+3. Informative but concise explanations (2-3 sentences max)
+
+KEY BEHAVIORS:
+- Mix up your response lengths naturally
+- Use emojis occasionally to keep it friendly
+- Add personality but stay professional
+- When relevant, suggest the estimate button with the prompt "Enter your address in the estimate calculator for an instant estimate!"
+- End responses with 3 suggested questions users might want to ask`;
+
+// Separate function for saving messages
+const saveMessageToDatabase = async (message: Message) => {
+  try {
+    const { error } = await supabase
+      .from('chat_logs')
+      .insert([
+        {
+          message: message.content,
+          user_type: message.role,
+          created_at: message.createdAt.toISOString(),
+        },
+      ]);
+
+    if (error) {
+      console.error('Error saving message:', error);
+    }
+  } catch (error) {
+    console.error('Error saving message:', error);
+  }
+};
 
 export const useChatMessages = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -14,12 +49,13 @@ export const useChatMessages = () => {
       createdAt: new Date(),
     };
     setMessages([initialMessage]);
+    // Try to save the message, but don't wait for it
+    saveMessageToDatabase(initialMessage).catch(console.error);
   }, []);
 
   const handleSendMessage = useCallback(async (content: string) => {
     if (!content.trim()) return;
 
-    // Add user message
     const userMessage: Message = {
       id: crypto.randomUUID(),
       role: "user",
@@ -30,17 +66,30 @@ export const useChatMessages = () => {
     setMessages(prev => [...prev, userMessage]);
     setIsTyping(true);
 
+    // Try to save the user message, but don't wait for it
+    saveMessageToDatabase(userMessage).catch(console.error);
+
     try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
+      const response = await fetch('https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=' + GEMINI_API_KEY, {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          messages: [...messages, userMessage].map(({ role, content }) => ({
-            role,
-            content,
-          })),
+          contents: [
+            { role: "user", parts: [{ text: SYSTEM_PROMPT }] },
+            ...messages.map((msg) => ({
+              role: msg.role === "assistant" ? "model" : "user",
+              parts: [{ text: msg.content }]
+            })),
+            { role: "user", parts: [{ text: content }] }
+          ],
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 800,
+            topP: 0.8,
+            topK: 40
+          },
         }),
       });
 
@@ -50,14 +99,20 @@ export const useChatMessages = () => {
 
       const data = await response.json();
       
+      if (!data.candidates?.[0]?.content?.parts?.[0]?.text) {
+        throw new Error('Invalid response format');
+      }
+
       const assistantMessage: Message = {
         id: crypto.randomUUID(),
         role: "assistant",
-        content: data.text,
+        content: data.candidates[0].content.parts[0].text,
         createdAt: new Date(),
       };
 
       setMessages(prev => [...prev, assistantMessage]);
+      // Try to save the assistant message, but don't wait for it
+      saveMessageToDatabase(assistantMessage).catch(console.error);
     } catch (error) {
       console.error("Error in chat:", error);
       
@@ -69,6 +124,8 @@ export const useChatMessages = () => {
       };
 
       setMessages(prev => [...prev, errorMessage]);
+      // Try to save the error message, but don't wait for it
+      saveMessageToDatabase(errorMessage).catch(console.error);
     } finally {
       setIsTyping(false);
     }

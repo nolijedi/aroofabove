@@ -16,28 +16,17 @@ serve(async (req) => {
   }
 
   try {
-    console.log('Processing chat request...');
-    
     if (!GEMINI_API_KEY) {
       console.error('GEMINI_API_KEY is not set');
       throw new Error('API configuration error');
     }
 
-    let body;
-    try {
-      body = await req.json();
-    } catch (error) {
-      console.error('Error parsing request body:', error);
-      throw new Error('Invalid JSON in request body');
-    }
-    
+    const body = await req.json();
     const { messages } = body;
     
     if (!messages || !Array.isArray(messages)) {
       throw new Error('Messages array is required');
     }
-
-    console.log('Sending request to Gemini API with messages:', messages);
 
     const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + GEMINI_API_KEY, {
       method: 'POST',
@@ -68,8 +57,7 @@ serve(async (req) => {
     }
 
     const data = await response.json();
-    console.log('Received response from Gemini:', data);
-
+    
     if (!data.candidates?.[0]?.content?.parts?.[0]?.text) {
       console.error('Invalid response format from Gemini:', data);
       throw new Error('Invalid response format from Gemini API');
@@ -83,8 +71,7 @@ serve(async (req) => {
     console.error('Error in chat function:', error);
     return new Response(
       JSON.stringify({ 
-        error: error.message || "An unexpected error occurred. Please try again.",
-        details: error.stack,
+        error: error.message || "An unexpected error occurred",
         timestamp: new Date().toISOString()
       }),
       {

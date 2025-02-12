@@ -11,21 +11,21 @@ const features = [
     title: "Quality Guaranteed",
     description: "We stand behind our work with industry-leading warranties.",
     expandedDescription: "Our comprehensive warranty coverage ensures your peace of mind. We use only premium materials and follow strict quality control processes to deliver roofing solutions that stand the test of time.",
-    image: "/lovable-uploads/10a995fa-6759-4932-b918-b83c2dd741d7.png"
+    image: "/images/10a995fa-6759-4932-b918-b83c2dd741d7.png"
   },
   {
     icon: Wrench,
     title: "Expert Craftsmanship",
     description: "Our skilled team brings years of experience to every project.",
     expandedDescription: "Our team of certified professionals has decades of combined experience in residential and commercial roofing. We stay updated with the latest industry standards and techniques.",
-    image: "/lovable-uploads/6e209d79-c584-48f2-9696-9aacf51e851d.png"
+    image: "/images/6e209d79-c584-48f2-9696-9aacf51e851d.png"
   },
   {
     icon: Clock,
     title: "Timely Service",
     description: "We respect your time and complete projects on schedule.",
     expandedDescription: "Our efficient project management ensures minimal disruption to your daily life. We provide detailed timelines and keep you informed throughout the entire process.",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1920"
+    image: "/images/f1a0c45a-862b-4b13-adf5-442bf18e0a3f.png"
   }
 ];
 

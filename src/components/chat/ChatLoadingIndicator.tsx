@@ -19,7 +19,7 @@ export const ChatLoadingIndicator = () => {
         }}
       >
         <img 
-          src="/lovable-uploads/hammer.svg" 
+          src="/images/hammer-icon.svg" 
           alt="Typing"
           className="w-full h-full object-contain"
           style={{ filter: "drop-shadow(0 1px 1px rgba(0,0,0,0.1))" }}

@@ -1,8 +1,15 @@
-import { useState, useEffect } from "react";
-import { Message } from "@/types/chat";
-import { supabase } from "@/integrations/supabase/client";
+import { useState } from "react";
 
-const INITIAL_MESSAGE = `Hi! 👋 I'm Eve, your roofing expert. I can help you get an instant estimate, explore premium materials, or answer any questions about your roofing project. Want to see how much you could save? 🏠✨`;
+interface Message {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  createdAt: Date;
+}
+
+const INITIAL_MESSAGE = `Hi! 👋 I'm Eve from A Roof Above. I can help you get an instant estimate or answer any roofing questions.
+
+Would you mind sharing your name so I can better assist you?`;
 
 export const useChatMessages = () => {
   const [messages, setMessages] = useState<Message[]>([
@@ -14,64 +21,71 @@ export const useChatMessages = () => {
     },
   ]);
   const [isTyping, setIsTyping] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const generateAIResponse = async (message: string): Promise<string> => {
+  const addMessage = async (content: string) => {
     try {
-      const { data, error } = await supabase.functions.invoke('chat', {
-        body: {
-          messages: [
-            ...messages.map(msg => ({
-              role: msg.role,
-              content: msg.content,
-            })),
-            {
-              role: "user",
-              content: message,
-            },
-          ],
-        },
+      setError(null);
+      
+      // Add user message
+      const userMessage: Message = {
+        id: crypto.randomUUID(),
+        role: 'user',
+        content,
+        createdAt: new Date(),
+      };
+      setMessages(prev => [...prev, userMessage]);
+
+      // Generate AI response
+      setIsTyping(true);
+      const response = await fetch('/server/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: content })
       });
 
-      if (error) throw error;
-      return data.text;
-    } catch (error) {
-      console.error('Error generating AI response:', error);
-      throw error;
-    }
-  };
-
-  const addMessage = async (content: string, role: "user" | "assistant" = "user") => {
-    const newMessage: Message = {
-      id: crypto.randomUUID(),
-      role,
-      content,
-      createdAt: new Date(),
-    };
-
-    setMessages(prevMessages => [...prevMessages, newMessage]);
-
-    if (role === "user") {
-      setIsTyping(true);
-      try {
-        const aiResponse = await generateAIResponse(content);
-        const aiMessage: Message = {
-          id: crypto.randomUUID(),
-          role: "assistant",
-          content: aiResponse,
-          createdAt: new Date(),
-        };
-        setMessages(prevMessages => [...prevMessages, aiMessage]);
-      } catch (error) {
-        console.error('Error in chat:', error);
-      } finally {
-        setIsTyping(false);
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Failed to get response' }));
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
       }
+
+      const data = await response.json();
+      
+      if (!data.message) {
+        throw new Error('Invalid response format');
+      }
+
+      // Add AI response
+      const aiMessage: Message = {
+        id: crypto.randomUUID(),
+        role: 'assistant',
+        content: data.message,
+        createdAt: new Date(),
+      };
+      setMessages(prev => [...prev, aiMessage]);
+
+    } catch (err) {
+      console.error('Chat error:', err);
+      setError(err instanceof Error ? err.message : 'Failed to process message');
+      
+      // Add error message to chat
+      const errorMessage: Message = {
+        id: crypto.randomUUID(),
+        role: 'assistant',
+        content: "I apologize, but I'm having trouble processing your message. Please try again in a moment.",
+        createdAt: new Date(),
+      };
+      setMessages(prev => [...prev, errorMessage]);
+
+    } finally {
+      setIsTyping(false);
     }
   };
 
   return {
     messages,
     isTyping,
+    error,
     addMessage,
   };
 };

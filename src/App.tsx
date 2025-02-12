@@ -24,6 +24,10 @@ import FAQ from "./pages/FAQ";
 import Product from "./pages/Product";
 import Careers from "./pages/Careers";
 import ContactForm from "./pages/ContactForm";
+import Application from "./pages/Application";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import ProtectedRoute from './components/ProtectedRoute';
 
 // Add styles to hide Lovable widget
 const styles = document.createElement('style');
@@ -62,30 +66,38 @@ const AppContent = () => {
           {isHomePage && <TopBar />}
           <Navbar />
           <main className="flex-1">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/why-choose-us" element={<WhyChooseUs />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/estimate" element={<Estimate />} />
-              <Route path="/insurance-claims" element={<InsuranceClaims />} />
-              <Route path="/financing" element={<Financing />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/product" element={<Product />} />
-              <Route path="/careers" element={<Careers />} />
-              <Route path="/button-test" element={<ButtonTest />} />
-              <Route path="/contact-form" element={<ContactForm />} />
-              <Route path="*" element={<Index />} /> {/* Catch-all route */}
-            </Routes>
+            <AnimatePresence mode="wait">
+              <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<Index />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/why-choose-us" element={<WhyChooseUs />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/estimate" element={<Estimate />} />
+                <Route path="/insurance-claims" element={<InsuranceClaims />} />
+                <Route path="/financing" element={<Financing />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/product" element={<Product />} />
+                <Route path="/careers" element={<Careers />} />
+                <Route path="/contact-form" element={<ContactForm />} />
+                <Route path="/application" element={<Application />} />
+                <Route path="/button-test" element={<ButtonTest />} />
+                <Route path="/admin" element={<AdminLogin />} />
+                <Route path="/admin/dashboard" element={
+                  <ProtectedRoute>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                } />
+                <Route path="*" element={<Index />} /> {/* Catch-all route */}
+              </Routes>
+            </AnimatePresence>
           </main>
           <Footer />
         </div>
         <PromoCountdown />
         <StickyPhone />
         <ChatWidget />
-        <AnimatePresence>
-          <ChatButton />
-        </AnimatePresence>
+        <Toaster />
+        <Sonner />
       </div>
     </>
   );
@@ -94,8 +106,6 @@ const AppContent = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
       <BrowserRouter>
         <AppContent />
       </BrowserRouter>
