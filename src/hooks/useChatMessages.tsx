@@ -11,6 +11,16 @@ const INITIAL_MESSAGE = `Hi! 👋 I'm Eve from A Roof Above. I can help you get 
 
 Would you mind sharing your name so I can better assist you?`;
 
+// Helper function to get API URL based on environment
+const getApiUrl = () => {
+  // Check if we're in development
+  if (process.env.NODE_ENV === 'development') {
+    return '/server/api/chat';
+  }
+  // In production
+  return '/api/chat';
+};
+
 export const useChatMessages = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -38,11 +48,17 @@ export const useChatMessages = () => {
 
       // Generate AI response
       setIsTyping(true);
-      const response = await fetch('/server/api/chat', {
+      const response = await fetch(getApiUrl(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: content })
       });
+
+      // Check if we got HTML instead of JSON
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('text/html')) {
+        throw new Error('Received HTML instead of JSON response. The API endpoint might be misconfigured.');
+      }
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({ error: 'Failed to get response' }));
