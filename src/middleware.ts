@@ -2,25 +2,31 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  // Allow API routes to pass through without redirection
-  if (request.nextUrl.pathname.startsWith('/api/')) {
+  const { pathname } = request.nextUrl
+
+  // If this is an API request, bypass all redirects and transformations
+  if (pathname.startsWith('/api/')) {
+    console.log('API request detected:', pathname)
     return NextResponse.next()
   }
 
-  // Your existing middleware logic here
+  // For non-API requests, check if we're on aroofabove.vercel.app
+  if (request.headers.get('host')?.includes('aroofabove.vercel.app')) {
+    const url = request.nextUrl.clone()
+    url.host = 'site.aroofabove.co'
+    url.protocol = 'https'
+    return NextResponse.redirect(url)
+  }
+
   return NextResponse.next()
 }
 
+// Update the matcher to explicitly handle API routes
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except:
-     * 1. /api/ (API routes)
-     * 2. /_next/ (Next.js internals)
-     * 3. /_static (inside /public)
-     * 4. /_vercel (Vercel internals)
-     * 5. all root files inside /public (e.g. /favicon.ico)
-     */
-    '/((?!api|_next|_static|_vercel|[\\w-]+\\.\\w+).*)',
+    // Match API routes
+    '/api/:path*',
+    // Match all other routes except static files and Next.js internals
+    '/((?!_next/static|_next/image|favicon.ico).*)',
   ],
 }

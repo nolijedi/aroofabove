@@ -1,12 +1,9 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-export async function GET(request: NextRequest) {
-  // Add CORS headers
-  const headers = new Headers({
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
-  })
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== 'GET') {
+    return res.status(405).json({ message: 'Method not allowed' })
+  }
 
   try {
     // Test GoHighLevel API connection
@@ -18,29 +15,17 @@ export async function GET(request: NextRequest) {
       test: 'integration_test'
     }
 
-    return new NextResponse(
-      JSON.stringify({
-        gohighlevel: goHighLevelTest,
-        analytics: analyticsTest,
-        message: 'Integration test completed'
-      }),
-      {
-        status: 200,
-        headers
-      }
-    )
+    res.status(200).json({
+      gohighlevel: goHighLevelTest,
+      analytics: analyticsTest,
+      message: 'Integration test completed'
+    })
   } catch (error) {
     console.error('Integration test failed:', error)
-    return new NextResponse(
-      JSON.stringify({ 
-        error: 'Integration test failed',
-        details: error instanceof Error ? error.message : 'Unknown error'
-      }),
-      {
-        status: 500,
-        headers
-      }
-    )
+    res.status(500).json({ 
+      error: 'Integration test failed',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    })
   }
 }
 
