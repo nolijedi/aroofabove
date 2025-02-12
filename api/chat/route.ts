@@ -1,13 +1,17 @@
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
+export const runtime = 'edge';
+
+export async function POST(request: NextRequest) {
   try {
-    const { message } = req.body;
+    const { message } = await request.json();
     
     if (!message) {
-      return res.status(400).json({ error: 'Message is required' });
+      return NextResponse.json(
+        { error: 'Message is required' },
+        { status: 400 }
+      );
     }
 
     const response = await fetch(
@@ -71,12 +75,13 @@ Note: If they've already provided their name, email, or phone, don't ask for it 
     const data = await response.json();
     const aiResponse = data.candidates[0].content.parts[0].text;
 
-    res.json({ message: aiResponse });
+    return NextResponse.json({ message: aiResponse });
 
   } catch (error) {
     console.error('Chat API error:', error);
-    res.status(500).json({ 
-      error: error instanceof Error ? error.message : 'Internal server error' 
-    });
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Internal server error' },
+      { status: 500 }
+    );
   }
 }
