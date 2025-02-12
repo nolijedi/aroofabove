@@ -3,21 +3,20 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   output: 'standalone',
-  async rewrites() {
-    return {
-      beforeFiles: [
-        {
-          source: '/:path*',
-          has: [
-            {
-              type: 'host',
-              value: 'site.aroofabove.co',
-            },
-          ],
-          destination: '/:path*',
-        },
-      ],
-    }
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'aroofabove.vercel.app',
+          },
+        ],
+        destination: 'https://site.aroofabove.co/:path*',
+        permanent: true,
+      },
+    ]
   },
   async headers() {
     return [
