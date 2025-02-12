@@ -18,5 +18,15 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/server\/api/, '/api')
       }
     }
+  },
+  build: {
+    outDir: 'dist',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', '@supabase/supabase-js']
+        }
+      }
+    }
   }
 });

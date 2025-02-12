@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "@/lib/supabase-singleton";
 
 interface Message {
   id: string;
@@ -38,7 +39,13 @@ export const useChatMessages = () => {
 
       // Generate AI response
       setIsTyping(true);
-      const response = await fetch('/server/api/chat', {
+      
+      // Determine the API URL based on environment
+      const apiUrl = import.meta.env.PROD 
+        ? '/api/chat' // Production URL
+        : '/server/api/chat'; // Development URL
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: content })
@@ -63,6 +70,22 @@ export const useChatMessages = () => {
         createdAt: new Date(),
       };
       setMessages(prev => [...prev, aiMessage]);
+
+      // Save to Supabase
+      await supabase.from('chat_logs').insert([
+        {
+          email: 'visitor@example.com',
+          message: content,
+          user_type: 'user',
+          ip_address: '127.0.0.1'
+        },
+        {
+          email: 'visitor@example.com',
+          message: data.message,
+          user_type: 'assistant',
+          ip_address: 'system'
+        }
+      ]);
 
     } catch (err) {
       console.error('Chat error:', err);
