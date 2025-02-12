@@ -17,7 +17,7 @@ const getApiUrl = () => {
   if (process.env.NODE_ENV === 'development') {
     return '/server/api/chat';
   }
-  // In production
+  // In production, use the same domain
   return '/api/chat';
 };
 
@@ -48,15 +48,23 @@ export const useChatMessages = () => {
 
       // Generate AI response
       setIsTyping(true);
-      const response = await fetch(getApiUrl(), {
+
+      const apiUrl = getApiUrl();
+      console.log('Using API URL:', apiUrl); // Debug log
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({ message: content })
       });
 
       // Check if we got HTML instead of JSON
       const contentType = response.headers.get('content-type');
       if (contentType && contentType.includes('text/html')) {
+        console.error('Received HTML response:', await response.text());
         throw new Error('Received HTML instead of JSON response. The API endpoint might be misconfigured.');
       }
 
