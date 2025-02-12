@@ -7,6 +7,9 @@
   "outputDirectory": ".next",
   "cleanUrls": true,
   "trailingSlash": false,
+  "analytics": {
+    "enabled": true
+  },
   "redirects": [
     {
       "source": "/:path*",
