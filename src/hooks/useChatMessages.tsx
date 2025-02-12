@@ -1,115 +1,72 @@
-import { useState } from "react";
+import { useState } from 'react';
+import { getBrowserSupabase } from '@/lib/supabase-singleton';
 
-interface Message {
-  id: string;
+export type Message = {
   role: 'user' | 'assistant';
   content: string;
-  createdAt: Date;
-}
-
-const INITIAL_MESSAGE = `Hi! 👋 I'm Eve from A Roof Above. I can help you get an instant estimate or answer any roofing questions.
-
-Would you mind sharing your name so I can better assist you?`;
-
-// Helper function to get API URL based on environment
-const getApiUrl = () => {
-  // Check if we're in development
-  if (process.env.NODE_ENV === 'development') {
-    return '/server/api/chat';
-  }
-  // In production, use the same domain
-  return '/api/chat';
 };
 
-export const useChatMessages = () => {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: crypto.randomUUID(),
-      role: "assistant",
-      content: INITIAL_MESSAGE,
-      createdAt: new Date(),
-    },
-  ]);
-  const [isTyping, setIsTyping] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+export function useChatMessages() {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const addMessage = async (content: string) => {
+    setIsLoading(true);
     try {
-      setError(null);
-      
       // Add user message
-      const userMessage: Message = {
-        id: crypto.randomUUID(),
-        role: 'user',
-        content,
-        createdAt: new Date(),
-      };
+      const userMessage: Message = { role: 'user', content };
       setMessages(prev => [...prev, userMessage]);
 
-      // Generate AI response
-      setIsTyping(true);
+      // Get API URL based on environment
+      const apiUrl = '/api/chat';
 
-      const apiUrl = getApiUrl();
-      console.log('Using API URL:', apiUrl); // Debug log
-
+      // Call chat API
       const response = await fetch(apiUrl, {
         method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: content })
       });
 
-      // Check if we got HTML instead of JSON
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('text/html')) {
-        console.error('Received HTML response:', await response.text());
-        throw new Error('Received HTML instead of JSON response. The API endpoint might be misconfigured.');
-      }
-
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ error: 'Failed to get response' }));
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        throw new Error('Failed to get response');
       }
 
       const data = await response.json();
       
-      if (!data.message) {
-        throw new Error('Invalid response format');
+      if (data.error) {
+        throw new Error(data.error);
       }
 
-      // Add AI response
-      const aiMessage: Message = {
-        id: crypto.randomUUID(),
-        role: 'assistant',
-        content: data.message,
-        createdAt: new Date(),
-      };
-      setMessages(prev => [...prev, aiMessage]);
+      // Add assistant message
+      const assistantMessage: Message = { role: 'assistant', content: data.message };
+      setMessages(prev => [...prev, assistantMessage]);
 
-    } catch (err) {
-      console.error('Chat error:', err);
-      setError(err instanceof Error ? err.message : 'Failed to process message');
-      
-      // Add error message to chat
-      const errorMessage: Message = {
-        id: crypto.randomUUID(),
-        role: 'assistant',
-        content: "I apologize, but I'm having trouble processing your message. Please try again in a moment.",
-        createdAt: new Date(),
-      };
-      setMessages(prev => [...prev, errorMessage]);
+      // Save to Supabase (optional, since server already saves)
+      const supabase = getBrowserSupabase();
+      try {
+        await supabase.from('chat_logs').insert([
+          {
+            email: 'visitor@example.com',
+            message: content,
+            user_type: 'user',
+            ip_address: 'browser'
+          }
+        ]);
+      } catch (error) {
+        console.error('Failed to save to Supabase:', error);
+      }
 
+    } catch (error) {
+      console.error('Chat error:', error);
+      setMessages(prev => [...prev, { role: 'assistant', content: 'I apologize, but I encountered an error. Please try again.' }]);
     } finally {
-      setIsTyping(false);
+      setIsLoading(false);
     }
   };
 
   return {
     messages,
-    isTyping,
-    error,
     addMessage,
+    isLoading
   };
-};
+}

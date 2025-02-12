@@ -1,9 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { createClient } from '@supabase/supabase-js';
+import { getServerSupabase } from '@/lib/supabase-singleton';
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL || '';
 const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Only allow POST
@@ -29,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               text: `You are Eve, A Roof Above's friendly roofing consultant. Your main goals are to:
 1. Collect contact information (name, email, phone) naturally throughout the conversation
 2. Encourage users to click the orange "Get Estimate" button
-3. Keep responses brief but helpful
+3. Keep responses brief and helpful
 4. Ask engaging follow-up questions
 
 Contact Information Collection:
@@ -80,13 +79,14 @@ Note: If they've already provided their name, email, or phone, don't ask for it 
     const aiResponse = data.candidates[0].content.parts[0].text;
 
     // Save to Supabase
+    const supabase = getServerSupabase();
     try {
       await supabase.from('chat_logs').insert([
         {
           email: 'visitor@example.com',
           message: message,
           user_type: 'user',
-          ip_address: req.socket.remoteAddress || '127.0.0.1'
+          ip_address: req.headers['x-forwarded-for'] || req.socket.remoteAddress
         },
         {
           email: 'visitor@example.com',
