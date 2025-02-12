@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { NavItem } from "./types";
 import { cn } from "@/lib/utils";
@@ -33,9 +33,14 @@ const menuVariants = {
 
 const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [hoverDropdown, setHoverDropdown] = useState<string | null>(null);
 
   const handleDropdownClick = (label: string) => {
     setOpenDropdown(openDropdown === label ? null : label);
+  };
+
+  const handleDropdownHover = (label: string | null) => {
+    setHoverDropdown(label);
   };
 
   return (
@@ -43,19 +48,21 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
       initial="closed"
       animate={isOpen ? "open" : "closed"}
       variants={menuVariants}
-      className="md:hidden overflow-hidden bg-white fixed inset-x-0 top-[72px] z-50"
+      className="md:hidden overflow-hidden bg-white"
     >
-      <div className="px-4 py-2 space-y-2 max-h-[calc(100vh-72px)] overflow-y-auto">
-        {navItems.map((item) => {
+      <div className="px-4 py-2 space-y-2">
+        {navItems.map((item, index) => {
           const isActive = currentPath === item.path ||
             (item.dropdown?.some(dropItem => currentPath === dropItem.path));
 
           if (item.dropdown) {
-            const isDropdownOpen = openDropdown === item.label;
+            const isDropdownOpen = openDropdown === item.label || hoverDropdown === item.label;
             return (
               <div 
                 key={item.label}
                 className="relative"
+                onMouseEnter={() => handleDropdownHover(item.label)}
+                onMouseLeave={() => handleDropdownHover(null)}
               >
                 <button
                   onClick={() => handleDropdownClick(item.label)}
@@ -65,33 +72,24 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
                       ? "bg-roofing-orange text-white hover:bg-roofing-orange/90"
                       : "bg-gray-200/90 text-gray-800 hover:bg-roofing-orange hover:text-white"
                   )}
-                  aria-expanded={isDropdownOpen}
                 >
                   {item.label}
-                  <ChevronDown 
-                    className={cn(
-                      "w-4 h-4 transition-transform duration-200",
-                      isDropdownOpen && "transform rotate-180"
-                    )} 
-                  />
+                  <ChevronDown className={cn(
+                    "w-4 h-4 transition-transform",
+                    isDropdownOpen && "transform rotate-180"
+                  )} />
                 </button>
-                <motion.div
-                  initial={false}
-                  animate={{
-                    height: isDropdownOpen ? "auto" : 0,
-                    opacity: isDropdownOpen ? 1 : 0
-                  }}
-                  transition={{ duration: 0.2 }}
-                  className="pl-4 space-y-1 mt-1 overflow-hidden"
+                <div
+                  className={cn(
+                    "pl-4 space-y-1 mt-1 overflow-hidden transition-all duration-200",
+                    isDropdownOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                  )}
                 >
                   {item.dropdown.map((dropItem) => (
                     <Link
                       key={dropItem.path}
-                      href={dropItem.path}
-                      onClick={() => {
-                        setOpenDropdown(null);
-                        onClose();
-                      }}
+                      to={dropItem.path}
+                      onClick={onClose}
                       className={cn(
                         "flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200",
                         currentPath === dropItem.path
@@ -103,19 +101,19 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
                       {dropItem.label}
                     </Link>
                   ))}
-                </motion.div>
+                </div>
               </div>
             );
           }
 
           return (
             <Link
-              key={item.label}
-              href={item.path}
+              key={item.path}
+              to={item.path}
               onClick={onClose}
               className={cn(
                 "block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200",
-                isActive
+                currentPath === item.path
                   ? "bg-roofing-orange text-white hover:bg-roofing-orange/90"
                   : "bg-gray-200/90 text-gray-800 hover:bg-roofing-orange hover:text-white"
               )}
@@ -124,6 +122,20 @@ const MobileNav = ({ isOpen, navItems, currentPath, onClose }: MobileNavProps) =
             </Link>
           );
         })}
+        <Link
+          to="/estimate"
+          onClick={onClose}
+          className="block px-4 py-2.5 rounded-lg text-sm font-medium bg-roofing-orange text-white hover:bg-roofing-orange/90 transition-colors duration-200"
+        >
+          Get Free Estimate
+        </Link>
+        <Link
+          to="/contact"
+          onClick={onClose}
+          className="block px-4 py-2.5 rounded-lg text-sm font-medium border border-roofing-orange text-roofing-orange hover:bg-roofing-orange hover:text-white transition-colors duration-200"
+        >
+          Contact Us
+        </Link>
       </div>
     </motion.div>
   );

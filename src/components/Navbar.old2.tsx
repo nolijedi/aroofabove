@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
 import DesktopNav from "./navbar/DesktopNav";
-import HamburgerMenu from "./HamburgerMenu";
-import { useLocation } from "react-router-dom";
+import MobileNav from "./navbar/MobileNav";
+import { NavItem } from "./navbar/types";
+import { motion, AnimatePresence } from "framer-motion";
 
-const MainNavbar = () => {
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
-  const isHomePage = location.pathname === '/';
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,7 +22,7 @@ const MainNavbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { path: "/services", label: "Services" },
     { path: "/why-choose-us", label: "Why Choose Us" },
     { path: "/insurance-claims", label: "Insurance Claims" },
@@ -51,10 +55,9 @@ const MainNavbar = () => {
     >
       <div className="max-w-[1600px] mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-[72px] relative">
-          {/* Logo */}
           <div className="w-[160px] flex-shrink-0 py-2">
             <Link 
-              to="/" 
+              href="/" 
               className="transition-transform duration-500 hover:scale-105 block"
             >
               <img 
@@ -65,18 +68,33 @@ const MainNavbar = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <DesktopNav 
-            navItems={navItems.filter(item => item.path !== '/contact')} 
-            currentPath={location.pathname} 
-          />
+          <DesktopNav navItems={navItems.filter(item => item.path !== '/contact')} currentPath={pathname} />
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 rounded-lg transition-colors duration-200 bg-roofing-orange hover:bg-roofing-orange/90 absolute right-0 top-4"
+            aria-expanded={isOpen}
+            aria-label="Toggle mobile menu"
+          >
+            {isOpen ? (
+              <X className="w-6 h-6 text-white" />
+            ) : (
+              <Menu className="w-6 h-6 text-white" />
+            )}
+          </button>
 
           {/* Mobile Navigation */}
-          <HamburgerMenu />
+          <MobileNav
+            isOpen={isOpen}
+            navItems={navItems}
+            currentPath={pathname}
+            onClose={() => setIsOpen(false)}
+          />
         </div>
       </div>
     </nav>
   );
 };
 
-export default MainNavbar;
+export default Navbar;
