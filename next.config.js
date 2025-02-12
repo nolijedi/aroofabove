@@ -26,10 +26,24 @@ const nextConfig = {
           {
             key: 'X-DNS-Prefetch-Control',
             value: 'on'
+          },
+          {
+            key: 'Host',
+            value: 'site.aroofabove.co'
           }
         ],
       },
     ]
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/:path*',
+          destination: 'https://site.aroofabove.co/:path*',
+        },
+      ],
+    }
   }
 }
 
