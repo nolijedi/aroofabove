@@ -1,6 +1,13 @@
 import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  // Add CORS headers
+  const headers = new Headers({
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
+  })
+
   try {
     // Test GoHighLevel API connection
     const goHighLevelTest = await testGoHighLevelConnection()
@@ -11,17 +18,29 @@ export async function GET() {
       test: 'integration_test'
     }
 
-    return NextResponse.json({
-      gohighlevel: goHighLevelTest,
-      analytics: analyticsTest,
-      message: 'Integration test completed'
-    })
+    return new NextResponse(
+      JSON.stringify({
+        gohighlevel: goHighLevelTest,
+        analytics: analyticsTest,
+        message: 'Integration test completed'
+      }),
+      {
+        status: 200,
+        headers
+      }
+    )
   } catch (error) {
     console.error('Integration test failed:', error)
-    return NextResponse.json({ 
-      error: 'Integration test failed',
-      details: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 })
+    return new NextResponse(
+      JSON.stringify({ 
+        error: 'Integration test failed',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      }),
+      {
+        status: 500,
+        headers
+      }
+    )
   }
 }
 
