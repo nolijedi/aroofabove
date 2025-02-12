@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { supabase } from "@/lib/supabase-singleton";
 
 interface Message {
   id: string;
@@ -39,18 +38,11 @@ export const useChatMessages = () => {
 
       // Generate AI response
       setIsTyping(true);
-
-      const response = await fetch('/api/chat', {
+      const response = await fetch('/server/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: content })
       });
-
-      // Check if we got HTML instead of JSON (common error in production)
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('text/html')) {
-        throw new Error('Received HTML instead of JSON. The API endpoint might be misconfigured.');
-      }
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({ error: 'Failed to get response' }));
@@ -71,27 +63,6 @@ export const useChatMessages = () => {
         createdAt: new Date(),
       };
       setMessages(prev => [...prev, aiMessage]);
-
-      // Save to Supabase
-      try {
-        await supabase.from('chat_logs').insert([
-          {
-            email: 'visitor@example.com',
-            message: content,
-            user_type: 'user',
-            ip_address: '127.0.0.1'
-          },
-          {
-            email: 'visitor@example.com',
-            message: data.message,
-            user_type: 'assistant',
-            ip_address: 'system'
-          }
-        ]);
-      } catch (dbError) {
-        // Log but don't fail the chat if Supabase save fails
-        console.error('Failed to save to Supabase:', dbError);
-      }
 
     } catch (err) {
       console.error('Chat error:', err);
