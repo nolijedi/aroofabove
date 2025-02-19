@@ -19,9 +19,9 @@ const EnhancedHero = () => {
   return (
     <div className="relative">
       {/* Dark Hero Section */}
-      <div className="relative bg-gradient-to-b from-roofing-charcoal to-roofing-charcoal/95 pb-32">
+      <div className="relative bg-gradient-to-b from-roofing-charcoal to-roofing-charcoal/95">
         {/* Content Container */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-48">
           {/* Text Content */}
           <div className="text-center max-w-3xl mx-auto space-y-8 relative z-10">
             <motion.h1
@@ -71,20 +71,19 @@ const EnhancedHero = () => {
           </div>
         </div>
 
-        {/* Curved Transition */}
-        <div className="absolute -bottom-1 left-0 w-full overflow-hidden">
+        {/* New Curved Transition */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
           <svg 
-            viewBox="0 0 1200 120" 
-            preserveAspectRatio="none" 
-            className="relative block w-full h-[120px]"
+            className="relative block w-[calc(100%+1.3px)] h-[150px]" 
+            viewBox="0 0 2400 160" 
+            preserveAspectRatio="none"
             style={{
-              transform: 'rotate(180deg)',
-              filter: 'drop-shadow(0 -4px 4px rgba(0,0,0,0.1))'
+              transform: 'rotateY(180deg)',
             }}
           >
             <path 
-              d="M600,112C400,112 200,96 0,96L0,120L1200,120L1200,96C1000,96 800,112 600,112Z" 
-              className="fill-white"
+              d="M0,160 L0,100 C600,20 1800,20 2400,100 L2400,160 Z" 
+              fill="white"
             />
           </svg>
         </div>
