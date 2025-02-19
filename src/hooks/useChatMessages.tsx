@@ -1,20 +1,22 @@
-import { useState } from 'react';
-import { getBrowserSupabase } from '@/lib/supabase-singleton';
 
-export type Message = {
-  role: 'user' | 'assistant';
-  content: string;
-};
+import { useState } from 'react';
+import { Message } from '@/types/chat';
+import { getBrowserSupabase } from '@/lib/supabase-singleton';
 
 export function useChatMessages() {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
 
   const addMessage = async (content: string) => {
-    setIsLoading(true);
+    setIsTyping(true);
     try {
       // Add user message
-      const userMessage: Message = { role: 'user', content };
+      const userMessage: Message = {
+        id: crypto.randomUUID(),
+        role: 'user',
+        content,
+        createdAt: new Date()
+      };
       setMessages(prev => [...prev, userMessage]);
 
       // Get API URL based on environment
@@ -38,10 +40,15 @@ export function useChatMessages() {
       }
 
       // Add assistant message
-      const assistantMessage: Message = { role: 'assistant', content: data.message };
+      const assistantMessage: Message = {
+        id: crypto.randomUUID(),
+        role: 'assistant',
+        content: data.message,
+        createdAt: new Date()
+      };
       setMessages(prev => [...prev, assistantMessage]);
 
-      // Save to Supabase (optional, since server already saves)
+      // Save to Supabase
       const supabase = getBrowserSupabase();
       try {
         await supabase.from('chat_logs').insert([
@@ -58,15 +65,20 @@ export function useChatMessages() {
 
     } catch (error) {
       console.error('Chat error:', error);
-      setMessages(prev => [...prev, { role: 'assistant', content: 'I apologize, but I encountered an error. Please try again.' }]);
+      setMessages(prev => [...prev, {
+        id: crypto.randomUUID(),
+        role: 'assistant',
+        content: 'I apologize, but I encountered an error. Please try again.',
+        createdAt: new Date()
+      }]);
     } finally {
-      setIsLoading(false);
+      setIsTyping(false);
     }
   };
 
   return {
     messages,
     addMessage,
-    isLoading
+    isTyping
   };
 }
