@@ -18,12 +18,18 @@ const EnhancedHero = () => {
 
   return (
     <div className="relative">
-      {/* Dark Hero Section */}
-      <div className="relative bg-gradient-to-b from-roofing-charcoal to-roofing-charcoal/95">
+      {/* Dark Hero Section with Curved Bottom */}
+      <div 
+        className="relative bg-gradient-to-b from-roofing-charcoal to-roofing-charcoal/95"
+        style={{
+          clipPath: 'ellipse(100% 100% at 50% 0%)',
+          paddingBottom: '8rem'
+        }}
+      >
         {/* Content Container */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-48">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
           {/* Text Content */}
-          <div className="text-center max-w-3xl mx-auto space-y-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto space-y-8">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -71,43 +77,36 @@ const EnhancedHero = () => {
           </div>
         </div>
 
-        {/* New Curved Transition */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-          <svg 
-            className="relative block w-[calc(100%+1.3px)] h-[150px]" 
-            viewBox="0 0 2400 160" 
-            preserveAspectRatio="none"
-            style={{
-              transform: 'rotateY(180deg)',
-            }}
-          >
-            <path 
-              d="M0,160 L0,100 C600,20 1800,20 2400,100 L2400,160 Z" 
-              fill="white"
-            />
-          </svg>
-        </div>
+        {/* White overlay for smooth transition */}
+        <div 
+          className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-white"
+          style={{
+            transform: 'translateY(50%)'
+          }}
+        />
       </div>
 
       {/* GIF Section */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.6 }}
-        className="relative w-full bg-white"
-      >
-        <img
-          src="/images/hero-roof.gif"
-          alt="Roofing Process"
-          className="w-full h-[500px] object-cover"
-        />
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4))'
-          }}
-        />
-      </motion.div>
+      <div className="bg-white">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="relative w-full"
+        >
+          <img
+            src="/images/hero-roof.gif"
+            alt="Roofing Process"
+            className="w-full h-[500px] object-cover"
+          />
+          <div 
+            className="absolute inset-0"
+            style={{
+              background: 'linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4))'
+            }}
+          />
+        </motion.div>
+      </div>
     </div>
   );
 };
