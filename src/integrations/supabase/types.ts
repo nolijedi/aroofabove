@@ -9,36 +9,108 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      applications: {
+        Row: {
+          cover_letter: string | null
+          created_at: string | null
+          email: string
+          experience: string | null
+          first_name: string
+          id: string
+          last_name: string
+          phone: string | null
+          position: string
+          resume_text: string | null
+        }
+        Insert: {
+          cover_letter?: string | null
+          created_at?: string | null
+          email: string
+          experience?: string | null
+          first_name: string
+          id?: string
+          last_name: string
+          phone?: string | null
+          position: string
+          resume_text?: string | null
+        }
+        Update: {
+          cover_letter?: string | null
+          created_at?: string | null
+          email?: string
+          experience?: string | null
+          first_name?: string
+          id?: string
+          last_name?: string
+          phone?: string | null
+          position?: string
+          resume_text?: string | null
+        }
+        Relationships: []
+      }
       chat_logs: {
         Row: {
           created_at: string | null
+          email: string
           id: string
           ip_address: string | null
-          message_content: string
-          metadata: Json | null
-          role: string
-          session_id: string
-          user_agent: string | null
+          message: string
+          user_type: string
         }
         Insert: {
           created_at?: string | null
+          email: string
           id?: string
           ip_address?: string | null
-          message_content: string
-          metadata?: Json | null
-          role: string
-          session_id: string
-          user_agent?: string | null
+          message: string
+          user_type?: string
         }
         Update: {
           created_at?: string | null
+          email?: string
           id?: string
           ip_address?: string | null
-          message_content?: string
-          metadata?: Json | null
-          role?: string
-          session_id?: string
-          user_agent?: string | null
+          message?: string
+          user_type?: string
+        }
+        Relationships: []
+      }
+      estimates: {
+        Row: {
+          address: string
+          client_name: string
+          created_at: string | null
+          email: string | null
+          estimated_cost: number | null
+          id: string
+          notes: string | null
+          phone: string | null
+          service_type: string
+          status: string | null
+        }
+        Insert: {
+          address: string
+          client_name: string
+          created_at?: string | null
+          email?: string | null
+          estimated_cost?: number | null
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          service_type: string
+          status?: string | null
+        }
+        Update: {
+          address?: string
+          client_name?: string
+          created_at?: string | null
+          email?: string | null
+          estimated_cost?: number | null
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          service_type?: string
+          status?: string | null
         }
         Relationships: []
       }
@@ -85,21 +157,6 @@ export type Database = {
           message: string
         }
         Returns: Json
-      }
-      get_chat_logs: {
-        Args: {
-          pass: string
-        }
-        Returns: {
-          created_at: string | null
-          id: string
-          ip_address: string | null
-          message_content: string
-          metadata: Json | null
-          role: string
-          session_id: string
-          user_agent: string | null
-        }[]
       }
     }
     Enums: {
