@@ -1,20 +1,23 @@
+'use client';
+
 import { createClient } from '@supabase/supabase-js';
+import type { Database } from '../types/supabase';
 
 // Get environment variables
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables');
 }
 
 // Create a single instance with proper configuration
-const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
   auth: {
     persistSession: true,
     storageKey: 'roofvision-auth',
-    storage: typeof window !== 'undefined' ? window.localStorage : undefined
+    storage: typeof window !== 'undefined' ? window.localStorage : undefined,
+    detectSessionInUrl: true,
+    flowType: 'pkce'
   }
 });
-
-export { supabase };

@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+'use client';
+
+import Link from "next/link";
 import { NavItem } from "./types";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -49,17 +51,16 @@ const DesktopNav = ({ navItems, currentPath }: DesktopNavProps) => {
               <div 
                 className={cn(
                   dropdownStyles,
-                  "transition-opacity duration-200",
-                  openDropdown === item.label ? "opacity-100" : "opacity-0 pointer-events-none"
+                  openDropdown === item.label ? "opacity-100 visible" : "opacity-0 invisible"
                 )}
               >
                 {item.dropdown.map((dropItem) => (
                   <Link
-                    key={dropItem.path}
-                    to={dropItem.path}
+                    key={dropItem.label}
+                    href={dropItem.path}
                     className={cn(
                       dropdownItemStyles,
-                      currentPath === dropItem.path && "bg-gray-100"
+                      currentPath === dropItem.path && "bg-roofing-orange text-white"
                     )}
                   >
                     {dropItem.label}
@@ -72,14 +73,14 @@ const DesktopNav = ({ navItems, currentPath }: DesktopNavProps) => {
 
         return (
           <Link
-            key={item.path}
-            to={item.path}
+            key={item.label}
+            href={item.path}
             className={cn(
               buttonBaseStyles,
-              "min-w-[120px]",
+              "min-w-[120px] hover:bg-gray-300/90 transition-colors duration-200",
               isActive
                 ? "bg-roofing-orange text-white"
-                : "bg-gray-200/90 text-gray-800 hover:bg-gray-300/90"
+                : "bg-gray-200/90 text-gray-800"
             )}
           >
             {item.label}
@@ -87,7 +88,7 @@ const DesktopNav = ({ navItems, currentPath }: DesktopNavProps) => {
         );
       })}
       <Link
-        to="/estimate"
+        href="/estimate"
         className={cn(
           buttonBaseStyles,
           "bg-roofing-orange text-white",
@@ -98,7 +99,7 @@ const DesktopNav = ({ navItems, currentPath }: DesktopNavProps) => {
         Get Free Estimate
       </Link>
       <Link
-        to="/contact"
+        href="/contact"
         className={cn(
           buttonBaseStyles,
           "border border-roofing-orange text-roofing-orange",

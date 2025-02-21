@@ -3,6 +3,23 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   output: 'standalone',
+  env: {
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  },
+  images: {
+    domains: ['site.aroofabove.co'],
+    formats: ['image/avif', 'image/webp'],
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    minimumCacheTTL: 60,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'site.aroofabove.co',
+      },
+    ],
+  },
   async redirects() {
     return [
       {

@@ -16,6 +16,11 @@ import "@/styles/globals.css";
 
 const queryClient = new QueryClient();
 
+export const metadata = {
+  title: 'A Roof Above - Professional Roofing Services',
+  description: 'Professional roofing services for residential and commercial properties. Quality workmanship guaranteed.',
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -23,7 +28,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <head>
+        <meta charSet="UTF-8" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+      </head>
+      <body className="min-h-screen bg-white">
         <QueryClientProvider client={queryClient}>
           <TopBar />
           <Navbar />

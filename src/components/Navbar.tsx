@@ -1,13 +1,16 @@
+'use client';
+
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import DesktopNav from "./navbar/DesktopNav";
 import HamburgerMenu from "./HamburgerMenu";
-import { useLocation } from "react-router-dom";
 
-const MainNavbar = () => {
+const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
-  const isHomePage = location.pathname === '/';
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,16 +53,19 @@ const MainNavbar = () => {
       }`}
     >
       <div className="max-w-[1600px] mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-[72px] relative">
+        <div className="flex items-center justify-between h-[84px] relative">
           {/* Logo */}
-          <div className="w-[160px] flex-shrink-0 py-2">
+          <div className="w-[160px] flex-shrink-0 py-3 mt-2">
             <Link 
-              to="/" 
-              className="transition-transform duration-500 hover:scale-105 block"
+              href="/"
+              className="transition-transform duration-500 hover:scale-105 block relative"
             >
-              <img 
-                src="/images/logo-new1.png" 
+              <Image 
+                src="/images/logo-new1.png"
                 alt="A Roof Above"
+                width={160}
+                height={48}
+                priority
                 className="w-full h-auto"
               />
             </Link>
@@ -68,7 +74,7 @@ const MainNavbar = () => {
           {/* Desktop Navigation */}
           <DesktopNav 
             navItems={navItems.filter(item => item.path !== '/contact')} 
-            currentPath={location.pathname} 
+            currentPath={pathname}
           />
 
           {/* Mobile Navigation */}
@@ -79,4 +85,4 @@ const MainNavbar = () => {
   );
 };
 
-export default MainNavbar;
+export default Navbar;
