@@ -4,31 +4,33 @@ import { motion } from "framer-motion";
 import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
 import Image from "next/image";
 
-const EnhancedHero = () => {
-  const socialLinks = [
-    { href: "https://facebook.com", label: "Facebook", Icon: Facebook },
-    { href: "https://instagram.com", label: "Instagram", Icon: Instagram },
-    { href: "https://twitter.com", label: "Twitter", Icon: Twitter },
-    { href: "https://linkedin.com", label: "LinkedIn", Icon: Linkedin },
-    { href: "https://youtube.com", label: "YouTube", Icon: Youtube },
-  ];
+const socialLinks = [
+  { Icon: Facebook, href: "https://facebook.com/aroofabove", label: "Facebook", delay: 0 },
+  { Icon: Instagram, href: "https://instagram.com/aroofabove", label: "Instagram", delay: 0.1 },
+  { Icon: Twitter, href: "https://twitter.com/aroofabove", label: "Twitter", delay: 0.2 },
+  { Icon: Linkedin, href: "https://linkedin.com/company/aroofabove", label: "LinkedIn", delay: 0.3 },
+  { Icon: Youtube, href: "https://youtube.com/@aroofabove", label: "YouTube", delay: 0.4 }
+];
 
+const EnhancedHero = () => {
   const handleSocialClick = (href: string) => {
     window.open(href, '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <div className="relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
-        <div className="text-center relative z-10">
-          {/* Main Content */}
-          <motion.div
-            className="space-y-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            {/* Heading with gradient text */}
+    <div className="relative">
+      {/* Dark Hero Section with Curved Bottom */}
+      <div 
+        className="relative bg-gradient-to-b from-roofing-charcoal to-roofing-charcoal/95"
+        style={{
+          clipPath: 'ellipse(100% 100% at 50% 0%)',
+          paddingBottom: '8rem'
+        }}
+      >
+        {/* Content Container */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
+          {/* Text Content */}
+          <div className="text-center max-w-3xl mx-auto space-y-8">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -36,50 +38,49 @@ const EnhancedHero = () => {
               className="text-5xl md:text-7xl font-bold"
             >
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-roofing-cream to-roofing-beige">
-                MANUAL TEST - Your Premier Roofing Specialists
+                TEST CHANGE - Your Premier Roofing Specialists 2024
               </span>
             </motion.h1>
-
-            {/* Description */}
+            
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
               className="text-xl md:text-2xl text-roofing-beige/90 leading-relaxed"
             >
-              MANUAL TEST - Professional roofing services for residential and commercial properties.
+              TEST CHANGE - Professional roofing services for residential and commercial properties.
               <br />
               Quality workmanship guaranteed - Call us today!
             </motion.p>
 
             {/* Social Links */}
             <motion.div
-              className="flex justify-center space-x-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+              className="flex justify-center gap-10 pt-4"
             >
-              {socialLinks.map(({ href, label, Icon }, index) => (
+              {socialLinks.map(({ Icon, href, label, delay }) => (
                 <motion.button
                   key={href}
                   onClick={() => handleSocialClick(href)}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                  className="text-roofing-beige/80 hover:text-roofing-cream transition-colors"
+                  transition={{ duration: 0.4, delay: 0.4 + delay }}
+                  className="text-roofing-beige/80 hover:text-roofing-cream transition-all transform"
                   aria-label={label}
                 >
                   <Icon size={28} />
                 </motion.button>
               ))}
             </motion.div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Gradient overlay */}
-        <div
-          className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-white"
+        {/* White overlay for smooth transition */}
+        <div 
+          className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-white"
           style={{
             transform: 'translateY(50%)'
           }}
